@@ -7,9 +7,6 @@ import payload from "./data.json";
 // every sprite request to the domain root.
 const BASE = import.meta.env.BASE_URL;
 
-// Events known to have been re-uploaded on their own dates but not yet diffed, so the
-// map shows the whole territory rather than implying event 1 is all there is.
-const PENDING = [24, 31, 74, 75, 111, 155];
 const esc = (s) => String(s).replace(/[&<>"]/g,
   (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const strip = (h) => h.replace(/<[^>]*>/g, "");
@@ -59,6 +56,28 @@ function searchLines(q) {
   }
   return out;
 }
+const unitName = (u) => (u || "").replace(/_/g, " ");
+
+function card(e, q, href) {
+  const tag = href ? "a" : "span";
+  const link = href ? ` href="${href}"` : "";
+  const art = e.banner
+    ? `<div class="art" style="background-image:url('${BASE}${e.banner}')"></div>` : "";
+  const logo = e.unitLogo ? `<img class="ulogo" alt="" src="${BASE}${e.unitLogo}">` : "";
+  const stats = href
+    ? `<span class="pill hot">${e.changed} changed lines</span>
+       <span class="pill">${e.episodes.length} episodes</span>`
+    : `<span class="pill wait">not yet diffed</span>`;
+  return `<${tag} class="card${href ? "" : " soon"}" style="--u:${e.colour || "#8f89b5"}"${link}>
+    ${art}
+    <div class="cbody">
+      <h3>${q ? hl(e.name, q) : esc(e.name)}</h3>
+      <div class="jp">${esc(e.nameJp || "")}</div>
+      <div class="row">${logo}${stats}
+        ${e.unit ? `<span class="pill unit">${esc(unitName(e.unit))}</span>` : ""}</div>
+    </div></${tag}>`;
+}
+
 function results() {
   const q = view.q, ql = q.toLowerCase();
   const evs = D.events.filter((e) => !q
@@ -70,7 +89,7 @@ function results() {
     ${hits.length ? `<div class="sec">${hits.length > 300 ? "300+" : hits.length}
         matching lines</div>` + hits.slice(0, 40).map((h) => `
       <a class="hit" href="#/e${h.ev.id}/ep${String(h.ep.no).padStart(2, "0")}/${h.f.talkIndex}">
-        <div class="who">Event ${h.ev.id} · Ep ${h.ep.no} · #${h.f.talkIndex} ·
+        <div class="who">${esc(h.ev.name)} · Ep ${h.ep.no} · #${h.f.talkIndex} ·
           <b>${esc(h.f.speaker)}</b></div>
         <div class="o">− ${hl(strip(h.f.old), q)}</div>
         <div class="n">+ ${hl(strip(h.f.new), q)}</div>
@@ -79,15 +98,9 @@ function results() {
       : ""}
     <div class="sec">Events${q ? ` matching “${esc(q)}”` : ""}</div>
     <div class="cards">
-      ${evs.map((e) => `<a class="card" href="#/e${e.id}">
-        <h3>Event ${e.id} · ${hl(e.name, q)}</h3>
-        <div class="jp">${esc(e.nameJp || "")}</div>
-        <div class="row"><span class="pill hot">${e.changed} changed lines</span>
-          <span class="pill">${e.episodes.length} episodes</span>
-          ${e.unit ? `<span class="pill">${esc(e.unit)}</span>` : ""}</div></a>`).join("")
+      ${evs.map((e) => card(e, q, `#/e${e.id}`)).join("")
       || `<div class="empty">No event matches “${esc(q)}”.</div>`}
-      ${q ? "" : PENDING.map((id) => `<span class="card soon"><h3>Event ${id}</h3>
-        <div class="jp">re-uploaded, not yet diffed</div></span>`).join("")}
+      ${q ? "" : (D.pending || []).map((e) => card(e, "", null)).join("")}
     </div>`;
 }
 
@@ -131,8 +144,9 @@ function home() {
 function event(ev, openEp) {
   document.getElementById("burger").hidden = false;
   document.getElementById("app").innerHTML = `
-    <div class="topbar"><a href="#/" title="All events">←</a>
-      <h2>Event ${ev.id} · ${esc(ev.name)}</h2>
+    <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/" title="All events">←</a>
+      ${ev.unitLogo ? `<img class="ulogo big" alt="" src="${BASE}${ev.unitLogo}">` : ""}
+      <h2>${esc(ev.name)}</h2>
       <span class="meta">${ev.changed} changed lines · ${ev.episodes.length} episodes ·
         ${D.comparison.old_asset_version} → ${D.comparison.new_asset_version}</span>
       <input id="filter" placeholder="Filter lines in this event…" autocomplete="off">
@@ -171,10 +185,12 @@ function drawer(ev) {
   document.getElementById("drawer").innerHTML =
     `<div class="nav-h">Browse</div><a class="nav-ev" href="#/">← All events</a>`
     + `<div class="nav-h">Events</div>`
-    + D.events.map((e) => `<a class="nav-ev${e.id === ev.id ? " on" : ""}" href="#/e${e.id}">`
-        + `Event ${e.id} · ${esc(e.name)}<small>${e.changed} changed lines</small></a>`).join("")
-    + PENDING.map((id) => `<span class="nav-ev soon">Event ${id}<small>not yet diffed</small></span>`).join("")
-    + `<div class="nav-h">Episodes — event ${ev.id}</div>`
+    + D.events.map((e) => `<a class="nav-ev${e.id === ev.id ? " on" : ""}" href="#/e${e.id}"`
+        + ` style="--u:${e.colour || "#8f89b5"}">${esc(e.name)}`
+        + `<small>${e.changed} changed lines</small></a>`).join("")
+    + (D.pending || []).map((e) => `<span class="nav-ev soon" style="--u:${e.colour}">`
+        + `${esc(e.name)}<small>not yet diffed</small></span>`).join("")
+    + `<div class="nav-h">Episodes</div>`
     + ev.episodes.map((ep) => `<a class="nav-ep" data-ep="ep${String(ep.no).padStart(2, "0")}"
         href="#/e${ev.id}/ep${String(ep.no).padStart(2, "0")}">`
         + `<i>${ep.no}.</i> ${esc(ep.title)} <i>${ep.frames.length}</i></a>`).join("")

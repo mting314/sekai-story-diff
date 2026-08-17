@@ -35,6 +35,7 @@ import sys
 from itertools import groupby
 from pathlib import Path
 
+import requests
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -50,6 +51,9 @@ from live2d_scene import (  # noqa: E402
 )
 from render_frames import cached, diff_spans, slug  # noqa: E402
 
+_banner_session = requests.Session()
+_banner_session.headers["User-Agent"] = "sekai-story-diff"
+
 STAGE_W, STAGE_H = 1920, 1080
 # Backgrounds are served from our own build, not hot-linked. storage.sekai.best
 # returns 403 for a cross-site Referer — it allows its own pages and referer-less
@@ -57,6 +61,22 @@ STAGE_W, STAGE_H = 1920, 1080
 # ourselves to someone else's bandwidth against their stated wishes. All 17 come to
 # about 1 MB at display resolution, so there is nothing to gain by arguing.
 BG_WIDTH = 1100  # ~2x what a 540px card shows
+BANNER_WIDTH = 640
+INDEXER = Path.home() / "github/sekai-story-indexer/events_index.json"
+# Events the mirror shows as re-uploaded on their own dates, awaiting a diff.
+PENDING_EVENTS = [24, 31, 74, 75, 111, 155]
+# Unit identity. The indexer names units after the group (leo_need); the game's own
+# master data names them after the asset family (light_sound), which is what the logo
+# files are keyed by. "mixed" events front several units and get no single logo.
+UNITS = {
+    "leo_need": ("light_sound", "#4a63e7"),
+    "more_more_jump": ("idol", "#44c266"),
+    "vivid_bad_squad": ("street", "#ee1166"),
+    "wonderlands_showtime": ("theme_park", "#ff9900"),
+    "nightcord": ("school_refusal", "#8b62c4"),
+    "virtual_singer": ("piapro", "#00bcd4"),
+    "mixed": ("", "#8f89b5"),
+}
 
 
 def sprite_key(costume: str, motion: str, facial: str, ambient: str, depth: int) -> str:
@@ -127,6 +147,49 @@ def build_backgrounds(names: set[str], out_dir: Path, width: int, quality: int) 
     return total
 
 
+def event_meta() -> dict[int, dict]:
+    """Event id -> display metadata, merged from the indexer and the EN master data.
+
+    The indexer carries the unit and the banner art; the EN master carries the English
+    name. Neither has both.
+    """
+    out: dict[int, dict] = {}
+    if INDEXER.exists():
+        for row in json.loads(INDEXER.read_text()):
+            out[row["event_id"]] = {
+                "banner": row.get("banner_url", ""),
+                "nameJp": row.get("name", ""),
+                "unit": row.get("unit", ""),
+            }
+    en_path = Path("data/master/events_en.json")
+    if en_path.exists():
+        for row in json.loads(en_path.read_text()):
+            entry = out.setdefault(row["id"], {"banner": "", "nameJp": "", "unit": ""})
+            entry["name"] = row.get("name", "")
+            entry["bundle"] = row.get("assetbundleName", "")
+    return out
+
+
+def fetch_banner(url: str, dest: Path, width: int, quality: int) -> bool:
+    """Self-host the banner. The mirror 403s a cross-site Referer, same as backgrounds."""
+    if not url or dest.exists():
+        return dest.exists()
+    try:
+        resp = _banner_session.get(url, timeout=60)
+    except Exception:  # noqa: BLE001
+        return False
+    if resp.status_code != 200:
+        return False
+    import io
+
+    image = Image.open(io.BytesIO(resp.content)).convert("RGB")
+    if image.width > width:
+        image = image.resize((width, round(image.height * width / image.width)), Image.LANCZOS)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    image.save(dest, "WEBP", quality=quality, method=6)
+    return True
+
+
 def spans_html(spans: list[tuple[str, bool]]) -> str:
     """Word runs as HTML, one ``<b>`` per *contiguous* run of changed words.
 
@@ -176,6 +239,7 @@ def main() -> None:
     poses: dict[str, dict] = {}
     events: list[dict] = []
     dropped: list[dict] = []
+    metas = event_meta()
 
     for event in data["events"]:
         bundle_name = event["bundle"].split("/")[1]
@@ -269,15 +333,26 @@ def main() -> None:
                 )
 
         if episodes:
+            meta = metas.get(event["event_id"], {})
+            unit = meta.get("unit") or ""
+            logo, colour = UNITS.get(unit, ("", "#8f89b5"))
+            bundle = meta.get("bundle") or bundle_name
+            banner = f"event/{bundle}.webp" if fetch_banner(
+                meta.get("banner", ""), out_root / "public/event" / f"{bundle}.webp",
+                BANNER_WIDTH, args.quality
+            ) else ""
             events.append(
                 {
+                    "banner": banner,
                     "changed": sum(len(e["frames"]) for e in episodes),
+                    "colour": colour,
                     "episodes": episodes,
                     "id": event["event_id"],
                     "name": event["name_en"],
-                    "nameJp": event["name_jp"],
+                    "nameJp": meta.get("nameJp") or event["name_jp"],
                     "slug": f"event{event['event_id']:03d}",
-                    "unit": event.get("unit", ""),
+                    "unit": unit,
+                    "unitLogo": f"unit/{logo}.png" if logo else "",
                 }
             )
 
@@ -306,10 +381,33 @@ def main() -> None:
         args.quality,
     )
 
+    pending = []
+    for event_id in PENDING_EVENTS:
+        meta = metas.get(event_id, {})
+        unit = meta.get("unit") or ""
+        logo, colour = UNITS.get(unit, ("", "#8f89b5"))
+        bundle = meta.get("bundle") or ""
+        banner = f"event/{bundle}.webp" if bundle and fetch_banner(
+            meta.get("banner", ""), out_root / "public/event" / f"{bundle}.webp",
+            BANNER_WIDTH, args.quality
+        ) else ""
+        pending.append(
+            {
+                "banner": banner,
+                "colour": colour,
+                "id": event_id,
+                "name": meta.get("name", ""),
+                "nameJp": meta.get("nameJp", ""),
+                "unit": unit,
+                "unitLogo": f"unit/{logo}.png" if logo else "",
+            }
+        )
+
     payload = {
         "comparison": cmp_info,
         "dropped": dropped,
         "events": events,
+        "pending": pending,
         "sprites": placed,
     }
     data_file.parent.mkdir(parents=True, exist_ok=True)
@@ -319,7 +417,9 @@ def main() -> None:
     data_bytes = data_file.stat().st_size
     print(f"\nsprites:     {len(placed)} files, {sprite_bytes / 1e6:.1f} MB")
     print(f"data.json:   {data_bytes / 1e6:.2f} MB")
+    banner_bytes = sum(p.stat().st_size for p in (out_root / "public/event").glob("*.webp"))
     print(f"backgrounds: {bg_bytes / 1e6:.1f} MB at {BG_WIDTH}px (self-hosted)")
+    print(f"banners:     {banner_bytes / 1e6:.2f} MB for {len(events) + len(pending)} events")
     print(f"TOTAL HOSTED: {(sprite_bytes + data_bytes + bg_bytes) / 1e6:.1f} MB")
     print(f"\nnext: cd {out_root} && bun install && bun run build")
     if missing:
