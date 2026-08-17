@@ -6,3 +6,4 @@ __pycache__/
 
 # staged copies of the fork's files; the patch is the artifact
 port/live2d-version-diff/
+.DS_Store

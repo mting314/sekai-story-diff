@@ -465,10 +465,16 @@ def stage_states(scenario: dict) -> dict[int, list[dict]]:
         if layout_type == 3:  # Clear
             entry["visible"] = False
             return
-        side_to = layout.get("SideTo", 0)
-        if side_to:
-            entry["side"] = side_to
-            entry["offset_x"] = layout.get("SideToOffsetX", 0.0) or 0.0
+        # Only Motion (1) and Appear (2) reposition. CharacterMotion (0) is
+        # "apply motion or expression only" — its SideFrom/SideTo are not a move
+        # instruction and the game's own player ignores them. Honouring them
+        # teleports characters on top of each other (e.g. event_01_02 talk 27,
+        # where a bare motion row carries SideTo=Left for someone standing Right).
+        if layout_type in (1, 2):
+            side_to = layout.get("SideTo", 0)
+            if side_to:
+                entry["side"] = side_to
+                entry["offset_x"] = layout.get("SideToOffsetX", 0.0) or 0.0
         if layout_type == 2:  # Appear
             entry["visible"] = True
 
