@@ -8,8 +8,8 @@ __pycache__/
 port/live2d-version-diff/
 .DS_Store
 
-# vite app: node_modules and build output; sprites + payload are generated
+# vite app: node_modules and build output. The sprites and payload ARE committed:
+# CI cannot regenerate them (needs Cubism Core, a GL context and ~1 GB of asset
+# cache), so the build input has to be in the tree.
 web/node_modules/
 web/dist/
-web/public/sprites/
-web/src/data.json
