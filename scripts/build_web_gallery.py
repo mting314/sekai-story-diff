@@ -50,6 +50,7 @@ from live2d_scene import (  # noqa: E402
     stage_states,
 )
 from render_frames import cached, diff_spans, slug  # noqa: E402
+from report import jp_lines as jp_source  # noqa: E402
 
 _banner_session = requests.Session()
 _banner_session.headers["User-Agent"] = "sekai-story-diff"
@@ -206,7 +207,12 @@ def spans_html(spans: list[tuple[str, bool]]) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument(
+        "--changes",
+        nargs="+",
+        default=["data/official_changes.json", "data/official_changes_*.json"],
+        help="one or more diff payloads (globs allowed); each carries its own version pair",
+    )
     ap.add_argument(
         "--out",
         default="web",
@@ -227,9 +233,17 @@ def main() -> None:
     )
     args = ap.parse_args()
 
-    data = json.loads(Path(args.changes).read_text())
-    cmp_info = data["comparison"]
-    new_ver = cmp_info["new_asset_version"]
+    import glob as _glob
+
+    paths = sorted({q for pattern in args.changes for q in _glob.glob(pattern)})
+    if not paths:
+        raise SystemExit(f"no diff payloads matched {args.changes}")
+    payloads = [json.loads(Path(q).read_text()) for q in paths]
+    print(f"merging {len(payloads)} diff payload(s):")
+    for q, d in zip(paths, payloads):
+        c = d["comparison"]
+        print(f"  {Path(q).name}: {c['old_asset_version']} -> {c['new_asset_version']}"
+              f" ({len(d['events'])} event(s))")
     kinds = set(args.kinds.split(","))
     out_root = Path(args.out)
     sprites_dir = out_root / "public/sprites"
@@ -241,7 +255,11 @@ def main() -> None:
     dropped: list[dict] = []
     metas = event_meta()
 
-    for event in data["events"]:
+    # flatten to (version pair, event) so each event keeps its own bracket: the six
+    # later events were each re-uploaded on their own date, so there is no single
+    # before/after for the site as a whole
+    for cmp_info, event in [(d["comparison"], e) for d in payloads for e in d["events"]]:
+        new_ver = cmp_info["new_asset_version"]
         bundle_name = event["bundle"].split("/")[1]
         scenarios = json.loads(
             Path("data/official", new_ver, event["bundle"].replace("/", "__") + ".json").read_text()
@@ -253,12 +271,8 @@ def main() -> None:
             states = stage_states(scenario)
             scenes = scene_states(scenario)
             mode = "three_models" if scenario.get("FirstCharacterLayoutMode") == 1 else "normal"
-            jp_path = Path("data/jp_assets") / bundle_name / f"{ep['scenario_id']}.json"
-            jp_lines = (
-                [(t.get("Body") or "").replace("\n", "") for t in json.loads(jp_path.read_text())["TalkData"]]
-                if jp_path.exists()
-                else []
-            )
+            # report.py owns the JP fetch + cache; reuse it so there is one implementation
+            jp_lines = jp_source(bundle_name, ep["scenario_id"])
             frames: list[dict] = []
 
             for change in ep["changes"]:
@@ -344,6 +358,10 @@ def main() -> None:
             events.append(
                 {
                     "banner": banner,
+                    "newReleasedAt": cmp_info.get("new_released_at", ""),
+                    "newVersion": cmp_info["new_asset_version"],
+                    "oldReleasedAt": cmp_info.get("old_released_at", ""),
+                    "oldVersion": cmp_info["old_asset_version"],
                     "changed": sum(len(e["frames"]) for e in episodes),
                     "colour": colour,
                     "episodes": episodes,
@@ -381,8 +399,9 @@ def main() -> None:
         args.quality,
     )
 
+    diffed = {e["id"] for e in events}
     pending = []
-    for event_id in PENDING_EVENTS:
+    for event_id in [i for i in PENDING_EVENTS if i not in diffed]:
         meta = metas.get(event_id, {})
         unit = meta.get("unit") or ""
         logo, colour = UNITS.get(unit, ("", "#8f89b5"))
@@ -404,7 +423,12 @@ def main() -> None:
         )
 
     payload = {
-        "comparison": cmp_info,
+        "comparison": {
+            "new_asset_version": max(e["newVersion"] for e in events),
+            "old_asset_version": min(e["oldVersion"] for e in events),
+            "pairs": sorted({(e["oldVersion"], e["newVersion"]) for e in events}),
+            "region": "en",
+        },
         "dropped": dropped,
         "events": events,
         "pending": pending,

@@ -17,7 +17,7 @@ const hl = (s, q) => !q ? esc(s)
 let D = null, view = { name: "home", ev: null, q: "" };
 
 /* ---------- frame rendering ---------- */
-function panel(f, old) {
+function panel(f, old, ev) {
   const layers = f.layers.map((l) => {
     const s = D.sprites[l.key];
     return s ? `<img loading="lazy" decoding="async" alt="" src="${BASE}sprites/${l.key}.webp"`
@@ -27,8 +27,8 @@ function panel(f, old) {
   const bg = f.cover ? `background:${f.cover === "white" ? "#fff" : "#000"}`
                      : `background-image:url('${BASE}bg/${f.bg}.webp')`;
   const name = old && f.speakerOld ? f.speakerOld : f.speaker;
-  const ver = old ? "BEFORE " + D.comparison.old_asset_version
-                  : "AFTER " + D.comparison.new_asset_version;
+  // each event has its own version bracket — they were re-uploaded on different dates
+  const ver = old ? "BEFORE " + ev.oldVersion : "AFTER " + ev.newVersion;
   // the box is a sibling of the stage, not a child: the stage is a fixed 16:9 box with
   // overflow hidden, so a narrow layout that stacks the text below the art cannot do it
   // from inside. On wide screens .box is absolutely positioned back over the stage.
@@ -39,7 +39,7 @@ function panel(f, old) {
        + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div></div>`;
 }
 const figure = (ev, ep, f) => `<figure id="f-${ev.id}-${ep.no}-${f.talkIndex}">`
-  + panel(f, true) + panel(f, false)
+  + panel(f, true, ev) + panel(f, false, ev)
   + `<figcaption>#${f.talkIndex}`
   + (f.jp ? `<div class="jpline"><i>JP</i>${esc(f.jp)}</div>` : "")
   + `</figcaption></figure>`;
@@ -73,6 +73,7 @@ function card(e, q, href) {
     <div class="cbody">
       <h3>${q ? hl(e.name, q) : esc(e.name)}</h3>
       <div class="jp">${esc(e.nameJp || "")}</div>
+      ${href ? `<div class="vpair">${e.oldVersion} → ${e.newVersion}</div>` : ""}
       <div class="row">${logo}${stats}
         ${e.unit ? `<span class="pill unit">${esc(unitName(e.unit))}</span>` : ""}</div>
     </div></${tag}>`;
@@ -119,8 +120,10 @@ function home() {
            over the scene the game actually draws for it. Backgrounds are served by
            storage.sekai.best; the posed characters are rendered from the official
            Live2D models.</p>
-        <div class="vers">EN asset <b>${D.comparison.old_asset_version}</b> →
-          <b>${D.comparison.new_asset_version}</b> · ${totalLines} changed lines</div>
+        <div class="vers">${D.events.length} events · ${totalLines} changed lines ·
+          EN assets <b>${D.comparison.old_asset_version}</b> –
+          <b>${D.comparison.new_asset_version}</b>
+          <span style="opacity:.6">(${(D.comparison.pairs || []).length} release pairs)</span></div>
       </div>
       <input id="q" placeholder="Search events, episodes, characters or dialogue…"
              autocomplete="off">
@@ -148,7 +151,7 @@ function event(ev, openEp) {
       ${ev.unitLogo ? `<img class="ulogo big" alt="" src="${BASE}${ev.unitLogo}">` : ""}
       <h2>${esc(ev.name)}</h2>
       <span class="meta">${ev.changed} changed lines · ${ev.episodes.length} episodes ·
-        ${D.comparison.old_asset_version} → ${D.comparison.new_asset_version}</span>
+        ${ev.oldVersion} → ${ev.newVersion}</span>
       <input id="filter" placeholder="Filter lines in this event…" autocomplete="off">
     </div>
     ${ev.episodes.map((ep, i) => `<details id="ep${String(ep.no).padStart(2, "0")}"
