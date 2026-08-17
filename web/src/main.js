@@ -32,7 +32,11 @@ function panel(f, old) {
   const name = old && f.speakerOld ? f.speakerOld : f.speaker;
   const ver = old ? "BEFORE " + D.comparison.old_asset_version
                   : "AFTER " + D.comparison.new_asset_version;
-  return `<div class="stage${f.flashback ? " fb" : ""}" style="${bg}">${layers}`
+  // the box is a sibling of the stage, not a child: the stage is a fixed 16:9 box with
+  // overflow hidden, so a narrow layout that stacks the text below the art cannot do it
+  // from inside. On wide screens .box is absolutely positioned back over the stage.
+  return `<div class="panel"><div class="stage${f.flashback ? " fb" : ""}" style="${bg}">`
+       + `${layers}</div>`
        + `<div class="box"><span class="plate">${esc(name)}</span>`
        + `<span class="tag ${old ? "o" : "n"}">${ver}</span>`
        + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div></div>`;
