@@ -1,0 +1,48 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+# one in-flight deploy at a time; queue rather than cancel so a push mid-deploy
+# still ends up published
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install
+        working-directory: web
+        run: bun install --frozen-lockfile
+      - name: Build
+        working-directory: web
+        # a project page is served from /<repo>/, so the base has to match or every
+        # asset 404s. Falls back to the relative default for user/org pages.
+        env:
+          BASE_URL: /${{ github.event.repository.name }}/
+        run: bun run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

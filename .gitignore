@@ -7,3 +7,9 @@ __pycache__/
 # staged copies of the fork's files; the patch is the artifact
 port/live2d-version-diff/
 .DS_Store
+
+# vite app: node_modules and build output; sprites + payload are generated
+web/node_modules/
+web/dist/
+web/public/sprites/
+web/src/data.json
