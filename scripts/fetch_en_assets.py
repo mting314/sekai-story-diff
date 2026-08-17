@@ -2,9 +2,9 @@
 
 The EN CDN mirrors the JP asset layout, so ``eventStories.json`` (master DB) gives us
 every ``(assetbundleName, scenarioId)`` pair and we pull the EN ``.asset`` JSON for
-each episode into ``retranslation/en_assets/<bundle>/<scenarioId>.json``.
+each episode into ``data/en_assets/<bundle>/<scenarioId>.json``.
 
-These are the *new* (post-retranslation) lines; the wiki cache holds the old ones.
+These are the *new* (post-retranslation) lines; the pinned old version holds the previous ones.
 The raw scenario JSON also carries the layout/background/character data that the
 phase-2 image renderer needs, which is why we keep the whole asset, not just Body.
 """
@@ -21,10 +21,10 @@ import requests
 
 MASTER_DB = "https://sekai-world.github.io/sekai-master-db-diff"
 EN_CDN = "https://storage.sekai.best/sekai-en-assets"
-OUT = Path("retranslation/en_assets")
+OUT = Path("data/en_assets")
 
 _session = requests.Session()
-_session.headers["User-Agent"] = "sekai-story-indexer/retranslation-audit"
+_session.headers["User-Agent"] = "sekai-story-diff"
 
 
 def _get_json(url: str) -> dict | list | None:

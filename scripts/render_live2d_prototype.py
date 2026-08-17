@@ -3,8 +3,8 @@
 Same comparison layout as ``render_frames.py``, but the backdrop is the actual staged
 scene (posed characters over the live background) instead of a background + portrait.
 
-    .venv/bin/python scripts/retranslation/render_live2d_prototype.py
-    .venv/bin/python scripts/retranslation/render_live2d_prototype.py --pick 3:19,6:30
+    .venv/bin/python scripts/data/render_live2d_prototype.py
+    .venv/bin/python scripts/data/render_live2d_prototype.py --pick 3:19,6:30
 """
 
 from __future__ import annotations
@@ -136,8 +136,8 @@ DEFAULT_PICKS = "1:13,2:48,3:19,3:21,6:47,8:23"
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="retranslation/official_changes.json")
-    ap.add_argument("--out", default="retranslation/images_live2d")
+    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument("--out", default="data/images_live2d")
     ap.add_argument("--pick", default=DEFAULT_PICKS, help="episode:talk_index pairs")
     args = ap.parse_args()
 
@@ -148,14 +148,14 @@ def main() -> None:
     bundle_name = event["bundle"].split("/")[1]
 
     scenarios = json.loads(
-        Path("retranslation/official", new_ver, event["bundle"].replace("/", "__") + ".json").read_text()
+        Path("data/official", new_ver, event["bundle"].replace("/", "__") + ".json").read_text()
     )["scenarios"]
     wanted: dict[int, set[int]] = {}
     for pair in args.pick.split(","):
         ep_no, idx = pair.split(":")
         wanted.setdefault(int(ep_no), set()).add(int(idx))
 
-    stage = Live2DStage()
+    stage = Live2DStage(size=(PANEL_W, PANEL_H))
     out_root = Path(args.out)
     out_root.mkdir(parents=True, exist_ok=True)
     made = 0
@@ -166,7 +166,7 @@ def main() -> None:
         scenario = scenarios[ep["scenario_id"]]
         states = stage_states(scenario)
         bg_map = background_by_talk(scenario)
-        jp_path = Path("retranslation/jp_assets") / bundle_name / f"{ep['scenario_id']}.json"
+        jp_path = Path("data/jp_assets") / bundle_name / f"{ep['scenario_id']}.json"
         jp_lines = (
             [(t.get("Body") or "").replace("\n", "") for t in json.loads(jp_path.read_text())["TalkData"]]
             if jp_path.exists()

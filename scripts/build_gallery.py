@@ -1,6 +1,6 @@
 """Build a browsable gallery of the rendered before/after frames.
 
-Writes ``retranslation/images/gallery.html`` (one section per episode, images lazy
+Writes ``data/images/gallery.html`` (one section per episode, images lazy
 loaded) plus a ``README.md`` per episode folder so the tree reads well on GitHub.
 """
 
@@ -39,8 +39,8 @@ TEMPLATE_HEAD = """<!doctype html>
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="retranslation/official_changes.json")
-    ap.add_argument("--images", default="retranslation/images")
+    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument("--images", default="data/images")
     args = ap.parse_args()
 
     data = json.loads(Path(args.changes).read_text())

@@ -31,14 +31,14 @@ except ImportError as exc:  # pragma: no cover - dependency guard
     raise SystemExit(
         "needs sssekai + UnityPy — run with an interpreter that has them, e.g.\n"
         "  ~/github/sekai-reverse-engineering/.venv/bin/python "
-        "scripts/retranslation/fetch_official_bundles.py ..."
+        "scripts/data/fetch_official_bundles.py ..."
     ) from exc
 
 warnings.filterwarnings("ignore")
 
 GAME_VERSION_EN = "https://game-version.sekai-en.com"
-MASTER = Path("retranslation/master")
-OUT = Path("retranslation/official")
+MASTER = Path("data/master")
+OUT = Path("data/official")
 
 _session = requests.Session()
 

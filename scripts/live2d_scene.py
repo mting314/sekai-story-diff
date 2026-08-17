@@ -28,12 +28,26 @@ import requests
 from PIL import Image
 
 LIVE2D_CDN = "https://storage.sekai.best/sekai-live2d-assets/live2d"
-CACHE = Path("retranslation/live2d")
+CACHE = Path("data/live2d")
 SSSEKAI_PY = Path.home() / "github/sekai-reverse-engineering/.venv/bin/sssekai"
 
-# CharacterLayoutPosition → x as a fraction of screen width (see sekai-viewer's
-# story-scenerio.d.ts: Left ≈ 30%, Center 50%, Right ≈ 70%, *Edge = off-screen).
-POSITION_X = {0: 0.5, 2: -0.15, 3: 0.31, 4: 0.5, 6: 1.15, 7: 0.69, 9: 0.31, 10: 0.5, 12: 0.69}
+# Stage transform, copied from how the game's own renderer is reproduced in
+# sekai-viewer (`Live2DPlayer/layer/Live2D.ts` + `action/character_layout.ts`) —
+# these are the game's numbers, not eyeballed framing:
+#   scale = stage_height / model.originalHeight * 2.1   (1.8 in three-model layout)
+#   anchor = centre, x = stage_w * pos.x, y = stage_h * (pos.y + 0.3)
+# CharacterLayoutPosition → (x, y) as fractions of the stage, per layout mode.
+POSITION_MAPS = {
+    "normal": {
+        0: (0.5, 0.5), 4: (0.5, 0.5), 3: (0.3, 0.5), 7: (0.7, 0.5),
+        2: (-0.5, 0.5), 6: (1.5, 0.5), 10: (0.5, 1.5), 9: (0.3, 1.5), 12: (0.7, 1.5),
+    },
+    "three_models": {
+        0: (0.5, 0.5), 4: (0.5, 0.5), 3: (0.25, 0.5), 7: (0.75, 0.5),
+        2: (-0.5, 0.5), 6: (1.5, 0.5), 10: (0.5, 1.5), 9: (0.25, 1.5), 12: (0.75, 1.5),
+    },
+}
+LAYOUT_SCALE = {"normal": 2.1, "three_models": 1.8}
 OFFSCREEN = {2, 6, 9, 10, 12}
 
 _session = requests.Session()
@@ -269,8 +283,13 @@ class Live2DStage:
         self._models[costume] = model
         return model
 
-    def render(self, costume: str, motion: str, facial: str, scale: float, offset_y: float):
-        """One character, posed, as an RGBA image (transparent background)."""
+    def render(self, costume: str, motion: str, facial: str, scale: float, offset_y: float, offset_x: float = 0.0):
+        """One character, posed, as an RGBA image (transparent background).
+
+        ``scale`` 1.0 draws the model canvas exactly one viewport-height tall, so the
+        game's ``* 2.1`` multiplier can be passed straight through. Offsets are in
+        units of half the viewport height (measured), +y up, +x right.
+        """
         from OpenGL.GL import (
             GL_COLOR_BUFFER_BIT,
             GL_FRAMEBUFFER,
@@ -288,7 +307,7 @@ class Live2DStage:
             return None
         model.ResetParameters()
         model.SetScale(scale)
-        model.SetOffset(0.0, offset_y)
+        model.SetOffset(offset_x, offset_y)
         apply_motion(model, motion_json(costume, "motion", motion))
         apply_motion(model, motion_json(costume, "facial", facial))
         model.Update()
@@ -328,7 +347,15 @@ def stage_states(scenario: dict) -> dict[int, list[dict]]:
             if cid is None:
                 continue
             entry = state.setdefault(
-                cid, {"costume": "", "motion": "", "facial": "", "side": 4, "visible": False}
+                cid,
+                {
+                    "costume": "",
+                    "motion": "",
+                    "facial": "",
+                    "side": 4,
+                    "offset_x": 0.0,
+                    "visible": False,
+                },
             )
             if layout.get("CostumeType"):
                 entry["costume"] = layout["CostumeType"]
@@ -337,6 +364,7 @@ def stage_states(scenario: dict) -> dict[int, list[dict]]:
             if layout.get("FacialName"):
                 entry["facial"] = layout["FacialName"]
             side_to = layout.get("SideTo", 0)
+            entry["offset_x"] = layout.get("SideToOffsetX", 0.0) or 0.0
             layout_type = layout.get("Type")
             if layout_type == 3:  # Clear
                 entry["visible"] = False
@@ -370,23 +398,37 @@ def compose_scene(
     stage: Live2DStage,
     background: Image.Image,
     characters: list[dict],
-    scale: float = 2.4,
-    offset_y: float = -1.15,
+    layout_mode: str = "normal",
 ) -> Image.Image:
-    """Draw every on-stage character over the background at their side slot."""
+    """Draw every on-stage character over the background, using the game's transform.
+
+    No hand-tuned framing: each model is drawn at ``LAYOUT_SCALE`` (2.1 normal /
+    1.8 three-model — the same multiplier the viewer uses over
+    ``stage_height / originalHeight``) with its canvas centre placed at
+    ``(stage_w * pos.x, stage_h * (pos.y + 0.3))``.
+
+    ``stage`` must have been created at the background's size, since the model is
+    rendered straight into stage-sized pixels rather than resized afterwards.
+    """
     canvas = background.convert("RGBA")
     width, height = canvas.size
+    positions = POSITION_MAPS[layout_mode]
+    scale = LAYOUT_SCALE[layout_mode]
     onstage = [c for c in characters if c["side"] not in OFFSCREEN]
     # non-speakers first so the speaker lands on top
     onstage.sort(key=lambda c: (c["speaking"], -c["side"]))
     for char in onstage:
-        sprite = stage.render(char["costume"], char["motion"], char["facial"], scale, offset_y)
+        pos_x, pos_y = positions.get(char["side"], (0.5, 0.5))
+        pos_x += char.get("offset_x", 0.0) / 1920  # SideToOffsetX, as the viewer does
+        # offsets are in units of half the viewport height, +y up
+        offset_x = (pos_x - 0.5) * width / (height / 2)
+        offset_y = -((pos_y + 0.3) - 0.5) * height / (height / 2)
+        sprite = stage.render(
+            char["costume"], char["motion"], char["facial"], scale, offset_y, offset_x
+        )
         if sprite is None:
             continue
-        # framing tuned against in-game captures: waist-up, heads ~a third down
-        target_h = int(height * 1.05)
-        target_w = int(sprite.width * target_h / sprite.height)
-        sprite = sprite.resize((target_w, target_h), Image.LANCZOS)
-        cx = int(POSITION_X.get(char["side"], 0.5) * width)
-        canvas.alpha_composite(sprite, (cx - target_w // 2, int(height * 0.04)))
+        if sprite.size != canvas.size:
+            sprite = sprite.resize(canvas.size, Image.LANCZOS)
+        canvas.alpha_composite(sprite)
     return canvas

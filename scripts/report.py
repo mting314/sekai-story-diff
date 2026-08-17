@@ -16,10 +16,10 @@ from pathlib import Path
 import requests
 
 JP_CDN = "https://storage.sekai.best/sekai-jp-assets"
-JP_CACHE = Path("retranslation/jp_assets")
+JP_CACHE = Path("data/jp_assets")
 
 _session = requests.Session()
-_session.headers["User-Agent"] = "sekai-story-indexer/retranslation-audit"
+_session.headers["User-Agent"] = "sekai-story-diff"
 
 
 def jp_lines(bundle: str, scenario_id: str) -> list[str]:
@@ -64,9 +64,9 @@ def _esc(text: str) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="retranslation/official_changes.json")
-    ap.add_argument("--out-md", default="retranslation/REPORT.md")
-    ap.add_argument("--out-csv", default="retranslation/changed_lines.csv")
+    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument("--out-md", default="data/REPORT.md")
+    ap.add_argument("--out-csv", default="data/changed_lines.csv")
     ap.add_argument("--skip-jp", action="store_true")
     args = ap.parse_args()
 

@@ -3,7 +3,7 @@
 The CDN mirror re-uploads a scenario asset when the game ships a new version of it,
 so the modified date is a direct, source-of-truth signal for *which* episodes were
 re-cut — far tighter than inferring it from text diffs alone. Output:
-``retranslation/en_asset_mtimes.json`` = ``{"<bundle>/<scenario_id>": "<http date>"}``.
+``data/en_asset_mtimes.json`` = ``{"<bundle>/<scenario_id>": "<http date>"}``.
 """
 
 from __future__ import annotations
@@ -17,10 +17,10 @@ from pathlib import Path
 import requests
 
 EN_CDN = "https://storage.sekai.best/sekai-en-assets"
-MASTER = Path("retranslation/master")
+MASTER = Path("data/master")
 
 _session = requests.Session()
-_session.headers["User-Agent"] = "sekai-story-indexer/retranslation-audit"
+_session.headers["User-Agent"] = "sekai-story-diff"
 
 
 def head(url: str) -> dict | None:
@@ -43,7 +43,7 @@ def head(url: str) -> dict | None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="retranslation/en_asset_mtimes.json")
+    ap.add_argument("--out", default="data/en_asset_mtimes.json")
     ap.add_argument("--workers", type=int, default=12)
     args = ap.parse_args()
 

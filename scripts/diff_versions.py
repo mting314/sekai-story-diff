@@ -5,7 +5,7 @@ comparison is index-for-index on ``TalkData`` — no fuzzy transcript alignment.
 count mismatch falls back to a sequence alignment so inserted/removed lines are
 reported as such instead of smearing the rest of the episode.
 
-Output: ``retranslation/official_changes.json``.
+Output: ``data/official_changes.json``.
 """
 
 from __future__ import annotations
@@ -21,8 +21,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from textutil import compare_key, normalize  # noqa: E402
 
-MASTER = Path("retranslation/master")
-OFFICIAL = Path("retranslation/official")
+MASTER = Path("data/master")
+OFFICIAL = Path("data/official")
 
 
 @dataclass
@@ -130,7 +130,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--old", required=True, help="old assetVersion directory name")
     ap.add_argument("--new", required=True, help="new assetVersion directory name")
-    ap.add_argument("--out", default="retranslation/official_changes.json")
+    ap.add_argument("--out", default="data/official_changes.json")
     args = ap.parse_args()
 
     stories = json.loads((MASTER / "eventStories.json").read_text())

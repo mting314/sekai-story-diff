@@ -8,7 +8,7 @@ line in game-style dialogue boxes with the changed words highlighted.
 Live2D poses cannot be rasterised outside the game, so the speaker is drawn from the
 official character cutout art instead of the live model.
 
-Output tree: ``retranslation/images/<event>/<episode>/<index>_<speaker>.png``
+Output tree: ``data/images/<event>/<episode>/<index>_<speaker>.png``
 """
 
 from __future__ import annotations
@@ -24,8 +24,8 @@ import requests
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 JP_CDN = "https://storage.sekai.best/sekai-jp-assets"
-MEDIA = Path("retranslation/media")
-MASTER = Path("retranslation/master")
+MEDIA = Path("data/media")
+MASTER = Path("data/master")
 
 W, H = 1920, 1080
 
@@ -39,7 +39,7 @@ OLD_MARK = (196, 60, 60)
 NEW_MARK = (28, 132, 92)
 
 _session = requests.Session()
-_session.headers["User-Agent"] = "sekai-story-indexer/retranslation-audit"
+_session.headers["User-Agent"] = "sekai-story-diff"
 
 
 # --- asset plumbing ----------------------------------------------------------
@@ -334,8 +334,8 @@ def render_frame(
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="retranslation/official_changes.json")
-    ap.add_argument("--out", default="retranslation/images")
+    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument("--out", default="data/images")
     ap.add_argument("--limit", type=int, default=0, help="render at most N frames (debug)")
     ap.add_argument("--kinds", default="text,speaker", help="change kinds to render")
     args = ap.parse_args()
@@ -356,13 +356,13 @@ def main() -> None:
         bundle_name = event["bundle"].split("/")[1]
         for ep in event["episodes"]:
             scenario_path = (
-                Path("retranslation/official") / new_ver / (event["bundle"].replace("/", "__") + ".json")
+                Path("data/official") / new_ver / (event["bundle"].replace("/", "__") + ".json")
             )
             scenario = json.loads(scenario_path.read_text())["scenarios"][ep["scenario_id"]]
             bg_map = background_by_talk(scenario)
             talks = scenario.get("TalkData") or []
 
-            jp_path = Path("retranslation/jp_assets") / bundle_name / f"{ep['scenario_id']}.json"
+            jp_path = Path("data/jp_assets") / bundle_name / f"{ep['scenario_id']}.json"
             if ep["scenario_id"] not in jp_cache and jp_path.exists():
                 jp_cache[ep["scenario_id"]] = [
                     (t.get("Body") or "").replace("\n", "")
