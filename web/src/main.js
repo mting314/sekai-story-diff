@@ -23,7 +23,7 @@ let D = null, view = { name: "home", ev: null, q: "" };
 function panel(f, old) {
   const layers = f.layers.map((l) => {
     const s = D.sprites[l.key];
-    return s ? `<img loading="lazy" alt="" src="${BASE}sprites/${l.key}.webp"`
+    return s ? `<img loading="lazy" decoding="async" alt="" src="${BASE}sprites/${l.key}.webp"`
              + ` style="left:${(s.left + l.dx).toFixed(3)}%;top:${s.top}%;`
              + `width:${s.w}%;height:${s.h}%">` : "";
   }).join("");
@@ -133,8 +133,9 @@ function event(ev, openEp) {
         ${D.comparison.old_asset_version} → ${D.comparison.new_asset_version}</span>
       <input id="filter" placeholder="Filter lines in this event…" autocomplete="off">
     </div>
-    ${ev.episodes.map((ep) => `<details id="ep${String(ep.no).padStart(2, "0")}"
-        ${!openEp || openEp === "ep" + String(ep.no).padStart(2, "0") ? "open" : ""}>
+    ${ev.episodes.map((ep, i) => `<details id="ep${String(ep.no).padStart(2, "0")}"
+        ${openEp ? (openEp === "ep" + String(ep.no).padStart(2, "0") ? "open" : "")
+                 : (i === 0 ? "open" : "")}>
       <summary>Episode ${ep.no} — ${esc(ep.title)}
         <em>${ep.frames.length} changed lines</em></summary>
       <div class="grid">${ep.frames.map((f) => figure(ev, ep, f)).join("")}</div>

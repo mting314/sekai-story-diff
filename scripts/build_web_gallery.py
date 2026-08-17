@@ -35,6 +35,8 @@ import sys
 from itertools import groupby
 from pathlib import Path
 
+from PIL import Image
+
 sys.path.insert(0, str(Path(__file__).parent))
 from live2d_scene import (  # noqa: E402
     LAYOUT_SCALE,
@@ -59,9 +61,17 @@ def sprite_key(costume: str, motion: str, facial: str, ambient: str, depth: int)
 
 
 def build_sprites(
-    stage: Live2DStage, poses: dict[str, dict], out_dir: Path, quality: int
+    stage: Live2DStage, poses: dict[str, dict], out_dir: Path, quality: int, max_height: int
 ) -> dict[str, dict]:
-    """Render each distinct pose once, centred, cropped to its alpha bounding box."""
+    """Render each distinct pose once, centred, cropped to its alpha bounding box.
+
+    The file is written at ``max_height`` rather than at stage resolution. A sprite
+    rasterised against a 1080-tall stage is ~944px, but a 540px-wide card displays it
+    around 264px, so shipping the full raster is ~13x the pixels anyone sees. The
+    placement below is deliberately computed from the stage-space bbox and *not* from
+    the resized file: it is a percentage of the stage, so it must not move when the
+    stored resolution changes.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     placed: dict[str, dict] = {}
     for i, (key, pose) in enumerate(sorted(poses.items()), 1):
@@ -77,7 +87,6 @@ def build_sprites(
         if not bbox:
             continue
         crop = sprite.crop(bbox)
-        crop.save(out_dir / f"{key}.webp", "WEBP", quality=quality, method=6)
         placed[key] = {
             "h": round(crop.height / STAGE_H * 100, 4),
             # placement as a percentage of the stage, so the page scales freely
@@ -85,6 +94,10 @@ def build_sprites(
             "top": round(bbox[1] / STAGE_H * 100, 4),
             "w": round(crop.width / STAGE_W * 100, 4),
         }
+        if max_height and crop.height > max_height:  # never upscale a small crop
+            width = max(1, round(crop.width * max_height / crop.height))
+            crop = crop.resize((width, max_height), Image.LANCZOS)
+        crop.save(out_dir / f"{key}.webp", "WEBP", quality=quality, method=6)
         if i % 50 == 0:
             print(f"  {i}/{len(poses)} sprites")
     return placed
@@ -113,7 +126,13 @@ def main() -> None:
         help="Vite app root; sprites go to <out>/public/sprites, payload to <out>/src/data.json",
     )
     ap.add_argument("--kinds", default="text,speaker")
-    ap.add_argument("--quality", type=int, default=88)
+    ap.add_argument("--quality", type=int, default=82)
+    ap.add_argument(
+        "--sprite-height",
+        type=int,
+        default=560,
+        help="max stored sprite height; ~2x the size a 540px card displays (0 = full)",
+    )
     ap.add_argument(
         "--skip-sprites",
         action="store_true",
@@ -251,7 +270,9 @@ def main() -> None:
         print(f"reusing {len(placed)} sprites")
     else:
         stage = Live2DStage(size=(STAGE_W, STAGE_H))
-        placed = build_sprites(stage, poses, sprites_dir, args.quality)
+        placed = build_sprites(
+            stage, poses, sprites_dir, args.quality, args.sprite_height
+        )
     missing = [k for k in poses if k not in placed]
 
     payload = {
