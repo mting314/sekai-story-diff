@@ -3,3 +3,6 @@
 __pycache__/
 *.pyc
 .venv/
+
+# staged copies of the fork's files; the patch is the artifact
+port/live2d-version-diff/
