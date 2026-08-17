@@ -48,6 +48,7 @@ from live2d_scene import (  # noqa: E402
     grade,
     scene_states,
     stage_states,
+    unresolved_motion_bases,
 )
 from render_frames import cached, diff_spans, slug  # noqa: E402
 from report import jp_lines as jp_source  # noqa: E402
@@ -448,6 +449,10 @@ def main() -> None:
     print(f"\nnext: cd {out_root} && bun install && bun run build")
     if missing:
         print(f"  WARNING {len(missing)} poses produced no sprite: {missing[:5]}")
+    if unresolved_motion_bases:
+        # no motion set on the mirror, so these render in the model's rest pose
+        print(f"  WARNING {len(unresolved_motion_bases)} costumes have no motion base and "
+              f"render as a T-pose: {sorted(unresolved_motion_bases)}")
     if dropped:
         print(f"  dropped {len(dropped)} lines")
 

@@ -128,24 +128,57 @@ def model_dir(costume: str) -> Path | None:
     return dest
 
 
+unresolved_motion_bases: set[str] = set()
+
+
 def motion_base(costume: str) -> str | None:
-    """``01ichika_cloth001`` → ``v1/main/01_ichika/01ichika_motion_base`` (probed)."""
-    prefix = costume.split("_")[0]
-    digits = "".join(ch for ch in prefix[:2] if ch.isdigit())
-    name = prefix[len(digits) :]
+    """Locate a costume's motion directory on the mirror, or ``None``.
+
+    ``01ichika_cloth001`` → ``v1/main/01_ichika/01ichika_motion_base``
+
+    Remade models carry a version marker, and it appears in *both* the directory and
+    the base name — ``v2_08shizuku_casual`` lives at
+    ``v2/main/08_shizuku/v2_08shizuku_motion_base``, not at the v1 path. Splitting on
+    ``_`` and taking the first field reads the marker as the character, probes a
+    nonsense path, finds nothing, and the model renders in its rest pose: arms out,
+    unmistakably a T-pose in the middle of a scene.
+
+    Sub-characters (``sub_*``) have no motion set published under any path tried, so
+    they legitimately resolve to None. Both cases land in
+    ``unresolved_motion_bases`` so a caller can report them rather than silently
+    shipping a T-pose.
+    """
+    import re
+
+    parts = costume.split("_")
+    marker = parts.pop(0) if parts and re.fullmatch(r"v\d+", parts[0]) else ""
+    core = parts[0] if parts else ""
+    digits = "".join(ch for ch in core[:2] if ch.isdigit())
+    name = core[len(digits) :]
     if not digits or not name:
+        unresolved_motion_bases.add(costume)
         return None
+
+    key = f"{marker}_{core}" if marker else core
     cache = CACHE / "motion_base.json"
     known = json.loads(cache.read_text()) if cache.exists() else {}
-    if prefix in known:
-        return known[prefix] or None
+    if key in known:
+        if not known[key]:
+            unresolved_motion_bases.add(costume)
+        return known[key] or None
+
+    if marker:
+        candidates = [f"{marker}/main/{digits}_{name}/{marker}_{core}_motion_base"]
+    else:
+        candidates = [f"{version}/main/{digits}_{name}/{core}_motion_base" for version in ("v1", "v2")]
     found = None
-    for version in ("v1", "v2"):
-        candidate = f"{version}/main/{digits}_{name}/{prefix}_motion_base"
+    for candidate in candidates:
         if _session.head(f"{LIVE2D_CDN}/motion/{candidate}/BuildMotionData.json").status_code == 200:
             found = candidate
             break
-    known[prefix] = found
+    if not found:
+        unresolved_motion_bases.add(costume)
+    known[key] = found
     cache.parent.mkdir(parents=True, exist_ok=True)
     cache.write_text(json.dumps(known, indent=1))
     return found

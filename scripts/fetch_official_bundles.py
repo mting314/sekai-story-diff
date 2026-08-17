@@ -88,7 +88,11 @@ def scenarios_from_bundle(blob: bytes) -> dict[str, dict]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", required=True, help="assetVersion, e.g. 5.4.0.30")
-    ap.add_argument("--hash", required=True, help="assetHash for that version")
+    ap.add_argument(
+        "--hash",
+        default="",
+        help="assetHash; looked up in data/versions_en.json when omitted",
+    )
     ap.add_argument("--app-version", default="5.5.0")
     ap.add_argument("--app-hash", default="d6f805a4-3d77-4967-91b8-a045d97e756c")
     ap.add_argument("--out", default=str(OUT))
@@ -99,7 +103,22 @@ def main() -> None:
         choices=["event", "unit"],
         help="which story bundles to pull",
     )
+    ap.add_argument(
+        "--bundles",
+        nargs="*",
+        default=[],
+        help="only these bundles, e.g. event_story/event_stella_2020/scenario",
+    )
+    ap.add_argument("--events", nargs="*", type=int, default=[], help="only these event ids")
     args = ap.parse_args()
+
+    # Pulling one bundle used to mean running from a scratch cwd with a hand-trimmed
+    # eventStories.json, because the only selection was "all of them".
+    if not args.hash:
+        from build_version_index import resolve
+
+        args.hash = resolve(args.version)
+        print(f"resolved {args.version} -> {args.hash}")
 
     _session.headers.update(_headers(args.app_version, args.app_hash))
     profile, host_hash = asset_host_hash(args.app_version, args.app_hash)
@@ -118,6 +137,16 @@ def main() -> None:
             for unit in chapters
             for ch in unit.get("chapters", [])
         ]
+
+    if args.bundles:
+        keep = set(args.bundles)
+        bundles = [b for b in bundles if b[1] in keep]
+    if args.events:
+        keep_ids = set(args.events)
+        bundles = [b for b in bundles if b[0] in keep_ids]
+    if (args.bundles or args.events) and not bundles:
+        raise SystemExit("no bundles matched --bundles/--events")
+    print(f"{len(bundles)} bundle(s) to consider")
 
     out_root = Path(args.out) / args.version
     out_root.mkdir(parents=True, exist_ok=True)

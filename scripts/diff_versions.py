@@ -23,6 +23,10 @@ from textutil import compare_key, normalize  # noqa: E402
 
 MASTER = Path("data/master")
 OFFICIAL = Path("data/official")
+# The story indexer supplies the JP name / unit / arc slug. This used to be read as a
+# bare "events_index.json" from the current working directory — a file that does not
+# exist in this repo, so the script only ran from a scratch cwd with a copy dropped in.
+INDEXER = Path.home() / "github/sekai-story-indexer/events_index.json"
 
 
 @dataclass
@@ -130,7 +134,18 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--old", required=True, help="old assetVersion directory name")
     ap.add_argument("--new", required=True, help="new assetVersion directory name")
-    ap.add_argument("--out", default="data/official_changes.json")
+    ap.add_argument(
+        "--out",
+        default="",
+        help="output path; defaults to data/official_changes_<old>_<new>.json",
+    )
+    ap.add_argument("--indexer", default=str(INDEXER), help="sekai-story-indexer events_index.json")
+    ap.add_argument(
+        "--bundles",
+        nargs="*",
+        default=[],
+        help="restrict to these bundles (e.g. event_story/event_stella_2020/scenario)",
+    )
     ap.add_argument(
         "--old-released-at",
         default="",
@@ -150,13 +165,22 @@ def main() -> None:
         s["eventId"]: {ep["episodeNo"]: ep.get("title", "") for ep in s.get("eventStoryEpisodes", [])}
         for s in json.loads((MASTER / "eventStories_en.json").read_text())
     }
-    index = {e["event_id"]: e for e in json.loads(Path("events_index.json").read_text())}
+    index_path = Path(args.indexer)
+    if not index_path.exists():
+        raise SystemExit(
+            f"{index_path} not found — it supplies each event's JP name, unit and arc slug. "
+            "Pass --indexer, or clone sekai-story-indexer next to this repo."
+        )
+    index = {e["event_id"]: e for e in json.loads(index_path.read_text())}
 
     old_root, new_root = OFFICIAL / args.old, OFFICIAL / args.new
     events: list[dict] = []
     only_new: list[str] = []
 
+    wanted = {b.replace("/", "__") + ".json" for b in args.bundles}
     for new_path in sorted(new_root.glob("*.json")):
+        if wanted and new_path.name not in wanted:
+            continue
         old_path = old_root / new_path.name
         new_doc = json.loads(new_path.read_text())
         bundle = new_doc["bundle"]
@@ -236,7 +260,10 @@ def main() -> None:
         "events": events,
         "bundles_only_in_new": only_new,
     }
-    Path(args.out).write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    out_path = Path(args.out or f"data/official_changes_{args.old}_{args.new}.json")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"wrote {out_path}")
     print(json.dumps(payload["totals"], indent=1))
 
 
