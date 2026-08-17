@@ -48,11 +48,15 @@ from live2d_scene import (  # noqa: E402
     scene_states,
     stage_states,
 )
-from render_frames import diff_spans, slug  # noqa: E402
+from render_frames import cached, diff_spans, slug  # noqa: E402
 
 STAGE_W, STAGE_H = 1920, 1080
-# the mirror the pipeline already pulls backgrounds from; the viewer hot-links it too
-BG_CDN = "https://storage.sekai.best/sekai-jp-assets/scenario/background"
+# Backgrounds are served from our own build, not hot-linked. storage.sekai.best
+# returns 403 for a cross-site Referer — it allows its own pages and referer-less
+# requests only — and defeating that with a no-referrer policy would be helping
+# ourselves to someone else's bandwidth against their stated wishes. All 17 come to
+# about 1 MB at display resolution, so there is nothing to gain by arguing.
+BG_WIDTH = 1100  # ~2x what a 540px card shows
 
 
 def sprite_key(costume: str, motion: str, facial: str, ambient: str, depth: int) -> str:
@@ -101,6 +105,26 @@ def build_sprites(
         if i % 50 == 0:
             print(f"  {i}/{len(poses)} sprites")
     return placed
+
+
+def build_backgrounds(names: set[str], out_dir: Path, width: int, quality: int) -> int:
+    """Copy each background into the site at display resolution. Returns bytes written."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    total = 0
+    for name in sorted(names):
+        if not name:
+            continue
+        src = cached(f"scenario/background/{name}/{name}.webp")
+        if not src:
+            print(f"  WARNING background {name} unavailable")
+            continue
+        image = Image.open(src).convert("RGB")
+        if image.width > width:
+            image = image.resize((width, round(image.height * width / image.width)), Image.LANCZOS)
+        dest = out_dir / f"{name}.webp"
+        image.save(dest, "WEBP", quality=quality, method=6)
+        total += dest.stat().st_size
+    return total
 
 
 def spans_html(spans: list[tuple[str, bool]]) -> str:
@@ -275,8 +299,14 @@ def main() -> None:
         )
     missing = [k for k in poses if k not in placed]
 
+    bg_bytes = build_backgrounds(
+        {f["bg"] for e in events for ep in e["episodes"] for f in ep["frames"]},
+        out_root / "public/bg",
+        BG_WIDTH,
+        args.quality,
+    )
+
     payload = {
-        "bgBase": BG_CDN,
         "comparison": cmp_info,
         "dropped": dropped,
         "events": events,
@@ -289,8 +319,8 @@ def main() -> None:
     data_bytes = data_file.stat().st_size
     print(f"\nsprites:     {len(placed)} files, {sprite_bytes / 1e6:.1f} MB")
     print(f"data.json:   {data_bytes / 1e6:.2f} MB")
-    print(f"backgrounds: hot-linked from {BG_CDN} (0 bytes hosted)")
-    print(f"TOTAL HOSTED: {(sprite_bytes + data_bytes) / 1e6:.1f} MB")
+    print(f"backgrounds: {bg_bytes / 1e6:.1f} MB at {BG_WIDTH}px (self-hosted)")
+    print(f"TOTAL HOSTED: {(sprite_bytes + data_bytes + bg_bytes) / 1e6:.1f} MB")
     print(f"\nnext: cd {out_root} && bun install && bun run build")
     if missing:
         print(f"  WARNING {len(missing)} poses produced no sprite: {missing[:5]}")

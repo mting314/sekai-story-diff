@@ -28,7 +28,7 @@ function panel(f, old) {
              + `width:${s.w}%;height:${s.h}%">` : "";
   }).join("");
   const bg = f.cover ? `background:${f.cover === "white" ? "#fff" : "#000"}`
-                     : `background-image:url('${D.bgBase}/${f.bg}/${f.bg}.webp')`;
+                     : `background-image:url('${BASE}bg/${f.bg}.webp')`;
   const name = old && f.speakerOld ? f.speakerOld : f.speaker;
   const ver = old ? "BEFORE " + D.comparison.old_asset_version
                   : "AFTER " + D.comparison.new_asset_version;
