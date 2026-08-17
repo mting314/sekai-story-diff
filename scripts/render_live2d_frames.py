@@ -292,7 +292,7 @@ def main() -> None:
                 out_path = ep_dir / f"{idx:03d}_{slug(speaker_new, 18)}{args.suffix}.jpg"
                 stacked_frame(
                     scene,
-                    f"Event {event['event_id']}  |  {event['name_en']}",
+                    event["name_en"],
                     f"Episode {ep['episode_no']} - {ep['title_en']}   |   line #{idx}",
                     speaker_old,
                     speaker_new,

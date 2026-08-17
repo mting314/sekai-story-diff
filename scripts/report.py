@@ -103,7 +103,7 @@ def main() -> None:
     rows: list[dict] = []
     for event in data["events"]:
         lines.append(
-            f"## Event {event['event_id']} — {event['name_en']} ({event['name_jp']})"
+            f"## {event['name_en']} — {event['name_jp']}"
         )
         lines.append("")
         lines.append(

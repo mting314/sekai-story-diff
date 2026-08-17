@@ -400,7 +400,7 @@ def main() -> None:
                     out_path,
                     bg_path,
                     portrait_path,
-                    f"Event {event['event_id']}  |  {event['name_en']}",
+                    event["name_en"],
                     f"Episode {ep['episode_no']} - {ep['title_en']}   |   line #{idx}",
                     speaker,
                     change["old"],

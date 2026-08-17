@@ -75,13 +75,13 @@ def main() -> None:
             if not rows:
                 continue
             parts.append(
-                f"<h2>Event {event['event_id']} · {html.escape(event['name_en'])} — "
+                f"<h2>{html.escape(event['name_en'])} — "
                 f"Episode {ep['episode_no']}: {html.escape(ep['title_en'])} "
                 f"<span class='idx'>({len(rows)} changed lines)</span></h2>"
             )
             parts.append("<div class='grid'>")
             lines_md = [
-                f"# Event {event['event_id']} — {event['name_en']}",
+                f"# {event['name_en']}",
                 "",
                 f"## Episode {ep['episode_no']} — {ep['title_en']} (`{ep['scenario_id']}`)",
                 "",
