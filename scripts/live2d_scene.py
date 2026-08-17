@@ -1,0 +1,392 @@
+"""Prototype: rebuild the actual in-scene Live2D frame for a story line.
+
+Everything runs locally — no browser. A legacy CGL context (GL 2.1 / GLSL 1.20, which
+is what the Cubism GL renderer's shaders target) is created offscreen, `live2d-py`
+drives Cubism Core natively, and each character is drawn to an FBO with alpha and
+composited over the scene background with Pillow.
+
+Per line, the scenario data tells us exactly what the game shows:
+  * which characters are on stage, where (``LayoutData`` side slots) and in what costume
+  * the body motion + facial expression active for each of them
+so the pose is reconstructed rather than approximated.
+
+Model bundles come from the official CDN (decrypted with sssekai); motions and
+expressions come pre-extracted off the mirror at
+``sekai-live2d-assets/live2d/motion/<dir>/<base>_motion_base/{motion,facial}/``.
+"""
+
+from __future__ import annotations
+
+import ctypes
+import ctypes.util
+import json
+import subprocess
+from ctypes import byref, c_int, c_void_p
+from pathlib import Path
+
+import requests
+from PIL import Image
+
+LIVE2D_CDN = "https://storage.sekai.best/sekai-live2d-assets/live2d"
+CACHE = Path("retranslation/live2d")
+SSSEKAI_PY = Path.home() / "github/sekai-reverse-engineering/.venv/bin/sssekai"
+
+# CharacterLayoutPosition → x as a fraction of screen width (see sekai-viewer's
+# story-scenerio.d.ts: Left ≈ 30%, Center 50%, Right ≈ 70%, *Edge = off-screen).
+POSITION_X = {0: 0.5, 2: -0.15, 3: 0.31, 4: 0.5, 6: 1.15, 7: 0.69, 9: 0.31, 10: 0.5, 12: 0.69}
+OFFSCREEN = {2, 6, 9, 10, 12}
+
+_session = requests.Session()
+_session.headers.update(
+    {
+        "Accept": "application/octet-stream",
+        "User-Agent": "UnityPlayer/2022.3.52f1",
+        "X-Platform": "Android",
+        "X-Unity-Version": "2022.3.52f1",
+        "X-App-Version": "5.5.0",
+        "X-App-Hash": "d6f805a4-3d77-4967-91b8-a045d97e756c",
+        "X-DeviceModel": "sssekai",
+        "X-OperatingSystem": "Android",
+    }
+)
+
+
+# --- offscreen GL ------------------------------------------------------------
+
+
+def make_legacy_context() -> None:
+    """Current-thread offscreen GL 2.1 context via CGL.
+
+    A core 3.3 context (what moderngl gives you) rejects Cubism's ``#version 120``
+    shaders, so the renderer silently draws nothing — hence the legacy profile.
+    """
+    cgl = ctypes.CDLL(ctypes.util.find_library("OpenGL"))
+    attrs = (c_int * 11)(99, 0x1000, 8, 24, 11, 8, 12, 24, 73, 0, 0)
+    pix, npix, ctx = c_void_p(), c_int(), c_void_p()
+    if cgl.CGLChoosePixelFormat(attrs, byref(pix), byref(npix)) or not npix.value:
+        raise RuntimeError("no legacy CGL pixel format")
+    if cgl.CGLCreateContext(pix, None, byref(ctx)):
+        raise RuntimeError("CGLCreateContext failed")
+    cgl.CGLSetCurrentContext(ctx)
+
+
+# --- asset fetching ----------------------------------------------------------
+
+
+def model_dir(costume: str) -> Path | None:
+    """Download + decrypt ``live2d/model/<costume>`` and return its extract dir."""
+    dest = CACHE / "models" / costume
+    marker = dest / ".ok"
+    if marker.exists():
+        return dest
+    if (dest / ".missing").exists():
+        return None
+    dest.mkdir(parents=True, exist_ok=True)
+    url = (
+        "https://n-production-846c90c1-assetbundle.sekai-en.com/"
+        "5.5.1.20/5ea006ba-5840-4fe4-aed8-d1beeacd39ab/android/"
+        f"live2d/model/{costume}"
+    )
+    resp = _session.get(url, timeout=120)
+    if resp.status_code != 200:
+        (dest / ".missing").touch()
+        return None
+    blob = CACHE / "bundles" / f"{costume}.bin"
+    blob.parent.mkdir(parents=True, exist_ok=True)
+    blob.write_bytes(resp.content)
+    subprocess.run(
+        [str(SSSEKAI_PY), "live2dextract", str(blob), str(dest)],
+        check=True,
+        capture_output=True,
+    )
+    marker.touch()
+    return dest
+
+
+def motion_base(costume: str) -> str | None:
+    """``01ichika_cloth001`` → ``v1/main/01_ichika/01ichika_motion_base`` (probed)."""
+    prefix = costume.split("_")[0]
+    digits = "".join(ch for ch in prefix[:2] if ch.isdigit())
+    name = prefix[len(digits) :]
+    if not digits or not name:
+        return None
+    cache = CACHE / "motion_base.json"
+    known = json.loads(cache.read_text()) if cache.exists() else {}
+    if prefix in known:
+        return known[prefix] or None
+    found = None
+    for version in ("v1", "v2"):
+        candidate = f"{version}/main/{digits}_{name}/{prefix}_motion_base"
+        if _session.head(f"{LIVE2D_CDN}/motion/{candidate}/BuildMotionData.json").status_code == 200:
+            found = candidate
+            break
+    known[prefix] = found
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps(known, indent=1))
+    return found
+
+
+def motion_json(costume: str, kind: str, name: str) -> dict | None:
+    """``kind`` is ``motion`` (body) or ``facial`` (expression)."""
+    if not name:
+        return None
+    base = motion_base(costume)
+    if not base:
+        return None
+    dest = CACHE / "motions" / base / kind / f"{name}.motion3.json"
+    if dest.exists():
+        return json.loads(dest.read_text()) if dest.stat().st_size else None
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    resp = _session.get(f"{LIVE2D_CDN}/motion/{base}/{kind}/{name}.motion3.json", timeout=60)
+    if resp.status_code != 200:
+        dest.write_text("")
+        return None
+    dest.write_bytes(resp.content)
+    return resp.json()
+
+
+# --- motion3 curve evaluation ------------------------------------------------
+
+
+def eval_curve(curve: dict, time: float) -> float:
+    """Value of one motion3 curve at ``time`` (linear/bezier/stepped segments)."""
+    points = curve["Segments"]
+    x0, y0 = points[0], points[1]
+    idx = 2
+    value = y0
+    while idx < len(points):
+        seg_type = int(points[idx])
+        idx += 1
+        if seg_type == 0:  # linear
+            x1, y1 = points[idx], points[idx + 1]
+            idx += 2
+            if time <= x1:
+                span = x1 - x0
+                t = 0.0 if span <= 0 else (time - x0) / span
+                return y0 + (y1 - y0) * t
+            x0, y0 = x1, y1
+        elif seg_type == 1:  # cubic bezier
+            cx1, cy1, cx2, cy2, x1, y1 = points[idx : idx + 6]
+            idx += 6
+            if time <= x1:
+                span = x1 - x0
+                t = 0.0 if span <= 0 else (time - x0) / span
+                u = 1 - t
+                return (
+                    u**3 * y0 + 3 * u**2 * t * cy1 + 3 * u * t**2 * cy2 + t**3 * y1
+                )
+            x0, y0 = x1, y1
+        elif seg_type in (2, 3):  # stepped / inverse-stepped
+            x1, y1 = points[idx], points[idx + 1]
+            idx += 2
+            if time <= x1:
+                return y0 if seg_type == 2 else y1
+            x0, y0 = x1, y1
+        else:  # unknown segment kind — stop rather than mis-read the buffer
+            break
+        value = y0
+    return value
+
+
+def apply_motion(model, data: dict | None, time: float | None = None) -> None:
+    """Push a motion3's parameter/opacity values at ``time`` into the model."""
+    if not data:
+        return
+    duration = float(data.get("Meta", {}).get("Duration", 0) or 0)
+    # default to the settled end pose: Sekai talk motions resolve into the pose the
+    # frame is meant to show, whereas t=0 is still the previous pose
+    when = duration if time is None else min(time, duration)
+    for curve in data.get("Curves", []):
+        target, cid = curve.get("Target"), curve.get("Id")
+        try:
+            value = eval_curve(curve, when)
+        except Exception:  # noqa: BLE001 - malformed curve, skip it
+            continue
+        if target == "Parameter":
+            try:
+                model.SetParameterValue(cid, value, 1.0)
+            except Exception:  # noqa: BLE001 - parameter absent on this model
+                pass
+        elif target == "PartOpacity":
+            try:
+                model.SetPartOpacity(cid, value)
+            except Exception:  # noqa: BLE001
+                pass
+
+
+# --- rendering ---------------------------------------------------------------
+
+
+class Live2DStage:
+    """Owns the GL context + model cache; renders one character at a time."""
+
+    def __init__(self, size: tuple[int, int] = (1100, 1100)) -> None:
+        import live2d.v3 as live2d
+        from OpenGL.GL import (
+            GL_COLOR_ATTACHMENT0,
+            GL_FRAMEBUFFER,
+            GL_RGBA,
+            GL_RGBA8,
+            GL_TEXTURE_2D,
+            GL_UNSIGNED_BYTE,
+            glBindFramebuffer,
+            glBindTexture,
+            glFramebufferTexture2D,
+            glGenFramebuffers,
+            glGenTextures,
+            glTexImage2D,
+        )
+
+        make_legacy_context()
+        self.live2d = live2d
+        self.size = size
+        live2d.init()
+        live2d.glInit()
+        self.fbo = glGenFramebuffers(1)
+        glBindFramebuffer(GL_FRAMEBUFFER, self.fbo)
+        tex = glGenTextures(1)
+        glBindTexture(GL_TEXTURE_2D, tex)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size[0], size[1], 0, GL_RGBA, GL_UNSIGNED_BYTE, None)
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
+        self._models: dict[str, object] = {}
+
+    def model(self, costume: str):
+        if costume in self._models:
+            return self._models[costume]
+        directory = model_dir(costume)
+        if not directory:
+            self._models[costume] = None
+            return None
+        model3 = next(directory.glob("*.model3.json"), None)
+        if not model3:
+            self._models[costume] = None
+            return None
+        model = self.live2d.LAppModel()
+        model.LoadModelJson(str(model3))
+        model.Resize(*self.size)
+        model.SetAutoBlinkEnable(False)
+        model.SetAutoBreathEnable(False)
+        self._models[costume] = model
+        return model
+
+    def render(self, costume: str, motion: str, facial: str, scale: float, offset_y: float):
+        """One character, posed, as an RGBA image (transparent background)."""
+        from OpenGL.GL import (
+            GL_COLOR_BUFFER_BIT,
+            GL_FRAMEBUFFER,
+            GL_RGBA,
+            GL_UNSIGNED_BYTE,
+            glBindFramebuffer,
+            glClear,
+            glClearColor,
+            glReadPixels,
+            glViewport,
+        )
+
+        model = self.model(costume)
+        if model is None:
+            return None
+        model.ResetParameters()
+        model.SetScale(scale)
+        model.SetOffset(0.0, offset_y)
+        apply_motion(model, motion_json(costume, "motion", motion))
+        apply_motion(model, motion_json(costume, "facial", facial))
+        model.Update()
+        apply_motion(model, motion_json(costume, "motion", motion))
+        apply_motion(model, motion_json(costume, "facial", facial))
+
+        glBindFramebuffer(GL_FRAMEBUFFER, self.fbo)
+        glViewport(0, 0, *self.size)
+        glClearColor(0, 0, 0, 0)
+        glClear(GL_COLOR_BUFFER_BIT)
+        model.Draw()
+        buf = glReadPixels(0, 0, self.size[0], self.size[1], GL_RGBA, GL_UNSIGNED_BYTE)
+        return Image.frombytes("RGBA", self.size, buf).transpose(Image.FLIP_TOP_BOTTOM)
+
+
+# --- scenario state ----------------------------------------------------------
+
+
+def stage_states(scenario: dict) -> dict[int, list[dict]]:
+    """Talk index → characters on stage, each with costume/motion/facial/position.
+
+    Walks the snippet list the way the game does: ``CharacterLayout`` (2) and
+    ``CharacterMotion`` (4) mutate stage state, ``Talk`` (1) snapshots it, and the
+    talk's own ``Motions`` override the speaker's pose for that line.
+    """
+    layouts = scenario.get("LayoutData") or []
+    talks = scenario.get("TalkData") or []
+    state: dict[int, dict] = {}
+    out: dict[int, list[dict]] = {}
+
+    for snippet in scenario.get("Snippets") or []:
+        action = snippet.get("Action")
+        ref = snippet.get("ReferenceIndex", 0)
+        if action in (2, 4) and ref < len(layouts):
+            layout = layouts[ref]
+            cid = layout.get("Character2dId")
+            if cid is None:
+                continue
+            entry = state.setdefault(
+                cid, {"costume": "", "motion": "", "facial": "", "side": 4, "visible": False}
+            )
+            if layout.get("CostumeType"):
+                entry["costume"] = layout["CostumeType"]
+            if layout.get("MotionName"):
+                entry["motion"] = layout["MotionName"]
+            if layout.get("FacialName"):
+                entry["facial"] = layout["FacialName"]
+            side_to = layout.get("SideTo", 0)
+            layout_type = layout.get("Type")
+            if layout_type == 3:  # Clear
+                entry["visible"] = False
+            else:
+                if side_to:
+                    entry["side"] = side_to
+                if layout_type == 2:  # Appear
+                    entry["visible"] = True
+                entry["visible"] = entry["visible"] or layout_type in (0, 1)
+        elif action == 1:
+            snapshot = {
+                cid: dict(entry) for cid, entry in state.items() if entry["visible"] and entry["costume"]
+            }
+            talk = talks[ref] if ref < len(talks) else {}
+            for motion in talk.get("Motions") or []:
+                cid = motion.get("Character2dId")
+                if cid in snapshot:
+                    if motion.get("MotionName"):
+                        snapshot[cid]["motion"] = motion["MotionName"]
+                    if motion.get("FacialName"):
+                        snapshot[cid]["facial"] = motion["FacialName"]
+            speakers = {c.get("Character2dId") for c in (talk.get("TalkCharacters") or [])}
+            out[ref] = [
+                {"character2d_id": cid, "speaking": cid in speakers, **entry}
+                for cid, entry in snapshot.items()
+            ]
+    return out
+
+
+def compose_scene(
+    stage: Live2DStage,
+    background: Image.Image,
+    characters: list[dict],
+    scale: float = 2.4,
+    offset_y: float = -1.15,
+) -> Image.Image:
+    """Draw every on-stage character over the background at their side slot."""
+    canvas = background.convert("RGBA")
+    width, height = canvas.size
+    onstage = [c for c in characters if c["side"] not in OFFSCREEN]
+    # non-speakers first so the speaker lands on top
+    onstage.sort(key=lambda c: (c["speaking"], -c["side"]))
+    for char in onstage:
+        sprite = stage.render(char["costume"], char["motion"], char["facial"], scale, offset_y)
+        if sprite is None:
+            continue
+        # framing tuned against in-game captures: waist-up, heads ~a third down
+        target_h = int(height * 1.05)
+        target_w = int(sprite.width * target_h / sprite.height)
+        sprite = sprite.resize((target_w, target_h), Image.LANCZOS)
+        cx = int(POSITION_X.get(char["side"], 0.5) * width)
+        canvas.alpha_composite(sprite, (cx - target_w // 2, int(height * 0.04)))
+    return canvas

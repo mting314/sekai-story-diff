@@ -1,0 +1,8 @@
+requests>=2.32
+pillow>=11.0
+# local Live2D rendering (scripts/live2d_scene.py)
+live2d-py>=0.7.0
+pyopengl>=3.1.10
+# bundle decrypt for scripts/fetch_official_bundles.py: sssekai + UnityPy
+sssekai>=0.8.0
+unitypy>=1.25.3

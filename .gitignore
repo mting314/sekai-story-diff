@@ -1,0 +1,5 @@
+# asset caches + rendered output (hundreds of MB, all reproducible)
+/data/
+__pycache__/
+*.pyc
+.venv/
