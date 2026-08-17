@@ -131,6 +131,16 @@ def main() -> None:
     ap.add_argument("--old", required=True, help="old assetVersion directory name")
     ap.add_argument("--new", required=True, help="new assetVersion directory name")
     ap.add_argument("--out", default="data/official_changes.json")
+    ap.add_argument(
+        "--old-released-at",
+        default="",
+        help="ISO date the old assetVersion shipped, carried into the web snapshots",
+    )
+    ap.add_argument(
+        "--new-released-at",
+        default="",
+        help="ISO date the new assetVersion shipped",
+    )
     args = ap.parse_args()
 
     stories = json.loads((MASTER / "eventStories.json").read_text())
@@ -212,6 +222,8 @@ def main() -> None:
         "comparison": {
             "old_asset_version": args.old,
             "new_asset_version": args.new,
+            "old_released_at": args.old_released_at,
+            "new_released_at": args.new_released_at,
             "region": "en",
             "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)",
         },

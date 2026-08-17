@@ -50,6 +50,17 @@ POSITION_MAPS = {
 LAYOUT_SCALE = {"normal": 2.1, "three_models": 1.8}
 OFFSCREEN = {2, 6, 9, 10, 12}
 
+# CharacterLayoutDepthType: Top=0, MidTop=1, MidBack=2, Back=3. Rows further back are
+# drawn first and slightly smaller. The game's exact per-row scale is not documented
+# anywhere we can check against — sekai-viewer ignores DepthType outright — so the
+# ladder is a geometric step, tunable, and every non-zero DepthType is logged. Event 1
+# never uses one (all 778 LayoutData rows are Top), so nothing here depends on it.
+DEPTH_STEP = 0.94
+
+
+def depth_scale(depth: int, step: float = DEPTH_STEP) -> float:
+    return step ** max(0, int(depth or 0))
+
 _session = requests.Session()
 _session.headers.update(
     {
@@ -202,14 +213,53 @@ def eval_curve(curve: dict, time: float) -> float:
     return value
 
 
+def settle_time(data: dict | None, tolerance: float = 1e-3) -> float:
+    """Earliest time from which every curve in ``data`` is already constant.
+
+    Sekai talk motions are "move into the pose and hold": the last third or so of
+    every curve is flat, so any sample taken after this point is the pose the player
+    actually reads the line against. Returns 0.0 for an absent/empty motion.
+    """
+    if not data:
+        return 0.0
+    duration = float(data.get("Meta", {}).get("Duration", 0) or 0)
+    latest = 0.0
+    for curve in data.get("Curves", []):
+        points = curve.get("Segments") or []
+        if len(points) < 2:
+            continue
+        # walk segments backwards, keeping the earliest x whose value still matches
+        # the final value
+        try:
+            final = eval_curve(curve, duration)
+        except Exception:  # noqa: BLE001 - malformed curve
+            continue
+        lo, hi = 0.0, duration
+        for _ in range(24):  # bisect: first time the curve has reached its final value
+            mid = (lo + hi) / 2
+            try:
+                flat = abs(eval_curve(curve, mid) - final) <= tolerance
+            except Exception:  # noqa: BLE001
+                break
+            if flat:
+                hi = mid
+            else:
+                lo = mid
+        latest = max(latest, hi)
+    return latest
+
+
 def apply_motion(model, data: dict | None, time: float | None = None) -> None:
-    """Push a motion3's parameter/opacity values at ``time`` into the model."""
+    """Push a motion3's parameter/opacity values at ``time`` into the model.
+
+    ``time`` is absolute seconds; ``None`` means the settled end pose.
+    """
     if not data:
         return
     duration = float(data.get("Meta", {}).get("Duration", 0) or 0)
     # default to the settled end pose: Sekai talk motions resolve into the pose the
     # frame is meant to show, whereas t=0 is still the previous pose
-    when = duration if time is None else min(time, duration)
+    when = duration if time is None else max(0.0, min(time, duration))
     for curve in data.get("Curves", []):
         target, cid = curve.get("Target"), curve.get("Id")
         try:
@@ -283,12 +333,27 @@ class Live2DStage:
         self._models[costume] = model
         return model
 
-    def render(self, costume: str, motion: str, facial: str, scale: float, offset_y: float, offset_x: float = 0.0):
+    def render(
+        self,
+        costume: str,
+        motion: str,
+        facial: str,
+        scale: float,
+        offset_y: float,
+        offset_x: float = 0.0,
+        flip: bool = False,
+        pose_time: float | None = None,
+    ):
         """One character, posed, as an RGBA image (transparent background).
 
         ``scale`` 1.0 draws the model canvas exactly one viewport-height tall, so the
         game's ``* 2.1`` multiplier can be passed straight through. Offsets are in
         units of half the viewport height (measured), +y up, +x right.
+
+        ``flip`` mirrors the model: the draw is done at the mirrored x offset and the
+        whole stage-sized buffer is then flipped, which puts the model back at its
+        intended x while reversing the art. ``pose_time`` is absolute seconds into
+        the motion; ``None`` samples the settled end pose.
         """
         from OpenGL.GL import (
             GL_COLOR_BUFFER_BIT,
@@ -305,14 +370,16 @@ class Live2DStage:
         model = self.model(costume)
         if model is None:
             return None
+        body = motion_json(costume, "motion", motion)
+        face = motion_json(costume, "facial", facial)
         model.ResetParameters()
         model.SetScale(scale)
-        model.SetOffset(offset_x, offset_y)
-        apply_motion(model, motion_json(costume, "motion", motion))
-        apply_motion(model, motion_json(costume, "facial", facial))
+        model.SetOffset(-offset_x if flip else offset_x, offset_y)
+        apply_motion(model, body, pose_time)
+        apply_motion(model, face, pose_time)
         model.Update()
-        apply_motion(model, motion_json(costume, "motion", motion))
-        apply_motion(model, motion_json(costume, "facial", facial))
+        apply_motion(model, body, pose_time)
+        apply_motion(model, face, pose_time)
 
         glBindFramebuffer(GL_FRAMEBUFFER, self.fbo)
         glViewport(0, 0, *self.size)
@@ -320,10 +387,38 @@ class Live2DStage:
         glClear(GL_COLOR_BUFFER_BIT)
         model.Draw()
         buf = glReadPixels(0, 0, self.size[0], self.size[1], GL_RGBA, GL_UNSIGNED_BYTE)
-        return Image.frombytes("RGBA", self.size, buf).transpose(Image.FLIP_TOP_BOTTOM)
+        sprite = Image.frombytes("RGBA", self.size, buf).transpose(Image.FLIP_TOP_BOTTOM)
+        return sprite.transpose(Image.FLIP_LEFT_RIGHT) if flip else sprite
 
 
 # --- scenario state ----------------------------------------------------------
+
+
+def _first_layout_rows(scenario: dict) -> list[dict]:
+    """``FirstLayout`` as equivalent ``Appear`` LayoutData rows.
+
+    The game seeds the stage from ``FirstLayout`` before the first snippet runs;
+    sekai-viewer's loader does it by synthesising Appear rows, and so do we, so the
+    walk below has a single code path.
+    """
+    rows = []
+    for entry in scenario.get("FirstLayout") or []:
+        side = entry.get("PositionSide", 4)
+        rows.append(
+            {
+                "Type": 2,  # Appear
+                "SideFrom": side,
+                "SideFromOffsetX": entry.get("OffsetX", 0.0),
+                "SideTo": side,
+                "SideToOffsetX": entry.get("OffsetX", 0.0),
+                "DepthType": 0,
+                "Character2dId": entry.get("Character2dId"),
+                "CostumeType": entry.get("CostumeType", ""),
+                "MotionName": entry.get("MotionName", ""),
+                "FacialName": entry.get("FacialName", ""),
+            }
+        )
+    return rows
 
 
 def stage_states(scenario: dict) -> dict[int, list[dict]]:
@@ -332,48 +427,59 @@ def stage_states(scenario: dict) -> dict[int, list[dict]]:
     Walks the snippet list the way the game does: ``CharacterLayout`` (2) and
     ``CharacterMotion`` (4) mutate stage state, ``Talk`` (1) snapshots it, and the
     talk's own ``Motions`` override the speaker's pose for that line.
+
+    Only ``Appear`` (2) reveals a model and only ``Clear`` (3) hides one. A bare
+    motion does not: the game keeps a hidden model's alpha at 0 and merely flips an
+    internal visible flag, so treating ``CharacterMotion``/``Motion`` as a reveal puts
+    characters on stage who are not in the frame.
     """
     layouts = scenario.get("LayoutData") or []
     talks = scenario.get("TalkData") or []
     state: dict[int, dict] = {}
     out: dict[int, list[dict]] = {}
 
+    def apply(layout: dict) -> None:
+        cid = layout.get("Character2dId")
+        if cid is None:
+            return
+        entry = state.setdefault(
+            cid,
+            {
+                "costume": "",
+                "motion": "",
+                "facial": "",
+                "side": 4,
+                "offset_x": 0.0,
+                "depth": 0,
+                "visible": False,
+            },
+        )
+        if layout.get("CostumeType"):
+            entry["costume"] = layout["CostumeType"]
+        if layout.get("MotionName"):
+            entry["motion"] = layout["MotionName"]
+        if layout.get("FacialName"):
+            entry["facial"] = layout["FacialName"]
+        entry["depth"] = layout.get("DepthType", 0) or 0
+        layout_type = layout.get("Type")
+        if layout_type == 3:  # Clear
+            entry["visible"] = False
+            return
+        side_to = layout.get("SideTo", 0)
+        if side_to:
+            entry["side"] = side_to
+            entry["offset_x"] = layout.get("SideToOffsetX", 0.0) or 0.0
+        if layout_type == 2:  # Appear
+            entry["visible"] = True
+
+    for row in _first_layout_rows(scenario):
+        apply(row)
+
     for snippet in scenario.get("Snippets") or []:
         action = snippet.get("Action")
         ref = snippet.get("ReferenceIndex", 0)
         if action in (2, 4) and ref < len(layouts):
-            layout = layouts[ref]
-            cid = layout.get("Character2dId")
-            if cid is None:
-                continue
-            entry = state.setdefault(
-                cid,
-                {
-                    "costume": "",
-                    "motion": "",
-                    "facial": "",
-                    "side": 4,
-                    "offset_x": 0.0,
-                    "visible": False,
-                },
-            )
-            if layout.get("CostumeType"):
-                entry["costume"] = layout["CostumeType"]
-            if layout.get("MotionName"):
-                entry["motion"] = layout["MotionName"]
-            if layout.get("FacialName"):
-                entry["facial"] = layout["FacialName"]
-            side_to = layout.get("SideTo", 0)
-            entry["offset_x"] = layout.get("SideToOffsetX", 0.0) or 0.0
-            layout_type = layout.get("Type")
-            if layout_type == 3:  # Clear
-                entry["visible"] = False
-            else:
-                if side_to:
-                    entry["side"] = side_to
-                if layout_type == 2:  # Appear
-                    entry["visible"] = True
-                entry["visible"] = entry["visible"] or layout_type in (0, 1)
+            apply(layouts[ref])
         elif action == 1:
             snapshot = {
                 cid: dict(entry) for cid, entry in state.items() if entry["visible"] and entry["costume"]
@@ -394,11 +500,92 @@ def stage_states(scenario: dict) -> dict[int, list[dict]]:
     return out
 
 
+# SpecialEffectType values that change what a still frame of a talk line looks like.
+CHANGE_BACKGROUND = 7
+FLASHBACK_IN, FLASHBACK_OUT = 9, 10
+CHANGE_CARD_STILL, CHANGE_BACKGROUND_STILL = 11, 17
+AMBIENT = {12: "normal", 13: "evening", 14: "night"}
+# fade-to-colour pairs: the "out" covers the screen, the "in" clears it again
+COVER_OUT = {2: "black", 4: "white", 21: "white"}
+COVER_IN = {1, 3, 20}
+# live2d ambient colour grades, from sekai-viewer's AmbientColor* effects:
+# per-channel multiply followed by saturate(-0.1)
+AMBIENT_GRADE = {
+    "normal": ((1.0, 1.0, 1.0), 1.0),
+    "evening": ((0.9, 0.9, 0.8), 0.9333),
+    "night": ((0.85, 0.85, 0.9), 0.9333),
+}
+
+
+def scene_states(scenario: dict) -> dict[int, dict]:
+    """Talk index → everything except the cast that decides how the frame looks.
+
+    Walks ``SpecialEffectData`` alongside the talks, tracking the state each effect
+    leaves behind: the live background, a card/background still covering it, the
+    flashback dim, the live2d ambient grade, and whether a fade has left the screen
+    covered. Effects that are transient by construction (Telop, PlaceInfo, shakes,
+    scenario effects) never survive to a talk — the game hides them as the next talk
+    opens — so they are deliberately not tracked.
+    """
+    effects = scenario.get("SpecialEffectData") or []
+    state = {
+        "background": scenario.get("FirstBackground") or "",
+        "still": "",
+        "flashback": False,
+        "ambient": "normal",
+        "cover": "",
+    }
+    out: dict[int, dict] = {}
+    for snippet in scenario.get("Snippets") or []:
+        action = snippet.get("Action")
+        ref = snippet.get("ReferenceIndex", 0)
+        if action == 6 and ref < len(effects):
+            effect = effects[ref]
+            kind = effect.get("EffectType")
+            value = effect.get("StringValSub") or effect.get("StringVal") or ""
+            if kind == CHANGE_BACKGROUND and value:
+                state["background"], state["still"] = value, ""
+            elif kind in (CHANGE_CARD_STILL, CHANGE_BACKGROUND_STILL):
+                state["still"] = value
+            elif kind == FLASHBACK_IN:
+                state["flashback"] = True
+            elif kind == FLASHBACK_OUT:
+                state["flashback"] = False
+            elif kind in AMBIENT:
+                state["ambient"] = AMBIENT[kind]
+            elif kind in COVER_OUT:
+                state["cover"] = COVER_OUT[kind]
+            elif kind in COVER_IN:
+                state["cover"] = ""
+        elif action == 1:
+            out[ref] = dict(state)
+    return out
+
+
+def grade(sprite: Image.Image, ambient: str) -> Image.Image:
+    """Apply a live2d ambient colour grade to one character sprite."""
+    (mr, mg, mb), sat = AMBIENT_GRADE.get(ambient, AMBIENT_GRADE["normal"])
+    if (mr, mg, mb, sat) == (1.0, 1.0, 1.0, 1.0):
+        return sprite
+    from PIL import ImageEnhance
+
+    red, green, blue, alpha = sprite.split()
+    red = red.point(lambda v: min(255, round(v * mr)))
+    green = green.point(lambda v: min(255, round(v * mg)))
+    blue = blue.point(lambda v: min(255, round(v * mb)))
+    rgb = ImageEnhance.Color(Image.merge("RGB", (red, green, blue))).enhance(sat)
+    return Image.merge("RGBA", (*rgb.split(), alpha))
+
+
 def compose_scene(
     stage: Live2DStage,
     background: Image.Image,
     characters: list[dict],
     layout_mode: str = "normal",
+    flip_ids: set[int] | None = None,
+    pose_time: float | None = None,
+    ambient: str = "normal",
+    depth_step: float = DEPTH_STEP,
 ) -> Image.Image:
     """Draw every on-stage character over the background, using the game's transform.
 
@@ -414,9 +601,10 @@ def compose_scene(
     width, height = canvas.size
     positions = POSITION_MAPS[layout_mode]
     scale = LAYOUT_SCALE[layout_mode]
+    flip_ids = flip_ids or set()
     onstage = [c for c in characters if c["side"] not in OFFSCREEN]
-    # non-speakers first so the speaker lands on top
-    onstage.sort(key=lambda c: (c["speaking"], -c["side"]))
+    # deepest row first, then non-speakers, so the speaker lands on top
+    onstage.sort(key=lambda c: (-c.get("depth", 0), c["speaking"], -c["side"]))
     for char in onstage:
         pos_x, pos_y = positions.get(char["side"], (0.5, 0.5))
         pos_x += char.get("offset_x", 0.0) / 1920  # SideToOffsetX, as the viewer does
@@ -424,10 +612,18 @@ def compose_scene(
         offset_x = (pos_x - 0.5) * width / (height / 2)
         offset_y = -((pos_y + 0.3) - 0.5) * height / (height / 2)
         sprite = stage.render(
-            char["costume"], char["motion"], char["facial"], scale, offset_y, offset_x
+            char["costume"],
+            char["motion"],
+            char["facial"],
+            scale * depth_scale(char.get("depth", 0), depth_step),
+            offset_y,
+            offset_x,
+            flip=char["character2d_id"] in flip_ids,
+            pose_time=pose_time,
         )
         if sprite is None:
             continue
+        sprite = grade(sprite, ambient)
         if sprite.size != canvas.size:
             sprite = sprite.resize(canvas.size, Image.LANCZOS)
         canvas.alpha_composite(sprite)

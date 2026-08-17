@@ -45,7 +45,11 @@ def main() -> None:
 
     data = json.loads(Path(args.changes).read_text())
     index = json.loads(Path(args.images, "index.json").read_text())
-    by_key = {(i["event_id"], i["episode_no"], i["talk_index"]): i["path"] for i in index}
+    # render_frames.py writes a bare list; render_live2d_frames.py writes
+    # {"frames": [...], "dropped": [...]} so unrenderable lines stay visible
+    dropped = index.get("dropped", []) if isinstance(index, dict) else []
+    frames = index["frames"] if isinstance(index, dict) else index
+    by_key = {(i["event_id"], i["episode_no"], i["talk_index"]): i["path"] for i in frames}
     cmp_info = data["comparison"]
     root = Path(args.images)
 
@@ -107,8 +111,20 @@ def main() -> None:
                     "",
                 ]
             parts.append("</div>")
-            ep_dir = Path(path).parent
-            (ep_dir / "README.md").write_text("\n".join(lines_md), encoding="utf-8")
+            first = by_key[(event["event_id"], ep["episode_no"], rows[0]["talk_index_new"])]
+            (Path(first).parent / "README.md").write_text("\n".join(lines_md), encoding="utf-8")
+
+    if dropped:
+        parts.append(
+            f"<h2>Not rendered <span class='idx'>({len(dropped)} lines)</span></h2>"
+            "<div class='grid'><figure><figcaption>"
+            + "<br>".join(
+                f"ep{d['episode_no']} #{d['talk_index']} <b>{html.escape(d['speaker'] or '')}</b> "
+                f"<span class='idx'>{html.escape(d['reason'])}</span>"
+                for d in dropped
+            )
+            + "</figcaption></figure></div>"
+        )
 
     out = root / "gallery.html"
     out.write_text("\n".join(parts), encoding="utf-8")

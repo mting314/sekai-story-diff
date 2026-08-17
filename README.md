@@ -43,11 +43,14 @@ $RE scripts/fetch_official_bundles.py --version 5.4.0.20 --hash a1c93735-6fa9-4d
 $RE scripts/fetch_official_bundles.py --version 5.4.0.30 --hash e41ccee9-d24f-4afe-9183-86640e8ee0ac
 
 # 2. diff them line by line, then report
-python scripts/diff_versions.py --old 5.4.0.20 --new 5.4.0.30
+python scripts/diff_versions.py --old 5.4.0.20 --new 5.4.0.30 \
+    --old-released-at 2026-06-30 --new-released-at 2026-07-03
 python scripts/report.py                 # data/REPORT.md + data/changed_lines.csv
 
 # 3. images
 python scripts/render_frames.py          # 1 frame per changed line (background + portrait)
+python scripts/render_live2d_frames.py   # same, over the real posed Live2D scene
+python scripts/build_gallery.py --images data/images_live2d
 python scripts/build_gallery.py          # data/images/gallery.html
 python scripts/render_live2d_prototype.py  # real posed Live2D scenes (prototype)
 ```
@@ -72,6 +75,22 @@ Transform constants mirror sekai-viewer's player (`Live2D.ts`): scale =
 `stage_height / model.originalHeight * 2.1` (`1.8` in three-model layout), anchor `0.5`,
 `y = stage_height * (position.y + 0.3)`, and the side→x table from
 `action/character_layout.ts`.
+
+Scene state is walked out of `SpecialEffectData` alongside the talks, so a frame gets
+the background, flashback dim (flat black at `0.3`, as `flashback_filter` does) and
+live2d ambient grade (`AmbientColor*`) that are actually in force at that line. Effects
+the game hides as the next talk opens — Telop, PlaceInfo, shakes — are deliberately not
+tracked. Three findings from calibrating against the game:
+
+* **Pose time.** Sampling each motion at its final frame is right, not a guess: all 454
+  motions used in event 1 are flat from 85 % of their duration at the latest (median
+  64 %), so the last frame *is* the held pose the line is read against.
+* **`isEnabledFlipDisplay`** is not a story-scene mirror flag. Applying it reverses the
+  lettering on Shiho's hoodie and Ichika's jacket, which the game never shows. The
+  mechanism is implemented behind `--flip`, and left off.
+* **`DepthType`** is `Top` for all 778 `LayoutData` rows in event 1, so the back-row
+  ladder (`--depth-step`, draw order + scale) never fires here and is unverified
+  against the game. sekai-viewer ignores the field outright.
 
 ## Layout
 
