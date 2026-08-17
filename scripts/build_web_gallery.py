@@ -32,6 +32,7 @@ import hashlib
 import html
 import json
 import sys
+from itertools import groupby
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -90,9 +91,17 @@ def build_sprites(
 
 
 def spans_html(spans: list[tuple[str, bool]]) -> str:
-    return " ".join(
-        f"<b>{html.escape(w)}</b>" if changed else html.escape(w) for w, changed in spans
-    )
+    """Word runs as HTML, one ``<b>`` per *contiguous* run of changed words.
+
+    Wrapping each word separately leaves the spaces between them outside the
+    highlight, so a multi-word edit reads as a row of little boxes. Grouping first
+    makes the highlight run across the whole edit, the way the rendered frames do.
+    """
+    out: list[str] = []
+    for changed, group in groupby(spans, key=lambda s: s[1]):
+        run = html.escape(" ".join(word for word, _ in group))
+        out.append(f"<b>{run}</b>" if changed else run)
+    return " ".join(out)
 
 
 def main() -> None:
@@ -105,6 +114,11 @@ def main() -> None:
     )
     ap.add_argument("--kinds", default="text,speaker")
     ap.add_argument("--quality", type=int, default=88)
+    ap.add_argument(
+        "--skip-sprites",
+        action="store_true",
+        help="reuse the rendered sprites and their placement from the existing payload",
+    )
     args = ap.parse_args()
 
     data = json.loads(Path(args.changes).read_text())
@@ -226,8 +240,18 @@ def main() -> None:
 
     total = sum(e["changed"] for e in events)
     print(f"{len(events)} event(s), {total} frames, {len(poses)} distinct poses to render")
-    stage = Live2DStage(size=(STAGE_W, STAGE_H))
-    placed = build_sprites(stage, poses, sprites_dir, args.quality)
+    if args.skip_sprites:
+        placed = json.loads(data_file.read_text())["sprites"]
+        stale = [k for k in poses if k not in placed]
+        if stale:
+            raise SystemExit(
+                f"--skip-sprites but {len(stale)} poses have no rendered sprite "
+                f"(e.g. {stale[:3]}); rerun without it"
+            )
+        print(f"reusing {len(placed)} sprites")
+    else:
+        stage = Live2DStage(size=(STAGE_W, STAGE_H))
+        placed = build_sprites(stage, poses, sprites_dir, args.quality)
     missing = [k for k in poses if k not in placed]
 
     payload = {
