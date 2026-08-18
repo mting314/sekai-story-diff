@@ -37,27 +37,64 @@ nothing added or cut.
 ```bash
 # interpreter with sssekai + UnityPy (bundle decrypt)
 RE=~/github/sekai-reverse-engineering/.venv/bin/python
+# interpreter with requests, pillow, live2d-py, pyopengl
+P=~/github/sekai-story-indexer/.venv/bin/python
 
-# 1. pull both versions of every event-story bundle
-$RE scripts/fetch_official_bundles.py --version 5.4.0.20 --hash a1c93735-6fa9-4d32-ab91-f7f3dcf9470b
-$RE scripts/fetch_official_bundles.py --version 5.4.0.30 --hash e41ccee9-d24f-4afe-9183-86640e8ee0ac
+# 1. index every release, then find which bundles changed between which of them
+$P scripts/build_version_index.py      # data/versions_en.json  (193 releases + hashes)
+$P scripts/fingerprint_bundles.py      # data/transitions.json  (candidates)
 
-# 2. diff them line by line, then report
-python scripts/diff_versions.py --old 5.4.0.20 --new 5.4.0.30 \
-    --old-released-at 2026-06-30 --new-released-at 2026-07-03
-python scripts/report.py                 # data/REPORT.md + data/changed_lines.csv
+# 2. confirm each candidate by actually fetching and diffing it
+$P scripts/diff_transitions.py         # data/transitions/*.json
 
-# 3. images
-python scripts/render_frames.py          # 1 frame per changed line (background + portrait)
-python scripts/render_live2d_frames.py   # same, over the real posed Live2D scene
-python scripts/build_gallery.py --images data/images_live2d
-python scripts/build_gallery.py          # data/images/gallery.html
-python scripts/render_live2d_prototype.py  # real posed Live2D scenes (prototype)
+# 3. the site
+$P scripts/build_web_gallery.py --changes 'data/official_changes*.json' 'data/transitions/*.json'
+cd web && bun install && bun run build     # -> web/dist
+
+# reports and the baked gallery, from a single pair
+$P scripts/report.py                   # data/REPORT.md + data/changed_lines.csv
+$P scripts/render_live2d_frames.py     # 1 frame per changed line, posed Live2D scenes
+$P scripts/build_gallery.py --images data/images_live2d
 ```
 
-`scripts/probe_asset_mtimes.py` sweeps `Last-Modified` on the mirror to find *which*
-releases are worth diffing — events 24, 31, 74, 75, 111 and 155 were each re-uploaded on
-their own dates and have not been diffed yet.
+## Finding the diffs
+
+The mirror records one `Last-Modified` per asset, so it can only ever reveal an event's
+*most recent* change. The version-addressed game CDN can do better, and cheaply: a ranged
+`GET` of one byte returns the object's `ETag`, so a bundle can be fingerprinted at a
+release without downloading it.
+
+```
+event_story/event_stella_2020/scenario
+  5.4.0.20  50719afd18f39f24982d2576c5ac898e
+  5.4.0.30  ba2b6d1b4a386007d916c6533d9f47e5   <- changed
+```
+
+Use a ranged GET, not `HEAD` — a proxy in front of the CDN swallows the headers on HEAD.
+Sweeping 211 event bundles across the 41 releases still served costs 8,651 requests and
+8.6 KB, and every cell is immutable, so the cache is only ever appended to.
+
+An ETag move is **necessary but not sufficient**: a bundle can be repacked without the
+English text changing. `diff_transitions.py` confirms each candidate by fetching and
+diffing it, and drops the rest.
+
+## What "changed" means
+
+Only about a fifth of the changed lines in the catalogue are editorial rewrites:
+
+| | |
+|---|---|
+| JP → EN | 9,620 — Japanese placeholder text replaced by its first English localisation |
+| EN → JP | 1,074 — the reverse leg of that round trip |
+| **English rewrite** | **2,779** |
+
+An EN story asset does not always contain English. `textutil.language_shift` classifies
+every line and the class is stored in the diff, so the site excludes the language flips
+by default (`--langs`) without that decision being baked into the data.
+
+`scripts/probe_asset_mtimes.py` still sweeps `Last-Modified` on the mirror, but the
+fingerprint sweep supersedes it for finding work: it sees every change in the retention
+window rather than only the latest one per asset.
 
 ## Local Live2D rendering (no browser)
 
