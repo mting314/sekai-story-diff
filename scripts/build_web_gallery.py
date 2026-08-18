@@ -50,6 +50,7 @@ from live2d_scene import (  # noqa: E402
     stage_states,
     unresolved_motion_bases,
 )
+from build_version_index import load as load_versions  # noqa: E402
 from render_frames import cached, diff_spans, slug  # noqa: E402
 from report import jp_lines as jp_source  # noqa: E402
 
@@ -87,7 +88,11 @@ def sprite_key(costume: str, motion: str, facial: str, ambient: str, depth: int)
 
 
 def build_sprites(
-    stage: Live2DStage, poses: dict[str, dict], out_dir: Path, quality: int, max_height: int
+    poses: dict[str, dict],
+    out_dir: Path,
+    quality: int,
+    max_height: int,
+    known: dict[str, dict] | None = None,
 ) -> dict[str, dict]:
     """Render each distinct pose once, centred, cropped to its alpha bounding box.
 
@@ -99,8 +104,20 @@ def build_sprites(
     stored resolution changes.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
-    placed: dict[str, dict] = {}
-    for i, (key, pose) in enumerate(sorted(poses.items()), 1):
+    # reuse anything already rasterised: a sprite is a pure function of its key, so a
+    # file on disk with a recorded placement can never be stale
+    known = known or {}
+    placed: dict[str, dict] = {
+        k: v for k, v in known.items() if k in poses and (out_dir / f"{k}.webp").exists()
+    }
+    todo = {k: v for k, v in poses.items() if k not in placed}
+    if placed:
+        print(f"  reusing {len(placed)} sprites already rendered; {len(todo)} to draw")
+    if not todo:
+        return placed
+    # the GL context and Cubism runtime are only worth standing up if there is work
+    stage = Live2DStage(size=(STAGE_W, STAGE_H))
+    for i, (key, pose) in enumerate(sorted(todo.items()), 1):
         scale = LAYOUT_SCALE[pose["layout_mode"]] * depth_scale(pose["depth"])
         # centred horizontally: the per-side shift is applied in CSS, so the same crop
         # serves every position the pose appears at
@@ -125,7 +142,7 @@ def build_sprites(
             crop = crop.resize((width, max_height), Image.LANCZOS)
         crop.save(out_dir / f"{key}.webp", "WEBP", quality=quality, method=6)
         if i % 50 == 0:
-            print(f"  {i}/{len(poses)} sprites")
+            print(f"  {i}/{len(todo)} sprites")
     return placed
 
 
@@ -220,6 +237,12 @@ def main() -> None:
         help="Vite app root; sprites go to <out>/public/sprites, payload to <out>/src/data.json",
     )
     ap.add_argument("--kinds", default="text,speaker")
+    ap.add_argument(
+        "--langs",
+        default="rewrite",
+        help="which language classes to show; 'rewrite' excludes first-localisation "
+             "(JP->EN) and regression (EN->JP) lines, which are 79%% of all changes",
+    )
     ap.add_argument("--quality", type=int, default=82)
     ap.add_argument(
         "--sprite-height",
@@ -246,15 +269,22 @@ def main() -> None:
         print(f"  {Path(q).name}: {c['old_asset_version']} -> {c['new_asset_version']}"
               f" ({len(d['events'])} event(s))")
     kinds = set(args.kinds.split(","))
+    langs = set(args.langs.split(","))
     out_root = Path(args.out)
     sprites_dir = out_root / "public/sprites"
     data_file = out_root / "src/data.json"
     out_root.mkdir(parents=True, exist_ok=True)
 
     poses: dict[str, dict] = {}
-    events: list[dict] = []
+    by_event: dict[int, dict] = {}
     dropped: list[dict] = []
     metas = event_meta()
+    # only the releases the CDN still serves; fingerprint_bundles.py records which
+    live_path = Path("data/transitions.json")
+    live = (
+        json.loads(live_path.read_text())["versions"] if live_path.exists() else load_versions()
+    )
+    order = {v["version"]: i for i, v in enumerate(live)}
 
     # flatten to (version pair, event) so each event keeps its own bracket: the six
     # later events were each re-uploaded on their own date, so there is no single
@@ -278,6 +308,10 @@ def main() -> None:
 
             for change in ep["changes"]:
                 if change["kind"] not in kinds:
+                    continue
+                # an EN asset does not always hold English; a first localisation is not
+                # a retranslation and must not be presented as one
+                if change.get("lang", "rewrite") not in langs:
                     continue
                 idx = change["talk_index_new"]
                 if idx is None:
@@ -356,27 +390,44 @@ def main() -> None:
                 meta.get("banner", ""), out_root / "public/event" / f"{bundle}.webp",
                 BANNER_WIDTH, args.quality
             ) else ""
-            events.append(
+            # An event can be rewritten at several releases, so it owns a list of
+            # transitions rather than one pair. Appending a second entry with the same
+            # id would make it unreachable — main.js finds events by id.
+            entry = by_event.setdefault(
+                event["event_id"],
                 {
                     "banner": banner,
-                    "newReleasedAt": cmp_info.get("new_released_at", ""),
-                    "newVersion": cmp_info["new_asset_version"],
-                    "oldReleasedAt": cmp_info.get("old_released_at", ""),
-                    "oldVersion": cmp_info["old_asset_version"],
-                    "changed": sum(len(e["frames"]) for e in episodes),
                     "colour": colour,
-                    "episodes": episodes,
                     "id": event["event_id"],
                     "name": event["name_en"],
                     "nameJp": meta.get("nameJp") or event["name_jp"],
                     "slug": f"event{event['event_id']:03d}",
+                    "transitions": [],
                     "unit": unit,
                     "unitLogo": f"unit/{logo}.png" if logo else "",
+                },
+            )
+            entry["transitions"].append(
+                {
+                    "changed": sum(len(e["frames"]) for e in episodes),
+                    "episodes": episodes,
+                    "newReleasedAt": cmp_info.get("new_released_at", ""),
+                    "newVersion": cmp_info["new_asset_version"],
+                    "oldReleasedAt": cmp_info.get("old_released_at", ""),
+                    "oldVersion": cmp_info["old_asset_version"],
                 }
             )
 
+    # order transitions chronologically by the release index, not by string compare:
+    # "5.10.x" sorts under "5.2.x" lexicographically
+    events = sorted(by_event.values(), key=lambda e: e["id"])
+    for e in events:
+        e["transitions"].sort(key=lambda t: order.get(t["newVersion"], 0))
+        e["changed"] = sum(t["changed"] for t in e["transitions"])
     total = sum(e["changed"] for e in events)
-    print(f"{len(events)} event(s), {total} frames, {len(poses)} distinct poses to render")
+    print(f"{len(events)} event(s), {len(payloads)} payload(s), "
+          f"{sum(len(e['transitions']) for e in events)} transitions, "
+          f"{total} frames, {len(poses)} distinct poses")
     if args.skip_sprites:
         placed = json.loads(data_file.read_text())["sprites"]
         stale = [k for k in poses if k not in placed]
@@ -387,14 +438,16 @@ def main() -> None:
             )
         print(f"reusing {len(placed)} sprites")
     else:
-        stage = Live2DStage(size=(STAGE_W, STAGE_H))
+        previous = (
+            json.loads(data_file.read_text()).get("sprites", {}) if data_file.exists() else {}
+        )
         placed = build_sprites(
-            stage, poses, sprites_dir, args.quality, args.sprite_height
+            poses, sprites_dir, args.quality, args.sprite_height, previous
         )
     missing = [k for k in poses if k not in placed]
 
     bg_bytes = build_backgrounds(
-        {f["bg"] for e in events for ep in e["episodes"] for f in ep["frames"]},
+        {f["bg"] for e in events for t in e["transitions"] for ep in t["episodes"] for f in ep["frames"]},
         out_root / "public/bg",
         BG_WIDTH,
         args.quality,
@@ -425,14 +478,21 @@ def main() -> None:
 
     payload = {
         "comparison": {
-            "new_asset_version": max(e["newVersion"] for e in events),
-            "old_asset_version": min(e["oldVersion"] for e in events),
-            "pairs": sorted({(e["oldVersion"], e["newVersion"]) for e in events}),
+            "new_asset_version": max(
+                (t["newVersion"] for e in events for t in e["transitions"]),
+                key=lambda v: order.get(v, 0),
+            ),
+            "old_asset_version": min(
+                (t["oldVersion"] for e in events for t in e["transitions"]),
+                key=lambda v: order.get(v, 0),
+            ),
             "region": "en",
         },
         "dropped": dropped,
         "events": events,
         "pending": pending,
+        # every release the CDN still serves, oldest first — the version pickers
+        "versions": [{"date": v["date"], "version": v["version"]} for v in live],
         "sprites": placed,
     }
     data_file.parent.mkdir(parents=True, exist_ok=True)

@@ -37,6 +37,21 @@
  .vers { display:inline-block; margin-top:14px; padding:5px 12px; border-radius:10px;
          background:#221d3d; font-size:13px; }
  .vers b { color:#c9bfff; }
+ /* version range pickers */
+ .picker { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:14px; }
+ .picker label { font-size:13px; color:var(--dim); display:flex; gap:6px; align-items:center; }
+ .picker select { background:var(--panel); color:#fff; border:1px solid var(--line);
+                  border-radius:9px; padding:6px 9px; font-size:13px; }
+ .picker button { background:#221d3d; color:#c9bfff; border:1px solid var(--line);
+                  border-radius:9px; padding:6px 11px; font-size:13px; cursor:pointer; }
+ .picker button:hover { border-color:var(--accent); }
+ .tally { color:#7d77a5; font-size:12.5px; }
+ /* a release heading, shown only when an event was rewritten more than once */
+ .relhdr { margin:26px 24px 0; padding:9px 14px; border-left:3px solid var(--u);
+           background:#1a1730; border-radius:0 10px 10px 0; display:flex; gap:12px;
+           align-items:baseline; flex-wrap:wrap; }
+ .relhdr b { font-variant-numeric:tabular-nums; }
+ .relhdr span { color:var(--dim); font-size:12.5px; }
  #q { width:100%; margin:26px 0 6px; padding:14px 16px; font-size:16px; color:#fff;
       background:var(--panel); border:1px solid var(--line); border-radius:12px; }
  #q:focus { outline:2px solid var(--accent); }

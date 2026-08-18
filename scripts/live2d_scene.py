@@ -21,6 +21,7 @@ import ctypes
 import ctypes.util
 import json
 import subprocess
+import time
 from ctypes import byref, c_int, c_void_p
 from pathlib import Path
 
@@ -60,6 +61,20 @@ DEPTH_STEP = 0.94
 
 def depth_scale(depth: int, step: float = DEPTH_STEP) -> float:
     return step ** max(0, int(depth or 0))
+
+def _get(url: str, timeout: int = 60):
+    """GET with retries. A single dropped connection used to abort an entire render:
+    a full build makes thousands of these, so a transient proxy failure is expected
+    rather than exceptional."""
+    last: Exception | None = None
+    for attempt in range(4):
+        try:
+            return _session.get(url, timeout=timeout)
+        except Exception as exc:  # noqa: BLE001 - proxy/DNS/reset, all worth retrying
+            last = exc
+            time.sleep(2 * (attempt + 1))
+    raise last  # type: ignore[misc]
+
 
 _session = requests.Session()
 _session.headers.update(
@@ -112,7 +127,7 @@ def model_dir(costume: str) -> Path | None:
         "5.5.1.20/5ea006ba-5840-4fe4-aed8-d1beeacd39ab/android/"
         f"live2d/model/{costume}"
     )
-    resp = _session.get(url, timeout=120)
+    resp = _get(url, timeout=120)
     if resp.status_code != 200:
         (dest / ".missing").touch()
         return None
@@ -173,7 +188,12 @@ def motion_base(costume: str) -> str | None:
         candidates = [f"{version}/main/{digits}_{name}/{core}_motion_base" for version in ("v1", "v2")]
     found = None
     for candidate in candidates:
-        if _session.head(f"{LIVE2D_CDN}/motion/{candidate}/BuildMotionData.json").status_code == 200:
+        try:
+            probe = _session.head(f"{LIVE2D_CDN}/motion/{candidate}/BuildMotionData.json", timeout=45)
+        except Exception:  # noqa: BLE001
+            time.sleep(2)
+            continue
+        if probe.status_code == 200:
             found = candidate
             break
     if not found:
@@ -195,7 +215,7 @@ def motion_json(costume: str, kind: str, name: str) -> dict | None:
     if dest.exists():
         return json.loads(dest.read_text()) if dest.stat().st_size else None
     dest.parent.mkdir(parents=True, exist_ok=True)
-    resp = _session.get(f"{LIVE2D_CDN}/motion/{base}/{kind}/{name}.motion3.json", timeout=60)
+    resp = _get(f"{LIVE2D_CDN}/motion/{base}/{kind}/{name}.motion3.json")
     if resp.status_code != 200:
         dest.write_text("")
         return None

@@ -19,7 +19,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from textutil import compare_key, normalize  # noqa: E402
+from textutil import compare_key, language_shift, normalize  # noqa: E402
 
 MASTER = Path("data/master")
 OFFICIAL = Path("data/official")
@@ -39,6 +39,10 @@ class LineChange:
     old: str
     new: str
     ratio: float
+    # rewrite | localised | untranslated | japanese. An EN asset does not always hold
+    # English: most catalogue-wide "changes" are the first localisation landing, not an
+    # edit, and must not be shown as retranslation.
+    lang: str = "rewrite"
 
 
 def _flat(body: str) -> str:
@@ -74,6 +78,7 @@ def diff_scenario(old: dict, new: dict) -> list[LineChange]:
                 LineChange(
                     None, j, "added", "", (n.get("WindowDisplayName") or "").strip(),
                     "", _flat(n.get("Body")), 0.0,
+                    language_shift("", _flat(n.get("Body"))),
                 )
             )
             return
@@ -82,6 +87,7 @@ def diff_scenario(old: dict, new: dict) -> list[LineChange]:
                 LineChange(
                     i, None, "removed", (o.get("WindowDisplayName") or "").strip(), "",
                     _flat(o.get("Body")), "", 0.0,
+                    language_shift(_flat(o.get("Body")), ""),
                 )
             )
             return
@@ -99,6 +105,7 @@ def diff_scenario(old: dict, new: dict) -> list[LineChange]:
                 old_text,
                 new_text,
                 round(SequenceMatcher(None, compare_key(old_text), compare_key(new_text)).ratio(), 3),
+                language_shift(old_text, new_text),
             )
         )
 
@@ -194,6 +201,15 @@ def main() -> None:
         ep_by_scenario = {
             ep["scenarioId"]: ep for ep in master.get("eventStoryEpisodes", [])
         }
+        # The scenario files inside a bundle are not always named after the EN eventId:
+        # event_higher_2025 is eventId 169 but holds event_168_*, and cheerheart (168)
+        # holds event_167_*. The filenames follow JP production numbering while the EN
+        # region numbers its own events, and the two have drifted. Matching on the
+        # scenarioId string silently yields no episode at all, so fall back to the
+        # episode number in the filename.
+        ep_by_number = {
+            ep.get("episodeNo"): ep for ep in master.get("eventStoryEpisodes", [])
+        }
 
         episodes: list[dict] = []
         for name, new_scenario in sorted(new_doc["scenarios"].items()):
@@ -203,12 +219,15 @@ def main() -> None:
             changes = diff_scenario(old_scenario, new_scenario)
             if not changes:
                 continue
-            ep = ep_by_scenario.get(name, {})
+            trailing = re.search(r"_(\d+)$", name)
+            number = int(trailing.group(1)) if trailing else None
+            ep = ep_by_scenario.get(name) or ep_by_number.get(number) or {}
+            episode_no = ep.get("episodeNo") or number
             episodes.append(
                 {
                     "scenario_id": name,
-                    "episode_no": ep.get("episodeNo"),
-                    "title_en": en_titles.get(master["eventId"], {}).get(ep.get("episodeNo"), ""),
+                    "episode_no": episode_no,
+                    "title_en": en_titles.get(master["eventId"], {}).get(episode_no, ""),
                     "title_jp": ep.get("title", ""),
                     "lines_old": len(_talks(old_scenario)),
                     "lines_new": len(_talks(new_scenario)),
@@ -238,10 +257,12 @@ def main() -> None:
 
     events.sort(key=lambda e: e["event_id"])
     kinds: dict[str, int] = {}
+    langs: dict[str, int] = {}
     for event in events:
         for ep in event["episodes"]:
             for c in ep["changes"]:
                 kinds[c["kind"]] = kinds.get(c["kind"], 0) + 1
+                langs[c["lang"]] = langs.get(c["lang"], 0) + 1
     payload = {
         "comparison": {
             "old_asset_version": args.old,
@@ -256,6 +277,8 @@ def main() -> None:
             "episodes_changed": sum(len(e["episodes"]) for e in events),
             "changed_lines": sum(e["total_changes"] for e in events),
             "by_kind": kinds,
+            "by_lang": langs,
+            "rewrite_lines": langs.get("rewrite", 0),
         },
         "events": events,
         "bundles_only_in_new": only_new,
