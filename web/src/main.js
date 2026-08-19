@@ -80,6 +80,21 @@ function searchLines(q) {
 }
 const unitName = (u) => (u || "").replace(/_/g, " ");
 
+// How much the text actually moved. Ranked, because an event can hold several
+// transitions and the card shows whichever is strongest in range — averaging would let
+// two typo passes cancel out a real rewrite.
+const LABELS = {
+  retranslation: { rank: 3, text: "substantial rewrite" },
+  revised:       { rank: 2, text: "revised wording" },
+  punctuation:   { rank: 1, text: "punctuation only" },
+};
+const strongest = (transitions) =>
+  transitions.reduce((best, t) =>
+    !best || (LABELS[t.label]?.rank ?? 0) > (LABELS[best]?.rank ?? 0) ? t.label : best,
+  null);
+const badge = (label) =>
+  label ? `<span class="pill mag ${label}">${LABELS[label]?.text ?? label}</span>` : "";
+
 function card(e, q, href) {
   const trs = href ? inRange(e) : [];
   const lines = trs.reduce((n, t) => n + t.changed, 0);
@@ -90,7 +105,7 @@ function card(e, q, href) {
     ? `<div class="art" style="background-image:url('${ASSETS}${e.banner}')"></div>` : "";
   const logo = e.unitLogo ? `<img class="ulogo" alt="" src="${ASSETS}${e.unitLogo}">` : "";
   const stats = href
-    ? `<span class="pill hot">${lines} changed lines</span>
+    ? badge(strongest(trs)) + `<span class="pill hot">${lines} changed lines</span>
        <span class="pill">${eps} episode${eps === 1 ? "" : "s"}</span>`
       + (trs.length > 1 ? `<span class="pill">${trs.length} releases</span>` : "")
     : `<span class="pill wait">not yet diffed</span>`;
@@ -224,11 +239,14 @@ function event(ev, openEp) {
       <h2>${esc(ev.name)}</h2>
       <span class="meta">${lines} changed lines ·
         ${trs.length} release${trs.length === 1 ? "" : "s"}</span>
+      ${badge(strongest(trs))}
       <input id="filter" placeholder="Filter lines in this event…" autocomplete="off">
     </div>
     ${trs.map((tr, ti) => (multi ? `<div class="relhdr" style="--u:${ev.colour}">
         <b>${tr.oldVersion} → ${tr.newVersion}</b>
-        <span>${tr.newReleasedAt || ""} · ${tr.changed} changed lines</span></div>` : "")
+        <span>${tr.newReleasedAt || ""} · ${tr.changed} changed lines ·
+          ${(tr.depth * 100).toFixed(1)}% of the text</span>
+        ${badge(tr.label)}</div>` : "")
       + tr.episodes.map((ep, i) => `<details id="${epId(tr, ep)}"
           ${openEp ? (openEp === epId(tr, ep) ? "open" : "")
                    : (ti === 0 && i === 0 ? "open" : "")}>
@@ -241,6 +259,7 @@ function event(ev, openEp) {
   const filt = document.getElementById("filter");
   filt.oninput = () => {
     const q = filt.value.toLowerCase();
+    let total = 0;
     for (const tr of trs) for (const ep of tr.episodes) {
       const el = document.getElementById(epId(tr, ep));
       let shown = 0;
@@ -255,7 +274,18 @@ function event(ev, openEp) {
       el.querySelector("em").textContent = q ? `${shown} of ${ep.frames.length} lines`
                                              : `${ep.frames.length} changed lines`;
       if (q) el.open = true;
+      total += shown;
     }
+    // hiding every episode used to leave a silently blank page with no explanation
+    let none = document.getElementById("nomatch");
+    if (!none) {
+      none = document.createElement("div");
+      none.id = "nomatch";
+      none.className = "empty";
+      document.getElementById("app").append(none);
+    }
+    none.textContent = q && !total ? `No line in this event matches “${filt.value}”.` : "";
+    none.style.display = q && !total ? "" : "none";
   };
 }
 

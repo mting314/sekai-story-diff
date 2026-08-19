@@ -36,25 +36,7 @@ nothing, so the list should probably show only those that did, with a count of t
 
 ---
 
-## 3. Classify each change: substantial rewrite vs typo fix
-
-At a glance, was this event's diff a real retranslation or a handful of comma fixes?
-
-**Why:** *First Star After the Rain* rewrote 359 lines; *Screaming?!* changed two
-characters of a homoglyph. Both currently look like "an event that changed".
-
-**Watch out for:** the signal is already half-computed. `LineChange.ratio` is a
-`SequenceMatcher` score on the normalised text, and `kind` separates `text` /
-`linebreak` / `speaker`. A first cut could bucket on median ratio plus changed-line
-share — high ratio and few lines means punctuation and grammar; low ratio across many
-lines means a rewrite. Worth sanity-checking against known cases: *Screaming?!* is a
-pure homoglyph swap, *Happy Lovely Everyday!* is mostly quotation marks, *Curtain Call*
-has a genuine rewording. Do the classification in the pipeline and store it, so the
-threshold can move without re-diffing.
-
----
-
-## 4. Attribution disclaimer on the site
+## 3. Attribution disclaimer on the site
 
 State plainly that all story text, character art and assets belong to Colorful Palette /
 SEGA / Crypton, that this is an unofficial fan project, and that source data comes from
@@ -69,7 +51,7 @@ version index and `sekai.best` for the asset mirror, since the pipeline depends 
 
 ---
 
-## 5. Ingest the main unit stories
+## 4. Ingest the main unit stories
 
 The sweep covers event stories only. The six unit arcs — the main character-band stories —
 are not covered at all, and are a likely place for considered retranslation.
@@ -85,7 +67,7 @@ enumerates event stories only; `diff_versions.py` resolves names and episode tit
 and an arc has no banner — though `web/public/unit/` already holds the logos. Model arcs as
 a sibling collection rather than fake events. Best done after the classifier and magnitude work, so both apply from the start.
 
-## 6. Style the dialogue like the game
+## 5. Style the dialogue like the game
 
 Replace the 94%-opaque white card with the game's look. The viewer's assets specify it
 exactly: `src/assets/live2d_player_ui/text_background.svg` is a **vertical black gradient at
@@ -97,7 +79,7 @@ against white and will be unreadable on a dark panel; the mobile variants (`#ff9
 `#8ce0b6`) are the starting point, and the two code paths can then merge. A screenshot would
 settle how much stage height the panel covers and where the name plate sits.
 
-## 7. Prune orphaned sprites from the bucket
+## 6. Prune orphaned sprites from the bucket
 
 Every reclassification leaves sprites in `gs://sekai-story-diff-assets` that no payload
 references. The classifier fix alone orphans ~1,672 of 2,219.
@@ -116,6 +98,10 @@ saving is easiest to confirm.
 
 ## Done
 
+- Change magnitude: breadth + depth per transition, badged as substantial rewrite /
+  revised wording / punctuation only. Two axes, because *Wonder Magical Showtime!* touched
+  167 lines and every one was adding a curly quote
+- Empty state when the in-event filter matches nothing
 - Renamed `master` → `main`; deploy triggers on `main`, Pages source repointed
 - Language classifier fixed: counts letters, not characters — 2,629 → 957 real rewrites
 - Fingerprint sweep to find changed bundles for ~1 byte each

@@ -80,6 +80,11 @@
  .pill.unit { background:none; border:1px solid var(--u); color:var(--u);
               text-transform:capitalize; }
  .pill.wait { background:#2a2450; color:var(--dim); }
+ /* how much the text moved. punctuation is deliberately quiet — it is the
+    "nothing much happened here" case and should not compete for attention. */
+ .pill.mag.retranslation { background:#7a2f52; color:#ffd9e7; }
+ .pill.mag.revised { background:#2a4a6b; color:#cfe6ff; }
+ .pill.mag.punctuation { background:none; border:1px solid var(--line); color:#7d77a5; }
  .sec { margin:34px 0 10px; font-size:13px; text-transform:uppercase;
         letter-spacing:.09em; color:#7d77a5; }
  .hit { display:block; background:var(--panel); border-radius:11px; padding:10px 14px;

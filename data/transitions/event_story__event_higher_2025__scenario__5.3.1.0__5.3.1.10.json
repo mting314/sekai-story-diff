@@ -18,10 +18,10 @@
   },
   "by_lang": {
    "punctuation": 36,
-   "localised": 684,
-   "rewrite": 9
+   "localised": 690,
+   "rewrite": 3
   },
-  "rewrite_lines": 9
+  "rewrite_lines": 3
  },
  "events": [
   {
@@ -5071,7 +5071,7 @@
        "old": "ここが、SONIC NOTESの会場……",
        "new": "So this is where SONIC NOTES is happening...",
        "ratio": 0.423,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 2,
@@ -5159,7 +5159,7 @@
        "old": "10万人……！",
        "new": "100,000...?!",
        "ratio": 0.5,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 10,
@@ -5588,7 +5588,7 @@
        "old": "『SONIC NOTESの開演だ！』",
        "new": "“It's time to get SONIC NOTES on the road!”",
        "ratio": 0.44,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 49,
@@ -7159,7 +7159,7 @@
        "old": "Lasting ECHO Fesって…… タイガさん達、あれに出るの！？",
        "new": "Wait, Lasting ECHO Fest...? You guys are gonna be performing there, Taiga?!",
        "ratio": 0.386,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 2,
@@ -7269,7 +7269,7 @@
        "old": "——Lasting ECHO Fesは、別格だ",
        "new": "But Lasting ECHO Fest is in a league of its own.",
        "ratio": 0.508,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 12,
@@ -7731,7 +7731,7 @@
        "old": "もちろん——Lasting ECHO Fesのステージでな",
        "new": "And yeah, I mean on the main stage at Lasting ECHO Fest.",
        "ratio": 0.457,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 54,

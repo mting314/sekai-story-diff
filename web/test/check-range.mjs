@@ -87,6 +87,36 @@ console.log("\nEVENT PAGE");
 ok(document.querySelectorAll("main figure").length === 359, "First Star renders 359 frames",
    `${document.querySelectorAll("main figure").length}`);
 
+console.log("\nMAGNITUDE");
+const LABELS = ["retranslation", "revised", "punctuation"];
+const labels = payload.events.flatMap((e) => e.transitions.map((t) => t.label));
+ok(labels.length > 0 && labels.every((l) => LABELS.includes(l)),
+   "every transition carries a known label",
+   [...new Set(labels)].join(", "));
+const named = (n) => payload.events.find((e) => e.name.startsWith(n));
+for (const [name, want] of [["First Star", "retranslation"], ["Imprisoned Marionette", "retranslation"],
+                            ["Wonder Magical Showtime", "punctuation"], ["Screaming?!", "punctuation"]]) {
+  const ev = named(name);
+  ok(ev && ev.transitions.some((t) => t.label === want),
+     `${name} reads as ${want}`, ev ? ev.transitions.map((t) => t.label).join(",") : "not found");
+}
+ok(payload.events.every((e) => e.transitions.every((t) => t.breadth <= 1)),
+   "no event reports breadth over 100%");
+({ document } = boot("#/e1"));
+ok(document.querySelector(".pill.mag"), "badge rendered on the event page",
+   document.querySelector(".pill.mag")?.textContent);
+
+console.log("\nEMPTY FILTER");
+{
+  const b = boot("#/e1");
+  const f = b.document.getElementById("filter");
+  f.value = "zzzznothingmatches";
+  f.oninput();
+  const msg = b.document.getElementById("nomatch");
+  ok(msg && msg.textContent.length > 0, "filter with no matches explains itself",
+     msg ? msg.textContent : "(no element)");
+}
+
 console.log("\nDEEP LINK WITH RANGE");
 ({ document } = boot("#/r/5.4.0.20..5.4.0.30/e1/t5_4_0_30-ep03/19"));
 ok(document.getElementById("t5_4_0_30-ep03")?.hasAttribute("open"), "target episode opened");

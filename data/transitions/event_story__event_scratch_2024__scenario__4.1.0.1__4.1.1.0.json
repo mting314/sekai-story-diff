@@ -15,11 +15,10 @@
    "text": 590
   },
   "by_lang": {
-   "localised": 558,
-   "punctuation": 31,
-   "rewrite": 1
+   "localised": 559,
+   "punctuation": 31
   },
-  "rewrite_lines": 1
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -4914,7 +4913,7 @@
        "old": "（Dear Ribbonの、新作……？）",
        "new": "(Dear Ribbon released some new stuff...?)",
        "ratio": 0.478,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 14,

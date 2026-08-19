@@ -83,6 +83,18 @@ def language_shift(old: str, new: str) -> str:
     old_letters, new_letters = _letters(old), _letters(new)
     if not old_letters and not new_letters:
         return "punctuation"
+
+    # A ratio alone still misses lines where a Latin proper noun dilutes the Japanese:
+    #   '——どうも。あれ、Leo/needだ' -> "Hello. Oh, Leo/need's also here."
+    # 'Leo/need' is enough Latin to drag it under any sensible threshold. Kana or kanji
+    # on the old side with none on the new is decisive on its own — English story text
+    # never carries Japanese script, verified across every line in the corpus.
+    old_has, new_has = bool(_JAPANESE.search(old)), bool(_JAPANESE.search(new))
+    if old_has and not new_has:
+        return "localised"
+    if new_has and not old_has:
+        return "untranslated"
+
     old_jp, new_jp = japanese_ratio(old) > 0.5, japanese_ratio(new) > 0.5
     if old_jp and new_jp:
         return "japanese"

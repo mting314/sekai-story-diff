@@ -17,11 +17,11 @@
    "linebreak": 8
   },
   "by_lang": {
-   "localised": 560,
+   "localised": 563,
    "punctuation": 15,
-   "rewrite": 4
+   "rewrite": 1
   },
-  "rewrite_lines": 4
+  "rewrite_lines": 1
  },
  "events": [
   {
@@ -2554,7 +2554,7 @@
        "old": "——どうも。あれ、Leo/needだ",
        "new": "Hello. Oh, Leo/need's also here.",
        "ratio": 0.412,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 27,
@@ -3356,7 +3356,7 @@
        "old": "あ……anemoneだ。 生歌、ヤバ……",
        "new": "Oh, it's anemone. They sound amazing live...",
        "ratio": 0.311,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 6,
@@ -3774,7 +3774,7 @@
        "old": "……頑張れ、Leo/need……！",
        "new": "Show us what you got, Leo/need...!",
        "ratio": 0.4,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 44,

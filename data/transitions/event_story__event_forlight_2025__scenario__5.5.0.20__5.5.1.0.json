@@ -15,11 +15,10 @@
    "text": 949
   },
   "by_lang": {
-   "localised": 932,
-   "rewrite": 1,
+   "localised": 933,
    "punctuation": 16
   },
-  "rewrite_lines": 1
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -399,7 +398,7 @@
        "old": "……！ THE CENTER THEATREでだと……！？",
        "new": "...! A run at the Center Theatre?!",
        "ratio": 0.8,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 33,

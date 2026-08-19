@@ -15,11 +15,10 @@
    "text": 621
   },
   "by_lang": {
-   "localised": 599,
-   "rewrite": 4,
+   "localised": 603,
    "punctuation": 18
   },
-  "rewrite_lines": 4
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -113,7 +112,7 @@
        "old": "（MORE MORE JUMP！の、みんなのためにも——！）",
        "new": "(For the sake of everyone involved in MORE MORE JUMP!)",
        "ratio": 0.431,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 7,
@@ -2498,7 +2497,7 @@
        "old": "（MORE MORE JUMP！のためにも、 頑張らなくちゃ……！）",
        "new": "(I have to try...! For the sake of MORE MORE JUMP!)",
        "ratio": 0.483,
-       "lang": "rewrite"
+       "lang": "localised"
       }
      ]
     },
@@ -5706,7 +5705,7 @@
        "old": "（そして——MORE MORE JUMP！の、これからも）",
        "new": "(But also the future of MORE MORE JUMP!)",
        "ratio": 0.549,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 34,
@@ -5827,7 +5826,7 @@
        "old": "（MORE MORE JUMP！の——みんなの未来を！）",
        "new": "(I want to carry MORE MORE JUMP! into the future!)",
        "ratio": 0.467,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 45,

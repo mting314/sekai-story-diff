@@ -16,11 +16,11 @@
    "linebreak": 2
   },
   "by_lang": {
-   "localised": 480,
+   "localised": 481,
    "punctuation": 11,
-   "rewrite": 3
+   "rewrite": 2
   },
-  "rewrite_lines": 3
+  "rewrite_lines": 2
  },
  "events": [
   {
@@ -3058,7 +3058,7 @@
        "old": "（12番、12番……）",
        "new": "(Twelve, twelve...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 29,

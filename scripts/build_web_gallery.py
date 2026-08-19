@@ -33,6 +33,7 @@ import html
 import io
 import json
 import sys
+from difflib import SequenceMatcher
 from itertools import groupby
 from pathlib import Path
 
@@ -53,6 +54,7 @@ from live2d_scene import (  # noqa: E402
 )
 from build_version_index import load as load_versions  # noqa: E402
 from render_frames import cached, diff_spans, slug  # noqa: E402
+from textutil import normalize  # noqa: E402
 from report import jp_lines as jp_source  # noqa: E402
 
 _banner_session = requests.Session()
@@ -235,6 +237,45 @@ def fetch_banner(url: str, dest: Path, width: int, quality: int) -> bool:
     return True
 
 
+# Two axes, because one number cannot tell these apart: Wonder Magical Showtime! changed
+# 167 lines and every one was adding a curly quote, while Grow Glorious Glow rewrote four
+# lines outright. Breadth alone ranks the first as major; depth alone ranks the second as
+# major; together they land correctly.
+PUNCTUATION_DEPTH = 0.05   # below this the text did not really move
+RETRANSLATION_BREADTH = 0.20
+RETRANSLATION_DEPTH = 0.10
+
+
+def score_changes(changes: list[dict], total_lines: int) -> dict:
+    """How much of an event's text actually moved.
+
+    ``depth`` is character-level: the share of the changed lines' characters that differ.
+    ``breadth`` is the share of the event's lines that changed at all. Both are kept in
+    the payload rather than only the label, because the thresholds are read off the
+    observed distribution and should be movable without re-diffing.
+    """
+    changed = total = 0
+    for change in changes:
+        old, new = normalize(change["old"]), normalize(change["new"])
+        matcher = SequenceMatcher(None, old, new)
+        changed += sum(
+            max(i2 - i1, j2 - j1)
+            for tag, i1, i2, j1, j2 in matcher.get_opcodes()
+            if tag != "equal"
+        )
+        total += max(len(old), len(new))
+    depth = changed / total if total else 0.0
+    breadth = len(changes) / total_lines if total_lines else 0.0
+
+    if depth < PUNCTUATION_DEPTH:
+        label = "punctuation"
+    elif breadth >= RETRANSLATION_BREADTH and depth >= RETRANSLATION_DEPTH:
+        label = "retranslation"
+    else:
+        label = "revised"
+    return {"breadth": round(breadth, 4), "depth": round(depth, 4), "label": label}
+
+
 def spans_html(spans: list[tuple[str, bool]]) -> str:
     """Word runs as HTML, one ``<b>`` per *contiguous* run of changed words.
 
@@ -327,7 +368,12 @@ def main() -> None:
         scenarios = json.loads(
             Path("data/official", new_ver, event["bundle"].replace("/", "__") + ".json").read_text()
         )["scenarios"]
+        # Breadth needs every line in the event, but diff_versions drops episodes with
+        # no changes — summing the payload's own lines_new would count only the changed
+        # episodes and make a one-episode edit look eight times broader than it is.
+        bundle_lines = sum(len(sc.get("TalkData") or []) for sc in scenarios.values())
         episodes: list[dict] = []
+        scored: list[dict] = []
 
         for ep in event["episodes"]:
             scenario = scenarios[ep["scenario_id"]]
@@ -387,6 +433,7 @@ def main() -> None:
                     )
                 layers.sort(key=lambda c: (-c["depth"], c["speaking"]))
 
+                scored.append(change)
                 spans_old, spans_new = diff_spans(change["old"], change["new"])
                 frames.append(
                     {
@@ -448,6 +495,7 @@ def main() -> None:
                 continue
             entry["transitions"].append(
                 {
+                    **score_changes(scored, bundle_lines),
                     "changed": sum(len(e["frames"]) for e in episodes),
                     "episodes": episodes,
                     "newReleasedAt": cmp_info.get("new_released_at", ""),
