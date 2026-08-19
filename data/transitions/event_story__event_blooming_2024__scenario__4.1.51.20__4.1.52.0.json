@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.51.20",
+  "new_asset_version": "4.1.52.0",
+  "old_released_at": "2026-01-05",
+  "new_released_at": "2026-01-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 130,
+   "name_en": "To One Day Reach that Flowery Stage",
+   "name_jp": "いつか花咲くステージへ",
+   "unit": "more_more_jump",
+   "arc_slug": "0130-itsuka-hanasaki-ku-suteeji-he",
+   "bundle": "event_story/event_blooming_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "wl_idol_01_04",
+     "episode_no": 4,
+     "title_en": "For the Stream",
+     "title_jp": "配信に向けて",
+     "lines_old": 64,
+     "lines_new": 64,
+     "changes": [
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "Yeah, when I was still in ASRUN. He always made sure to let the idols he was working with about what he was thinking.",
+       "new": "Yeah, when I was still in ASRUN. He always made sure to let the idols he was working with know about what he was thinking.",
+       "ratio": 0.979,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

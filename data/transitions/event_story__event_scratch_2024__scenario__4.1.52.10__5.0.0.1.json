@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.52.10",
+  "new_asset_version": "5.0.0.1",
+  "old_released_at": "2026-01-13",
+  "new_released_at": "2026-01-16",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 150,
+   "name_en": "With Our Wounded Hands",
+   "name_jp": "傷だらけの手で、私達は",
+   "unit": "nightcord",
+   "arc_slug": "0150-kizu-darakeno-tede-watashitachi-ha",
+   "bundle": "event_story/event_scratch_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_150_08",
+     "episode_no": 8,
+     "title_en": "Friends",
+     "title_jp": "友達",
+     "lines_old": 122,
+     "lines_new": 122,
+     "changes": [
+      {
+       "talk_index_old": 108,
+       "talk_index_new": 108,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "Let's keep being friends, Mizuki.",
+       "new": "Let's stay together, Mizuki.",
+       "ratio": 0.545,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

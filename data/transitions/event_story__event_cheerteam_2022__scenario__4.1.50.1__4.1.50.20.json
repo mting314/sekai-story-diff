@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.1",
+  "new_asset_version": "4.1.50.20",
+  "old_released_at": "2025-11-29",
+  "new_released_at": "2025-12-07",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 58,
+   "name_en": "The Climax! Kamiyama Cheer Squad!",
+   "name_jp": "白熱！神高応援団！",
+   "unit": "mixed",
+   "arc_slug": "0058-hakunetsu-kandaka-ouendan",
+   "bundle": "event_story/event_cheerteam_2022/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_58_03",
+     "episode_no": 3,
+     "title_en": "For the Cheering Competition",
+     "title_jp": "応援合戦に向けて",
+     "lines_old": 95,
+     "lines_new": 95,
+     "changes": [
+      {
+       "talk_index_old": 32,
+       "talk_index_new": 32,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "Liu-bei? Do you what they're talking about, Luka?",
+       "new": "Liu-bei? Do you know what they're talking about, Luka?",
+       "ratio": 0.946,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

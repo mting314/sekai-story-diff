@@ -1,0 +1,359 @@
+{
+ "comparison": {
+  "old_asset_version": "4.0.1.20",
+  "new_asset_version": "4.1.0.1",
+  "old_released_at": "2025-10-27",
+  "new_released_at": "2025-11-03",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 8,
+  "changed_lines": 22,
+  "by_kind": {
+   "text": 22
+  },
+  "by_lang": {
+   "rewrite": 22
+  },
+  "rewrite_lines": 22
+ },
+ "events": [
+  {
+   "event_id": 26,
+   "name_en": "Carnation Recollection",
+   "name_jp": "カーネーション・リコレクション",
+   "unit": "nightcord",
+   "arc_slug": "0026-kaaneeshonrikorekushon",
+   "bundle": "event_story/event_carnation_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_26_01",
+     "episode_no": 1,
+     "title_en": "Still Not Quite Right",
+     "title_jp": "まだ、響かない",
+     "lines_old": 109,
+     "lines_new": 109,
+     "changes": [
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<But this is the fourth one now, right? Can't you say anything more than just, I don't know...?>",
+       "new": "<But this is the fourth one now, right? Can't you say anything more than just, “I don't know”...?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 34,
+       "talk_index_new": 34,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(How do I actually make a song that can save Mafuyu...?)",
+       "new": "(How do I actually make a song that can save Yuki...?)",
+       "ratio": 0.939,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 89,
+       "talk_index_new": 89,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "Yeah, it really tells you what's going on from the start.",
+       "new": "Yeah, it really tells you what's going on from the start. Nice one, K!",
+       "ratio": 0.908,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_02",
+     "episode_no": 2,
+     "title_en": "Luka's Words",
+     "title_jp": "ルカの言葉",
+     "lines_old": 84,
+     "lines_new": 84,
+     "changes": [
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<Okay, well... Yuki's biggest reaction so far came from hearing Marionette, right...?>",
+       "new": "<Okay, well... Yuki's biggest reaction so far came from hearing “Marionette”, right...?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 29,
+       "talk_index_new": 29,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(I tried to remember the way I was when I made Marionette for Mafuyu or that other song for Ena...)",
+       "new": "(I tried to remember the way I was when I made “Marionette” for Yuki or that other song for Ena...)",
+       "ratio": 0.968,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 30,
+       "talk_index_new": 30,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(Will this finally be the one that reaches Mafuyu?)",
+       "new": "(Will this finally be the one that reaches Yuki?)",
+       "ratio": 0.936,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 76,
+       "talk_index_new": 76,
+       "kind": "text",
+       "speaker_old": "MEIKO",
+       "speaker_new": "MEIKO",
+       "old": "*Sigh*...",
+       "new": "Huh...?",
+       "ratio": 0.286,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_03",
+     "episode_no": 3,
+     "title_en": "Condoling Rain",
+     "title_jp": "涙雨",
+     "lines_old": 66,
+     "lines_new": 66,
+     "changes": [
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(But even if he is awake, which dad is he going to be...?)",
+       "new": "(But even if he is awake, which “dad” is he going to be...?)",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 42,
+       "talk_index_new": 42,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "(Is that Kanade...? Oh, maybe she on her way home after visiting her dad.)",
+       "new": "(Is that Kanade...? Oh, maybe she's on her way home after visiting her dad.)",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 43,
+       "talk_index_new": 43,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "(But I probably shouldn't butt in announced. Plus, we'll talk on Nightcord later so I guess I don't need to go up to her now and...)",
+       "new": "(But I probably shouldn't butt in unannounced. Plus, we'll talk on Nightcord later, so I guess I don't need to go up to her now and...)",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 49,
+       "talk_index_new": 49,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "I'm on my home from work. More importantly, why are you walking around in the rain without an umbrella? You'll get sick, you know?",
+       "new": "I'm on my way home from work. More importantly, why are you walking around in the rain without an umbrella? You'll get sick, you know?",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_04",
+     "episode_no": 4,
+     "title_en": "Looking for a Hint",
+     "title_jp": "ヒントを探して",
+     "lines_old": 77,
+     "lines_new": 77,
+     "changes": [
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "So I need to finish another one.",
+       "new": "So I need to finish another one for tonight.",
+       "ratio": 0.838,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_05",
+     "episode_no": 5,
+     "title_en": "Flowers from a Distant Past",
+     "title_jp": "遠い記憶の花畑",
+     "lines_old": 86,
+     "lines_new": 86,
+     "changes": [
+      {
+       "talk_index_old": 48,
+       "talk_index_new": 48,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "Okay.",
+       "new": "Yes.",
+       "ratio": 0.286,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 82,
+       "talk_index_new": 82,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "It's that place with the fountain that's just nearby. It has all these little flowerbeds and look so pretty♪",
+       "new": "It's that place with the fountain that's just nearby. It has all these little flowerbeds and looks so pretty♪",
+       "ratio": 0.995,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_06",
+     "episode_no": 6,
+     "title_en": "Forgotten Happiness",
+     "title_jp": "忘れていた幸せ",
+     "lines_old": 103,
+     "lines_new": 103,
+     "changes": [
+      {
+       "talk_index_old": 33,
+       "talk_index_new": 33,
+       "kind": "text",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Father",
+       "old": "But let's see... We can call it, Kanade and Mommy's Happy Sunday...!",
+       "new": "But let's see... We can call it, “Kanade and Mommy's Happy Sunday”...!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 37,
+       "talk_index_new": 37,
+       "kind": "text",
+       "speaker_old": "Kanade's Mother",
+       "speaker_new": "Kanade's Mother",
+       "old": "Kanade, you know it's not nice to says things like that. You'll make your father sad.",
+       "new": "Kanade, you know it's not nice to say things like that. You'll make your father sad.",
+       "ratio": 0.994,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 40,
+       "talk_index_new": 40,
+       "kind": "text",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Father",
+       "old": "As long as my music makes you and your mother smile, it'll make me smile too.",
+       "new": "As long as my music makes you and your mother smile, I'll be more than happy.",
+       "ratio": 0.838,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 46,
+       "talk_index_new": 46,
+       "kind": "text",
+       "speaker_old": "Little Kanade",
+       "speaker_new": "Little Kanade",
+       "old": "Mommy you look really happy...!",
+       "new": "Mommy, you look really happy...!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_07",
+     "episode_no": 7,
+     "title_en": "Beyond the Labyrinth",
+     "title_jp": "迷路の先にあるもの",
+     "lines_old": 42,
+     "lines_new": 42,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(It's so gentle and warm, like I'm being wrapped in a blanket. Dad's songs has these qualities.)",
+       "new": "(It's so gentle and warm, like I'm being wrapped in a blanket. Dad's songs have these qualities.)",
+       "ratio": 0.983,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(Dad sang that song because he wanted mom and I to smile...)",
+       "new": "(Dad sang that song because he wanted mom and me to smile...)",
+       "ratio": 0.973,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 22,
+       "talk_index_new": 22,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "(But I don't know who that Mafuyu is. What's going to happen when she does find the real her?)",
+       "new": "(But I don't know who that Mafuyu is. What's going to happen when she does find the “real” her?)",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_26_08",
+     "episode_no": 8,
+     "title_en": "A Gentle Smile",
+     "title_jp": "ほほ笑み",
+     "lines_old": 69,
+     "lines_new": 69,
+     "changes": [
+      {
+       "talk_index_old": 59,
+       "talk_index_new": 59,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "(But if Kanade's saying that I was actually able to help her, I guess the things I did up to this points weren't a complete waste.)",
+       "new": "(But if Kanade's saying that I was actually able to help her, I guess the things I've done up to this point weren't a complete waste.)",
+       "ratio": 0.968,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 22,
+   "text_changes": 22
+  }
+ ],
+ "bundles_only_in_new": []
+}

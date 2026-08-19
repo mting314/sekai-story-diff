@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "5.0.0.1",
+  "new_asset_version": "5.0.50.20",
+  "old_released_at": "2026-01-16",
+  "new_released_at": "2026-02-02",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 154,
+   "name_en": "Time to Take Off!",
+   "name_jp": "Time to take off！",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0154-time-to-take-off",
+   "bundle": "event_story/event_takeoff_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_154_08",
+     "episode_no": 8,
+     "title_en": "We All Want the Same Thing",
+     "title_jp": "きっと、同じ場所を目指して",
+     "lines_old": 94,
+     "lines_new": 94,
+     "changes": [
+      {
+       "talk_index_old": 69,
+       "talk_index_new": 69,
+       "kind": "text",
+       "speaker_old": "Student Ａ",
+       "speaker_new": "Student Ａ",
+       "old": "“They way you improvised towards the end there was great!”",
+       "new": "“The way you improvised towards the end there was great!”",
+       "ratio": 0.991,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

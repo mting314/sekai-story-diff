@@ -1,0 +1,102 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.1.10",
+  "new_asset_version": "4.1.50.1",
+  "old_released_at": "2025-11-21",
+  "new_released_at": "2025-11-29",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 5,
+  "by_kind": {
+   "text": 5
+  },
+  "by_lang": {
+   "rewrite": 5
+  },
+  "rewrite_lines": 5
+ },
+ "events": [
+  {
+   "event_id": 31,
+   "name_en": "Happy Lovely Everyday!",
+   "name_jp": "ハッピー・ラブリー・エブリデイ！",
+   "unit": "more_more_jump",
+   "arc_slug": "0031-happiiraburiieburidei",
+   "bundle": "event_story/event_everyday_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_31_02",
+     "episode_no": 2,
+     "title_en": "For the Kids!",
+     "title_jp": "子供達のために！",
+     "lines_old": 120,
+     "lines_new": 120,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "The first involves Minori's idea: Let's Make A Yearbook!",
+       "new": "The first involves Minori's idea: “Let's Make A Yearbook!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 28,
+       "talk_index_new": 28,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Now, our next segment is... Let's Play With MORE MORE JUMP!",
+       "new": "Now, our next segment is... “Let's Play With MORE MORE JUMP!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 38,
+       "talk_index_new": 38,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "And last but not least, we'll have our finale: It's Showtime! The kids will all get a chance to have fun while they watch our performance!",
+       "new": "And last but not least, we'll have our finale: “It's Showtime!” The kids will all get a chance to have fun while they watch our performance!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Alright, we're here. Oh, there aren't any shows happening right now. I wonder where Miku and the other are...",
+       "new": "Alright, we're here. Oh, there aren't any shows happening right now. I wonder where Miku and the others are...",
+       "ratio": 0.995,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 77,
+       "talk_index_new": 77,
+       "kind": "text",
+       "speaker_old": "Len",
+       "speaker_new": "Len",
+       "old": "Really? That's be a huge help.",
+       "new": "Really? That'd be a huge help.",
+       "ratio": 0.963,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 5,
+   "text_changes": 5
+  }
+ ],
+ "bundles_only_in_new": []
+}

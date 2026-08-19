@@ -1,0 +1,79 @@
+{
+ "comparison": {
+  "old_asset_version": "4.0.1.20",
+  "new_asset_version": "4.1.0.1",
+  "old_released_at": "2025-10-27",
+  "new_released_at": "2025-11-03",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 2,
+  "changed_lines": 2,
+  "by_kind": {
+   "text": 2
+  },
+  "by_lang": {
+   "rewrite": 2
+  },
+  "rewrite_lines": 2
+ },
+ "events": [
+  {
+   "event_id": 144,
+   "name_en": "Here on Our Dream Stage",
+   "name_jp": "想いをのせて！Dream Stage",
+   "unit": "mixed",
+   "arc_slug": "0144-omoi-wonosete-dream-stage",
+   "bundle": "event_story/event_dreamstage_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_144_01",
+     "episode_no": 1,
+     "title_en": "The Festival",
+     "title_jp": "シブ学祭",
+     "lines_old": 65,
+     "lines_new": 65,
+     "changes": [
+      {
+       "talk_index_old": 59,
+       "talk_index_new": 59,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Yes. I am a little scared... But if it means learning more about how shows are produced, the I'd like to do it!",
+       "new": "Yes. I am a little scared... But if it means learning more about how shows are produced, then I'd like to do it!",
+       "ratio": 0.995,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_144_09",
+     "episode_no": 9,
+     "title_en": "All of Us Together",
+     "title_jp": "たくさんの想いと共に",
+     "lines_old": 131,
+     "lines_new": 131,
+     "changes": [
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Yes, Momoi's absolutely right! You've all come such a long way.",
+       "new": "Yes, Airi Momoi's absolutely right! You've all come such a long way.",
+       "ratio": 0.959,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 2,
+   "text_changes": 2
+  }
+ ],
+ "bundles_only_in_new": []
+}

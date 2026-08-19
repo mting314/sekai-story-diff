@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 21,
+   "name_en": "STRAY BAD DOG",
+   "name_jp": "STRAY BAD DOG",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0021-stray-bad-dog",
+   "bundle": "event_story/event_stray_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_21_01",
+     "episode_no": 1,
+     "title_en": "Apparent Growth",
+     "title_jp": "感じる成長",
+     "lines_old": 100,
+     "lines_new": 100,
+     "changes": [
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "Then we're one in the same. On top of that, I feel like we're finally hitting our stride as a team.",
+       "new": "Then we're one and the same. On top of that, I feel like we're finally hitting our stride as a team.",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

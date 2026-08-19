@@ -1,0 +1,79 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.51.10",
+  "new_asset_version": "4.1.51.15",
+  "old_released_at": "2025-12-16",
+  "new_released_at": "2025-12-26",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 2,
+  "changed_lines": 2,
+  "by_kind": {
+   "text": 2
+  },
+  "by_lang": {
+   "rewrite": 2
+  },
+  "rewrite_lines": 2
+ },
+ "events": [
+  {
+   "event_id": 151,
+   "name_en": "Grow Glorious Glow",
+   "name_jp": "Grow glorious glow",
+   "unit": "more_more_jump",
+   "arc_slug": "0151-grow-glorious-glow",
+   "bundle": "event_story/event_grow_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_151_02",
+     "episode_no": 2,
+     "title_en": "Overpowering Light",
+     "title_jp": "圧倒的な光",
+     "lines_old": 107,
+     "lines_new": 107,
+     "changes": [
+      {
+       "talk_index_old": 58,
+       "talk_index_new": 58,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "(I need to look proud and confident. Puff our your chest and stand tall...!)",
+       "new": "(I need to look proud and confident. Puff out your chest and stand tall...!)",
+       "ratio": 0.986,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_151_07",
+     "episode_no": 7,
+     "title_en": "Aura",
+     "title_jp": "オーラ",
+     "lines_old": 86,
+     "lines_new": 86,
+     "changes": [
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "(So, I should be able to shine outshine anyone!!)",
+       "new": "(So, I will glow brighter than anyone!)",
+       "ratio": 0.506,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 2,
+   "text_changes": 2
+  }
+ ],
+ "bundles_only_in_new": []
+}

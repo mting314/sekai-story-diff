@@ -1,0 +1,113 @@
+{
+ "comparison": {
+  "old_asset_version": "5.5.0.20",
+  "new_asset_version": "5.5.1.0",
+  "old_released_at": "2026-08-03",
+  "new_released_at": "2026-08-07",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 3,
+  "changed_lines": 5,
+  "by_kind": {
+   "text": 5
+  }
+ },
+ "events": [
+  {
+   "event_id": 74,
+   "name_en": "A Sad Farewell at the Curtain Call",
+   "name_jp": "カーテンコールに惜別を",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0074-kaatenkooru-ni-sekibetsu-wo",
+   "bundle": "event_story/event_curtaincall_2022/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_74_03",
+     "episode_no": 3,
+     "title_en": "The Two Leads",
+     "title_jp": "ふたりの主演",
+     "lines_old": 108,
+     "lines_new": 108,
+     "changes": [
+      {
+       "talk_index_old": 20,
+       "talk_index_new": 20,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Now that we all have our roles, so I'd like for us to do a table read today. Once again, I look forward to putting on a good show with all of you.",
+       "new": "Now that we all have our roles, I'd like for us to do a table read today. Once again, I look forward to putting on a good show with all of you.",
+       "ratio": 0.989
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_74_04",
+     "episode_no": 4,
+     "title_en": "Let Us Be Friends!",
+     "title_jp": "食べよう！同じ釜の飯",
+     "lines_old": 209,
+     "lines_new": 209,
+     "changes": [
+      {
+       "talk_index_old": 165,
+       "talk_index_new": 165,
+       "kind": "text",
+       "speaker_old": "Asahi",
+       "speaker_new": "Asahi",
+       "old": "I had no idea who he was. But when we tried to hand me some bread, I said, “I don't want that. I want a way to not be alone.”",
+       "new": "I had no idea who he was. But when he tried to hand me some bread, I said, \"I don't want that. I want a way to not be alone.\"",
+       "ratio": 0.991
+      },
+      {
+       "talk_index_old": 190,
+       "talk_index_new": 190,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "A show that can bring the world together...",
+       "new": "Shows that bring the world together...",
+       "ratio": 0.907
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_74_06",
+     "episode_no": 6,
+     "title_en": "Both Are Important",
+     "title_jp": "どちらも大事な",
+     "lines_old": 153,
+     "lines_new": 153,
+     "changes": [
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Asahi",
+       "speaker_new": "Asahi",
+       "old": "So, I came up with the idea of putting on a show at the Center Theatre that could bring the world together.",
+       "new": "So, I came up with the idea of putting on shows at the Center Theatre that bring the world together.",
+       "ratio": 0.956
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "A show that brings the world together...?",
+       "new": "Shows that bring the world together...?",
+       "ratio": 0.944
+      }
+     ]
+    }
+   ],
+   "total_changes": 5,
+   "text_changes": 5
+  }
+ ],
+ "bundles_only_in_new": []
+}

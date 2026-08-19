@@ -1,0 +1,80 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.1.10",
+  "new_asset_version": "4.1.50.1",
+  "old_released_at": "2025-11-21",
+  "new_released_at": "2025-11-29",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 3,
+  "by_kind": {
+   "text": 3
+  },
+  "by_lang": {
+   "rewrite": 3
+  },
+  "rewrite_lines": 3
+ },
+ "events": [
+  {
+   "event_id": 13,
+   "name_en": "Musical Twilight Parade",
+   "name_jp": "響くトワイライトパレード",
+   "unit": "leo_need",
+   "arc_slug": "0013-hibiku-towairaitopareedo",
+   "bundle": "event_story/event_parade_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_13_03",
+     "episode_no": 3,
+     "title_en": "Nice To Meet You?! Wonderhoy!",
+     "title_jp": "はじめまして！？わんだほい！",
+     "lines_old": 102,
+     "lines_new": 102,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Come on, everyone!! Let us sing and dance!! All for this glorious day!!!!",
+       "new": "\"Come on, everyone!! Let us sing and dance!! All for this glorious day!!!!\"",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 17,
+       "talk_index_new": 17,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "So he's all fired up and even said, I'm going to put on the greatest show ever!",
+       "new": "So he's all fired up and even said, \"I'm going to put on the greatest show ever!\"",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 93,
+       "talk_index_new": 93,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "What...?! Rin?! You'll startle people if they see you like this. You need to be a little more discrete.",
+       "new": "What...?! Rin?! You'll startle people if they see you like this. You need to be a little more discreet.",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 3,
+   "text_changes": 3
+  }
+ ],
+ "bundles_only_in_new": []
+}

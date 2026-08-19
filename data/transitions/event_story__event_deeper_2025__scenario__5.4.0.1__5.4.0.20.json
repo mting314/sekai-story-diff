@@ -1,0 +1,154 @@
+{
+ "comparison": {
+  "old_asset_version": "5.4.0.1",
+  "new_asset_version": "5.4.0.20",
+  "old_released_at": "2026-06-24",
+  "new_released_at": "2026-06-30",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 4,
+  "changed_lines": 7,
+  "by_kind": {
+   "text": 7
+  },
+  "by_lang": {
+   "rewrite": 7
+  },
+  "rewrite_lines": 7
+ },
+ "events": [
+  {
+   "event_id": 172,
+   "name_en": "Deeper and Deeper",
+   "name_jp": "Deeper and deeper",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0172-deeper-and-deeper",
+   "bundle": "event_story/event_deeper_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_171_03",
+     "episode_no": 3,
+     "title_en": "\"Insipid\"",
+     "title_jp": "“つまらない”",
+     "lines_old": 95,
+     "lines_new": 95,
+     "changes": [
+      {
+       "talk_index_old": 77,
+       "talk_index_new": 77,
+       "kind": "text",
+       "speaker_old": "Tom",
+       "speaker_new": "Tom",
+       "old": "<“Also, forgive me if I'm mistaken... But have you ever happened to watch ”The Voices of Honeybees“?”>",
+       "new": "<“Also, forgive me if I'm mistaken... But have you ever happened to watch 'The Voices of Honeybees'?”>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_171_04",
+     "episode_no": 4,
+     "title_en": "Unbridgeable Gulf",
+     "title_jp": "埋まらぬ差",
+     "lines_old": 128,
+     "lines_new": 128,
+     "changes": [
+      {
+       "talk_index_old": 58,
+       "talk_index_new": 58,
+       "kind": "text",
+       "speaker_old": "Actor A",
+       "speaker_new": "Actor A",
+       "old": "“Who are you...? ”None may set foot in this place without my permission...“",
+       "new": "“Who are you...? None may set foot in this place without my permission...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_171_06",
+     "episode_no": 6,
+     "title_en": "Self",
+     "title_jp": "自分自身",
+     "lines_old": 98,
+     "lines_new": 98,
+     "changes": [
+      {
+       "talk_index_old": 18,
+       "talk_index_new": 18,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "“Yes. I had the chance to see the dress rehearsal for ”Goodbye Ghosts“ the other day.”",
+       "new": "“Yes. I had the chance to see the dress rehearsal for 'Goodbye Ghosts' the other day.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 21,
+       "talk_index_new": 21,
+       "kind": "text",
+       "speaker_old": "Tom",
+       "speaker_new": "Tom",
+       "old": "<...>",
+       "new": "<“...”>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 81,
+       "talk_index_new": 81,
+       "kind": "text",
+       "speaker_old": "Tom",
+       "speaker_new": "Tom",
+       "old": "<“For example, I get the sense that some of the ghosts in ”Goodbye Ghosts“ have elements of my parents and friends who have long since passed from this world.”>",
+       "new": "<“For example, I get the sense that some of the ghosts in 'Goodbye Ghosts' have elements of my parents and friends who have long since passed from this world.”>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 94,
+       "talk_index_new": 94,
+       "kind": "text",
+       "speaker_old": "Tom",
+       "speaker_new": "Tom",
+       "old": "<I'm glad to hear that. I'm looking forward to what you'll show us.>",
+       "new": "<“I'm glad to hear that. I'm looking forward to what you'll show us.”>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_171_07",
+     "episode_no": 7,
+     "title_en": "The Curtain Rises",
+     "title_jp": "開幕",
+     "lines_old": 106,
+     "lines_new": 106,
+     "changes": [
+      {
+       "talk_index_old": 61,
+       "talk_index_new": 61,
+       "kind": "text",
+       "speaker_old": "Minstrel",
+       "speaker_new": "Minstrel",
+       "old": "“It's settled, then.” Starting today, you'll call me your master.“",
+       "new": "“It's settled, then. Starting today, you'll call me your master.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 7,
+   "text_changes": 7
+  }
+ ],
+ "bundles_only_in_new": []
+}

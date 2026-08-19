@@ -1,0 +1,122 @@
+{
+ "comparison": {
+  "old_asset_version": "5.1.0.1",
+  "new_asset_version": "5.1.0.10",
+  "old_released_at": "2026-02-19",
+  "new_released_at": "2026-03-08",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 4,
+  "changed_lines": 4,
+  "by_kind": {
+   "linebreak": 1,
+   "text": 3
+  },
+  "by_lang": {
+   "rewrite": 4
+  },
+  "rewrite_lines": 4
+ },
+ "events": [
+  {
+   "event_id": 159,
+   "name_en": "Connect Hearts Message",
+   "name_jp": "Connect hearts message",
+   "unit": "mixed",
+   "arc_slug": "0159-connect-hearts-message",
+   "bundle": "event_story/event_heartsmessage_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_159_01",
+     "episode_no": 1,
+     "title_en": "Work Shadowing Excitement",
+     "title_jp": "ワクワク企業研究学習",
+     "lines_old": 62,
+     "lines_new": 62,
+     "changes": [
+      {
+       "talk_index_old": 46,
+       "talk_index_new": 46,
+       "kind": "linebreak",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "(Giving people the opportunity to have fun like that, and make unforgettable memories, must be really great...)",
+       "new": "(Giving people the opportunity to have fun like that, and make unforgettable memories, must be really great...)",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_159_02",
+     "episode_no": 2,
+     "title_en": "The Real Business Deal",
+     "title_jp": "本格グループワーク",
+     "lines_old": 102,
+     "lines_new": 102,
+     "changes": [
+      {
+       "talk_index_old": 36,
+       "talk_index_new": 36,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "(A product promotion event... Does that means it's gonna be like that cosmetics expo?)",
+       "new": "(A product promotion event... Does that mean it's gonna be like that cosmetics expo?)",
+       "ratio": 0.994,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_159_03",
+     "episode_no": 3,
+     "title_en": "Heart-Pounding Presentation",
+     "title_jp": "どきどきプレゼン発表",
+     "lines_old": 80,
+     "lines_new": 80,
+     "changes": [
+      {
+       "talk_index_old": 5,
+       "talk_index_new": 5,
+       "kind": "text",
+       "speaker_old": "Shiho",
+       "speaker_new": "Shiho",
+       "old": "And it'sa good idea to let anyone participate.",
+       "new": "And it's a good idea to let anyone participate.",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_159_07",
+     "episode_no": 7,
+     "title_en": "Feelings of Gratitude",
+     "title_jp": "ありがとうの気持ちを",
+     "lines_old": 63,
+     "lines_new": 63,
+     "changes": [
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "Congratulations! You card is all set to go now♪",
+       "new": "Congratulations! Your card is all set to go now♪",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 4,
+   "text_changes": 3
+  }
+ ],
+ "bundles_only_in_new": []
+}

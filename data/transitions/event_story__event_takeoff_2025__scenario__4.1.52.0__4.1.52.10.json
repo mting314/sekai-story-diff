@@ -1,0 +1,147 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.52.0",
+  "new_asset_version": "4.1.52.10",
+  "old_released_at": "2026-01-09",
+  "new_released_at": "2026-01-13",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 9,
+  "by_kind": {
+   "speaker": 8,
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 9
+  },
+  "rewrite_lines": 9
+ },
+ "events": [
+  {
+   "event_id": 154,
+   "name_en": "Time to Take Off!",
+   "name_jp": "Time to take off！",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0154-time-to-take-off",
+   "bundle": "event_story/event_takeoff_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_154_03",
+     "episode_no": 3,
+     "title_en": "Trouble Strikes Quickly",
+     "title_jp": "トラブルは突然に",
+     "lines_old": 70,
+     "lines_new": 70,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "This is it. Please watch your step.",
+       "new": "This is it. Please watch your step.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 5,
+       "talk_index_new": 5,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "Please wait here. I'll be over at the check-in counter.",
+       "new": "Please wait here. I'll be over at the check-in counter.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 34,
+       "talk_index_new": 34,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "I'm so sorry, everyone... The thing is...",
+       "new": "I'm so sorry, everyone... The thing is...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 36,
+       "talk_index_new": 36,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "Yes, I'm incredibly sorry...",
+       "new": "Yes, I'm incredibly sorry...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 37,
+       "talk_index_new": 37,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "Taiga said he'd book his favorite hotel, but he accidentally made a reservation for one month from now...",
+       "new": "Taiga said he'd book his favorite hotel, but he accidentally made a reservation for one month from now...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 44,
+       "talk_index_new": 44,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "Unfortunately, they're all booked up.",
+       "new": "Unfortunately, they're all booked up.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 45,
+       "talk_index_new": 45,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "I even checked all the hotels nearby...",
+       "new": "I even checked all the hotels nearby...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 56,
+       "talk_index_new": 56,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "I'll be excusing myself once I've handed you all over",
+       "new": "I'll be excusing myself once I've handed you all over.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 57,
+       "talk_index_new": 57,
+       "kind": "speaker",
+       "speaker_old": "An",
+       "speaker_new": "Manager",
+       "old": "Once I've managed to find a hotel for tomorrow onwards, I'll let you all know...",
+       "new": "Once I've managed to find a hotel for tomorrow onwards, I'll let you all know...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 9,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

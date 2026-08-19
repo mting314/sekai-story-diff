@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.1.10",
+  "new_asset_version": "4.1.50.1",
+  "old_released_at": "2025-11-21",
+  "new_released_at": "2025-11-29",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 147,
+   "name_en": "Happy Enjoy Music!",
+   "name_jp": "Happy Enjoy Music！",
+   "unit": "leo_need",
+   "arc_slug": "0147-happy-enjoy-music",
+   "bundle": "event_story/event_enjoymusic_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_147_08",
+     "episode_no": 8,
+     "title_en": "Fun and Happy",
+     "title_jp": "楽しくて、幸せな",
+     "lines_old": 97,
+     "lines_new": 97,
+     "changes": [
+      {
+       "talk_index_old": 81,
+       "talk_index_new": 81,
+       "kind": "text",
+       "speaker_old": "Iori",
+       "speaker_new": "Iori",
+       "old": "For who exactly...?",
+       "new": "Which part, exactly...?",
+       "ratio": 0.606,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

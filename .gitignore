@@ -1,5 +1,14 @@
-# asset caches + rendered output (hundreds of MB, all reproducible)
-/data/
+# Asset caches and rendered output: ~1.8 GB, all reproducible from the CDN.
+/data/*
+# ...but the pipeline's own findings are small and are the input to every later
+# stage, so they are tracked. Without them CI has nothing to work from.
+!/data/versions_en.json
+!/data/versions_etag.json
+!/data/last_checked.txt
+!/data/fingerprints.json
+!/data/transitions.json
+!/data/transitions/
+!/data/official_changes*.json
 __pycache__/
 *.pyc
 .venv/

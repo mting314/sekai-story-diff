@@ -1,0 +1,239 @@
+{
+ "comparison": {
+  "old_asset_version": "5.3.50.0",
+  "new_asset_version": "5.3.51.0",
+  "old_released_at": "2026-06-01",
+  "new_released_at": "2026-06-18",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 7,
+  "changed_lines": 12,
+  "by_kind": {
+   "text": 12
+  },
+  "by_lang": {
+   "rewrite": 12
+  },
+  "rewrite_lines": 12
+ },
+ "events": [
+  {
+   "event_id": 24,
+   "name_en": "An Ode for the Pure of Heart",
+   "name_jp": "純白の貴方へ、誓いの歌を！",
+   "unit": "mixed",
+   "arc_slug": "0024-junpaku-no-anata-he-chikai-no-utawo",
+   "bundle": "event_story/event_bridal_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_24_01",
+     "episode_no": 1,
+     "title_en": "A Sudden Substitution",
+     "title_jp": "突然の代役",
+     "lines_old": 97,
+     "lines_new": 97,
+     "changes": [
+      {
+       "talk_index_old": 32,
+       "talk_index_new": 32,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "<I even called his temp agency and they said that anyone will do, so I was hoping that Tsukasa would agree to take the day off once I did find someone...>",
+       "new": "<I even called his temp agency, and they said it'll be no issue as long as they have a replacement, so I was hoping that Tsukasa would agree to take the day off once I did find someone...>",
+       "ratio": 0.817,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_02",
+     "episode_no": 2,
+     "title_en": "An Uncomfortable Ceremony",
+     "title_jp": "困惑の式場",
+     "lines_old": 83,
+     "lines_new": 83,
+     "changes": [
+      {
+       "talk_index_old": 61,
+       "talk_index_new": 61,
+       "kind": "text",
+       "speaker_old": "Hall Staff",
+       "speaker_new": "Hall Staff",
+       "old": "At this rate, we'll have to cancel everything and I was about the tell the bride...",
+       "new": "At this rate, we'll have to cancel everything and I was about to tell the bride...",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_03",
+     "episode_no": 3,
+     "title_en": "Quit Hesitating",
+     "title_jp": "ためらいを捨てて",
+     "lines_old": 72,
+     "lines_new": 72,
+     "changes": [
+      {
+       "talk_index_old": 35,
+       "talk_index_new": 35,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "(If it were me in her shoes and wasn't able to participate in an event I practiced so hard for, I'm not sure what I'd do...)",
+       "new": "(If it were me in her shoes and I wasn't able to participate in an event I practiced so hard for, I'm not sure what I'd do...)",
+       "ratio": 0.991,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_05",
+     "episode_no": 5,
+     "title_en": "For This Upcoming Show",
+     "title_jp": "目の前のショーのために",
+     "lines_old": 101,
+     "lines_new": 101,
+     "changes": [
+      {
+       "talk_index_old": 28,
+       "talk_index_new": 28,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "Are you're sure about just letting him go? We'll be down a person...",
+       "new": "Are you sure about just letting him go? We'll be down a person...",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 36,
+       "talk_index_new": 36,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "(Our lever was my leading candidate, but I'm guessing he also would've let things get to his head and cause trouble for everyone else...)",
+       "new": "(Our leaver was my leading candidate, but I'm guessing he also would've let things go to his head and caused trouble for everyone else...)",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_06",
+     "episode_no": 6,
+     "title_en": "Trust and Understanding",
+     "title_jp": "信頼と理解",
+     "lines_old": 88,
+     "lines_new": 88,
+     "changes": [
+      {
+       "talk_index_old": 11,
+       "talk_index_new": 11,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Louder! You need to articulate more when you say that! Like someone's planted a bomb in your molars and will explode if you close your mouth!",
+       "new": "Louder! You need to articulate more when you say that! Like someone's planted a bomb in your molars that will explode if you close your mouth!",
+       "ratio": 0.982,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 69,
+       "talk_index_new": 69,
+       "kind": "text",
+       "speaker_old": "Extras",
+       "speaker_new": "Extras",
+       "old": "Oh, like getting that turn down in the end...",
+       "new": "Oh, like getting that turn at the end down...",
+       "ratio": 0.829,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_07",
+     "episode_no": 7,
+     "title_en": "Extra Wedding Show!",
+     "title_jp": "エクストラウェディングショー！",
+     "lines_old": 103,
+     "lines_new": 103,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "I'm finally done with everything Dad asked me to do, so maybe I'll go to MEIKO's place and... Huh?",
+       "new": "I'm finally done with everything dad asked me to do, so maybe I'll go to MEIKO's place and... Huh?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "And there's only one way for you to take it back is to sing for it.",
+       "new": "And there's only one way for you to take it back, which is to sing for it.",
+       "ratio": 0.956,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 79,
+       "talk_index_new": 79,
+       "kind": "text",
+       "speaker_old": "Groom",
+       "speaker_new": "Groom",
+       "old": "I know that I can't dribble like that guy, make stuff like that other guy and how I'm tone deaf...! But she means absolutely everything to me!",
+       "new": "I know that I can't dribble like that guy or make stuff like that other guy, and that I'm tone deaf...! But she means absolutely everything to me!",
+       "ratio": 0.971,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 86,
+       "talk_index_new": 86,
+       "kind": "text",
+       "speaker_old": "passersby",
+       "speaker_new": "passersby",
+       "old": "Is something about to happen? I thought I just heard some commotion coming from the garden wing...",
+       "new": "What's going on there? Looks like they're having an outdoor wedding.",
+       "ratio": 0.241,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_08",
+     "episode_no": 8,
+     "title_en": "Smiles and Dreams",
+     "title_jp": "笑顔と夢と",
+     "lines_old": 67,
+     "lines_new": 67,
+     "changes": [
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "I hope that we'll be able to put on an event that can move people like during that wedding someday...",
+       "new": "I hope we'll be able to put on an event that moves people like that someday...",
+       "ratio": 0.854,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 12,
+   "text_changes": 12
+  }
+ ],
+ "bundles_only_in_new": []
+}

@@ -1,0 +1,293 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 8,
+  "changed_lines": 16,
+  "by_kind": {
+   "text": 16
+  },
+  "by_lang": {
+   "rewrite": 16
+  },
+  "rewrite_lines": 16
+ },
+ "events": [
+  {
+   "event_id": 24,
+   "name_en": "An Ode for the Pure of Heart",
+   "name_jp": "純白の貴方へ、誓いの歌を！",
+   "unit": "mixed",
+   "arc_slug": "0024-junpaku-no-anata-he-chikai-no-utawo",
+   "bundle": "event_story/event_bridal_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_24_01",
+     "episode_no": 1,
+     "title_en": "A Sudden Substitution",
+     "title_jp": "突然の代役",
+     "lines_old": 97,
+     "lines_new": 97,
+     "changes": [
+      {
+       "talk_index_old": 48,
+       "talk_index_new": 48,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "Uh, Toya... What did you mean when you said replacement just now?",
+       "new": "Uh, Toya... What did you mean when you said “replacement” just now?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 49,
+       "talk_index_new": 49,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "Also, I thought I heard his name just now...",
+       "new": "Also, I thought I heard “his” name just now...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 85,
+       "talk_index_new": 85,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "He was scheduled to be an extra for something today but he unfortunately has a stomach ache.",
+       "new": "He was scheduled to be an extra for something today but he unfortunately has a stomachache.",
+       "ratio": 0.994,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_02",
+     "episode_no": 2,
+     "title_en": "An Uncomfortable Ceremony",
+     "title_jp": "困惑の式場",
+     "lines_old": 83,
+     "lines_new": 83,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "It said, The director will give you more details the day of...",
+       "new": "It said, “The director will give you more details the day of...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Hall Staff",
+       "speaker_new": "Hall Staff",
+       "old": "At the end of this part, the minister for the wedding, the groom's friend, will say the standard to love and to cherish, till death do us part bit.",
+       "new": "At the end of this part, the minister for the wedding, the groom's friend, will say the standard “to love and to cherish, till death do us part” bit.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Hall Staff",
+       "speaker_new": "Hall Staff",
+       "old": "The groom will say, I do, and just as the bride is about to say the same, a man will exclaim, Wait!",
+       "new": "The groom will say, “I do,” and just as the bride is about to say the same, a man will exclaim, “Wait!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Hall Staff",
+       "speaker_new": "Hall Staff",
+       "old": "He'll run up to the altar and spontaneously propose to the bride by shouting, I love you! Let's get married!",
+       "new": "He'll run up to the altar and spontaneously propose to the bride by shouting, “I love you! Let's get married!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 29,
+       "talk_index_new": 29,
+       "kind": "text",
+       "speaker_old": "Hall Staff",
+       "speaker_new": "Hall Staff",
+       "old": "The bride will then choose her groom by saying, He is the only one for me. Everybody else congratulates them with a hearty mazel tov...",
+       "new": "The bride will then choose her groom by saying, “He is the only one for me.” Everybody else congratulates them with a hearty “mazel tov”...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 55,
+       "talk_index_new": 55,
+       "kind": "text",
+       "speaker_old": "Hall Staff",
+       "speaker_new": "Hall Staff",
+       "old": "You want us to take the reigns...?! You really can't send anyone else...?! But...!",
+       "new": "You want us to take the reins...?! You really can't send anyone else...?! But...!",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_03",
+     "episode_no": 3,
+     "title_en": "Quit Hesitating",
+     "title_jp": "ためらいを捨てて",
+     "lines_old": 72,
+     "lines_new": 72,
+     "changes": [
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Yes. A wedding is a one-in-a-lifetime show in a way, you see?",
+       "new": "Yes. A wedding is a once-in-a-lifetime show in a way, you see?",
+       "ratio": 0.991,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_04",
+     "episode_no": 4,
+     "title_en": "The Director's Orders",
+     "title_jp": "演出家の采配",
+     "lines_old": 65,
+     "lines_new": 65,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Since we're limited on time, we'll still go with when the bride and groom say their vows, but I'll making one small addition to that.",
+       "new": "Since we're limited on time, we'll still go with when the bride and groom say their vows, but I'll be making one small addition to that.",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "They'll say, Oh, it was just an act, and feel relieved...?",
+       "new": "They'll say, “Oh, it was just an act,” and feel relieved...?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_05",
+     "episode_no": 5,
+     "title_en": "For This Upcoming Show",
+     "title_jp": "目の前のショーのために",
+     "lines_old": 101,
+     "lines_new": 101,
+     "changes": [
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "But to the bride and groom, this is a once in a lifetime event. If you're unable to see that, then I won't ask you to participate.",
+       "new": "But to the bride and groom, this is a once-in-a-lifetime event. If you're unable to see that, then I won't ask you to participate.",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_06",
+     "episode_no": 6,
+     "title_en": "Trust and Understanding",
+     "title_jp": "信頼と理解",
+     "lines_old": 88,
+     "lines_new": 88,
+     "changes": [
+      {
+       "talk_index_old": 80,
+       "talk_index_new": 80,
+       "kind": "text",
+       "speaker_old": "Len",
+       "speaker_new": "Len",
+       "old": "<What if you tried that...?>",
+       "new": "<What if you tried “that”...?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_07",
+     "episode_no": 7,
+     "title_en": "Extra Wedding Show!",
+     "title_jp": "エクストラウェディングショー！",
+     "lines_old": 103,
+     "lines_new": 103,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "I'm finally done with everything dad asked me to do, so maybe I'll go to MEIKO's place and... Huh?",
+       "new": "I'm finally done with everything Dad asked me to do, so maybe I'll go to MEIKO's place and... Huh?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_24_08",
+     "episode_no": 8,
+     "title_en": "Smiles and Dreams",
+     "title_jp": "笑顔と夢と",
+     "lines_old": 67,
+     "lines_new": 67,
+     "changes": [
+      {
+       "talk_index_old": 55,
+       "talk_index_new": 55,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "Haha. I guess normal isn't really their thing, huh...?",
+       "new": "Haha. I guess “normal” isn't really their thing, huh...?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 16,
+   "text_changes": 16
+  }
+ ],
+ "bundles_only_in_new": []
+}

@@ -1,0 +1,69 @@
+{
+ "comparison": {
+  "old_asset_version": "5.4.0.40",
+  "new_asset_version": "5.5.0.1",
+  "old_released_at": "2026-07-16",
+  "new_released_at": "2026-07-24",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 2,
+  "by_kind": {
+   "speaker": 2
+  },
+  "by_lang": {
+   "rewrite": 2
+  },
+  "rewrite_lines": 2
+ },
+ "events": [
+  {
+   "event_id": 75,
+   "name_en": "Screaming?! Welcome to the Forest of Wolves!",
+   "name_jp": "絶叫！？ オオカミの森へようこそ！",
+   "unit": "mixed",
+   "arc_slug": "0075-zekkyou-ookami-no-mori-heyoukoso",
+   "bundle": "event_story/event_scream_2022/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_75_02",
+     "episode_no": 2,
+     "title_en": "Let's Make A Haunted House!",
+     "title_jp": "お化け屋敷を作ろう！",
+     "lines_old": 109,
+     "lines_new": 109,
+     "changes": [
+      {
+       "talk_index_old": 77,
+       "talk_index_new": 77,
+       "kind": "speaker",
+       "speaker_old": "Classmate Ⅾ",
+       "speaker_new": "Classmate D",
+       "old": "Yeah! I can tell that you worked really hard on it...!",
+       "new": "Yeah! I can tell that you worked really hard on it...!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 81,
+       "talk_index_new": 81,
+       "kind": "speaker",
+       "speaker_old": "Classmate Ⅾ",
+       "speaker_new": "Classmate D",
+       "old": "Yeah, that's a great idea! Okay, let's try painting a few more realistic trees.",
+       "new": "Yeah, that's a great idea! Okay, let's try painting a few more realistic trees.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 2,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}

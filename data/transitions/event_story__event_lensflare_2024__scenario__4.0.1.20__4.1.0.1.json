@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.0.1.20",
+  "new_asset_version": "4.1.0.1",
+  "old_released_at": "2025-10-27",
+  "new_released_at": "2025-11-03",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 119,
+   "name_en": "Backlight, Lens Flare",
+   "name_jp": "逆光のレンズフレア",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0119-gyakukou-no-renzufurea",
+   "bundle": "event_story/event_lensflare_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_119_05",
+     "episode_no": 5,
+     "title_en": "Cinematic Techniques",
+     "title_jp": "映画の手法",
+     "lines_old": 129,
+     "lines_new": 129,
+     "changes": [
+      {
+       "talk_index_old": 108,
+       "talk_index_new": 108,
+       "kind": "text",
+       "speaker_old": "Ohara",
+       "speaker_new": "Ohara",
+       "old": "No need... Let's move on from this scenefor now.",
+       "new": "No need... Let's move on from this scene for now.",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

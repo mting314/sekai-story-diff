@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.1.0",
+  "new_asset_version": "4.1.1.10",
+  "old_released_at": "2025-11-07",
+  "new_released_at": "2025-11-21",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 149,
+   "name_en": "The Power of Regret",
+   "name_jp": "The Power Of Regret",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0149-the-power-of-regret",
+   "bundle": "event_story/event_regret_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_149_07",
+     "episode_no": 7,
+     "title_en": "The Final Day",
+     "title_jp": "最終日",
+     "lines_old": 96,
+     "lines_new": 96,
+     "changes": [
+      {
+       "talk_index_old": 12,
+       "talk_index_new": 12,
+       "kind": "text",
+       "speaker_old": "Teacher",
+       "speaker_new": "Teacher",
+       "old": "You will be performing in this order... Ms. Aizawa, Ms. Ito, Ms. Kano, Ms. Kusanagi and Ms. Byakkomachi to finish.",
+       "new": "You will be performing in this order... Ms. Osawa, Ms. Ito, Ms. Kanae, Ms. Kusanagi and Ms. Byakkomachi to finish.",
+       "ratio": 0.961,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

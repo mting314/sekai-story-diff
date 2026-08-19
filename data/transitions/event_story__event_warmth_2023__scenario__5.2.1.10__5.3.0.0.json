@@ -1,0 +1,79 @@
+{
+ "comparison": {
+  "old_asset_version": "5.2.1.10",
+  "new_asset_version": "5.3.0.0",
+  "old_released_at": "2026-04-24",
+  "new_released_at": "2026-05-01",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 2,
+  "changed_lines": 2,
+  "by_kind": {
+   "text": 2
+  },
+  "by_lang": {
+   "rewrite": 2
+  },
+  "rewrite_lines": 2
+ },
+ "events": [
+  {
+   "event_id": 111,
+   "name_en": "The Warmth of a Guiding Hand",
+   "name_jp": "その手導くぬくもりは",
+   "unit": "more_more_jump",
+   "arc_slug": "0111-sono-te-michibiku-nukumoriha",
+   "bundle": "event_story/event_warmth_2023/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_111_03",
+     "episode_no": 3,
+     "title_en": "A Serendipitous Reunion",
+     "title_jp": "思いがけぬ再会",
+     "lines_old": 81,
+     "lines_new": 81,
+     "changes": [
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "It's further into the mountains that I initially realized, but I'm really enjoying being surrounded by nature like this.",
+       "new": "It's further into the mountains than I initially realized, but I'm really enjoying being surrounded by nature like this.",
+       "ratio": 0.991,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_111_05",
+     "episode_no": 5,
+     "title_en": "That Warmth At The Start",
+     "title_jp": "始まりのぬくもり",
+     "lines_old": 100,
+     "lines_new": 100,
+     "changes": [
+      {
+       "talk_index_old": 86,
+       "talk_index_new": 86,
+       "kind": "text",
+       "speaker_old": "Saito",
+       "speaker_new": "Saito",
+       "old": "Please don't tell Mom about what we just talking about, okay, Grandma?",
+       "new": "Please don't tell Mom about what we just talked about, okay, Grandma?",
+       "ratio": 0.962,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 2,
+   "text_changes": 2
+  }
+ ],
+ "bundles_only_in_new": []
+}

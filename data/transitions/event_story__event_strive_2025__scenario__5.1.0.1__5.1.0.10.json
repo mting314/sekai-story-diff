@@ -1,0 +1,101 @@
+{
+ "comparison": {
+  "old_asset_version": "5.1.0.1",
+  "new_asset_version": "5.1.0.10",
+  "old_released_at": "2026-02-19",
+  "new_released_at": "2026-03-08",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 2,
+  "changed_lines": 4,
+  "by_kind": {
+   "text": 4
+  },
+  "by_lang": {
+   "rewrite": 4
+  },
+  "rewrite_lines": 4
+ },
+ "events": [
+  {
+   "event_id": 157,
+   "name_en": "Rise and Strive",
+   "name_jp": "Rise and Strive",
+   "unit": "more_more_jump",
+   "arc_slug": "0157-rise-and-strive",
+   "bundle": "event_story/event_strive_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_157_01",
+     "episode_no": 1,
+     "title_en": "A Small Step Forward",
+     "title_jp": "わずかな光明",
+     "lines_old": 85,
+     "lines_new": 85,
+     "changes": [
+      {
+       "talk_index_old": 61,
+       "talk_index_new": 61,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Hehe. Some people are saying that they say your commercial, Shizuku.",
+       "new": "Hehe. Some people are saying that they saw your commercial, Shizuku.",
+       "ratio": 0.985,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 69,
+       "talk_index_new": 69,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "So, we hope you'll all be looking for our next stream.",
+       "new": "So, we hope you'll all be looking forward to our next stream.",
+       "ratio": 0.936,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 70,
+       "talk_index_new": 70,
+       "kind": "text",
+       "speaker_old": "Comments",
+       "speaker_new": "Comments",
+       "old": "<Yeah, showbiz can be pretty tough...> <I'm looking forward to you doing more streams.> <I'm gonna watch your next one in real time!>",
+       "new": "<Yeah, showbiz can be pretty tough...> <It's cool that you'll be doing more streams.> <I'm gonna watch your next one in real time too!>",
+       "ratio": 0.87,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_157_07",
+     "episode_no": 7,
+     "title_en": "Even So",
+     "title_jp": "それでも私達は",
+     "lines_old": 67,
+     "lines_new": 67,
+     "changes": [
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "But... If what Haruka just said is true, then there was nothing that we can done.",
+       "new": "But... If what Haruka just said is true, then there was nothing that we could've done.",
+       "ratio": 0.949,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 4,
+   "text_changes": 4
+  }
+ ],
+ "bundles_only_in_new": []
+}

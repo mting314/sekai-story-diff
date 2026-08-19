@@ -1,0 +1,242 @@
+{
+ "comparison": {
+  "old_asset_version": "5.3.1.20",
+  "new_asset_version": "5.3.50.0",
+  "old_released_at": "2026-05-26",
+  "new_released_at": "2026-06-01",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 4,
+  "changed_lines": 15,
+  "by_kind": {
+   "text": 15
+  },
+  "by_lang": {
+   "rewrite": 15
+  },
+  "rewrite_lines": 15
+ },
+ "events": [
+  {
+   "event_id": 31,
+   "name_en": "Happy Lovely Everyday!",
+   "name_jp": "ハッピー・ラブリー・エブリデイ！",
+   "unit": "more_more_jump",
+   "arc_slug": "0031-happiiraburiieburidei",
+   "bundle": "event_story/event_everyday_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_31_02",
+     "episode_no": 2,
+     "title_en": "For the Kids!",
+     "title_jp": "子供達のために！",
+     "lines_old": 120,
+     "lines_new": 120,
+     "changes": [
+      {
+       "talk_index_old": 31,
+       "talk_index_new": 31,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "The games I have in mind are in this doc, but they include tag, a true or false quiz and...",
+       "new": "The games are in this doc, but they include tag, a true or false quiz and...",
+       "ratio": 0.904,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_31_03",
+     "episode_no": 3,
+     "title_en": "Lingering in the Past",
+     "title_jp": "拭いきれない過去",
+     "lines_old": 104,
+     "lines_new": 104,
+     "changes": [
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Email",
+       "speaker_new": "Email",
+       "old": "<I always loved seeing you on your seven-o-clock show, The Wonderful World of Laughs!>",
+       "new": "<I always loved seeing you on your seven o'clock show, The Wide World of Laughs!>",
+       "ratio": 0.949,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 59,
+       "talk_index_new": 59,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Okay, just hear me out... Curl your hands into little C shapes and put your thumbs together.",
+       "new": "Okay, just hear me out... Curl your hands into little “C” shapes and put your thumbs together.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 88,
+       "talk_index_new": 88,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Hm...? Did someone in the crowd just say, That's so old...?",
+       "new": "Hm...? Did someone in the crowd just say, “That's so old”...?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 90,
+       "talk_index_new": 90,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Today, I want you to learn my special pose! Start by making little C shapes with your hands and...",
+       "new": "Today, I want you to learn my special pose! Start by making little “C” shapes with your hands and...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_31_05",
+     "episode_no": 5,
+     "title_en": "Delivering Our Thoughts",
+     "title_jp": "想いを届けるために",
+     "lines_old": 87,
+     "lines_new": 87,
+     "changes": [
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "We haven't done anything like this yet, so I'm sure our viewers will get a kick out it too!",
+       "new": "We haven't done anything like this yet, so I'm sure our viewers will get a kick out of it too!",
+       "ratio": 0.983,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "After a while, the public started seeing me as nothing more than that girl from those shows...",
+       "new": "After a while, the public started seeing me as nothing more than “that girl” from those shows...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 28,
+       "talk_index_new": 28,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Eventually, random people started saying things to me when I was just going about my own business, expecting me to have a good comeback or laugh it off...",
+       "new": "Eventually, random people started saying things to me when I was just going about my own business, expecting me to “have a good comeback” or “laugh it off”...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 31,
+       "talk_index_new": 31,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Well, in my case, the hardest part was having the agency and my fans are expecting me to be Variety Show Airi Momoi...",
+       "new": "Well, in my case, the hardest part was having the agency and my fans expecting me to be “Variety Show Airi Momoi”...",
+       "ratio": 0.982,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 51,
+       "talk_index_new": 51,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "Because she's takes being an idol so seriously and loves it so much, she even made me want to work a little harder.",
+       "new": "Because she takes being an idol so seriously and loves it so much, she even made me want to work a little harder.",
+       "ratio": 0.996,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 80,
+       "talk_index_new": 80,
+       "kind": "text",
+       "speaker_old": "Len",
+       "speaker_new": "Len",
+       "old": "You're pretty much trying to get a whole standup routing in there, Rin. Can't we just talk like normal?",
+       "new": "You're pretty much trying to get a whole standup routine in there, Rin. Can't we just talk like normal?",
+       "ratio": 0.99,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_31_06",
+     "episode_no": 6,
+     "title_en": "As An Idol",
+     "title_jp": "アイドルとして",
+     "lines_old": 106,
+     "lines_new": 106,
+     "changes": [
+      {
+       "talk_index_old": 20,
+       "talk_index_new": 20,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Eventually, that turned into inspiring hope in others.",
+       "new": "Eventually, that turned into “inspiring hope” in others.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "(The odds of someone telling me that back then was...)",
+       "new": "(The odds of someone telling me that back then were...)",
+       "ratio": 0.949,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 35,
+       "talk_index_new": 35,
+       "kind": "text",
+       "speaker_old": "Len",
+       "speaker_new": "Len",
+       "old": "You did everything you could for your fans, right? I'm sure you were able to touch the hearts of so many people because of that.",
+       "new": "You did everything you could “for your fans”, right? I'm sure you were able to touch the hearts of so many people because of that.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Minori",
+       "speaker_new": "Minori",
+       "old": "We gonna...! Do a special graduation event at an elementary school!",
+       "new": "We're gonna...! Do a special graduation event at an elementary school!",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 15,
+   "text_changes": 15
+  }
+ ],
+ "bundles_only_in_new": []
+}

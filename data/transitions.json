@@ -1,0 +1,572 @@
+{
+ "bundles": {
+  "event_story/event_stella_2020/scenario": [
+   {
+    "new": "5.4.0.30",
+    "old": "5.4.0.20"
+   }
+  ],
+  "event_story/event_jackpod_2020/scenario": [
+   {
+    "new": "4.0.0.10",
+    "old": "4.0.0.1"
+   }
+  ],
+  "event_story/event_parade_2021/scenario": [
+   {
+    "new": "4.1.50.1",
+    "old": "4.1.1.10"
+   }
+  ],
+  "event_story/event_ohanami_2021/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_stray_2021/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_breaktime_2021/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_bridal_2021/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   },
+   {
+    "new": "5.3.51.0",
+    "old": "5.3.50.0"
+   }
+  ],
+  "event_story/event_wonders_2021/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_carnation_2021/scenario": [
+   {
+    "new": "4.1.0.1",
+    "old": "4.0.1.20"
+   }
+  ],
+  "event_story/event_unnamed_2021/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_everyday_2021/scenario": [
+   {
+    "new": "4.1.50.1",
+    "old": "4.1.1.10"
+   },
+   {
+    "new": "5.3.50.0",
+    "old": "5.3.1.20"
+   }
+  ],
+  "event_story/event_makingxmas_2021/scenario": [
+   {
+    "new": "5.1.0.1",
+    "old": "5.0.51.0"
+   },
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   }
+  ],
+  "event_story/event_cheerteam_2022/scenario": [
+   {
+    "new": "4.1.50.20",
+    "old": "4.1.50.1"
+   }
+  ],
+  "event_story/event_curtaincall_2022/scenario": [
+   {
+    "new": "5.5.0.1",
+    "old": "5.4.0.40"
+   },
+   {
+    "new": "5.5.1.0",
+    "old": "5.5.0.20"
+   }
+  ],
+  "event_story/event_scream_2022/scenario": [
+   {
+    "new": "5.5.0.1",
+    "old": "5.4.0.40"
+   }
+  ],
+  "event_story/event_thread_2023/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_warmth_2023/scenario": [
+   {
+    "new": "5.3.0.0",
+    "old": "5.2.1.10"
+   }
+  ],
+  "event_story/event_lensflare_2024/scenario": [
+   {
+    "new": "4.1.0.1",
+    "old": "4.0.1.20"
+   }
+  ],
+  "event_story/event_yosoro_2024/scenario": [
+   {
+    "new": "5.1.0.1",
+    "old": "5.0.51.0"
+   },
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   }
+  ],
+  "event_story/event_concerto_2024/scenario": [
+   {
+    "new": "4.1.0.1",
+    "old": "4.0.1.20"
+   }
+  ],
+  "event_story/event_blooming_2024/scenario": [
+   {
+    "new": "4.1.52.0",
+    "old": "4.1.51.20"
+   }
+  ],
+  "event_story/event_overrad_2024/scenario": [
+   {
+    "new": "4.1.1.0",
+    "old": "4.1.0.1"
+   }
+  ],
+  "event_story/event_torimonothou_2024/scenario": [
+   {
+    "new": "4.1.1.0",
+    "old": "4.1.0.1"
+   }
+  ],
+  "event_story/event_dreamstage_2024/scenario": [
+   {
+    "new": "4.1.0.1",
+    "old": "4.0.1.20"
+   }
+  ],
+  "event_story/event_thorns_2024/scenario": [
+   {
+    "new": "4.0.0.10",
+    "old": "4.0.0.1"
+   }
+  ],
+  "event_story/event_rekindle_2024/scenario": [
+   {
+    "new": "4.1.1.0",
+    "old": "4.1.0.1"
+   }
+  ],
+  "event_story/event_enjoymusic_2024/scenario": [
+   {
+    "new": "4.1.0.1",
+    "old": "4.0.1.20"
+   },
+   {
+    "new": "4.1.50.1",
+    "old": "4.1.1.10"
+   }
+  ],
+  "event_story/event_foliage_2024/scenario": [
+   {
+    "new": "4.1.0.1",
+    "old": "4.0.1.20"
+   },
+   {
+    "new": "4.1.1.10",
+    "old": "4.1.1.0"
+   }
+  ],
+  "event_story/event_regret_2024/scenario": [
+   {
+    "new": "4.1.1.0",
+    "old": "4.1.0.1"
+   },
+   {
+    "new": "4.1.1.10",
+    "old": "4.1.1.0"
+   },
+   {
+    "new": "4.1.50.20",
+    "old": "4.1.50.1"
+   }
+  ],
+  "event_story/event_scratch_2024/scenario": [
+   {
+    "new": "4.1.1.0",
+    "old": "4.1.0.1"
+   },
+   {
+    "new": "4.1.1.10",
+    "old": "4.1.1.0"
+   },
+   {
+    "new": "4.1.50.1",
+    "old": "4.1.1.10"
+   },
+   {
+    "new": "5.0.0.1",
+    "old": "4.1.52.10"
+   }
+  ],
+  "event_story/event_grow_2024/scenario": [
+   {
+    "new": "4.1.1.0",
+    "old": "4.1.0.1"
+   },
+   {
+    "new": "4.1.51.15",
+    "old": "4.1.51.10"
+   }
+  ],
+  "event_story/event_specialpresent_2024/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   },
+   {
+    "new": "5.1.0.1",
+    "old": "5.0.51.0"
+   },
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   }
+  ],
+  "event_story/event_unfading_2024/scenario": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   }
+  ],
+  "event_story/event_takeoff_2025/scenario": [
+   {
+    "new": "4.1.52.0",
+    "old": "4.1.51.20"
+   },
+   {
+    "new": "4.1.52.10",
+    "old": "4.1.52.0"
+   },
+   {
+    "new": "5.0.50.20",
+    "old": "5.0.0.1"
+   }
+  ],
+  "event_story/event_yourshine_2025/scenario": [
+   {
+    "new": "5.3.0.0",
+    "old": "5.2.1.10"
+   }
+  ],
+  "event_story/event_strive_2025/scenario": [
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   }
+  ],
+  "event_story/event_heartsmessage_2025/scenario": [
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   }
+  ],
+  "event_story/event_myhero_2025/scenario": [
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   }
+  ],
+  "event_story/event_notes_2025/scenario": [
+   {
+    "new": "5.1.0.10",
+    "old": "5.1.0.1"
+   },
+   {
+    "new": "5.2.0.1",
+    "old": "5.1.1.10"
+   },
+   {
+    "new": "5.2.1.10",
+    "old": "5.2.0.10"
+   }
+  ],
+  "event_story/event_wl_2nd_street_2025/scenario": [
+   {
+    "new": "5.2.1.10",
+    "old": "5.2.0.10"
+   }
+  ],
+  "event_story/event_cheerheart_2025/scenario": [
+   {
+    "new": "5.3.1.10",
+    "old": "5.3.1.0"
+   },
+   {
+    "new": "5.3.1.20",
+    "old": "5.3.1.10"
+   }
+  ],
+  "event_story/event_higher_2025/scenario": [
+   {
+    "new": "5.3.1.10",
+    "old": "5.3.1.0"
+   }
+  ],
+  "event_story/event_wl_2nd_schoolrefusal_2025/scenario": [
+   {
+    "new": "5.3.1.10",
+    "old": "5.3.1.0"
+   }
+  ],
+  "event_story/event_deeper_2025/scenario": [
+   {
+    "new": "5.4.0.20",
+    "old": "5.4.0.1"
+   }
+  ],
+  "event_story/event_tomorrow_2025/scenario": [
+   {
+    "new": "5.5.1.0",
+    "old": "5.5.0.20"
+   }
+  ],
+  "event_story/event_forlight_2025/scenario": [
+   {
+    "new": "5.5.1.0",
+    "old": "5.5.0.20"
+   }
+  ]
+ },
+ "versions": [
+  {
+   "date": "2025-09-26",
+   "hash": "e50fea62-fb3c-4774-a6ed-f8c093db5f65",
+   "version": "4.0.0.1"
+  },
+  {
+   "date": "2025-09-30",
+   "hash": "6aa1c8e9-ebd7-4b34-be58-15e3a37b60d8",
+   "version": "4.0.0.10"
+  },
+  {
+   "date": "2025-10-09",
+   "hash": "8fe11dd8-34f7-4c33-9e4e-f27cceb30c70",
+   "version": "4.0.1.0"
+  },
+  {
+   "date": "2025-10-27",
+   "hash": "45d81144-5d21-4c33-bc3a-cb7f7e00c40e",
+   "version": "4.0.1.20"
+  },
+  {
+   "date": "2025-11-03",
+   "hash": "d551143f-d6c8-4555-ad6d-32d5488afc25",
+   "version": "4.1.0.1"
+  },
+  {
+   "date": "2025-11-07",
+   "hash": "b50da7b8-3aaa-4296-9245-436c401d785f",
+   "version": "4.1.1.0"
+  },
+  {
+   "date": "2025-11-21",
+   "hash": "0e5abed8-275b-4ee4-a2a0-54be00dc9732",
+   "version": "4.1.1.10"
+  },
+  {
+   "date": "2025-11-29",
+   "hash": "6bbfbb7e-ef45-4637-bda6-b091322ee55b",
+   "version": "4.1.50.1"
+  },
+  {
+   "date": "2025-12-07",
+   "hash": "d1805ac8-7ae4-48d9-ae05-db1aec10d3d9",
+   "version": "4.1.50.20"
+  },
+  {
+   "date": "2025-12-09",
+   "hash": "50a93762-962f-46ba-a259-7c310d4e161f",
+   "version": "4.1.51.0"
+  },
+  {
+   "date": "2025-12-16",
+   "hash": "a855b841-bbb9-4ed7-831c-b347e8154900",
+   "version": "4.1.51.10"
+  },
+  {
+   "date": "2025-12-26",
+   "hash": "4ecf9964-713a-4773-a467-b46a56668fbc",
+   "version": "4.1.51.15"
+  },
+  {
+   "date": "2026-01-05",
+   "hash": "7dfaf027-9857-4169-a240-7bc8a7b16a8e",
+   "version": "4.1.51.20"
+  },
+  {
+   "date": "2026-01-09",
+   "hash": "0ad5e191-cfee-43fc-bef3-b221745cca75",
+   "version": "4.1.52.0"
+  },
+  {
+   "date": "2026-01-13",
+   "hash": "e521cd54-600c-4a0e-8160-b76a6fe4f652",
+   "version": "4.1.52.10"
+  },
+  {
+   "date": "2026-01-16",
+   "hash": "e2134a7e-54e3-4556-a01b-d6e6734c2506",
+   "version": "5.0.0.1"
+  },
+  {
+   "date": "2026-02-02",
+   "hash": "33b8dcb4-1462-4dfc-b1fd-44fcd350bc6b",
+   "version": "5.0.50.20"
+  },
+  {
+   "date": "2026-02-05",
+   "hash": "cf69b333-5928-4e5b-95be-7953c10409b2",
+   "version": "5.0.50.30"
+  },
+  {
+   "date": "2026-02-09",
+   "hash": "099130e0-88d0-4e29-8e4c-fd9192a06bae",
+   "version": "5.0.51.0"
+  },
+  {
+   "date": "2026-02-19",
+   "hash": "c21c4a97-952e-4f6b-9756-d9c682ef5efb",
+   "version": "5.1.0.1"
+  },
+  {
+   "date": "2026-03-08",
+   "hash": "af1e317c-66ce-4999-96cf-fd8fe36e5cf3",
+   "version": "5.1.0.10"
+  },
+  {
+   "date": "2026-03-09",
+   "hash": "90de6220-679d-466d-b322-4dc2608c6266",
+   "version": "5.1.1.0"
+  },
+  {
+   "date": "2026-03-13",
+   "hash": "be2f4f8e-47a0-46c1-868c-bd716bc91ee2",
+   "version": "5.1.1.10"
+  },
+  {
+   "date": "2026-03-26",
+   "hash": "86dca579-fa4f-4a3e-bd7d-541c0340d9d3",
+   "version": "5.2.0.1"
+  },
+  {
+   "date": "2026-04-07",
+   "hash": "c30df7b6-bc58-4bdb-8112-7b4c9f41405a",
+   "version": "5.2.0.10"
+  },
+  {
+   "date": "2026-04-24",
+   "hash": "29c5dce4-76ae-4af6-bdde-22da21c80ac8",
+   "version": "5.2.1.10"
+  },
+  {
+   "date": "2026-05-01",
+   "hash": "abe3f78a-0598-4412-b293-5cc49d680002",
+   "version": "5.3.0.0"
+  },
+  {
+   "date": "2026-05-04",
+   "hash": "5264f8d2-c17f-4299-a068-4c237f3b0add",
+   "version": "5.3.1.0"
+  },
+  {
+   "date": "2026-05-11",
+   "hash": "1e0e1e93-9507-45b9-9b62-a0c8b9dbfe7a",
+   "version": "5.3.1.10"
+  },
+  {
+   "date": "2026-05-26",
+   "hash": "bdcc65df-83ff-4be0-9f5d-f713d4afb2cf",
+   "version": "5.3.1.20"
+  },
+  {
+   "date": "2026-06-01",
+   "hash": "2727c82f-1faa-4fcf-8d5c-323aa40ae4a5",
+   "version": "5.3.50.0"
+  },
+  {
+   "date": "2026-06-18",
+   "hash": "22a5f495-b9c0-4420-987b-f167d1d7e301",
+   "version": "5.3.51.0"
+  },
+  {
+   "date": "2026-06-19",
+   "hash": "b6f39440-a79a-4cb5-9436-914af9f4568d",
+   "version": "5.3.51.20"
+  },
+  {
+   "date": "2026-06-24",
+   "hash": "51879cb8-5f07-489a-8fdf-4346c1582a77",
+   "version": "5.4.0.1"
+  },
+  {
+   "date": "2026-06-30",
+   "hash": "a1c93735-6fa9-4d32-ab91-f7f3dcf9470b",
+   "version": "5.4.0.20"
+  },
+  {
+   "date": "2026-07-03",
+   "hash": "e41ccee9-d24f-4afe-9183-86640e8ee0ac",
+   "version": "5.4.0.30"
+  },
+  {
+   "date": "2026-07-16",
+   "hash": "7513e88f-fe38-4d00-90d2-3ae09acb8d86",
+   "version": "5.4.0.40"
+  },
+  {
+   "date": "2026-07-24",
+   "hash": "9e70a3d8-6c6c-4c2c-8032-4d632ffb6b23",
+   "version": "5.5.0.1"
+  },
+  {
+   "date": "2026-08-03",
+   "hash": "f683e3b0-9242-4846-966f-d4be6e8f3127",
+   "version": "5.5.0.20"
+  },
+  {
+   "date": "2026-08-11",
+   "hash": "3a896aa9-5ce3-440c-9417-9c0f0e18b08a",
+   "version": "5.5.1.0"
+  },
+  {
+   "date": "2026-08-14",
+   "hash": "5ea006ba-5840-4fe4-aed8-d1beeacd39ab",
+   "version": "5.5.1.20"
+  },
+  {
+   "date": "2026-08-19",
+   "hash": "03806de6-8b48-41ac-a262-9d9ea4d769dd",
+   "version": "5.5.1.30"
+  }
+ ]
+}

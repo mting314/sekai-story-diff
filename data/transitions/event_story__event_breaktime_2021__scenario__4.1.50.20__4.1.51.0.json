@@ -1,0 +1,349 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 7,
+  "changed_lines": 22,
+  "by_kind": {
+   "text": 22
+  },
+  "by_lang": {
+   "rewrite": 22
+  },
+  "rewrite_lines": 22
+ },
+ "events": [
+  {
+   "event_id": 23,
+   "name_en": "You deserve it! Break Time!",
+   "name_jp": "頑張るあなたにBreak Time！",
+   "unit": "more_more_jump",
+   "arc_slug": "0023-ganbaru-anatani-break-time",
+   "bundle": "event_story/event_breaktime_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_23_01",
+     "episode_no": 1,
+     "title_en": "For The Fans",
+     "title_jp": "ファンのために",
+     "lines_old": 77,
+     "lines_new": 77,
+     "changes": [
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "Minori",
+       "speaker_new": "Minori",
+       "old": "Our next segment is... Let's Learn to Dance with Minori!",
+       "new": "Our next segment is... “Let's Learn to Dance with Minori!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_23_02",
+     "episode_no": 2,
+     "title_en": "SEKAI's New Idol",
+     "title_jp": "セカイの新しいアイドル",
+     "lines_old": 88,
+     "lines_new": 88,
+     "changes": [
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "Comment",
+       "speaker_new": "Comment",
+       "old": "<I'm definitely comment!> <I hope they use my idea.> <I wanna make Minori do stuff...>",
+       "new": "<I'm definitely commenting!> <I hope they use my idea.> <I wanna make Minori do stuff...>",
+       "ratio": 0.98,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Your new Tell Us About Yourselves idea went really well today, Haruka!",
+       "new": "Your new “Tell Us About Yourselves” idea went really well today, Haruka!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "You coming up with something that we can make a whole video off of really save us, Haruka.",
+       "new": "You coming up with something that we can make a whole video off of really saved us, Haruka.",
+       "ratio": 0.994,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_23_04",
+     "episode_no": 4,
+     "title_en": "For So Long, You've...",
+     "title_jp": "昔から、あなたは",
+     "lines_old": 75,
+     "lines_new": 75,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "I'm Shizuku Hinomori of Cheerful * Days. It's an honor to be chosen as the group's lead.",
+       "new": "“I'm Shizuku Hinomori of Cheerful * Days. It's an honor to be chosen as the group's lead.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "I have you, the fans, to thank for allowing me to become the lead. I promise to do everything I can to make this group more fun and exciting.",
+       "new": "“I have you, the fans, to thank for allowing me to become the lead. I promise to do everything I can to make this group more fun and exciting.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 15,
+       "talk_index_new": 15,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "We'll be counting on your support.",
+       "new": "“We'll be counting on your support.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "Yes, I'm Shizuku Hinomori. It's so nice to meet you...!",
+       "new": "Yes, I'm Hinomori. It's so nice to meet you...!",
+       "ratio": 0.907,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 33,
+       "talk_index_new": 33,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "(But the reason why I wasn't given this role isn't because of any particular talents I have...)",
+       "new": "(But the reason why I was given this role isn't because of any particular talents I have...)",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 38,
+       "talk_index_new": 38,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "It felt pretty clear that you're the one the works the hardest out of everyone.",
+       "new": "It felt pretty clear that you're the one that works the hardest out of everyone.",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_23_05",
+     "episode_no": 5,
+     "title_en": "How to Enjoy a Day Off",
+     "title_jp": "オフの日のすすめ",
+     "lines_old": 55,
+     "lines_new": 55,
+     "changes": [
+      {
+       "talk_index_old": 21,
+       "talk_index_new": 21,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "But at the same time, she really doesn’t like showing any weakness so it does seem natural to feel worried...",
+       "new": "But at the same time, she really doesn't like showing any weakness, so it does seem natural to feel worried...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 41,
+       "talk_index_new": 41,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "We've been so busy with practice and making videos, right? I thought that it would be nice to take a break every once it a while.",
+       "new": "We've been so busy with practice and making videos, right? I thought that it would be nice to take a break every once in a while.",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 47,
+       "talk_index_new": 47,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "That's a lot of things... Well, it's our day off so as long as we don't over do it, it'll be okay.",
+       "new": "That's a lot of things... Well, it's our day off, so as long as we don't overdo it, it'll be okay.",
+       "ratio": 0.994,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_23_06",
+     "episode_no": 6,
+     "title_en": "I Want Them to Rest But...",
+     "title_jp": "休ませてあげたいのに",
+     "lines_old": 121,
+     "lines_new": 121,
+     "changes": [
+      {
+       "talk_index_old": 12,
+       "talk_index_new": 12,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Sounds good! We can even do blast from the past idol medley!",
+       "new": "Sounds good! We can even do a blast from the past idol medley!",
+       "ratio": 0.983,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 45,
+       "talk_index_new": 45,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "What's this all the sudden?",
+       "new": "What's this all of a sudden?",
+       "ratio": 0.863,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 79,
+       "talk_index_new": 79,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "Oh, this is nice. We can people watch a little too while we're here.",
+       "new": "Oh, this is nice. We can people-watch a little too while we're here.",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 84,
+       "talk_index_new": 84,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Th-There's six tea pots?! Why...?!",
+       "new": "Th-There's six teapots?! Why...?!",
+       "ratio": 0.98,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_23_07",
+     "episode_no": 7,
+     "title_en": "The One Thing I Want To Do",
+     "title_jp": "やりたいこと、ひとつ",
+     "lines_old": 97,
+     "lines_new": 97,
+     "changes": [
+      {
+       "talk_index_old": 50,
+       "talk_index_new": 50,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "Alright, let's come up with some new ideas. I still have a little time...",
+       "new": "Alright, let's come up with some new ideas. I still have a little bit of time...",
+       "ratio": 0.95,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "(Haruka was never putting on a face when it came to being the perfect idol...)",
+       "new": "(Haruka was never putting on a face when it came to being “the perfect idol”...)",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 70,
+       "talk_index_new": 70,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "(But I am certain that working this hard doesn't have its consequences, even if it's her we're talking about...)",
+       "new": "(But I am certain that working this hard has its consequences, even if it's her we're talking about...)",
+       "ratio": 0.949,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 95,
+       "talk_index_new": 95,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "Anything you like. Something or somewhere that just let's you relax and enjoy yourself. I believe that's the answer.",
+       "new": "Anything you like. Something or somewhere that just lets you relax and enjoy yourself. I believe that's the answer.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_23_08",
+     "episode_no": 8,
+     "title_en": "The Happy Blue Penguin",
+     "title_jp": "幸せの青いペンギン",
+     "lines_old": 78,
+     "lines_new": 78,
+     "changes": [
+      {
+       "talk_index_old": 2,
+       "talk_index_new": 2,
+       "kind": "text",
+       "speaker_old": "Airi",
+       "speaker_new": "Airi",
+       "old": "Sorry for the wait. There were so many people in line during check out.",
+       "new": "Sorry for the wait. There were so many people in line during checkout.",
+       "ratio": 0.993,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 22,
+   "text_changes": 22
+  }
+ ],
+ "bundles_only_in_new": []
+}

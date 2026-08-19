@@ -1,0 +1,153 @@
+{
+ "comparison": {
+  "old_asset_version": "5.2.0.10",
+  "new_asset_version": "5.2.1.10",
+  "old_released_at": "2026-04-07",
+  "new_released_at": "2026-04-24",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 5,
+  "changed_lines": 6,
+  "by_kind": {
+   "text": 6
+  },
+  "by_lang": {
+   "rewrite": 6
+  },
+  "rewrite_lines": 6
+ },
+ "events": [
+  {
+   "event_id": 163,
+   "name_en": "Turning Pain Into Drive",
+   "name_jp": "Turning Pain into Drive",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0163-turning-pain-into-drive",
+   "bundle": "event_story/event_wl_2nd_street_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "wl_street_02_02",
+     "episode_no": 2,
+     "title_en": "The Life I Wanted",
+     "title_jp": "望んでいた生活",
+     "lines_old": 77,
+     "lines_new": 77,
+     "changes": [
+      {
+       "talk_index_old": 39,
+       "talk_index_new": 39,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "(Now I know. Neither classical or street music...)",
+       "new": "(Now I know. Neither classical nor street music...)",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_street_02_04",
+     "episode_no": 4,
+     "title_en": "Even Alone",
+     "title_jp": "ひとりでも",
+     "lines_old": 86,
+     "lines_new": 86,
+     "changes": [
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "(And by the time I calm down and felt ready to talk to him, he'd left Japan.)",
+       "new": "(And by the time I calmed down and felt ready to talk to him, he'd left Japan.)",
+       "ratio": 0.986,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_street_02_05",
+     "episode_no": 5,
+     "title_en": "The Lines Begin to Cross",
+     "title_jp": "平行線は揺らいで",
+     "lines_old": 73,
+     "lines_new": 73,
+     "changes": [
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Friend A",
+       "speaker_new": "Friend A",
+       "old": "Toya also came back to Japan! What country was it? Australia?",
+       "new": "Aoyagi also came back to Japan! What country was it? Australia?",
+       "ratio": 0.966,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 11,
+       "talk_index_new": 11,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "I'm singing over in the states right now.",
+       "new": "I'm singing over in the States right now.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_street_02_07",
+     "episode_no": 7,
+     "title_en": "Wishes",
+     "title_jp": "願うことは",
+     "lines_old": 62,
+     "lines_new": 62,
+     "changes": [
+      {
+       "talk_index_old": 60,
+       "talk_index_new": 60,
+       "kind": "text",
+       "speaker_old": "Kohane",
+       "speaker_new": "Kohane",
+       "old": "(That I want to us to sing together again someday.)",
+       "new": "(That I want us to sing together again someday.)",
+       "ratio": 0.968,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_street_02_09",
+     "episode_no": 9,
+     "title_en": "Someday With My Song",
+     "title_jp": "いつか私の歌で",
+     "lines_old": 61,
+     "lines_new": 61,
+     "changes": [
+      {
+       "talk_index_old": 56,
+       "talk_index_new": 56,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "(I might wait and wait...and come out of this completely empty handed.)",
+       "new": "(I might wait and wait...and come out of this completely empty-handed.)",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 6,
+   "text_changes": 6
+  }
+ ],
+ "bundles_only_in_new": []
+}

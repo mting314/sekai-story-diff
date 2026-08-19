@@ -1,0 +1,157 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.1.0",
+  "new_asset_version": "4.1.1.10",
+  "old_released_at": "2025-11-07",
+  "new_released_at": "2025-11-21",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 10,
+  "by_kind": {
+   "added": 10
+  },
+  "by_lang": {
+   "rewrite": 10
+  },
+  "rewrite_lines": 10
+ },
+ "events": [
+  {
+   "event_id": 150,
+   "name_en": "With Our Wounded Hands",
+   "name_jp": "傷だらけの手で、私達は",
+   "unit": "nightcord",
+   "arc_slug": "0150-kizu-darakeno-tede-watashitachi-ha",
+   "bundle": "event_story/event_scratch_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_150_08",
+     "episode_no": 8,
+     "title_en": "Friends",
+     "title_jp": "友達",
+     "lines_old": 112,
+     "lines_new": 122,
+     "changes": [
+      {
+       "talk_index_old": null,
+       "talk_index_new": 112,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Kanade",
+       "old": "",
+       "new": "Welcome back, Mizuki.",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 113,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Thanks...",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 114,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Sorry for making you all worry.",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 115,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mafuyu",
+       "old": "",
+       "new": "Is everything okay?",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 116,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Yeah, I'm alright now.",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 117,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Really, thank you.",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 118,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Also... Um...",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 119,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "There's something I need to tell all of you.",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 120,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Something you guys have to hear...",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 121,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "Something I've been wanting to say.",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 10,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}

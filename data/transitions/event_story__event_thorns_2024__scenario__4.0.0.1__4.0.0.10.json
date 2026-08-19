@@ -1,0 +1,113 @@
+{
+ "comparison": {
+  "old_asset_version": "4.0.0.1",
+  "new_asset_version": "4.0.0.10",
+  "old_released_at": "2025-09-26",
+  "new_released_at": "2025-09-30",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 6,
+  "by_kind": {
+   "added": 6
+  },
+  "by_lang": {
+   "rewrite": 6
+  },
+  "rewrite_lines": 6
+ },
+ "events": [
+  {
+   "event_id": 145,
+   "name_en": "Whither This Path of Thorns",
+   "name_jp": "荊棘の道は何処へ",
+   "unit": "nightcord",
+   "arc_slug": "0145-ibara-no-michi-ha-doko-he",
+   "bundle": "event_story/event_thorns_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_145_08",
+     "episode_no": 8,
+     "title_en": "I'm Sorry",
+     "title_jp": "ごめんね",
+     "lines_old": 49,
+     "lines_new": 55,
+     "changes": [
+      {
+       "talk_index_old": null,
+       "talk_index_new": 49,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "(You reap what you sow.)",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 50,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "(I ran away, and I kept on running...)",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 51,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "(And all the while, I hoped someone would eventually say it for me.)",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 52,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "(Be careful what you wish for, huh.)",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 53,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "(Ugh.)",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 54,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Mizuki",
+       "old": "",
+       "new": "(I want to disappear.)",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 6,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}

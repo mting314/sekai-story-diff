@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.0.1.20",
+  "new_asset_version": "4.1.0.1",
+  "old_released_at": "2025-10-27",
+  "new_released_at": "2025-11-03",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 125,
+   "name_en": "The First Concerto",
+   "name_jp": "The first concerto",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0125-the-first-concerto",
+   "bundle": "event_story/event_concerto_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_125_08",
+     "episode_no": 8,
+     "title_en": "With This Song",
+     "title_jp": "この曲で",
+     "lines_old": 87,
+     "lines_new": 87,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "Young Local Musicians",
+       "speaker_new": "Young Local Musicians",
+       "old": "Hey, did you guys hear?! Vivid Bad SQUAD said they're gonna surpass RAD WEEKEND during their next event!",
+       "new": "Hey, did you guys hear?! Vivid BAD SQUAD said they're gonna surpass RAD WEEKEND during their next event!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

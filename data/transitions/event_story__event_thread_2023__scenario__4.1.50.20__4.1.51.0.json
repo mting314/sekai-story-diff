@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 85,
+   "name_en": "At The End of The Unraveled Thread",
+   "name_jp": "ほどかれた糸のその先に",
+   "unit": "more_more_jump",
+   "arc_slug": "0085-hodokareta-ito-nosono-sakini",
+   "bundle": "event_story/event_thread_2023/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_85_07",
+     "episode_no": 7,
+     "title_en": "A Tangled Up String",
+     "title_jp": "からまった糸",
+     "lines_old": 102,
+     "lines_new": 102,
+     "changes": [
+      {
+       "talk_index_old": 88,
+       "talk_index_new": 88,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "But I want them to know that the me who was in Cheerful * Days and the me who is currently in MORE MORE JUMP! are one in the same.",
+       "new": "But I want them to know that the me who was in Cheerful * Days and the me who is currently in MORE MORE JUMP! are one and the same.",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

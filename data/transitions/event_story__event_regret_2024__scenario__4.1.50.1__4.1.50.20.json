@@ -1,0 +1,69 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.1",
+  "new_asset_version": "4.1.50.20",
+  "old_released_at": "2025-11-29",
+  "new_released_at": "2025-12-07",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 2,
+  "by_kind": {
+   "text": 2
+  },
+  "by_lang": {
+   "rewrite": 2
+  },
+  "rewrite_lines": 2
+ },
+ "events": [
+  {
+   "event_id": 149,
+   "name_en": "The Power of Regret",
+   "name_jp": "The Power Of Regret",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0149-the-power-of-regret",
+   "bundle": "event_story/event_regret_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_149_01",
+     "episode_no": 1,
+     "title_en": "To the Morinomiya Revue!",
+     "title_jp": "いざ！森ノ宮歌劇団！",
+     "lines_old": 64,
+     "lines_new": 64,
+     "changes": [
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Yeah. The all-female Lily of the Valley troupe is so popular that even people overseas talk about them...",
+       "new": "Yeah. The all-female Suzurangumi is so popular that even people overseas talk about them...",
+       "ratio": 0.817,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 7,
+       "talk_index_new": 7,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "But recently, the all-male Bellflower troupe has started to gain some traction as well. Getting to train here really is a huge honor...",
+       "new": "But recently, the all-male Kikyogumi has started to gain some traction as well. Getting to train here really is a huge honor...",
+       "ratio": 0.912,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 2,
+   "text_changes": 2
+  }
+ ],
+ "bundles_only_in_new": []
+}

@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.0.1",
+  "new_asset_version": "4.1.1.0",
+  "old_released_at": "2025-11-03",
+  "new_released_at": "2025-11-07",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 136,
+   "name_en": "Halt! Tenma's on the Case",
+   "name_jp": "お縄を頂戴！？天馬捕物帳",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0136-o-nawa-wo-choudai-tenma-torimonochou",
+   "bundle": "event_story/event_torimonothou_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_136_02",
+     "episode_no": 2,
+     "title_en": "Hiori Jidaigeki Studio Park",
+     "title_jp": "日織時代劇村",
+     "lines_old": 112,
+     "lines_new": 112,
+     "changes": [
+      {
+       "talk_index_old": 41,
+       "talk_index_new": 41,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "That lead me to wall jumping, Chusuke's forte.",
+       "new": "That led me to wall jumping, Chusuke's forte.",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

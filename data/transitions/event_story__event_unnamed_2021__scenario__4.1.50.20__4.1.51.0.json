@@ -1,0 +1,155 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 3,
+  "changed_lines": 8,
+  "by_kind": {
+   "text": 8
+  },
+  "by_lang": {
+   "rewrite": 8
+  },
+  "rewrite_lines": 8
+ },
+ "events": [
+  {
+   "event_id": 27,
+   "name_en": "Unnamed Harmony",
+   "name_jp": "Unnamed Harmony",
+   "unit": "leo_need",
+   "arc_slug": "0027-unnamed-harmony",
+   "bundle": "event_story/event_unnamed_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_27_02",
+     "episode_no": 2,
+     "title_en": "A New Sound",
+     "title_jp": "新しい音色",
+     "lines_old": 91,
+     "lines_new": 91,
+     "changes": [
+      {
+       "talk_index_old": 49,
+       "talk_index_new": 49,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "Things are gonna be so much more now that Rin's here with us♪",
+       "new": "Things are gonna be so much more fun now that Rin's here with us♪",
+       "ratio": 0.967,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 55,
+       "talk_index_new": 55,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "It may be because you all decided to go pro together and gave yourselves a new challenge to face, no...?",
+       "new": "It may be because you all decided to “go pro” together and gave yourselves a new challenge to face, no...?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 89,
+       "talk_index_new": 89,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "(I wasn't able to play the piano for so long too while I was in the hospital. Is it because of that I'm holding everyone back...?)",
+       "new": "(I wasn't able to play the piano for so long since I was in the hospital. Am I holding everyone back...?)",
+       "ratio": 0.844,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_27_03",
+     "episode_no": 3,
+     "title_en": "What I Can Do",
+     "title_jp": "アタシにできること",
+     "lines_old": 113,
+     "lines_new": 113,
+     "changes": [
+      {
+       "talk_index_old": 49,
+       "talk_index_new": 49,
+       "kind": "text",
+       "speaker_old": "Shiho",
+       "speaker_new": "Shiho",
+       "old": "Who's they?",
+       "new": "Who's “they”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 80,
+       "talk_index_new": 80,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "(Oh, here is it! Just the CD I was looking for♪)",
+       "new": "(Oh, here it is! Just the CD I was looking for♪)",
+       "ratio": 0.953,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 86,
+       "talk_index_new": 86,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "Oh, also! Are they any albums by your favorite bands that you recommend?",
+       "new": "Oh, also! Are there any albums by your favorite bands that you recommend?",
+       "ratio": 0.978,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 88,
+       "talk_index_new": 88,
+       "kind": "text",
+       "speaker_old": "Shiho",
+       "speaker_new": "Shiho",
+       "old": "How about this...? It's a best of but it has songs from when they just debuted all the way up to their new stuff.",
+       "new": "How about this...? It's a “best of” but it has songs from when they just debuted all the way up to their new stuff.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_27_08",
+     "episode_no": 8,
+     "title_en": "What I Need to Tell You",
+     "title_jp": "伝えたい想い",
+     "lines_old": 90,
+     "lines_new": 90,
+     "changes": [
+      {
+       "talk_index_old": 87,
+       "talk_index_new": 87,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "(I actually turned my thoughts into music and tell everyone exactly how I felt through my song...)",
+       "new": "(I actually turned my thoughts into music and told everyone exactly how I felt through my song...)",
+       "ratio": 0.978,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 8,
+   "text_changes": 8
+  }
+ ],
+ "bundles_only_in_new": []
+}

@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.0.1",
+  "new_asset_version": "4.1.1.0",
+  "old_released_at": "2025-11-03",
+  "new_released_at": "2025-11-07",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 146,
+   "name_en": "Rekindle the Flame",
+   "name_jp": "Rekindle the flame",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0146-rekindle-the-flame",
+   "bundle": "event_story/event_rekindle_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_146_03",
+     "episode_no": 3,
+     "title_en": "Rumor Has It",
+     "title_jp": "気になる噂",
+     "lines_old": 63,
+     "lines_new": 63,
+     "changes": [
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "(Yeah... Highter...!)",
+       "new": "(Yeah... Higher...!)",
+       "ratio": 0.957,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

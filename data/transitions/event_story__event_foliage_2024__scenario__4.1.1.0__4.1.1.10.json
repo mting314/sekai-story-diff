@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.1.0",
+  "new_asset_version": "4.1.1.10",
+  "old_released_at": "2025-11-07",
+  "new_released_at": "2025-11-21",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 148,
+   "name_en": "As the Leaves Change Once More",
+   "name_jp": "また、木の葉の色づく頃に",
+   "unit": "mixed",
+   "arc_slug": "0148-mata-konoha-no-iro-zuku-goroni",
+   "bundle": "event_story/event_foliage_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_148_07",
+     "episode_no": 7,
+     "title_en": "A Leaf-Viewing Reattempt",
+     "title_jp": "リベンジ紅葉狩り",
+     "lines_old": 72,
+     "lines_new": 72,
+     "changes": [
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "This is all thanks to the plan you made for us, Shii...",
+       "new": "This is all thanks to the plan you made for us, Shiho...",
+       "ratio": 0.971,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

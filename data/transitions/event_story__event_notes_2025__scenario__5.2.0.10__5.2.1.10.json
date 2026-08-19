@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "5.2.0.10",
+  "new_asset_version": "5.2.1.10",
+  "old_released_at": "2026-04-07",
+  "new_released_at": "2026-04-24",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 161,
+   "name_en": "Unreliable Notes",
+   "name_jp": "Unreliable Notes",
+   "unit": "nightcord",
+   "arc_slug": "0161-unreliable-notes",
+   "bundle": "event_story/event_notes_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_161_05",
+     "episode_no": 5,
+     "title_en": "Frustration",
+     "title_jp": "焦燥",
+     "lines_old": 68,
+     "lines_new": 68,
+     "changes": [
+      {
+       "talk_index_old": 50,
+       "talk_index_new": 50,
+       "kind": "text",
+       "speaker_old": "Mafuyu's Father",
+       "speaker_new": "Mafuyu's Father",
+       "old": "But... Are you feeling okay? Your look rather pallid...",
+       "new": "But... Are you feeling okay? You look rather pallid...",
+       "ratio": 0.989,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

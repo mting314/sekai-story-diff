@@ -1,0 +1,58 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.0.1",
+  "new_asset_version": "4.1.1.0",
+  "old_released_at": "2025-11-03",
+  "new_released_at": "2025-11-07",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 135,
+   "name_en": "Over Rad Squad!!",
+   "name_jp": "OVER RAD SQUAD!!",
+   "unit": "vivid_bad_squad",
+   "arc_slug": "0135-over-rad-squad",
+   "bundle": "event_story/event_overrad_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_135_03",
+     "episode_no": 3,
+     "title_en": "Special Coaching",
+     "title_jp": "特別コーチ",
+     "lines_old": 118,
+     "lines_new": 118,
+     "changes": [
+      {
+       "talk_index_old": 80,
+       "talk_index_new": 80,
+       "kind": "text",
+       "speaker_old": "GLaP day Member A",
+       "speaker_new": "GLaP day Member A",
+       "old": "You still did really well. I looking forward to seeing how you grow from here.",
+       "new": "You still did really well. I'm looking forward to seeing how you grow from here.",
+       "ratio": 0.993,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}

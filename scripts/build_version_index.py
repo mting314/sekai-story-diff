@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 import requests
@@ -34,6 +35,11 @@ RAW = f"https://raw.githubusercontent.com/{REPO}"
 
 _session = requests.Session()
 _session.headers["User-Agent"] = "sekai-story-diff"
+# The commit-list endpoint is rate limited to 60/hour unauthenticated, which a single
+# backfill can exhaust. Any token raises it to 5,000; Actions provides one for free.
+_token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
+if _token:
+    _session.headers["Authorization"] = f"Bearer {_token}"
 
 
 def commits(pages: int) -> list[tuple[str, str]]:
@@ -71,7 +77,27 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="data/versions_en.json")
     ap.add_argument("--pages", type=int, default=5, help="pages of 100 commits to walk")
+    ap.add_argument(
+        "--append",
+        nargs=3,
+        metavar=("VERSION", "HASH", "DATE"),
+        help="add one known release without touching the API — the normal daily path, "
+             "since the poller already has these three values",
+    )
     args = ap.parse_args()
+
+    if args.append:
+        version, digest, date = args.append
+        out = Path(args.out)
+        rows = json.loads(out.read_text()) if out.exists() else []
+        if any(r["version"] == version for r in rows):
+            print(f"{version} already indexed")
+            return
+        rows.append({"date": date, "hash": digest, "version": version})
+        rows.sort(key=lambda r: r["date"])
+        out.write_text(json.dumps(rows, indent=1), encoding="utf-8")
+        print(f"appended {version} ({date}); {len(rows)} versions indexed")
+        return
 
     history = commits(args.pages)
     print(f"{len(history)} commits touch {FILE}")

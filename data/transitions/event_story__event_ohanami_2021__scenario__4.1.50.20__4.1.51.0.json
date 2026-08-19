@@ -1,0 +1,122 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 3,
+  "changed_lines": 5,
+  "by_kind": {
+   "text": 5
+  },
+  "by_lang": {
+   "rewrite": 5
+  },
+  "rewrite_lines": 5
+ },
+ "events": [
+  {
+   "event_id": 18,
+   "name_en": "Singing Among the Cherry Blossoms",
+   "name_jp": "君と歌う、桜舞う世界で",
+   "unit": "leo_need",
+   "arc_slug": "0018-kun-to-utau-sakura-mau-sekai-de",
+   "bundle": "event_story/event_ohanami_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_18_02",
+     "episode_no": 2,
+     "title_en": "A Lonely Street",
+     "title_jp": "ひとりぼっちの路上",
+     "lines_old": 72,
+     "lines_new": 72,
+     "changes": [
+      {
+       "talk_index_old": 17,
+       "talk_index_new": 17,
+       "kind": "text",
+       "speaker_old": "Ichika",
+       "speaker_new": "Ichika",
+       "old": "Which is why I'd asking you, Miku...",
+       "new": "Which is why I'm asking you, Miku...",
+       "ratio": 0.968,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_18_03",
+     "episode_no": 3,
+     "title_en": "Our Dream",
+     "title_jp": "私達の夢",
+     "lines_old": 78,
+     "lines_new": 78,
+     "changes": [
+      {
+       "talk_index_old": 32,
+       "talk_index_new": 32,
+       "kind": "text",
+       "speaker_old": "Kohane",
+       "speaker_new": "Kohane",
+       "old": "I do. Well, I just started doing this, so I can't say always or anything.",
+       "new": "I do. Well, I just started doing this, so I can't say \"always\" or anything.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 36,
+       "talk_index_new": 36,
+       "kind": "text",
+       "speaker_old": "Kohane",
+       "speaker_new": "Kohane",
+       "old": "But I'm doing everything I can to catch up to them, which is why I'm singing in public or joining evens by myself.",
+       "new": "But I'm doing everything I can to catch up to them, which is why I'm singing in public or joining events by myself.",
+       "ratio": 0.995,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_18_06",
+     "episode_no": 6,
+     "title_en": "Juniors and Seniors",
+     "title_jp": "先輩と後輩と",
+     "lines_old": 60,
+     "lines_new": 60,
+     "changes": [
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "MEIKO",
+       "speaker_new": "MEIKO",
+       "old": "So your secret training with Ichika's been paying off?",
+       "new": "So your \"secret training\" with Ichika's been paying off?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 23,
+       "talk_index_new": 23,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "I always thought that words like, mentor, senior and such suited Luka and MEIKO more.",
+       "new": "I always thought that words like mentor, senior and such suited you two more.",
+       "ratio": 0.904,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 5,
+   "text_changes": 5
+  }
+ ],
+ "bundles_only_in_new": []
+}
