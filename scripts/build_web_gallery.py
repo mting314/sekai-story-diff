@@ -254,7 +254,7 @@ def main() -> None:
     ap.add_argument(
         "--changes",
         nargs="+",
-        default=["data/official_changes.json", "data/official_changes_*.json"],
+        default=["data/transitions/*.json"],
         help="one or more diff payloads (globs allowed); each carries its own version pair",
     )
     ap.add_argument(
@@ -275,6 +275,11 @@ def main() -> None:
         type=int,
         default=560,
         help="max stored sprite height; ~2x the size a 540px card displays (0 = full)",
+    )
+    ap.add_argument(
+        "--refresh-media",
+        action="store_true",
+        help="re-download and re-encode backgrounds even if they are already present",
     )
     ap.add_argument(
         "--skip-sprites",

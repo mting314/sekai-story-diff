@@ -15,10 +15,10 @@
    "text": 872
   },
   "by_lang": {
-   "rewrite": 108,
-   "untranslated": 764
+   "untranslated": 851,
+   "punctuation": 21
   },
-  "rewrite_lines": 108
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -46,7 +46,7 @@
        "old": "Wh-Wh-Wh...",
        "new": "な、な、な……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 1,
@@ -57,7 +57,7 @@
        "old": "What is this place?!",
        "new": "なんだここは～～～～！！！！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 2,
@@ -387,7 +387,7 @@
        "old": "Yeah!",
        "new": "『おーっ！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 32,
@@ -717,7 +717,7 @@
        "old": "Whoa, the wind...!",
        "new": "わっ、風が……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 62,
@@ -948,7 +948,7 @@
        "old": "What?!",
        "new": "なに～！？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 83,
@@ -1036,7 +1036,7 @@
        "old": "Yeah!",
        "new": "『おー！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       }
      ]
     },
@@ -1794,7 +1794,7 @@
        "old": "(Misunderstood...)",
        "new": "（誤解を……）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 68,
@@ -1849,7 +1849,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 73,
@@ -1882,7 +1882,7 @@
        "old": "Right!",
        "new": "……うん！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 76,
@@ -1904,7 +1904,7 @@
        "old": "...!",
        "new": "……！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 78,
@@ -1926,7 +1926,7 @@
        "old": "CHOMP!",
        "new": "——ガブッ！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 80,
@@ -2014,7 +2014,7 @@
        "old": "!!!",
        "new": "——！！！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 88,
@@ -2234,7 +2234,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 108,
@@ -2256,7 +2256,7 @@
        "old": "What?! Why?!",
        "new": "ええ～！ なんで～！？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 110,
@@ -2278,7 +2278,7 @@
        "old": "...!",
        "new": "……！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 112,
@@ -2333,7 +2333,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 117,
@@ -2662,7 +2662,7 @@
        "old": "What...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 26,
@@ -2673,7 +2673,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 27,
@@ -2750,7 +2750,7 @@
        "old": "Umm...",
        "new": "……えっと……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 34,
@@ -2772,7 +2772,7 @@
        "old": "Because... I...",
        "new": "……ぼくには……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 36,
@@ -2783,7 +2783,7 @@
        "old": "Huh?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 37,
@@ -2860,7 +2860,7 @@
        "old": "Right...",
        "new": "うん……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 44,
@@ -2926,7 +2926,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 50,
@@ -3036,7 +3036,7 @@
        "old": "(He's scared...?)",
        "new": "（……怖く、なって……）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 60,
@@ -3135,7 +3135,7 @@
        "old": "Huh?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 69,
@@ -3200,7 +3200,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 1,
@@ -3211,7 +3211,7 @@
        "old": "Excuse me...",
        "new": "——あの……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 2,
@@ -3255,7 +3255,7 @@
        "old": "Oh...",
        "new": "あ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 6,
@@ -3277,7 +3277,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 8,
@@ -3310,7 +3310,7 @@
        "old": "Huh...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 11,
@@ -3332,7 +3332,7 @@
        "old": "Oh...",
        "new": "あ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 13,
@@ -3365,7 +3365,7 @@
        "old": "What...?",
        "new": "え……？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 16,
@@ -3475,7 +3475,7 @@
        "old": "Huh...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 26,
@@ -3519,7 +3519,7 @@
        "old": "Courage...",
        "new": "勇気……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 30,
@@ -3563,7 +3563,7 @@
        "old": "“♪————!”",
        "new": "『♪————！』",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 34,
@@ -3574,7 +3574,7 @@
        "old": "...!",
        "new": "…………！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 35,
@@ -3662,7 +3662,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 43,
@@ -3706,7 +3706,7 @@
        "old": "Oh...",
        "new": "あ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 47,
@@ -3750,7 +3750,7 @@
        "old": "I wish...",
        "new": "…………いいな",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 51,
@@ -3761,7 +3761,7 @@
        "old": "Huh?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 52,
@@ -3805,7 +3805,7 @@
        "old": "I... I...!",
        "new": "ぼく……ぼく……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 56,
@@ -3838,7 +3838,7 @@
        "old": "...!",
        "new": "……！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 59,
@@ -3871,7 +3871,7 @@
        "old": "R-Right...!",
        "new": "う、うん……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 62,
@@ -3915,7 +3915,7 @@
        "old": "H-Here goes nothing!",
        "new": "え、えいっ——！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 66,
@@ -3926,7 +3926,7 @@
        "old": "Oh...!",
        "new": "あ……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 67,
@@ -4355,7 +4355,7 @@
        "old": "Zzz... Zzz...♪",
        "new": "……すー……すー……♪",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 106,
@@ -4443,7 +4443,7 @@
        "old": "(But...)",
        "new": "（でも——）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 114,
@@ -4574,7 +4574,7 @@
        "old": "Emu...",
        "new": "えむ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 9,
@@ -4607,7 +4607,7 @@
        "old": "Oh...",
        "new": "あ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 12,
@@ -4629,7 +4629,7 @@
        "old": "You do?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 14,
@@ -4772,7 +4772,7 @@
        "old": "What...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 27,
@@ -4838,7 +4838,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 33,
@@ -4926,7 +4926,7 @@
        "old": "Okay!",
        "new": "お～！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 41,
@@ -5113,7 +5113,7 @@
        "old": "You do?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 58,
@@ -5387,7 +5387,7 @@
        "old": "Thank you...!",
        "new": "はい……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 5,
@@ -5453,7 +5453,7 @@
        "old": "(He admires it...)",
        "new": "（……憧れ、か）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 11,
@@ -5519,7 +5519,7 @@
        "old": "Hm?",
        "new": "ん？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 17,
@@ -5541,7 +5541,7 @@
        "old": "I-I-I-I-It's...",
        "new": "で、で、で、で、で……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 19,
@@ -5662,7 +5662,7 @@
        "old": "Heeeeeey, Phooooeeenix!!!!!!",
        "new": "お～～～～～～いっ！ フェニックス～～～～～～～！！！！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 30,
@@ -5849,7 +5849,7 @@
        "old": "What...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 47,
@@ -5882,7 +5882,7 @@
        "old": "Grr...",
        "new": "ぐっ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 50,
@@ -5926,7 +5926,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 54,
@@ -5948,7 +5948,7 @@
        "old": "What...? R-Really...?",
        "new": "え……ほ、本当？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 56,
@@ -6245,7 +6245,7 @@
        "old": "Okay...",
        "new": "そっか～……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 83,
@@ -6256,7 +6256,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 84,
@@ -6673,7 +6673,7 @@
        "old": "Three!",
        "new": "——えい！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 5,
@@ -6750,7 +6750,7 @@
        "old": "O-Okay...!",
        "new": "は、はい……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 12,
@@ -6816,7 +6816,7 @@
        "old": "Wow! They're really flying!!!",
        "new": "わあ！ 跳んでる～～～！！！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 18,
@@ -6849,7 +6849,7 @@
        "old": "What...?",
        "new": "——なに……？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 21,
@@ -6871,7 +6871,7 @@
        "old": "Okay! C-Casting...!",
        "new": "はい！ え、えい……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 23,
@@ -6882,7 +6882,7 @@
        "old": "...!",
        "new": "……！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 24,
@@ -6893,7 +6893,7 @@
        "old": "Oh no...! Th-The wind...!",
        "new": "わ……か、風が……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 25,
@@ -6915,7 +6915,7 @@
        "old": "It won't even reach it...!",
        "new": "……届かない、か……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 27,
@@ -6948,7 +6948,7 @@
        "old": "However...",
        "new": "だが……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 30,
@@ -6992,7 +6992,7 @@
        "old": "Grr...",
        "new": "くっ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 34,
@@ -7069,7 +7069,7 @@
        "old": "N-Now...! Huh...?!",
        "new": "そ、それ……！ ——あ……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 41,
@@ -7212,7 +7212,7 @@
        "old": "What...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 54,
@@ -7245,7 +7245,7 @@
        "old": "...!",
        "new": "……！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 57,
@@ -7344,7 +7344,7 @@
        "old": "Huh...?",
        "new": "え……？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 66,
@@ -7377,7 +7377,7 @@
        "old": "They will?",
        "new": "……進む、力に？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 69,
@@ -7421,7 +7421,7 @@
        "old": "Oh...",
        "new": "……あ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 73,
@@ -7432,7 +7432,7 @@
        "old": "O-Okay...!",
        "new": "……っ、は、はい……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 74,
@@ -7531,7 +7531,7 @@
        "old": "Let's go!",
        "new": "……いくぞ！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 83,
@@ -7575,7 +7575,7 @@
        "old": "O-Okay!",
        "new": "は、はい——！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 87,
@@ -7586,7 +7586,7 @@
        "old": "...!",
        "new": "——！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 88,
@@ -7608,7 +7608,7 @@
        "old": "Oh no...!",
        "new": "あ……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 90,
@@ -7652,7 +7652,7 @@
        "old": "Right...!",
        "new": "はい……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 94,
@@ -7663,7 +7663,7 @@
        "old": "Huh...?! What are they...?",
        "new": "……っ！？ なにを……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 95,
@@ -7696,7 +7696,7 @@
        "old": "We can make iiiiiit!!!",
        "new": "届けー！！！！！！！！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 98,
@@ -7740,7 +7740,7 @@
        "old": "Noooooooooo! We're falling!!!!!",
        "new": "ぬおおおおおおおおおお、落ちる～～～～～～～～！！！！！！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 102,
@@ -7960,7 +7960,7 @@
        "old": "But...",
        "new": "……だが……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 122,
@@ -7982,7 +7982,7 @@
        "old": "Grr...",
        "new": "くっ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 124,
@@ -8004,7 +8004,7 @@
        "old": "Huh...?",
        "new": "え……？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 126,
@@ -8136,7 +8136,7 @@
        "old": "Huh? Really...?",
        "new": "え、いいの……？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 138,
@@ -8202,7 +8202,7 @@
        "old": "*Gasp*",
        "new": "あ……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 144,
@@ -8213,7 +8213,7 @@
        "old": "Y-Yes, I will...!",
        "new": "は、はい……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 145,
@@ -8367,7 +8367,7 @@
        "old": "(Yes...)",
        "new": "（……そうだ）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 159,
@@ -8521,7 +8521,7 @@
        "old": "...!",
        "new": "……！",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 173,
@@ -8872,7 +8872,7 @@
        "old": "That's it!",
        "new": "……そうか！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 29,
@@ -9158,7 +9158,7 @@
        "old": "Huh...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 55,
@@ -9202,7 +9202,7 @@
        "old": "Excellent! Then...",
        "new": "——よし！ では……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 59,
@@ -9279,7 +9279,7 @@
        "old": "Huh?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 66,
@@ -9312,7 +9312,7 @@
        "old": "Miku...",
        "new": "ミク……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 69,
@@ -9345,7 +9345,7 @@
        "old": "Still too early...?",
        "new": "今は、まだ……？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 72,
@@ -9455,7 +9455,7 @@
        "old": "Emu! Nene! Rui!",
        "new": "——えむ、寧々、類！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 82,
@@ -9488,7 +9488,7 @@
        "old": "Yeah! Yes.",
        "new": "『うん！』 『ああ』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 85,
@@ -9598,7 +9598,7 @@
        "old": "Huh?",
        "new": "……あれ？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 95,
@@ -9697,7 +9697,7 @@
        "old": "Yeah!",
        "new": "お～！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       }
      ]
     }

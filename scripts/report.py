@@ -64,7 +64,7 @@ def _esc(text: str) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument("--changes", default="data/transitions/event_story__event_stella_2020__scenario__5.4.0.20__5.4.0.30.json")
     ap.add_argument("--out-md", default="data/REPORT.md")
     ap.add_argument("--out-csv", default="data/changed_lines.csv")
     ap.add_argument("--skip-jp", action="store_true")

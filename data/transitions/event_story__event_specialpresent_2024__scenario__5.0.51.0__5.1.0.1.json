@@ -15,10 +15,10 @@
    "text": 199
   },
   "by_lang": {
-   "untranslated": 187,
-   "rewrite": 12
+   "untranslated": 198,
+   "punctuation": 1
   },
-  "rewrite_lines": 12
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -530,7 +530,7 @@
        "old": "Effects...?",
        "new": "演出……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 45,
@@ -959,7 +959,7 @@
        "old": "What...?",
        "new": "え……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 84,
@@ -1211,7 +1211,7 @@
        "old": "“Yeah!”",
        "new": "『おお！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 21,
@@ -1409,7 +1409,7 @@
        "old": "“Roger!”",
        "new": "『はい！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 39,
@@ -1486,7 +1486,7 @@
        "old": "“Grr... So many snowballs...!”",
        "new": "『くっ……なんて量だ……！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 46,
@@ -1497,7 +1497,7 @@
        "old": "H-Hey, that looks like...!",
        "new": "あ……あれって……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 47,
@@ -1717,7 +1717,7 @@
        "old": "“...”",
        "new": "『…………』",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 67,
@@ -1761,7 +1761,7 @@
        "old": "“He...”",
        "new": "『ふっ……』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 71,
@@ -1783,7 +1783,7 @@
        "old": "“What's so funny?”",
        "new": "『トナカイ……？』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 73,
@@ -1805,7 +1805,7 @@
        "old": "“No, you didn't...!”",
        "new": "『お前達、まさか……！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 75,
@@ -1860,7 +1860,7 @@
        "old": "Okay!",
        "new": "『はーい！』",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 80,
@@ -2234,7 +2234,7 @@
        "old": "We will...!",
        "new": "うん……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       }
      ]
     }

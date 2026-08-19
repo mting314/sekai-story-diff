@@ -164,7 +164,7 @@ jobs:
 
       - name: Render
         run: |
-          uv run python scripts/build_web_gallery.py --changes "data/official_changes.json" "data/official_changes_*.json" "data/transitions/*.json"
+          uv run python scripts/build_web_gallery.py --changes "data/transitions/*.json"
 
       # Refuse to publish a payload whose sprites are missing: with "hide until
       # rendered" a partial deploy looks identical to a healthy site.

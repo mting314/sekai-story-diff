@@ -16,9 +16,10 @@
    "speaker": 3
   },
   "by_lang": {
-   "rewrite": 172
+   "rewrite": 167,
+   "punctuation": 5
   },
-  "rewrite_lines": 172
+  "rewrite_lines": 167
  },
  "events": [
   {
@@ -558,7 +559,7 @@
        "old": "...",
        "new": "“...”",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 32,
@@ -800,7 +801,7 @@
        "old": "...",
        "new": "“...”",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 58,
@@ -1174,7 +1175,7 @@
        "old": "...!",
        "new": "“...!”",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       }
      ]
     },
@@ -1591,7 +1592,7 @@
        "old": "...",
        "new": "“...”",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 49,
@@ -1690,7 +1691,7 @@
        "old": "...",
        "new": "“...”",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 58,

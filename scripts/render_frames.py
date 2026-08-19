@@ -334,7 +334,7 @@ def render_frame(
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--changes", default="data/official_changes.json")
+    ap.add_argument("--changes", default="data/transitions/event_story__event_stella_2020__scenario__5.4.0.20__5.4.0.30.json")
     ap.add_argument("--out", default="data/images")
     ap.add_argument("--limit", type=int, default=0, help="render at most N frames (debug)")
     ap.add_argument("--kinds", default="text,speaker", help="change kinds to render")

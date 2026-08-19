@@ -120,14 +120,19 @@ ok(b.document.querySelectorAll(".hit").length === 0, "same query finds nothing o
 console.log("\nLANGUAGE FLIPS EXCLUDED");
 // 71% of catalogue changes are a first localisation, not a rewrite; none may appear
 const JP = /[぀-ヿ一-鿿]/;
-let jpFrames = 0;
+const strip = (h) => h.replace(/<[^>]*>/g, "");
+// letters only: counting punctuation is what let 'ん…………' -> 'Mm...' pass as a rewrite
+const letters = (s) => [...s].filter((c) => /[\p{L}\p{N}]/u.test(c));
+const jpRatio = (s) => { const l = letters(s); return l.length ? l.filter((c) => JP.test(c)).length / l.length : 0; };
+let jpFrames = 0, punctOnly = 0;
 for (const e of payload.events) for (const t of e.transitions) for (const ep of t.episodes)
   for (const f of ep.frames) {
-    const strip = (h) => h.replace(/<[^>]*>/g, "");
-    const ratio = (s) => { const l = [...s].filter((c) => c.trim()); return l.length ? l.filter((c) => JP.test(c)).length / l.length : 0; };
-    if (ratio(strip(f.old)) > 0.5 || ratio(strip(f.new)) > 0.5) jpFrames++;
+    const o = strip(f.old), n = strip(f.new);
+    if (jpRatio(o) > 0.5 || jpRatio(n) > 0.5) jpFrames++;
+    if (!letters(o).length && !letters(n).length) punctOnly++;
   }
 ok(jpFrames === 0, "no Japanese-side lines shown as retranslation", `${jpFrames} found`);
+ok(punctOnly === 0, "no punctuation-only lines shown as retranslation", `${punctOnly} found`);
 
 console.log(`\n${fails === 0 ? "ALL RANGE CHECKS PASSED" : fails + " FAILED"}`);
 process.exit(fails ? 1 : 0);

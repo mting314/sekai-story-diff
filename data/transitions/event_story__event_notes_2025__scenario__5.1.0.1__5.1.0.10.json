@@ -15,10 +15,10 @@
    "text": 653
   },
   "by_lang": {
-   "rewrite": 159,
-   "localised": 494
+   "punctuation": 35,
+   "localised": 618
   },
-  "rewrite_lines": 159
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -46,7 +46,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 1,
@@ -90,7 +90,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 5,
@@ -101,7 +101,7 @@
        "old": "……よかった……",
        "new": "Thank goodness...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 6,
@@ -255,7 +255,7 @@
        "old": "……なに？",
        "new": "Yes?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 20,
@@ -277,7 +277,7 @@
        "old": "え……",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 22,
@@ -321,7 +321,7 @@
        "old": "……うん",
        "new": "*Nod*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 26,
@@ -387,7 +387,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 32,
@@ -431,7 +431,7 @@
        "old": "看病……",
        "new": "She nursed you...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 36,
@@ -486,7 +486,7 @@
        "old": "……うん",
        "new": "Yes...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 41,
@@ -519,7 +519,7 @@
        "old": "へえ……",
        "new": "Really...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 44,
@@ -629,7 +629,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 54,
@@ -651,7 +651,7 @@
        "old": "奏……",
        "new": "Kanade...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 56,
@@ -684,7 +684,7 @@
        "old": "……うん",
        "new": "Me too...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 59,
@@ -695,7 +695,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 60,
@@ -772,7 +772,7 @@
        "old": "…………っ",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 67,
@@ -794,7 +794,7 @@
        "old": "（本当に……？）",
        "new": "(Is that true...?)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 69,
@@ -838,7 +838,7 @@
        "old": "（……でも……）",
        "new": "(And yet...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 73,
@@ -849,7 +849,7 @@
        "old": "（…………間違って、いたの……？）",
        "new": "(Was I...wrong...?)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 74,
@@ -860,7 +860,7 @@
        "old": "（……でも、それなら……）",
        "new": "(But that means...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 75,
@@ -871,7 +871,7 @@
        "old": "私は…………",
        "new": "I...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       }
      ]
     },
@@ -914,7 +914,7 @@
        "old": "（でも……）",
        "new": "(But...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 3,
@@ -947,7 +947,7 @@
        "old": "『——奏』",
        "new": "<Kanade.>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 6,
@@ -958,7 +958,7 @@
        "old": "え……",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 7,
@@ -1013,7 +1013,7 @@
        "old": "『……奏、何かあった？』",
        "new": "<Did something happen, Kanade?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 12,
@@ -1024,7 +1024,7 @@
        "old": "え？",
        "new": "Huh?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 13,
@@ -1046,7 +1046,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 15,
@@ -1090,7 +1090,7 @@
        "old": "『イメージ……？』",
        "new": "<A clear vision...?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 19,
@@ -1134,7 +1134,7 @@
        "old": "『真逆？』",
        "new": "<The complete opposite?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 23,
@@ -1167,7 +1167,7 @@
        "old": "『冷たい……』",
        "new": "<Cold...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 26,
@@ -1222,7 +1222,7 @@
        "old": "『……難しい……』",
        "new": "<This is hard...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 31,
@@ -1244,7 +1244,7 @@
        "old": "『…………』",
        "new": "<...>",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 33,
@@ -1288,7 +1288,7 @@
        "old": "……そう、だね……",
        "new": "Good point...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 37,
@@ -1332,7 +1332,7 @@
        "old": "え、あ……",
        "new": "Huh? Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 41,
@@ -1420,7 +1420,7 @@
        "old": "え？",
        "new": "Huh?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 49,
@@ -1464,7 +1464,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 53,
@@ -1530,7 +1530,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 59,
@@ -1706,7 +1706,7 @@
        "old": "……あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 75,
@@ -2112,7 +2112,7 @@
        "old": "え……？",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 34,
@@ -2233,7 +2233,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 45,
@@ -2288,7 +2288,7 @@
        "old": "（でも……）",
        "new": "(But...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 50,
@@ -2299,7 +2299,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 51,
@@ -2398,7 +2398,7 @@
        "old": "…………。 あの——",
        "new": "... Pardon me...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 60,
@@ -2431,7 +2431,7 @@
        "old": "え……",
        "new": "What...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 63,
@@ -2464,7 +2464,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 66,
@@ -2551,7 +2551,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 1,
@@ -2595,7 +2595,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 5,
@@ -2639,7 +2639,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 9,
@@ -2661,7 +2661,7 @@
        "old": "…………！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 11,
@@ -2716,7 +2716,7 @@
        "old": "…………っ",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 16,
@@ -2771,7 +2771,7 @@
        "old": "………………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 21,
@@ -2782,7 +2782,7 @@
        "old": "……でも……",
        "new": "But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 22,
@@ -2793,7 +2793,7 @@
        "old": "え……？",
        "new": "Hm...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 23,
@@ -2826,7 +2826,7 @@
        "old": "だけど…………",
        "new": "But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 26,
@@ -2837,7 +2837,7 @@
        "old": "……だけど……！",
        "new": "But even so...!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 27,
@@ -2892,7 +2892,7 @@
        "old": "それに…………っ",
        "new": "And...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 32,
@@ -2925,7 +2925,7 @@
        "old": "…………っ",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 35,
@@ -2991,7 +2991,7 @@
        "old": "……え……",
        "new": "What...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 41,
@@ -3057,7 +3057,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 47,
@@ -3101,7 +3101,7 @@
        "old": "…………っ",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 51,
@@ -3134,7 +3134,7 @@
        "old": "…………そうね……",
        "new": "We did...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 54,
@@ -3178,7 +3178,7 @@
        "old": "……どうして……",
        "new": "So, why...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 58,
@@ -3211,7 +3211,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 61,
@@ -3233,7 +3233,7 @@
        "old": "——よし",
        "new": "Alright.",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 63,
@@ -3320,7 +3320,7 @@
        "old": "…………どうかな",
        "new": "What do you think...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 6,
@@ -3375,7 +3375,7 @@
        "old": "…………うん",
        "new": "Okay...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 11,
@@ -3496,7 +3496,7 @@
        "old": "（……わからない。でも……）",
        "new": "(I don't know. But...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 22,
@@ -3507,7 +3507,7 @@
        "old": "……次……",
        "new": "Again...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 23,
@@ -3529,7 +3529,7 @@
        "old": "…………違う……！",
        "new": "No...!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 25,
@@ -3584,7 +3584,7 @@
        "old": "……っ、次",
        "new": "Next...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 30,
@@ -3606,7 +3606,7 @@
        "old": "………………っ",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 32,
@@ -3672,7 +3672,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 38,
@@ -3727,7 +3727,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 43,
@@ -3771,7 +3771,7 @@
        "old": "宵崎さん……！？",
        "new": "Ms. Yoisaki...?!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 47,
@@ -3804,7 +3804,7 @@
        "old": "え、ええ……",
        "new": "Th-Thank you...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 50,
@@ -3859,7 +3859,7 @@
        "old": "え？ でも……",
        "new": "Huh? But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 55,
@@ -3881,7 +3881,7 @@
        "old": "……はい……",
        "new": "Thank you...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 57,
@@ -3925,7 +3925,7 @@
        "old": "『……奏？』",
        "new": "<Kanade...?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 61,
@@ -3936,7 +3936,7 @@
        "old": "…………これも、違う",
        "new": "No, this is also wrong...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 62,
@@ -3947,7 +3947,7 @@
        "old": "『……！』",
        "new": "<...!>",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 63,
@@ -3991,7 +3991,7 @@
        "old": "次の曲は————",
        "new": "Next, I'll try...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 67,
@@ -4002,7 +4002,7 @@
        "old": "（奏……）",
        "new": "(Kanade...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       }
      ]
     },
@@ -4023,7 +4023,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 1,
@@ -4034,7 +4034,7 @@
        "old": "『……よし、出来た……』",
        "new": "<Okay, it's done...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 2,
@@ -4067,7 +4067,7 @@
        "old": "『ありがと～！』",
        "new": "<Thanks!>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 5,
@@ -4166,7 +4166,7 @@
        "old": "『えっ？』",
        "new": "<What?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 14,
@@ -4210,7 +4210,7 @@
        "old": "『……言ってる、けど……』",
        "new": "<I have been... But...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 18,
@@ -4232,7 +4232,7 @@
        "old": "『え……？』",
        "new": "<What...?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 20,
@@ -4254,7 +4254,7 @@
        "old": "『…………』",
        "new": "<...>",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 22,
@@ -4276,7 +4276,7 @@
        "old": "『あ……リン』",
        "new": "<Oh, Rin.>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 24,
@@ -4353,7 +4353,7 @@
        "old": "『え？』",
        "new": "<Huh?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 31,
@@ -4375,7 +4375,7 @@
        "old": "『…………！』",
        "new": "<...!>",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 33,
@@ -4474,7 +4474,7 @@
        "old": "…………探さなきゃ……",
        "new": "But I have to find it...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 42,
@@ -4518,7 +4518,7 @@
        "old": "え……",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 46,
@@ -4584,7 +4584,7 @@
        "old": "……お母さん……",
        "new": "Mommy...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 52,
@@ -4595,7 +4595,7 @@
        "old": "————！！",
        "new": "...!!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 53,
@@ -4672,7 +4672,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 60,
@@ -4683,7 +4683,7 @@
        "old": "……うん……",
        "new": "*Nod*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 61,
@@ -4727,7 +4727,7 @@
        "old": "『——奏！』",
        "new": "<Kanade!>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 65,
@@ -4738,7 +4738,7 @@
        "old": "『奏、大丈夫……！？』",
        "new": "<Kanade! Are you okay...?!>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 66,
@@ -4760,7 +4760,7 @@
        "old": "……っぅ、……",
        "new": "*Groan*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 68,
@@ -4793,7 +4793,7 @@
        "old": "っ、でも……",
        "new": "B-But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 71,
@@ -4815,7 +4815,7 @@
        "old": "え……？",
        "new": "What...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 73,
@@ -4859,7 +4859,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 77,
@@ -4903,7 +4903,7 @@
        "old": "でも……",
        "new": "But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 81,
@@ -4925,7 +4925,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 83,
@@ -5024,7 +5024,7 @@
        "old": "う……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 92,
@@ -5068,7 +5068,7 @@
        "old": "『……ねえ、奏』",
        "new": "<Hey, Kanade?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 96,
@@ -5090,7 +5090,7 @@
        "old": "え……",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       }
      ]
     },
@@ -5111,7 +5111,7 @@
        "old": "はあ……",
        "new": "*Sigh*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 1,
@@ -5166,7 +5166,7 @@
        "old": "う……ご、ごめん……",
        "new": "Oh... I-I'm sorry...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 6,
@@ -5199,7 +5199,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 9,
@@ -5243,7 +5243,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 13,
@@ -5342,7 +5342,7 @@
        "old": "『……そうなんだ……』",
        "new": "<I see...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 22,
@@ -5364,7 +5364,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 24,
@@ -5408,7 +5408,7 @@
        "old": "『え……』",
        "new": "<What...?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 28,
@@ -5452,7 +5452,7 @@
        "old": "……うん……",
        "new": "*Nod*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 32,
@@ -5474,7 +5474,7 @@
        "old": "でも——",
        "new": "But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 34,
@@ -5496,7 +5496,7 @@
        "old": "『あ……』",
        "new": "<Oh...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 36,
@@ -5540,7 +5540,7 @@
        "old": "『…………』",
        "new": "<...>",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 40,
@@ -5595,7 +5595,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 45,
@@ -5628,7 +5628,7 @@
        "old": "え……？",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 48,
@@ -5705,7 +5705,7 @@
        "old": "……そう、だね……",
        "new": "T-True...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 55,
@@ -5760,7 +5760,7 @@
        "old": "（だって——）",
        "new": "(I mean...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 60,
@@ -5771,7 +5771,7 @@
        "old": "『……ねえ、奏』",
        "new": "<Hey, Kanade?>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 61,
@@ -5793,7 +5793,7 @@
        "old": "え？",
        "new": "What?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 63,
@@ -5826,7 +5826,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 66,
@@ -5892,7 +5892,7 @@
        "old": "でも……",
        "new": "But...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 72,
@@ -5936,7 +5936,7 @@
        "old": "『奏……』",
        "new": "<Kanade...>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 76,
@@ -6046,7 +6046,7 @@
        "old": "……なに？",
        "new": "What was that?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 86,
@@ -6090,7 +6090,7 @@
        "old": "…………！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 90,
@@ -6112,7 +6112,7 @@
        "old": "え、あ……",
        "new": "U-Uhh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 92,
@@ -6156,7 +6156,7 @@
        "old": "……何が？",
        "new": "About what?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 96,
@@ -6222,7 +6222,7 @@
        "old": "……奏……",
        "new": "Kanade...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 102,
@@ -6233,7 +6233,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 103,
@@ -6244,7 +6244,7 @@
        "old": "——私も……",
        "new": "I...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 104,
@@ -6255,7 +6255,7 @@
        "old": "え？",
        "new": "What?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 105,
@@ -6331,7 +6331,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 1,
@@ -6397,7 +6397,7 @@
        "old": "——ただい……",
        "new": "I'm back...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 7,
@@ -6518,7 +6518,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 18,
@@ -6551,7 +6551,7 @@
        "old": "……そうだね……",
        "new": "Yes...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 21,
@@ -6694,7 +6694,7 @@
        "old": "え……？",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 34,
@@ -6738,7 +6738,7 @@
        "old": "……ああ",
        "new": "Yes...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 38,
@@ -6760,7 +6760,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 40,
@@ -6793,7 +6793,7 @@
        "old": "……なに？",
        "new": "What is it?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 43,
@@ -6837,7 +6837,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 47,
@@ -6881,7 +6881,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 51,
@@ -6892,7 +6892,7 @@
        "old": "（お母さん、と……）",
        "new": "(With Mom...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 52,
@@ -6958,7 +6958,7 @@
        "old": "（……っ、でも……）",
        "new": "(But...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 58,
@@ -6969,7 +6969,7 @@
        "old": "（…………私も、進まなきゃ）",
        "new": "(I also need to start moving forward...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 59,
@@ -6991,7 +6991,7 @@
        "old": "（私も——）",
        "new": "(So, I too...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 61,
@@ -7002,7 +7002,7 @@
        "old": "————わかった",
        "new": "Okay...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 62,
@@ -7013,7 +7013,7 @@
        "old": "…………！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 63,
@@ -7024,7 +7024,7 @@
        "old": "本当か……？",
        "new": "Really...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 64,
@@ -7035,7 +7035,7 @@
        "old": "……うん",
        "new": "*Nod*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 65,
@@ -7079,7 +7079,7 @@
        "old": "……奏",
        "new": "Kanade...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 69,
@@ -7090,7 +7090,7 @@
        "old": "え？",
        "new": "Huh?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 70,
@@ -7189,7 +7189,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 79,
@@ -7211,7 +7211,7 @@
        "old": "奏……",
        "new": "Kanade...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 81,
@@ -7244,7 +7244,7 @@
        "old": "……うん",
        "new": "*Nod*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 84,

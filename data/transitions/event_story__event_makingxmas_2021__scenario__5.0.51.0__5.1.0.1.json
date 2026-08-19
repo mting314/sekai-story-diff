@@ -15,10 +15,10 @@
    "text": 136
   },
   "by_lang": {
-   "untranslated": 123,
-   "rewrite": 13
+   "untranslated": 134,
+   "punctuation": 2
   },
-  "rewrite_lines": 13
+  "rewrite_lines": 0
  },
  "events": [
   {
@@ -68,7 +68,7 @@
        "old": "Ow, my arms...!",
        "new": "うう、腕が……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 3,
@@ -475,7 +475,7 @@
        "old": "“Hello, everyone...! This is Minori Hanasato from MORE MORE JUMP!...”",
        "new": "『皆さん、こんにちは！ MORE MORE JUMP！の、花里みのりで……』",
        "ratio": 0.389,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 40,
@@ -585,7 +585,7 @@
        "old": "Okay...",
        "new": "はい……",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 50,
@@ -717,7 +717,7 @@
        "old": "Yeah...",
        "new": "…………うん",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 62,
@@ -805,7 +805,7 @@
        "old": "Oh no...!",
        "new": "あ……！",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 70,
@@ -838,7 +838,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 73,
@@ -904,7 +904,7 @@
        "old": "...",
        "new": "…………",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 79,
@@ -926,7 +926,7 @@
        "old": "Huh?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 81,
@@ -1113,7 +1113,7 @@
        "old": "Huh?",
        "new": "え？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 98,
@@ -1168,7 +1168,7 @@
        "old": "(That's right...)",
        "new": "（……そうだった……）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 103,
@@ -1190,7 +1190,7 @@
        "old": "(That means I...!)",
        "new": "（なら……わたしは……！）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 105,
@@ -1289,7 +1289,7 @@
        "old": "What...?!",
        "new": "え……！？",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 114,
@@ -1311,7 +1311,7 @@
        "old": "(So...!)",
        "new": "（だから——！）",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "untranslated"
       },
       {
        "talk_index_old": 116,

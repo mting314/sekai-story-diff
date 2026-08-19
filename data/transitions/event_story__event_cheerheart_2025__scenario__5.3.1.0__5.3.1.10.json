@@ -16,10 +16,11 @@
    "linebreak": 2
   },
   "by_lang": {
-   "localised": 431,
-   "rewrite": 63
+   "localised": 480,
+   "punctuation": 11,
+   "rewrite": 3
   },
-  "rewrite_lines": 63
+  "rewrite_lines": 3
  },
  "events": [
   {
@@ -410,7 +411,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 34,
@@ -487,7 +488,7 @@
        "old": "（えっ？）",
        "new": "(What?)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 41,
@@ -596,7 +597,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 6,
@@ -629,7 +630,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 9,
@@ -860,7 +861,7 @@
        "old": "えっ……！ 生配信！？",
        "new": "What?! Live...?!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 30,
@@ -882,7 +883,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 32,
@@ -1091,7 +1092,7 @@
        "old": "す……、すごかったね……！ LUMINAグランプリ！",
        "new": "Th-That totally blew me away...! The Lumina Grand Prix's super gigantic!",
        "ratio": 0.169,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 51,
@@ -1223,7 +1224,7 @@
        "old": "あ……",
        "new": "That's right...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 63,
@@ -1882,7 +1883,7 @@
        "old": "愛莉……",
        "new": "Airi...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 52,
@@ -1904,7 +1905,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 54,
@@ -2156,7 +2157,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 1,
@@ -2189,7 +2190,7 @@
        "old": "そう……",
        "new": "Okay...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 4,
@@ -2299,7 +2300,7 @@
        "old": "え……",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 14,
@@ -2629,7 +2630,7 @@
        "old": "……ん？",
        "new": "Hm...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 44,
@@ -2673,7 +2674,7 @@
        "old": "…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 48,
@@ -2728,7 +2729,7 @@
        "old": "（次は、絶対に……！）",
        "new": "(This time, I'm definitely gonna...!)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       }
      ]
     },
@@ -2793,7 +2794,7 @@
        "old": "♪————～～！",
        "new": "♪————~~!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 5,
@@ -2804,7 +2805,7 @@
        "old": "（じょ、上手……！）",
        "new": "(Sh-She's amazing...!)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 6,
@@ -2848,7 +2849,7 @@
        "old": "……はい！",
        "new": "Present...!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 10,
@@ -2892,7 +2893,7 @@
        "old": "（あっ……）",
        "new": "(Oh...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 14,
@@ -2925,7 +2926,7 @@
        "old": "♪————～～！",
        "new": "♪————~~!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 17,
@@ -3090,7 +3091,7 @@
        "old": "（っ、次だ……！）",
        "new": "(I'm next...!)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 32,
@@ -3101,7 +3102,7 @@
        "old": "（お願い……！）",
        "new": "(Please...!)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 33,
@@ -3134,7 +3135,7 @@
        "old": "あっ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 36,
@@ -3145,7 +3146,7 @@
        "old": "……っ、…………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 37,
@@ -3156,7 +3157,7 @@
        "old": "（…………知らなかった）",
        "new": "(I didn't know...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 38,
@@ -3233,7 +3234,7 @@
        "old": "……うん……",
        "new": "*Nod*",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 45,
@@ -3244,7 +3245,7 @@
        "old": "愛莉……",
        "new": "Airi...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 46,
@@ -3343,7 +3344,7 @@
        "old": "えっ……？",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 55,
@@ -3420,7 +3421,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 62,
@@ -3475,7 +3476,7 @@
        "old": "（……でも……）",
        "new": "(But...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 67,
@@ -3486,7 +3487,7 @@
        "old": "（でも、わたし——）",
        "new": "(But I...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 68,
@@ -3694,7 +3695,7 @@
        "old": "（……すごい……）",
        "new": "(Wow...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 17,
@@ -3771,7 +3772,7 @@
        "old": "『はい！』",
        "new": "<Okay!>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 24,
@@ -3782,7 +3783,7 @@
        "old": "わ……",
        "new": "Wow...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 25,
@@ -3815,7 +3816,7 @@
        "old": "『——ストップ！』",
        "new": "<Stop!>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 28,
@@ -3826,7 +3827,7 @@
        "old": "えっ……？",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 29,
@@ -3881,7 +3882,7 @@
        "old": "『はい！』",
        "new": "<Understood!>",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 34,
@@ -3892,7 +3893,7 @@
        "old": "こ、怖い……",
        "new": "Sh-She's really scary...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 35,
@@ -4035,7 +4036,7 @@
        "old": "………………",
        "new": "...",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 48,
@@ -4090,7 +4091,7 @@
        "old": "（でも——）",
        "new": "(But...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 53,
@@ -4200,7 +4201,7 @@
        "old": "うん、うん……！",
        "new": "Yeah, me too...!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 63,
@@ -4244,7 +4245,7 @@
        "old": "え……？ ハート？",
        "new": "Huh? Heart...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 67,
@@ -4288,7 +4289,7 @@
        "old": "（そっか……）",
        "new": "(Right...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 71,
@@ -4343,7 +4344,7 @@
        "old": "（…………あれ、でも……）",
        "new": "(Oh, but...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 76,
@@ -4354,7 +4355,7 @@
        "old": "（あのとき——）",
        "new": "(Before...)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 77,
@@ -4387,7 +4388,7 @@
        "old": "……そっか……",
        "new": "That's right...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 80,
@@ -4518,7 +4519,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 8,
@@ -4573,7 +4574,7 @@
        "old": "——うん",
        "new": "Me too.",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 13,
@@ -4606,7 +4607,7 @@
        "old": "『うん！』 『ええ！』",
        "new": "Yeah! Yes!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 16,
@@ -4628,7 +4629,7 @@
        "old": "えっ……？",
        "new": "Huh...?",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 18,
@@ -4672,7 +4673,7 @@
        "old": "ミク……",
        "new": "Miku...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 22,
@@ -4837,7 +4838,7 @@
        "old": "——ええ！",
        "new": "Yeah, we will!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 37,
@@ -4903,7 +4904,7 @@
        "old": "『おー！』",
        "new": "Yeah!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       }
      ]
     },
@@ -4946,7 +4947,7 @@
        "old": "は、ふぁい～……！",
        "new": "O-Okay...!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 3,
@@ -4968,7 +4969,7 @@
        "old": "……っ、はい！",
        "new": "Okay...!",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 5,
@@ -5133,7 +5134,7 @@
        "old": "（って——えっ！？）",
        "new": "(Wait, huh?!)",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 20,
@@ -5232,7 +5233,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 29,
@@ -5364,7 +5365,7 @@
        "old": "あ……",
        "new": "Oh...",
        "ratio": 0.0,
-       "lang": "rewrite"
+       "lang": "localised"
       },
       {
        "talk_index_old": 41,
@@ -5441,7 +5442,7 @@
        "old": "……！",
        "new": "...!",
        "ratio": 1.0,
-       "lang": "rewrite"
+       "lang": "punctuation"
       },
       {
        "talk_index_old": 48,
