@@ -9,6 +9,15 @@
 !/data/transitions.json
 !/data/transitions/
 !/data/official_changes*.json
+# The master DB snapshot. Nothing downloads it and every script reads it, so CI has
+# none unless it is tracked. Only the four the pipeline actually opens: cards.json
+# (34 MB) and events_jp.json serve the portrait gallery, not the site.
+!/data/master/
+/data/master/*
+!/data/master/eventStories.json
+!/data/master/eventStories_en.json
+!/data/master/events_en.json
+!/data/master/character2ds.json
 __pycache__/
 *.pyc
 .venv/
@@ -20,7 +29,7 @@ port/live2d-version-diff/
 # vite app: node_modules and build output. The sprites and payload ARE committed:
 # CI cannot regenerate them (needs Cubism Core, a GL context and ~1 GB of asset
 # cache), so the build input has to be in the tree.
-web/node_modules/
+node_modules/
 web/dist/
 
 # project venv

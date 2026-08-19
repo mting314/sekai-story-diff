@@ -140,6 +140,7 @@ jobs:
             data/live2d
             data/media
             data/jp_assets
+            data/official
           key: live2d-${{ runner.os }}-${{ hashFiles('data/transitions.json') }}
           restore-keys: live2d-${{ runner.os }}-
 
@@ -154,6 +155,11 @@ jobs:
       # every pose as new and redraw all of them instead of the release's handful.
       - name: Pull existing media
         run: gcloud storage rsync gs://sekai-story-diff-assets web/public --recursive --quiet
+
+      # data/official is 543 MB and untracked, so a cold cache has none of it. Only the
+      # 62 files the payloads actually reference are needed, not the whole thing.
+      - name: Ensure the scenario data the build reads
+        run: python scripts/ensure_scenarios.py
 
       - name: Render
         run: |

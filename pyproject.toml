@@ -1,0 +1,29 @@
+[project]
+name = "sekai-story-diff"
+version = "0.1.0"
+description = "What Project Sekai's English release rewrites in its story text between asset versions"
+requires-python = ">=3.12"
+
+dependencies = [
+    "requests>=2.32",
+    "pillow>=11.0",
+    # bundle decrypt (scripts/fetch_official_bundles.py)
+    "sssekai>=0.8.0",
+    "unitypy>=1.25.3",
+    "msgpack>=1.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+# Live2D rendering. Kept out of the base dependencies because live2d-py publishes
+# macOS and Windows wheels only, so a Linux runner cannot install it — and the diff
+# half of the pipeline does not need it. glfw supplies the GL context: it is the one
+# route that exists on every platform, which is what lets the render run on CI
+# rather than only on a laptop.
+render = [
+    "live2d-py>=0.7.0",
+    "pyopengl>=3.1.10",
+    "glfw>=2.7",
+]
