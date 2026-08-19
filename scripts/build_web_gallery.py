@@ -277,6 +277,7 @@ def main() -> None:
 
     poses: dict[str, dict] = {}
     by_event: dict[int, dict] = {}
+    duplicate_pairs: list[tuple] = []
     dropped: list[dict] = []
     metas = event_meta()
     # only the releases the CDN still serves; fingerprint_bundles.py records which
@@ -407,6 +408,13 @@ def main() -> None:
                     "unitLogo": f"unit/{logo}.png" if logo else "",
                 },
             )
+            # The same pair can arrive from two payloads — the fingerprint sweep
+            # rediscovers every hand-found diff — and appending both silently doubles
+            # the event's line count.
+            pair = (cmp_info["old_asset_version"], cmp_info["new_asset_version"])
+            if any((t["oldVersion"], t["newVersion"]) == pair for t in entry["transitions"]):
+                duplicate_pairs.append((event["event_id"], *pair))
+                continue
             entry["transitions"].append(
                 {
                     "changed": sum(len(e["frames"]) for e in episodes),
@@ -424,6 +432,10 @@ def main() -> None:
     for e in events:
         e["transitions"].sort(key=lambda t: order.get(t["newVersion"], 0))
         e["changed"] = sum(t["changed"] for t in e["transitions"])
+    if duplicate_pairs:
+        print(f"  skipped {len(duplicate_pairs)} duplicate transition(s) present in more "
+              f"than one payload (e.g. event {duplicate_pairs[0][0]} "
+              f"{duplicate_pairs[0][1]}->{duplicate_pairs[0][2]})")
     total = sum(e["changed"] for e in events)
     print(f"{len(events)} event(s), {len(payloads)} payload(s), "
           f"{sum(len(e['transitions']) for e in events)} transitions, "

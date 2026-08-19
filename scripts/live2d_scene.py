@@ -335,7 +335,19 @@ def apply_motion(model, data: dict | None, time: float | None = None) -> None:
 
 
 class Live2DStage:
-    """Owns the GL context + model cache; renders one character at a time."""
+    """Owns the GL context + model cache; renders one character at a time.
+
+    The cache is bounded. Every loaded model holds native Cubism state and GL
+    textures, and keeping them all alive segfaults the native layer once a run spans
+    enough costumes — a full catalogue render died with SIGSEGV at 91 models.
+    sekai-viewer bounds it the same way (``Live2DController.model_queue`` "replaces
+    the oldest model").
+
+    Eviction is barely felt in practice: sprites are rendered in sorted key order and
+    the key starts with the costume, so all of a costume's poses are drawn together.
+    """
+
+    MAX_MODELS = 6
 
     def __init__(self, size: tuple[int, int] = (1100, 1100)) -> None:
         import live2d.v3 as live2d
@@ -365,10 +377,25 @@ class Live2DStage:
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size[0], size[1], 0, GL_RGBA, GL_UNSIGNED_BYTE, None)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
+        # insertion-ordered: the oldest live model is the first non-None entry
         self._models: dict[str, object] = {}
+
+    def _evict(self) -> None:
+        """Drop the least recently loaded model, releasing its renderer."""
+        for key, model in list(self._models.items()):
+            if model is None:
+                continue  # a "missing" marker costs nothing, keep it
+            try:
+                model.DestroyRenderer()
+            except Exception:  # noqa: BLE001 - already gone; dropping the ref is enough
+                pass
+            del self._models[key]
+            return
 
     def model(self, costume: str):
         if costume in self._models:
+            # refresh recency so a costume in active use is not the next evicted
+            self._models[costume] = self._models.pop(costume)
             return self._models[costume]
         directory = model_dir(costume)
         if not directory:
@@ -378,6 +405,10 @@ class Live2DStage:
         if not model3:
             self._models[costume] = None
             return None
+        live = sum(1 for m in self._models.values() if m is not None)
+        while live >= self.MAX_MODELS:
+            self._evict()
+            live -= 1
         model = self.live2d.LAppModel()
         model.LoadModelJson(str(model3))
         model.Resize(*self.size)
