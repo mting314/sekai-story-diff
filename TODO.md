@@ -6,23 +6,7 @@ knowing before picking one up.
 
 ---
 
-## 1. Rename `master` → `main`
-
-Rename the default branch, repoint the deploy and update workflows, and delete `master`.
-
-**Why:** `main` is the convention everywhere else in this workspace, and the workflows
-currently hardcode `master`.
-
-**Watch out for:**
-- `.github/workflows/deploy.yml` and `update.yml` both trigger on `branches: [main, master]`
-  / `master`; the update workflow also pushes, so it needs the new name.
-- The GitHub Pages source is pinned to a branch in repo settings — renaming without
-  updating it silently stops deploys.
-- `feat/live2d-frame-set` is fully merged and can be deleted at the same time.
-
----
-
-## 2. Event banner and unit icon in the sidebar
+## 1. Event banner and unit icon in the sidebar
 
 The drawer lists events as plain text. The home cards already show banner art, a unit
 logo and the unit colour; the sidebar should too.
@@ -36,7 +20,7 @@ cards, not 40px rows. Data is already in the payload (`banner`, `unitLogo`, `col
 
 ---
 
-## 3. Version browser
+## 2. Version browser
 
 A view over releases rather than events: for each asset version, which stories changed
 and how many lines in each.
@@ -52,7 +36,7 @@ nothing, so the list should probably show only those that did, with a count of t
 
 ---
 
-## 4. Classify each change: substantial rewrite vs typo fix
+## 3. Classify each change: substantial rewrite vs typo fix
 
 At a glance, was this event's diff a real retranslation or a handful of comma fixes?
 
@@ -70,7 +54,7 @@ threshold can move without re-diffing.
 
 ---
 
-## 5. Attribution disclaimer on the site
+## 4. Attribution disclaimer on the site
 
 State plainly that all story text, character art and assets belong to Colorful Palette /
 SEGA / Crypton, that this is an unofficial fan project, and that source data comes from
@@ -85,7 +69,7 @@ version index and `sekai.best` for the asset mirror, since the pipeline depends 
 
 ---
 
-## 6. Ingest the main unit stories
+## 5. Ingest the main unit stories
 
 The sweep covers event stories only. The six unit arcs — the main character-band stories —
 are not covered at all, and are a likely place for considered retranslation.
@@ -99,10 +83,9 @@ enumerates event stories only; `diff_versions.py` resolves names and episode tit
 `eventStories.json` and unit chapters have no `eventId` (they carry `chapterNo` /
 `episodeNo` / `episodeNoLabel`); `build_web_gallery.py` builds cards from event metadata,
 and an arc has no banner — though `web/public/unit/` already holds the logos. Model arcs as
-a sibling collection rather than fake events. Best done after the classifier and magnitude
-work, so both apply from the start.
+a sibling collection rather than fake events. Best done after the classifier and magnitude work, so both apply from the start.
 
-## 7. Style the dialogue like the game
+## 6. Style the dialogue like the game
 
 Replace the 94%-opaque white card with the game's look. The viewer's assets specify it
 exactly: `src/assets/live2d_player_ui/text_background.svg` is a **vertical black gradient at
@@ -114,7 +97,7 @@ against white and will be unreadable on a dark panel; the mobile variants (`#ff9
 `#8ce0b6`) are the starting point, and the two code paths can then merge. A screenshot would
 settle how much stage height the panel covers and where the name plate sits.
 
-## 8. Prune orphaned sprites from the bucket
+## 7. Prune orphaned sprites from the bucket
 
 Every reclassification leaves sprites in `gs://sekai-story-diff-assets` that no payload
 references. The classifier fix alone orphans ~1,672 of 2,219.
@@ -126,13 +109,15 @@ Nothing breaks.
 tell a live sprite from a dead one without rebuilding the payload. A script that diffs the
 bucket listing against `web/src/data.json` and deletes the difference is small — the pieces
 already exist in `scripts/verify_payload.py`, which walks exactly the same references in the
-opposite direction. Do it after item 1 lands, when the orphan set is at its largest and the
+opposite direction. Do it after the classifier fix lands, when the orphan set is at its largest and the
 saving is easiest to confirm.
 
 ---
 
 ## Done
 
+- Renamed `master` → `main`; deploy triggers on `main`, Pages source repointed
+- Language classifier fixed: counts letters, not characters — 2,629 → 957 real rewrites
 - Fingerprint sweep to find changed bundles for ~1 byte each
 - Per-transition payload and version-range UI
 - Content-addressed sprites, served from a bucket with a one-year immutable cache
