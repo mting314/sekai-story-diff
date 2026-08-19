@@ -1,0 +1,58 @@
+name: Spike — can Windows CI render a sprite?
+
+# Throwaway probe, not part of the pipeline. Question: can a GitHub-hosted Windows
+# runner draw a Live2D sprite? If yes, the whole render job runs here for free and the
+# GCP Windows VM in the plan is unnecessary.
+#
+# The doubt is OpenGL, not Cubism. live2d-py ships win_amd64 wheels, but a headless
+# runner has no GPU and Windows' fallback is OpenGL 1.1, which cannot compile Cubism's
+# #version 120 shaders. Mesa's software rasteriser (llvmpipe) provides a modern GL via a
+# drop-in opengl32.dll, so the run tries bare first and then with Mesa.
+#
+# The failure mode to watch for is a *blank frame*: a context that accepts the shaders
+# and draws nothing, with no error. So the check counts non-transparent pixels rather
+# than trusting an exit code.
+on:
+  workflow_dispatch:
+
+jobs:
+  spike:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install live2d-py glfw pyopengl pillow requests msgpack "unitypy>=1.25.3" "sssekai>=0.8.0"
+
+      - name: What GL does the runner have?
+        continue-on-error: true
+        run: python .github/spike/probe_gl.py
+
+      - name: Try rendering a sprite (bare)
+        id: bare
+        continue-on-error: true
+        run: python .github/spike/render_probe.py bare
+
+      - name: Install Mesa software GL
+        if: steps.bare.outcome != 'success'
+        run: |
+          curl -L -o mesa.7z https://github.com/pal1000/mesa-dist-win/releases/download/25.0.3/mesa3d-25.0.3-release-msvc.7z
+          7z x mesa.7z -omesa
+          copy mesa\x64\opengl32.dll .
+          copy mesa\x64\libgallium_wgl.dll . 2>$null
+          echo "GALLIUM_DRIVER=llvmpipe" >> $env:GITHUB_ENV
+          echo "LIBGL_ALWAYS_SOFTWARE=1" >> $env:GITHUB_ENV
+
+      - name: Try rendering a sprite (Mesa)
+        if: steps.bare.outcome != 'success'
+        run: python .github/spike/render_probe.py mesa
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spike-output
+          path: spike-*.png
+          if-no-files-found: ignore
