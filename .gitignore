@@ -25,3 +25,6 @@ web/dist/
 
 # project venv
 .venv/
+
+# probe output
+spike-*.png
