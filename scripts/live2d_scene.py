@@ -31,7 +31,23 @@ from PIL import Image
 
 LIVE2D_CDN = "https://storage.sekai.best/sekai-live2d-assets/live2d"
 CACHE = Path("data/live2d")
-SSSEKAI_PY = Path.home() / "github/sekai-reverse-engineering/.venv/bin/sssekai"
+def _sssekai_cmd() -> list[str]:
+    """How to invoke sssekai here.
+
+    This used to be a hardcoded path into a sibling checkout's virtualenv, which only
+    ever existed on one laptop. Prefer whatever is installed alongside the running
+    interpreter, so the renderer works anywhere the dependency is present.
+    """
+    from shutil import which
+
+    # the copy installed alongside the interpreter we are running under wins: PATH may
+    # well hold a different checkout's virtualenv
+    for name in ("sssekai", "sssekai.exe"):
+        beside = Path(sys.executable).parent / name
+        if beside.exists():
+            return [str(beside)]
+    found = which("sssekai")
+    return [found] if found else [sys.executable, "-m", "sssekai"]
 
 # Stage transform, copied from how the game's own renderer is reproduced in
 # sekai-viewer (`Live2DPlayer/layer/Live2D.ts` + `action/character_layout.ts`) —
@@ -171,7 +187,7 @@ def model_dir(costume: str) -> Path | None:
     blob.parent.mkdir(parents=True, exist_ok=True)
     blob.write_bytes(resp.content)
     subprocess.run(
-        [str(SSSEKAI_PY), "live2dextract", str(blob), str(dest)],
+        [*_sssekai_cmd(), "live2dextract", str(blob), str(dest)],
         check=True,
         capture_output=True,
     )
