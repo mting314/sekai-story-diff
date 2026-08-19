@@ -162,12 +162,23 @@ def build_sprites(
     return placed
 
 
-def build_backgrounds(names: set[str], out_dir: Path, width: int, quality: int) -> int:
-    """Copy each background into the site at display resolution. Returns bytes written."""
+def build_backgrounds(
+    names: set[str], out_dir: Path, width: int, quality: int, refresh: bool = False
+) -> int:
+    """Copy each background into the site at display resolution. Returns bytes written.
+
+    Skips any already present: they ship with the repo, so a CI run would otherwise
+    re-download and re-encode every one of them on a cold cache for no benefit. Pass
+    ``refresh`` after changing the width or quality.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     total = 0
     for name in sorted(names):
         if not name:
+            continue
+        dest = out_dir / f"{name}.webp"
+        if dest.exists() and not refresh:
+            total += dest.stat().st_size
             continue
         src = cached(f"scenario/background/{name}/{name}.webp")
         if not src:
@@ -176,7 +187,6 @@ def build_backgrounds(names: set[str], out_dir: Path, width: int, quality: int) 
         image = Image.open(src).convert("RGB")
         if image.width > width:
             image = image.resize((width, round(image.height * width / image.width)), Image.LANCZOS)
-        dest = out_dir / f"{name}.webp"
         image.save(dest, "WEBP", quality=quality, method=6)
         total += dest.stat().st_size
     return total
@@ -479,6 +489,7 @@ def main() -> None:
         out_root / "public/bg",
         BG_WIDTH,
         args.quality,
+        args.refresh_media,
     )
 
     diffed = {e["id"] for e in events}

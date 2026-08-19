@@ -99,18 +99,65 @@ jobs:
     name: Render and publish
     needs: detect
     if: needs.detect.outputs.changed == 'true'
-    runs-on: ubuntu-latest
+    # Windows, not Linux: live2d-py ships no Linux wheel and its CMakeLists has no
+    # Linux branch, so the Cubism binding cannot be built there. A GitHub-hosted
+    # Windows runner is free for public repos, which is why this needs no VM.
+    runs-on: windows-latest
     steps:
-      # Rendering needs macOS or Windows: live2d-py has no Linux wheel and its
-      # CMakeLists has no Linux branch, so the Cubism binding cannot be built here.
-      # This step hands off to the GCE Windows instance, which renders, commits and
-      # shuts itself down.
-      - name: Placeholder — hand off to the render VM
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt glfw msgpack
+
+      # The runner has no GPU and Windows' fallback is OpenGL 1.1, which cannot compile
+      # Cubism's #version 120 shaders. Mesa's llvmpipe gives a 4.5 *compatibility*
+      # profile, which can. It must sit next to python.exe — Windows resolves
+      # opengl32.dll from the executable's directory, not the working directory.
+      - name: Install Mesa software GL
         run: |
-          echo "New changed lines for ${{ needs.detect.outputs.version }} need rendering."
-          echo "Wired up in a follow-up: start the GCE Windows instance, which renders,"
-          echo "commits the sprites and data.json, and stops itself."
-          exit 1
+          curl -L -o mesa.7z https://github.com/pal1000/mesa-dist-win/releases/download/25.0.3/mesa3d-25.0.3-release-msvc.7z
+          7z x mesa.7z -omesa
+          $py = Split-Path (Get-Command python).Source
+          $dll = Get-ChildItem -Recurse mesa -Filter opengl32.dll |
+            Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1
+          if (-not $dll) { throw "no x64 opengl32.dll in the Mesa archive" }
+          Copy-Item $dll.FullName -Destination $py -Force
+          Get-ChildItem -Recurse mesa -Filter "libgallium_wgl.dll" |
+            Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1 |
+            ForEach-Object { Copy-Item $_.FullName -Destination $py -Force }
+          echo "GALLIUM_DRIVER=llvmpipe" >> $env:GITHUB_ENV
+
+      # Models are ~3 MB each and motions are fetched one file at a time, so a cold
+      # cache turns a two-minute render into a long one and hammers the mirror.
+      - name: Cache Live2D models, motions and media
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/live2d
+            data/media
+            data/jp_assets
+          key: live2d-${{ runner.os }}-${{ hashFiles('data/transitions.json') }}
+          restore-keys: live2d-${{ runner.os }}-
+
+      - name: Render
+        run: |
+          python scripts/build_web_gallery.py --changes "data/official_changes.json" "data/official_changes_*.json" "data/transitions/*.json"
+
+      # Refuse to publish a payload whose sprites are missing: with "hide until
+      # rendered" a partial deploy looks identical to a healthy site.
+      - name: Every referenced sprite must exist
+        run: python scripts/verify_payload.py
+
+      - name: Commit and publish
+        run: |
+          git config user.name "sekai-story-diff bot"
+          git config user.email "actions@github.com"
+          git add web/src/data.json web/public
+          if (git diff --cached --quiet) { echo "nothing new to publish" } else {
+            git commit -m "Render ${{ needs.detect.outputs.version }}"
+            git push
+          }
 
   report-failure:
     name: Report failure
