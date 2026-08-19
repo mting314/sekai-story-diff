@@ -29,6 +29,11 @@ jobs:
         # asset 404s. Falls back to the relative default for user/org pages.
         env:
           BASE_URL: /${{ github.event.repository.name }}/
+          # Generated media lives in a bucket, not the repo. GitHub Pages pins
+          # cache-control at max-age=600 and will not let you change it, so the
+          # content-addressed sprites can only be cached for a year from somewhere
+          # we control the headers.
+          VITE_ASSET_BASE: 
         run: bun run build
       - uses: actions/upload-pages-artifact@v3
         with:

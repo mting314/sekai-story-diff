@@ -103,6 +103,9 @@ jobs:
     # Linux branch, so the Cubism binding cannot be built there. A GitHub-hosted
     # Windows runner is free for public repos, which is why this needs no VM.
     runs-on: windows-latest
+    permissions:
+      contents: write
+      id-token: write   # for Workload Identity Federation; no key is stored anywhere
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -140,6 +143,18 @@ jobs:
           key: live2d-${{ runner.os }}-${{ hashFiles('data/transitions.json') }}
           restore-keys: live2d-${{ runner.os }}-
 
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/1067538977979/locations/global/workloadIdentityPools/github/providers/mting314"
+          service_account: "sekai-diff-ci@sekai-story-indexer.iam.gserviceaccount.com"
+      - uses: google-github-actions/setup-gcloud@v2
+
+      # Sprites are no longer in the repo, so without this a fresh runner would treat
+      # every pose as new and redraw all of them instead of the release's handful.
+      - name: Pull existing media
+        run: gcloud storage rsync gs://sekai-story-diff-assets web/public --recursive --quiet
+
       - name: Render
         run: |
           python scripts/build_web_gallery.py --changes "data/official_changes.json" "data/official_changes_*.json" "data/transitions/*.json"
@@ -149,11 +164,19 @@ jobs:
       - name: Every referenced sprite must exist
         run: python scripts/verify_payload.py
 
+      # Upload before committing: the payload must never reference a sprite that is
+      # not yet fetchable. Immutable caching is only safe because the filenames are
+      # hashes of the bytes.
+      - name: Upload new media
+        run: |
+          gcloud storage rsync web/public gs://sekai-story-diff-assets --recursive --quiet
+          gcloud storage objects update "gs://sekai-story-diff-assets/**" --cache-control="public, max-age=31536000, immutable" --quiet
+
       - name: Commit and publish
         run: |
           git config user.name "sekai-story-diff bot"
           git config user.email "actions@github.com"
-          git add web/src/data.json web/public
+          git add web/src/data.json
           if (git diff --cached --quiet) { echo "nothing new to publish" } else {
             git commit -m "Render ${{ needs.detect.outputs.version }}"
             git push

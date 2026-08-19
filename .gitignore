@@ -28,3 +28,9 @@ web/dist/
 
 # probe output
 spike-*.png
+
+# Generated media is served from gs://sekai-story-diff-assets, not from here.
+# unit/ stays: those logos are a source asset copied from the viewer, not generated.
+web/public/sprites/
+web/public/bg/
+web/public/event/
