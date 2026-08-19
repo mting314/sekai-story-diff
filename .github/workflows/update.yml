@@ -28,17 +28,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.12"
-      - run: pip install requests msgpack pillow "unitypy>=1.25.3" "sssekai>=0.8.0"
+          enable-cache: true
+      # the base set only: live2d-py has no Linux wheel, and detection does not render
+      - run: uv sync
 
       - name: Is there a new asset version?
         id: check
         # exit 10 means "new"; anything else non-zero is a real failure
         run: |
           set +e
-          python scripts/check_new_version.py --github
+          uv run python scripts/check_new_version.py --github
           code=$?
           set -e
           if [ "$code" != "0" ] && [ "$code" != "10" ]; then exit "$code"; fi
@@ -46,7 +47,7 @@ jobs:
       - name: Index it
         if: steps.check.outputs.new == 'true'
         run: |
-          python scripts/build_version_index.py --append \
+          uv run python scripts/build_version_index.py --append \
             "${{ steps.check.outputs.version }}" "${{ steps.check.outputs.hash }}" \
             "$(date -u +%F)"
 
@@ -54,14 +55,14 @@ jobs:
       # already known is re-fetched
       - name: Fingerprint the new release
         if: steps.check.outputs.new == 'true'
-        run: python scripts/fingerprint_bundles.py --workers 4
+        run: uv run python scripts/fingerprint_bundles.py --workers 4
 
       - name: Confirm candidates by diffing them
         id: diff
         if: steps.check.outputs.new == 'true'
         run: |
           before=$(ls data/transitions/*.json 2>/dev/null | wc -l | tr -d ' ')
-          python scripts/diff_transitions.py
+          uv run python scripts/diff_transitions.py
           after=$(ls data/transitions/*.json 2>/dev/null | wc -l | tr -d ' ')
           echo "changed=$([ "$after" -gt "$before" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
           echo "$before -> $after confirmed transitions"
@@ -108,10 +109,10 @@ jobs:
       id-token: write   # for Workload Identity Federation; no key is stored anywhere
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.12"
-      - run: pip install -r requirements.txt glfw msgpack
+          enable-cache: true
+      - run: uv sync --group render
 
       # The runner has no GPU and Windows' fallback is OpenGL 1.1, which cannot compile
       # Cubism's #version 120 shaders. Mesa's llvmpipe gives a 4.5 *compatibility*
@@ -159,16 +160,16 @@ jobs:
       # data/official is 543 MB and untracked, so a cold cache has none of it. Only the
       # 62 files the payloads actually reference are needed, not the whole thing.
       - name: Ensure the scenario data the build reads
-        run: python scripts/ensure_scenarios.py
+        run: uv run python scripts/ensure_scenarios.py
 
       - name: Render
         run: |
-          python scripts/build_web_gallery.py --changes "data/official_changes.json" "data/official_changes_*.json" "data/transitions/*.json"
+          uv run python scripts/build_web_gallery.py --changes "data/official_changes.json" "data/official_changes_*.json" "data/transitions/*.json"
 
       # Refuse to publish a payload whose sprites are missing: with "hide until
       # rendered" a partial deploy looks identical to a healthy site.
       - name: Every referenced sprite must exist
-        run: python scripts/verify_payload.py
+        run: uv run python scripts/verify_payload.py
 
       # Upload before committing: the payload must never reference a sprite that is
       # not yet fetchable. Immutable caching is only safe because the filenames are

@@ -35,26 +35,23 @@ nothing added or cut.
 ## Pipeline
 
 ```bash
-# interpreter with sssekai + UnityPy (bundle decrypt)
-RE=~/github/sekai-reverse-engineering/.venv/bin/python
-# interpreter with requests, pillow, live2d-py, pyopengl
-P=~/github/sekai-story-indexer/.venv/bin/python
+uv sync --group render     # everything; omit --group render for the diff half only
 
 # 1. index every release, then find which bundles changed between which of them
-$P scripts/build_version_index.py      # data/versions_en.json  (193 releases + hashes)
-$P scripts/fingerprint_bundles.py      # data/transitions.json  (candidates)
+uv run python scripts/build_version_index.py      # data/versions_en.json  (193 releases + hashes)
+uv run python scripts/fingerprint_bundles.py      # data/transitions.json  (candidates)
 
 # 2. confirm each candidate by actually fetching and diffing it
-$P scripts/diff_transitions.py         # data/transitions/*.json
+uv run python scripts/diff_transitions.py         # data/transitions/*.json
 
 # 3. the site
-$P scripts/build_web_gallery.py --changes 'data/official_changes*.json' 'data/transitions/*.json'
+uv run python scripts/build_web_gallery.py --changes 'data/official_changes*.json' 'data/transitions/*.json'
 cd web && bun install && bun run build     # -> web/dist
 
 # reports and the baked gallery, from a single pair
-$P scripts/report.py                   # data/REPORT.md + data/changed_lines.csv
-$P scripts/render_live2d_frames.py     # 1 frame per changed line, posed Live2D scenes
-$P scripts/build_gallery.py --images data/images_live2d
+uv run python scripts/report.py                   # data/REPORT.md + data/changed_lines.csv
+uv run python scripts/render_live2d_frames.py     # 1 frame per changed line, posed Live2D scenes
+uv run python scripts/build_gallery.py --images data/images_live2d
 ```
 
 ## Finding the diffs
