@@ -95,6 +95,13 @@ ok(document.getElementById("f-1-5.4.0.30-3-19"), "target frame present");
 const srcs = [...document.querySelectorAll("main figure img")].map((i) => i.getAttribute("src"));
 ok(srcs.length > 0 && srcs.every((u) => /\/[0-9a-f]{16}\.webp$/.test(u)),
    "sprites are content-addressed", srcs[0]);
+// Generated media is not in the repo any more, so a relative sprite URL means
+// VITE_ASSET_BASE did not reach the build and every image will 404.
+const expectBase = process.env.EXPECT_ASSET_BASE;
+if (expectBase) {
+  ok(srcs.every((u) => u.startsWith(expectBase)),
+     `sprites point at ${expectBase}`, srcs[0]);
+}
 ok([...document.querySelectorAll("a[href^='#/']")].every((a) =>
      a.getAttribute("href").startsWith("#/r/5.4.0.20..5.4.0.30")),
    "links inside a range keep the range");

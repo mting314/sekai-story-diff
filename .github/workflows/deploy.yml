@@ -33,8 +33,13 @@ jobs:
           # cache-control at max-age=600 and will not let you change it, so the
           # content-addressed sprites can only be cached for a year from somewhere
           # we control the headers.
-          VITE_ASSET_BASE: 
+          VITE_ASSET_BASE: https://storage.googleapis.com/sekai-story-diff-assets/
         run: bun run build
+      - name: Verify the built bundle
+        working-directory: web
+        env:
+          EXPECT_ASSET_BASE: https://storage.googleapis.com/sekai-story-diff-assets/
+        run: bun run test
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
