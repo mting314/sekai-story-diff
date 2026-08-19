@@ -6,6 +6,9 @@ import payload from "./data.json";
 // the document: a project page served without its trailing slash would otherwise send
 // every sprite request to the domain root.
 const BASE = import.meta.env.BASE_URL;
+// Generated media can be served from elsewhere (a bucket) without moving the app.
+// Falls back to the site's own base so `bun run dev` and a local dist still work.
+const ASSETS = import.meta.env.VITE_ASSET_BASE || BASE;
 
 const esc = (s) => String(s).replace(/[&<>"]/g,
   (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -35,12 +38,13 @@ const rangePrefix = () => {
 function panel(f, old, tr) {
   const layers = f.layers.map((l) => {
     const s = D.sprites[l.key];
-    return s ? `<img loading="lazy" decoding="async" alt="" src="${BASE}sprites/${l.key}.webp"`
+    // the filename is a hash of the sprite's own bytes, so it can be cached forever
+    return s ? `<img loading="lazy" decoding="async" alt="" src="${ASSETS}sprites/${s.file}"`
              + ` style="left:${(s.left + l.dx).toFixed(3)}%;top:${s.top}%;`
              + `width:${s.w}%;height:${s.h}%">` : "";
   }).join("");
   const bg = f.cover ? `background:${f.cover === "white" ? "#fff" : "#000"}`
-                     : `background-image:url('${BASE}bg/${f.bg}.webp')`;
+                     : `background-image:url('${ASSETS}bg/${f.bg}.webp')`;
   const name = old && f.speakerOld ? f.speakerOld : f.speaker;
   // the bracket belongs to the transition: one event can be rewritten at several
   // releases, and each frame must say which one it belongs to
@@ -83,8 +87,8 @@ function card(e, q, href) {
   const tag = href ? "a" : "span";
   const link = href ? ` href="${href}"` : "";
   const art = e.banner
-    ? `<div class="art" style="background-image:url('${BASE}${e.banner}')"></div>` : "";
-  const logo = e.unitLogo ? `<img class="ulogo" alt="" src="${BASE}${e.unitLogo}">` : "";
+    ? `<div class="art" style="background-image:url('${ASSETS}${e.banner}')"></div>` : "";
+  const logo = e.unitLogo ? `<img class="ulogo" alt="" src="${ASSETS}${e.unitLogo}">` : "";
   const stats = href
     ? `<span class="pill hot">${lines} changed lines</span>
        <span class="pill">${eps} episode${eps === 1 ? "" : "s"}</span>`
@@ -216,7 +220,7 @@ function event(ev, openEp) {
 
   document.getElementById("app").innerHTML = `
     <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/${rangePrefix()}" title="All events">←</a>
-      ${ev.unitLogo ? `<img class="ulogo big" alt="" src="${BASE}${ev.unitLogo}">` : ""}
+      ${ev.unitLogo ? `<img class="ulogo big" alt="" src="${ASSETS}${ev.unitLogo}">` : ""}
       <h2>${esc(ev.name)}</h2>
       <span class="meta">${lines} changed lines ·
         ${trs.length} release${trs.length === 1 ? "" : "s"}</span>

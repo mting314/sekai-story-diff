@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import html
+import io
 import json
 import sys
 from itertools import groupby
@@ -104,11 +105,14 @@ def build_sprites(
     stored resolution changes.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
-    # reuse anything already rasterised: a sprite is a pure function of its key, so a
-    # file on disk with a recorded placement can never be stale
+    # Reuse anything already rasterised. A sprite is a pure function of its pose key
+    # *and* the render settings, so the recorded filename — which is a hash of the
+    # encoded bytes — is what proves a file on disk is the right one.
     known = known or {}
     placed: dict[str, dict] = {
-        k: v for k, v in known.items() if k in poses and (out_dir / f"{k}.webp").exists()
+        k: v
+        for k, v in known.items()
+        if k in poses and v.get("file") and (out_dir / v["file"]).exists()
     }
     todo = {k: v for k, v in poses.items() if k not in placed}
     if placed:
@@ -140,7 +144,19 @@ def build_sprites(
         if max_height and crop.height > max_height:  # never upscale a small crop
             width = max(1, round(crop.width * max_height / crop.height))
             crop = crop.resize((width, max_height), Image.LANCZOS)
-        crop.save(out_dir / f"{key}.webp", "WEBP", quality=quality, method=6)
+        # Name the file after its own bytes, not after the pose. Naming by pose meant
+        # the same filename held different art whenever a render setting changed
+        # (sprite height 944 -> 560, quality 88 -> 82), which makes an immutable CDN
+        # cache actively wrong. Hashing the output means a settings change produces new
+        # names and misses cleanly, and identical output dedupes for free.
+        buffer = io.BytesIO()
+        crop.save(buffer, "WEBP", quality=quality, method=6)
+        payload = buffer.getvalue()
+        name = f"{hashlib.sha256(payload).hexdigest()[:16]}.webp"
+        placed[key]["file"] = name
+        target = out_dir / name
+        if not target.exists():
+            target.write_bytes(payload)
         if i % 50 == 0:
             print(f"  {i}/{len(todo)} sprites")
     return placed
