@@ -21,6 +21,7 @@ import ctypes
 import ctypes.util
 import json
 import subprocess
+import sys
 import time
 from ctypes import byref, c_int, c_void_p
 from pathlib import Path
@@ -94,12 +95,47 @@ _session.headers.update(
 # --- offscreen GL ------------------------------------------------------------
 
 
-def make_legacy_context() -> None:
-    """Current-thread offscreen GL 2.1 context via CGL.
+_glfw_window = None
 
-    A core 3.3 context (what moderngl gives you) rejects Cubism's ``#version 120``
-    shaders, so the renderer silently draws nothing — hence the legacy profile.
+
+def make_legacy_context() -> None:
+    """Current-thread offscreen GL context that Cubism can actually draw into.
+
+    Cubism's GL renderer ships ``#version 120`` shaders. A core profile accepts them
+    and then silently renders nothing — no error, just an empty framebuffer — so the
+    context *must* be a legacy/compatibility one. That is the single constraint here,
+    and it is the one that fails invisibly if you get it wrong.
+
+    GLFW is tried first because it is the only route that exists on every platform;
+    the renderer would otherwise be locked to this laptop, which rules out running it
+    anywhere unattended. CGL is kept as the macOS fallback since it is what this
+    pipeline has always used and is known-good here.
     """
+    global _glfw_window
+    if _glfw_window is not None:
+        return
+    try:
+        import glfw
+    except ImportError:
+        glfw = None
+
+    if glfw is not None and glfw.init():
+        glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
+        # ask for legacy explicitly; requesting no version at all gets a core profile
+        # on some drivers, which is the silent-blank-frame case
+        glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 2)
+        glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 1)
+        window = glfw.create_window(64, 64, "sekai-story-diff", None, None)
+        if window:
+            glfw.make_context_current(window)
+            _glfw_window = window
+            return
+        glfw.terminate()
+
+    if sys.platform != "darwin":
+        raise RuntimeError(
+            "no GL context: GLFW unavailable or failed, and the CGL fallback is macOS-only"
+        )
     cgl = ctypes.CDLL(ctypes.util.find_library("OpenGL"))
     attrs = (c_int * 11)(99, 0x1000, 8, 24, 11, 8, 12, 24, 73, 0, 0)
     pix, npix, ctx = c_void_p(), c_int(), c_void_p()

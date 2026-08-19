@@ -13,3 +13,6 @@ port/live2d-version-diff/
 # cache), so the build input has to be in the tree.
 web/node_modules/
 web/dist/
+
+# project venv
+.venv/
