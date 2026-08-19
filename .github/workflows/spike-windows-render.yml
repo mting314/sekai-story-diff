@@ -38,13 +38,29 @@ jobs:
 
       - name: Install Mesa software GL
         if: steps.bare.outcome != 'success'
+        # Windows resolves opengl32.dll from the directory of the *executable*, not the
+        # working directory, so these have to sit next to python.exe. Dropping them in
+        # the repo root does nothing at all.
         run: |
           curl -L -o mesa.7z https://github.com/pal1000/mesa-dist-win/releases/download/25.0.3/mesa3d-25.0.3-release-msvc.7z
           7z x mesa.7z -omesa
-          copy mesa\x64\opengl32.dll .
-          copy mesa\x64\libgallium_wgl.dll . 2>$null
+          $py = Split-Path (Get-Command python).Source
+          Write-Host "python lives in $py"
+          Get-ChildItem -Recurse mesa -Filter opengl32.dll | ForEach-Object { Write-Host "found $($_.FullName)" }
+          $dll = Get-ChildItem -Recurse mesa -Filter opengl32.dll | Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1
+          if (-not $dll) { throw "no x64 opengl32.dll in the Mesa archive" }
+          Copy-Item $dll.FullName -Destination $py -Force
+          Get-ChildItem -Recurse mesa -Filter "libgallium_wgl.dll" |
+            Where-Object { $_.FullName -match 'x64' } | Select-Object -First 1 |
+            ForEach-Object { Copy-Item $_.FullName -Destination $py -Force }
+          Write-Host "opengl32.dll next to python: $(Test-Path (Join-Path $py 'opengl32.dll'))"
           echo "GALLIUM_DRIVER=llvmpipe" >> $env:GITHUB_ENV
           echo "LIBGL_ALWAYS_SOFTWARE=1" >> $env:GITHUB_ENV
+
+      - name: What GL does Mesa give us?
+        if: steps.bare.outcome != 'success'
+        continue-on-error: true
+        run: python .github/spike/probe_gl.py
 
       - name: Try rendering a sprite (Mesa)
         if: steps.bare.outcome != 'success'
