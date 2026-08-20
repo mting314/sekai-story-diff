@@ -78,7 +78,18 @@ function searchLines(q) {
     }
   return out;
 }
-const unitName = (u) => (u || "").replace(/_/g, " ");
+// The payload keys are slugs. Spelling them out matters now that they head the drawer
+// groups: the casing in "MORE MORE JUMP!" and "Vivid BAD SQUAD" is the official EN
+// styling, not shouting, and de-slugging alone would print "leo need".
+const UNIT_NAMES = {
+  leo_need: "Leo/need",
+  more_more_jump: "MORE MORE JUMP!",
+  vivid_bad_squad: "Vivid BAD SQUAD",
+  wonderlands_showtime: "Wonderlands×Showtime",
+  nightcord: "Nightcord at 25:00",
+  mixed: "Mixed units",
+};
+const unitName = (u) => UNIT_NAMES[u] || (u || "").replace(/_/g, " ");
 
 // How much the text actually moved. Ranked, because an event can hold several
 // transitions and the card shows whichever is strongest in range — averaging would let
@@ -235,11 +246,10 @@ function event(ev, openEp) {
 
   document.getElementById("app").innerHTML = `
     <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/${rangePrefix()}" title="All events">←</a>
-      ${ev.unitLogo ? `<img class="ulogo big" alt="" src="${ASSETS}${ev.unitLogo}">` : ""}
+      ${ev.logo ? `<img class="elogo" alt="" src="${ASSETS}${ev.logo}">` : ""}
       <h2>${esc(ev.name)}</h2>
       <span class="meta">${lines} changed lines ·
         ${trs.length} release${trs.length === 1 ? "" : "s"}</span>
-      ${badge(strongest(trs))}
       <input id="filter" placeholder="Filter lines in this event…" autocomplete="off">
     </div>
     ${trs.map((tr, ti) => (multi ? `<div class="relhdr" style="--u:${ev.colour}">
@@ -289,21 +299,84 @@ function event(ev, openEp) {
   };
 }
 
+function navRow(e, n) {
+  // The full-size banner, not a thumbnail variant. Home is the default entry point, so
+  // the cards have already fetched these and the drawer costs nothing; a separate small
+  // set would share no cache and make the common path download both.
+  //
+  // An <img loading="lazy"> rather than card()'s CSS background-image: backgrounds fetch
+  // as soon as the element renders, which would pull every banner on every event page
+  // whether the drawer is opened or not.
+  const art = e.banner
+    ? `<img class="nav-art" loading="lazy" decoding="async" alt="" src="${ASSETS}${e.banner}">`
+    : "";
+  return `<a class="nav-ev" data-ev="${e.id}" href="#/${rangePrefix()}e${e.id}"`
+       + ` style="--u:${e.colour || "#8f89b5"}">${art}`
+       + `<span class="nav-txt"><b>${esc(e.name)}</b>`
+       + `<small>${n} changed lines</small></span></a>`;
+}
+
+// Events grouped by unit, heaviest first at both levels: units by their total changed
+// lines, events within a unit by their own. Grouping is over the *in-range* events, so a
+// narrow window drops whole units rather than showing empty headers.
+function navGroups() {
+  const by = new Map();
+  for (const e of D.events) {
+    const trs = inRange(e);
+    if (!trs.length) continue;
+    const u = e.unit || "mixed";
+    if (!by.has(u)) by.set(u, { unit: u, total: 0, logo: "", events: [] });
+    const g = by.get(u);
+    const n = trs.reduce((m, t) => m + t.changed, 0);
+    g.total += n;
+    g.logo ||= e.unitLogo || "";
+    g.events.push({ e, n });
+  }
+  for (const g of by.values()) g.events.sort((a, b) => b.n - a.n);
+  return [...by.values()].sort((a, b) => b.total - a.total);
+}
+
+let navRange = null;
+
 function drawer(ev, trs) {
-  document.getElementById("drawer").innerHTML =
-    `<div class="nav-h">Browse</div>`
-    + `<a class="nav-ev" href="#/${rangePrefix()}">← All events</a>`
-    + `<div class="nav-h">Events in range</div>`
-    + D.events.filter((e) => inRange(e).length).map((e) => {
-        const n = inRange(e).reduce((m, t) => m + t.changed, 0);
-        return `<a class="nav-ev${e.id === ev.id ? " on" : ""}" href="#/${rangePrefix()}e${e.id}"`
-             + ` style="--u:${e.colour || "#8f89b5"}">${esc(e.name)}`
-             + `<small>${n} changed lines</small></a>`;
-      }).join("")
-    + trs.map((tr) => `<div class="nav-h">${tr.oldVersion} → ${tr.newVersion}</div>`
+  const d = document.getElementById("drawer");
+  const key = `${view.from}..${view.to}`;
+  // The event list depends only on the range, but drawer() runs on every route change
+  // including each episode deep-link. Rebuilding it there would discard and recreate 38
+  // <img> elements — and reset their lazy-load state — for no change in content.
+  if (navRange !== key) {
+    navRange = key;
+    d.innerHTML =
+      `<div class="nav-h">Browse</div>`
+      + `<a class="nav-ev flat" href="#/${rangePrefix()}">← All events</a>`
+      + `<div id="nav-events">`
+      + navGroups().map((g) => {
+          const logo = g.logo
+            ? `<img class="nav-ulogo" loading="lazy" alt="" src="${ASSETS}${g.logo}">` : "";
+          return `<details class="nav-grp" style="--u:${g.events[0].e.colour || "#8f89b5"}">`
+               + `<summary class="nav-h unit">${logo}`
+               + `<span class="nav-t">${esc(unitName(g.unit))}</span>`
+               + `<i>${g.total.toLocaleString()}</i></summary>`
+               + g.events.map(({ e, n }) => navRow(e, n)).join("")
+               + `</details>`;
+        }).join("")
+      + `</div><div id="nav-eps"></div>`;
+  }
+  for (const a of d.querySelectorAll("#nav-events .nav-ev")) {
+    a.classList.toggle("on", a.getAttribute("data-ev") === String(ev.id));
+  }
+  // Open the group holding the current event, and never close one the reader opened —
+  // the list survives navigation, so its expanded state should too.
+  for (const g of d.querySelectorAll("#nav-events .nav-grp")) {
+    if (g.querySelector(`.nav-ev[data-ev="${ev.id}"]`)) g.setAttribute("open", "");
+  }
+  document.getElementById("nav-eps").innerHTML =
+    trs.map((tr) => `<details class="nav-grp" open>`
+        + `<summary class="nav-h"><span class="nav-t">${tr.oldVersion} → ${tr.newVersion}</span></summary>`
         + tr.episodes.map((ep) => `<a class="nav-ep" data-ep="${epId(tr, ep)}"`
             + ` href="#/${rangePrefix()}e${ev.id}/${epId(tr, ep)}">`
-            + `<i>${ep.no}.</i> ${esc(ep.title)} <i>${ep.frames.length}</i></a>`).join("")).join("")
+            + `<i>${ep.no}.</i> ${esc(ep.title)} <i>${ep.frames.length}</i></a>`).join("")
+        + `</details>`).join("")
     + `<div class="nav-h">All episodes</div>`
     + `<a class="nav-ep" id="expand" href="#">Expand all</a>`
     + `<a class="nav-ep" id="collapse" href="#">Collapse all</a>`;

@@ -68,6 +68,13 @@ STAGE_W, STAGE_H = 1920, 1080
 # about 1 MB at display resolution, so there is nothing to gain by arguing.
 BG_WIDTH = 1100  # ~2x what a 540px card shows
 BANNER_WIDTH = 640
+# Event title logo, shown in the event header. Sized by height because logos are wide
+# and vary in aspect; 72px is 2x the ~36px the header gives them.
+LOGO_HEIGHT = 72
+# The indexer's logo_url points at the JP mirror. Take the EN one instead — it is the
+# localised title art, which is what belongs above English story text. Verified present
+# for all 38 events in the payload, with the JP URL kept as a fallback.
+EN_LOGO = "https://storage.sekai.best/sekai-en-assets/event/{bundle}/logo/logo.webp"
 INDEXER = Path.home() / "github/sekai-story-indexer/events_index.json"
 # Events the mirror shows as re-uploaded on their own dates, awaiting a diff.
 PENDING_EVENTS = [24, 31, 74, 75, 111, 155]
@@ -205,13 +212,14 @@ def event_meta() -> dict[int, dict]:
         for row in json.loads(INDEXER.read_text()):
             out[row["event_id"]] = {
                 "banner": row.get("banner_url", ""),
+                "logo": row.get("logo_url", ""),
                 "nameJp": row.get("name", ""),
                 "unit": row.get("unit", ""),
             }
     en_path = Path("data/master/events_en.json")
     if en_path.exists():
         for row in json.loads(en_path.read_text()):
-            entry = out.setdefault(row["id"], {"banner": "", "nameJp": "", "unit": ""})
+            entry = out.setdefault(row["id"], {"banner": "", "logo": "", "nameJp": "", "unit": ""})
             entry["name"] = row.get("name", "")
             entry["bundle"] = row.get("assetbundleName", "")
     return out
@@ -235,6 +243,35 @@ def fetch_banner(url: str, dest: Path, width: int, quality: int) -> bool:
     dest.parent.mkdir(parents=True, exist_ok=True)
     image.save(dest, "WEBP", quality=quality, method=6)
     return True
+
+
+def fetch_logo(bundle: str, fallback_url: str, dest: Path, quality: int) -> bool:
+    """Self-host the event title logo, alpha intact.
+
+    Not fetch_banner: that converts to RGB, which on a transparent logo leaves whatever
+    happens to sit under the alpha channel — a black slab behind the lettering.
+    """
+    if not bundle or dest.exists():
+        return dest.exists()
+    import io
+
+    for url in (EN_LOGO.format(bundle=bundle), fallback_url):
+        if not url:
+            continue
+        try:
+            resp = _banner_session.get(url, timeout=60)
+        except Exception:  # noqa: BLE001
+            continue
+        if resp.status_code != 200:
+            continue
+        image = Image.open(io.BytesIO(resp.content)).convert("RGBA")
+        if image.height > LOGO_HEIGHT:
+            width = round(image.width * LOGO_HEIGHT / image.height)
+            image = image.resize((width, LOGO_HEIGHT), Image.LANCZOS)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        image.save(dest, "WEBP", quality=quality, method=6)
+        return True
+    return False
 
 
 # Two axes, because one number cannot tell these apart: Wonder Magical Showtime! changed
@@ -478,6 +515,10 @@ def main() -> None:
                     "banner": banner,
                     "colour": colour,
                     "id": event["event_id"],
+                    "logo": f"logo/{bundle}.webp" if fetch_logo(
+                        bundle, meta.get("logo", ""),
+                        out_root / "public/logo" / f"{bundle}.webp", args.quality
+                    ) else "",
                     "name": event["name_en"],
                     "nameJp": meta.get("nameJp") or event["name_jp"],
                     "slug": f"event{event['event_id']:03d}",
@@ -595,9 +636,13 @@ def main() -> None:
     print(f"\nsprites:     {len(placed)} files, {sprite_bytes / 1e6:.1f} MB")
     print(f"data.json:   {data_bytes / 1e6:.2f} MB")
     banner_bytes = sum(p.stat().st_size for p in (out_root / "public/event").glob("*.webp"))
+    logo_files = list((out_root / "public/logo").glob("*.webp"))
+    logo_bytes = sum(p.stat().st_size for p in logo_files)
     print(f"backgrounds: {bg_bytes / 1e6:.1f} MB at {BG_WIDTH}px (self-hosted)")
     print(f"banners:     {banner_bytes / 1e6:.2f} MB for {len(events) + len(pending)} events")
-    print(f"TOTAL HOSTED: {(sprite_bytes + data_bytes + bg_bytes) / 1e6:.1f} MB")
+    print(f"logos:       {logo_bytes / 1e6:.2f} MB for {len(logo_files)} events at {LOGO_HEIGHT}px")
+    print(f"TOTAL HOSTED: "
+          f"{(sprite_bytes + data_bytes + bg_bytes + banner_bytes + logo_bytes) / 1e6:.1f} MB")
     print(f"\nnext: cd {out_root} && bun install && bun run build")
     if missing:
         print(f"  WARNING {len(missing)} poses produced no sprite: {missing[:5]}")

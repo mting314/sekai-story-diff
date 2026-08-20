@@ -6,21 +6,7 @@ knowing before picking one up.
 
 ---
 
-## 1. Event banner and unit icon in the sidebar
-
-The drawer lists events as plain text. The home cards already show banner art, a unit
-logo and the unit colour; the sidebar should too.
-
-**Why:** the drawer is the main way to move between events once you are reading one, and
-45 text rows are hard to scan.
-
-**Watch out for:** the drawer is rebuilt on every route change, so 45 banner images want
-`loading="lazy"` or a small thumbnail variant — the banners are 640px wide and sized for
-cards, not 40px rows. Data is already in the payload (`banner`, `unitLogo`, `colour`).
-
----
-
-## 2. Version browser
+## 1. Version browser
 
 A view over releases rather than events: for each asset version, which stories changed
 and how many lines in each.
@@ -36,7 +22,7 @@ nothing, so the list should probably show only those that did, with a count of t
 
 ---
 
-## 3. Attribution disclaimer on the site
+## 2. Attribution disclaimer on the site
 
 State plainly that all story text, character art and assets belong to Colorful Palette /
 SEGA / Crypton, that this is an unofficial fan project, and that source data comes from
@@ -51,7 +37,7 @@ version index and `sekai.best` for the asset mirror, since the pipeline depends 
 
 ---
 
-## 4. Ingest the main unit stories
+## 3. Ingest the main unit stories
 
 The sweep covers event stories only. The six unit arcs — the main character-band stories —
 are not covered at all, and are a likely place for considered retranslation.
@@ -67,7 +53,7 @@ enumerates event stories only; `diff_versions.py` resolves names and episode tit
 and an arc has no banner — though `web/public/unit/` already holds the logos. Model arcs as
 a sibling collection rather than fake events. Best done after the classifier and magnitude work, so both apply from the start.
 
-## 5. Style the dialogue like the game
+## 4. Style the dialogue like the game
 
 Replace the 94%-opaque white card with the game's look. The viewer's assets specify it
 exactly: `src/assets/live2d_player_ui/text_background.svg` is a **vertical black gradient at
@@ -79,7 +65,7 @@ against white and will be unreadable on a dark panel; the mobile variants (`#ff9
 `#8ce0b6`) are the starting point, and the two code paths can then merge. A screenshot would
 settle how much stage height the panel covers and where the name plate sits.
 
-## 6. Prune orphaned sprites from the bucket
+## 5. Prune orphaned sprites from the bucket
 
 Every reclassification leaves sprites in `gs://sekai-story-diff-assets` that no payload
 references. The classifier fix alone orphans ~1,672 of 2,219.
@@ -94,10 +80,19 @@ already exist in `scripts/verify_payload.py`, which walks exactly the same refer
 opposite direction. Do it after the classifier fix lands, when the orphan set is at its largest and the
 saving is easiest to confirm.
 
+Banners are orphaned the same way and should go in the same sweep: 45 files under
+`event/` for the 38 events the payload still references.
+
 ---
 
 ## Done
 
+- Event banner and unit icon in the drawer, grouped by unit and collapsible, with the
+  event list cached per range so a route change no longer recreates 38 `<img>` elements
+- Event title art in the page header, from the **EN** mirror rather than the indexer's
+  JP `logo_url`; the magnitude chip came out of the header at the same time
+- `verify_payload.py` now checks banners, event logos and unit logos, not just sprites and
+  backgrounds — adding an asset class and never uploading it used to pass
 - Change magnitude: breadth + depth per transition, badged as substantial rewrite /
   revised wording / punctuation only. Two axes, because *Wonder Magical Showtime!* touched
   167 lines and every one was adding a curly quote
