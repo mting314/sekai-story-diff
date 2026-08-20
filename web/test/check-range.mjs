@@ -96,12 +96,16 @@ console.log("\nDRAWER");
   ok(b.document.querySelector("#nav-events .nav-ev.on")?.getAttribute("data-ev") === "1",
      "and it is the open event");
   const withBanner = payload.events.filter((e) => e.banner).length;
-  const art = [...b.document.querySelectorAll("#nav-events .nav-art")];
+  const art = [...b.document.querySelectorAll("#nav-events img.nav-art")];
   ok(art.length === withBanner, "every event with banner art shows it in the drawer",
      `${art.length}/${withBanner}`);
-  // CSS backgrounds are not lazy; an eager drawer would fetch 38 banners on page load
+  // CSS backgrounds are not lazy; an eager drawer would fetch every banner on page load
   ok(art.length > 0 && art.every((i) => i.getAttribute("loading") === "lazy"),
      "drawer banners are lazy");
+  // unit arcs have no banner and fall back to a unit-logo panel of the same size
+  const blank = [...b.document.querySelectorAll("#nav-events .nav-art.blank")];
+  ok(blank.length === EVENTS - withBanner, "bannerless entries still get an art slot",
+     `${blank.length}/${EVENTS - withBanner}`);
   // grouped by unit, heaviest unit first, heaviest event first within each
   const lines = (e) => e.transitions.reduce((n, t) => n + t.changed, 0);
   const byUnit = new Map();
@@ -172,8 +176,39 @@ console.log("\nEVENT HEADER");
   ok(bar.querySelector("h2").textContent.trim() === "First Star After the Rain",
      "the event name is still the accessible label");
 }
-ok(payload.events.every((e) => e.logo), "every event carries a logo",
-   `${payload.events.filter((e) => !e.logo).length} missing`);
+// arcs have no title art on the mirror; every real event does
+ok(payload.events.filter((e) => e.kind !== "arc").every((e) => e.logo),
+   "every event carries a logo",
+   `${payload.events.filter((e) => e.kind !== "arc" && !e.logo).length} missing`);
+
+console.log("\nUNIT ARCS");
+{
+  const arcs = payload.events.filter((e) => e.kind === "arc");
+  ok(arcs.length > 0, `${arcs.length} unit arc(s) in the payload`);
+  // the whole point of the pseudo-event model: ids must not collide with real events
+  const evIds = new Set(payload.events.filter((e) => e.kind !== "arc").map((e) => e.id));
+  ok(arcs.every((a) => !evIds.has(a.id)), "arc ids do not collide with event ids",
+     arcs.map((a) => a.id).join(","));
+  ok(arcs.every((a) => a.unit && a.unitLogo && a.colour !== "#8f89b5"),
+     "arcs resolve their unit colour and logo",
+     arcs.map((a) => `${a.unit}:${a.colour}`).join(" "));
+  ok(arcs.every((a) => a.shortName), "arcs carry a short label for the drawer",
+     arcs.map((a) => a.shortName).join(" / "));
+  // an arc must be reachable and render like any other entry
+  const ab = boot(`#/e${arcs[0].id}`);
+  ok(ab.document.querySelectorAll("main figure").length > 0,
+     `${arcs[0].name} renders frames`,
+     `${ab.document.querySelectorAll("main figure").length}`);
+  ok(ab.document.querySelector(".topbar .ulogo"),
+     "arc header falls back to the unit logo");
+  ok(!ab.document.querySelector(".topbar .elogo"), "and has no event title art");
+  // and it must group under its unit in the drawer, not in a bucket of its own
+  const grp = [...ab.document.querySelectorAll("#nav-events .nav-grp")]
+    .find((g) => g.querySelector(`.nav-ev[data-ev="${arcs[0].id}"]`));
+  ok(grp && grp.querySelectorAll(".nav-ev").length > 1,
+     "the arc sits in its unit's group alongside that unit's events",
+     `${grp?.querySelectorAll(".nav-ev").length} rows`);
+}
 
 console.log("\nEMPTY FILTER");
 {

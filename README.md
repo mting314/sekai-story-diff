@@ -19,6 +19,18 @@ msgpack). Bundles are decrypted with [`sssekai`][sssekai] and read with UnityPy.
 [endiff]: https://github.com/Sekai-World/sekai-master-db-en-diff
 [sssekai]: https://github.com/mos9527/sssekai
 
+### What is covered
+
+Every EN **event story** in the live window, plus the six **main unit arcs**. Unit arcs are
+one bundle per chapter, carried through the pipeline as pseudo-events in id range 9000+ so
+that search, version-range filtering, the drawer and the release view need no second code
+path — event ids run to 178, chapter ids to 6, so the ranges cannot collide.
+
+Sweeping the arcs cost 6 × 42 = 252 probes and found that only two were ever retouched:
+Nightcord at 25:00 (4.1.50.20, mostly wording) and Wonderlands×Showtime (5.1.0.1, almost
+entirely adding quotation marks around in-story dialogue). Leo/need, MORE MORE JUMP!,
+Vivid BAD SQUAD and Piapro have never been revised.
+
 ### How far back this can go
 
 Not to launch, and never will. The version index knows **194 EN releases back to

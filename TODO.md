@@ -37,23 +37,7 @@ version index and `sekai.best` for the asset mirror, since the pipeline depends 
 
 ---
 
-## 3. Ingest the main unit stories
-
-The sweep covers event stories only. The six unit arcs — the main character-band stories —
-are not covered at all, and are a likely place for considered retranslation.
-
-**Why cheap:** `fetch_official_bundles.py` already has `--kind unit`. The master list is on
-the mirror we already poll (`unitStories.json`, 57 KB). Six units, six chapters (one bundle
-each), 125 episodes — the fingerprint sweep is 6 × 42 = **252 probes, 252 bytes**.
-
-**Watch out for:** everything downstream assumes "event". `fingerprint_bundles.event_bundles()`
-enumerates event stories only; `diff_versions.py` resolves names and episode titles through
-`eventStories.json` and unit chapters have no `eventId` (they carry `chapterNo` /
-`episodeNo` / `episodeNoLabel`); `build_web_gallery.py` builds cards from event metadata,
-and an arc has no banner — though `web/public/unit/` already holds the logos. Model arcs as
-a sibling collection rather than fake events. Best done after the classifier and magnitude work, so both apply from the start.
-
-## 4. Style the dialogue like the game
+## 3. Style the dialogue like the game
 
 Replace the 94%-opaque white card with the game's look. The viewer's assets specify it
 exactly: `src/assets/live2d_player_ui/text_background.svg` is a **vertical black gradient at
@@ -65,10 +49,10 @@ against white and will be unreadable on a dark panel; the mobile variants (`#ff9
 `#8ce0b6`) are the starting point, and the two code paths can then merge. A screenshot would
 settle how much stage height the panel covers and where the name plate sits.
 
-## 5. Prune orphaned sprites from the bucket
+## 4. Prune orphaned sprites from the bucket
 
 Every reclassification leaves sprites in `gs://sekai-story-diff-assets` that no payload
-references. The classifier fix alone orphans ~1,672 of 2,219.
+references. The bucket holds 2,390 sprites against 1,161 the payload references.
 
 **Why it can wait:** they are immutable, content-addressed, and cost roughly $0.001/month.
 Nothing breaks.
@@ -87,6 +71,10 @@ Banners are orphaned the same way and should go in the same sweep: 45 files unde
 
 ## Done
 
+- Main unit stories ingested. Six arcs swept (252 probes); only Nightcord at 25:00 and
+  Wonderlands×Showtime were ever retouched. Modelled as pseudo-events in id range
+  9000+ so search, range filtering, the drawer and a future version browser need no
+  second code path
 - Event banner and unit icon in the drawer, grouped by unit and collapsible, with the
   event list cached per range so a route change no longer recreates 38 `<img>` elements
 - Event title art in the page header, from the **EN** mirror rather than the indexer's

@@ -1,0 +1,1165 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.50.20",
+  "new_asset_version": "4.1.51.0",
+  "old_released_at": "2025-12-07",
+  "new_released_at": "2025-12-09",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 20,
+  "changed_lines": 84,
+  "by_kind": {
+   "text": 74,
+   "speaker": 5,
+   "linebreak": 5
+  },
+  "by_lang": {
+   "rewrite": 82,
+   "punctuation": 2
+  },
+  "rewrite_lines": 82
+ },
+ "events": [
+  {
+   "event_id": 9006,
+   "kind": "arc",
+   "name_en": "Nightcord at 25:00 Story - Chapter 1",
+   "name_jp": "",
+   "unit": "school_refusal",
+   "arc_slug": "",
+   "bundle": "scenario/unitstory/school-refusal-story-chapter",
+   "episodes": [
+    {
+     "scenario_id": "nightcode_01_01",
+     "episode_no": 2,
+     "title_en": "Midnight Meet-Up",
+     "title_jp": "Midnight Meet-Up",
+     "lines_old": 64,
+     "lines_new": 64,
+     "changes": [
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "All right, one last push... I want to finish this today.",
+       "new": "Alright, one last push... I want to finish this today.",
+       "ratio": 0.98,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 57,
+       "talk_index_new": 57,
+       "kind": "text",
+       "speaker_old": "[K]",
+       "speaker_new": "[K]",
+       "old": "<All right, see you.>",
+       "new": "<Alright, see you.>",
+       "ratio": 0.938,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_02",
+     "episode_no": 3,
+     "title_en": "White Miku",
+     "title_jp": "White Miku",
+     "lines_old": 52,
+     "lines_new": 52,
+     "changes": [
+      {
+       "talk_index_old": 3,
+       "talk_index_new": 3,
+       "kind": "text",
+       "speaker_old": "[K]",
+       "speaker_new": "[K]",
+       "old": "<All right. I think I'm going to work on it a bit longer.>",
+       "new": "<Alright. I think I'm going to work on it a bit longer.>",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Mafuyu",
+       "speaker_new": "Mafuyu",
+       "old": "All right, I'm off then!",
+       "new": "Alright, I'm off then!",
+       "ratio": 0.95,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_03",
+     "episode_no": 4,
+     "title_en": "OWN",
+     "title_jp": "OWN",
+     "lines_old": 93,
+     "lines_new": 93,
+     "changes": [
+      {
+       "talk_index_old": 43,
+       "talk_index_new": 43,
+       "kind": "text",
+       "speaker_old": "[K]",
+       "speaker_new": "[K]",
+       "old": "<Oh...>",
+       "new": "<Ah...>",
+       "ratio": 0.5,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 62,
+       "talk_index_new": 62,
+       "kind": "text",
+       "speaker_old": "[Yuki]",
+       "speaker_new": "[Yuki]",
+       "old": "<I was really surprised to get a message asking to make songs together from an account with zero followers and no profile picture.>",
+       "new": "<I was really surprised to get a DM asking to make songs together from an account with zero followers and no profile picture.>",
+       "ratio": 0.972,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "text",
+       "speaker_old": "[Yuki]",
+       "speaker_new": "[Yuki]",
+       "old": "<Time sure has flown, though. After that, Enanan and Amia joined, and before long we even came up with a name.>",
+       "new": "<Time sure has flown, though. First Enanan joined, then Amia, and before long we even came up with a name.>",
+       "ratio": 0.863,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 80,
+       "talk_index_new": 80,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "I see...",
+       "new": "So...",
+       "ratio": 0.286,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 82,
+       "talk_index_new": 82,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "Thank goodness...",
+       "new": "I'm so glad.",
+       "ratio": 0.25,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 83,
+       "talk_index_new": 83,
+       "kind": "text",
+       "speaker_old": "Mafuyu",
+       "speaker_new": "Mafuyu",
+       "old": "......",
+       "new": ".....",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_04",
+     "episode_no": 5,
+     "title_en": "I'm a \"Good Girl\"",
+     "title_jp": "I'm a \"Good Girl\"",
+     "lines_old": 103,
+     "lines_new": 103,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Mafuyu",
+       "speaker_new": "Mafuyu",
+       "old": "Hehe. Thought so. The homework we got today looks pretty hard, after all. All right. Today was only a half day, so let's study together.",
+       "new": "Hehe. Thought so. The homework we got today looks pretty hard, after all. Alright. Today was only a half day, so let's study together.",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 32,
+       "talk_index_new": 32,
+       "kind": "text",
+       "speaker_old": "Mafuyu",
+       "speaker_new": "Mafuyu",
+       "old": "All right, you two. Break time's over. Time to get back to studying.",
+       "new": "Alright, you two. Break time's over. Time to get back to studying.",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 34,
+       "talk_index_new": 34,
+       "kind": "text",
+       "speaker_old": "Mafuyu",
+       "speaker_new": "Mafuyu",
+       "old": "All right...",
+       "new": "Alright...",
+       "ratio": 0.875,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "[Amia]",
+       "speaker_new": "[Amia]",
+       "old": "<Yuki? You all right?>",
+       "new": "<Yuki? You okay?>",
+       "ratio": 0.645,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_05",
+     "episode_no": 6,
+     "title_en": "Vanishing Snow",
+     "title_jp": "Vanishing Snow",
+     "lines_old": 73,
+     "lines_new": 73,
+     "changes": [
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Dad",
+       "old": ".....",
+       "new": ".....",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Dad",
+       "old": "That's amazing, Kanade!",
+       "new": "That's amazing, Kanade!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Dad",
+       "old": "I didn't realize you could write such gentle songs. I'm sure your mother would have loved it, too.",
+       "new": "I didn't realize you could write such gentle songs. I'm sure your mother would have loved it, too.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Dad",
+       "old": "You have such a gift, Kanade. You've really been blessed by music.",
+       "new": "You have such a gift, Kanade. You've really been blessed by music.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Dad",
+       "old": "Kanade, make sure you keep creating your own music.",
+       "new": "Kanade, make sure you keep creating your own music.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 61,
+       "talk_index_new": 61,
+       "kind": "text",
+       "speaker_old": "[Enanan]",
+       "speaker_new": "[Enanan]",
+       "old": "<Oh, you're right. It's called...Untitled?>",
+       "new": "<Oh, you're right. It's called...“Untitled”?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 62,
+       "talk_index_new": 62,
+       "kind": "text",
+       "speaker_old": "[K]",
+       "speaker_new": "[K]",
+       "old": "<Untitled? I don't remember making that.>",
+       "new": "<“Untitled”? I don't remember making that.>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_06",
+     "episode_no": 7,
+     "title_en": "Empty SEKAI",
+     "title_jp": "Empty SEKAI",
+     "lines_old": 81,
+     "lines_new": 81,
+     "changes": [
+      {
+       "talk_index_old": 17,
+       "talk_index_new": 17,
+       "kind": "text",
+       "speaker_old": "???",
+       "speaker_new": "???",
+       "old": "No idea. As soon as I clicked on that Untitled file to play it, my computer monitor started glowing. I was like, I can't see! Then when I opened my eyes, I was here.",
+       "new": "No idea. As soon as I clicked on that “Untitled” file to play it, my computer monitor started glowing. I was like, “I can't see!” Then when I opened my eyes, I was here.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 30,
+       "talk_index_new": 30,
+       "kind": "text",
+       "speaker_old": "???",
+       "speaker_new": "???",
+       "old": "I figured we'd go to a restaurant or a cafe or something and be all like What's your real name? and Yay, let me tell you! and stuff.",
+       "new": "I figured we'd go to a restaurant or a cafe or something and be all like “What's your real name?” and “Yay, let me tell you!” and stuff.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 33,
+       "talk_index_new": 33,
+       "kind": "text",
+       "speaker_old": "???",
+       "speaker_new": "???",
+       "old": "Well, it says kanade in your email address, so I figured it must be your name.",
+       "new": "Well, it says “kanade” in your email address, so I figured it must be your name.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 39,
+       "talk_index_new": 39,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "All right. So Mizuki and Ena.",
+       "new": "Alright. So Mizuki and Ena.",
+       "ratio": 0.962,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "Your world and this one are connected by Untitled.",
+       "new": "Your world and this one are connected by “Untitled.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "Untitled? You mean the song file in the shared folder?",
+       "new": "“Untitled”? You mean the song file in the shared folder?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_07",
+     "episode_no": 8,
+     "title_en": "Though I Want to Disappear",
+     "title_jp": "Though I Want to Disappear",
+     "lines_old": 90,
+     "lines_new": 90,
+     "changes": [
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "I'm so glad you're all right, Yuki! We were getting worried after not hearing from you for so long.",
+       "new": "I'm so glad you're okay, Yuki! We were getting worried after not hearing from you for so long.",
+       "ratio": 0.94,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 12,
+       "talk_index_new": 12,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "What's wrong? Yuki, are you all right? Are you hungry from not having eaten since you got here or something?",
+       "new": "What's wrong? Yuki, are you okay? Are you hungry from not having eaten since you got here or something?",
+       "ratio": 0.945,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_08",
+     "episode_no": 9,
+     "title_en": "Amateur Painter",
+     "title_jp": "Amateur Painter",
+     "lines_old": 85,
+     "lines_new": 85,
+     "changes": [
+      {
+       "talk_index_old": 2,
+       "talk_index_new": 2,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<K! K, answer me! Kanade, are you all right?!>",
+       "new": "<K! K, answer me! Kanade, are you okay?!>",
+       "ratio": 0.845,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<Phew... It looks like we all made it back all right. That's a relief.>",
+       "new": "<Phew... It looks like we all made it back okay. That's a relief.>",
+       "ratio": 0.909,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<I don't see any reason to talk about her after this. She basically said she wants to work alone. It's not like she's coming back!",
+       "new": "<I don't see any reason to talk about her after this. She basically said she wants to work alone. It's not like she's coming back!>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_09",
+     "episode_no": 10,
+     "title_en": "I Just Want to be Myself",
+     "title_jp": "I Just Want to be Myself",
+     "lines_old": 57,
+     "lines_new": 57,
+     "changes": [
+      {
+       "talk_index_old": 5,
+       "talk_index_new": 5,
+       "kind": "text",
+       "speaker_old": "Teacher",
+       "speaker_new": "Teacher",
+       "old": "Just keep these two theorem in mind, and remember which one to apply based on what you're trying to find over here.",
+       "new": "Just keep these two theorems in mind, and remember which one to apply based on what you're trying to find over here.",
+       "ratio": 0.996,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 20,
+       "talk_index_new": 20,
+       "kind": "text",
+       "speaker_old": "2nd Year Student A",
+       "speaker_new": "2nd Year Student A",
+       "old": "Hey, speak of the devil! You're Mizuki, right?",
+       "new": "Hey, speak of the devil! You're Akiyama, right?",
+       "ratio": 0.892,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 23,
+       "talk_index_new": 23,
+       "kind": "linebreak",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "Huh? I figured that would be obvious.",
+       "new": "Huh? I figured that would be obvious.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 33,
+       "talk_index_new": 33,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "All right! Time to go do a little shopping to relax!",
+       "new": "Alright! Time to go do a little shopping to relax!",
+       "ratio": 0.98,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "[Amia]",
+       "speaker_new": "[Amia]",
+       "old": "<Yuki? You all right?>",
+       "new": "<Yuki? You okay?>",
+       "ratio": 0.645,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_10",
+     "episode_no": 11,
+     "title_en": "The Missing Sound",
+     "title_jp": "The Missing Sound",
+     "lines_old": 86,
+     "lines_new": 86,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<You all right? You sound a little out of it. Did you get enough sleep?>",
+       "new": "<You okay? You sound a little out of it. Did you get enough sleep?>",
+       "ratio": 0.915,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 11,
+       "talk_index_new": 11,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "<I'm all right.>",
+       "new": "<I'm okay.>",
+       "ratio": 0.421,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Young Kanade",
+       "speaker_new": "Young Kanade",
+       "old": "Dad, dinner is ready. Are you all right?",
+       "new": "Dad, dinner is ready. Are you okay?",
+       "ratio": 0.841,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 69,
+       "talk_index_new": 69,
+       "kind": "linebreak",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Father",
+       "old": "That's more than enough, Kanade, thanks. Dad's got to eat if he's going to keep working hard.",
+       "new": "That's more than enough, Kanade, thanks. Dad's got to eat if he's going to keep working hard.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_11",
+     "episode_no": 12,
+     "title_en": "Music For Happiness",
+     "title_jp": "Music For Happiness",
+     "lines_old": 100,
+     "lines_new": 100,
+     "changes": [
+      {
+       "talk_index_old": 18,
+       "talk_index_new": 18,
+       "kind": "text",
+       "speaker_old": "Kanade's Father",
+       "speaker_new": "Kanade's Father",
+       "old": "Oh, it's all right, Kanade. It's nothing. I'm just on the phone about work.",
+       "new": "Oh, it's okay, Kanade. It's nothing. I'm just on the phone about work.",
+       "ratio": 0.915,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 58,
+       "talk_index_new": 58,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "7th - I responded to the client's claim that my music sounded too old-fashioned. Still, I can't keep clinging to the same old style forever.",
+       "new": "“7th - I responded to the client's claim that my music sounded too old-fashioned. Still, I can't keep clinging to the same old style forever.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 60,
+       "talk_index_new": 60,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "23rd - I'm finally getting used to working with the computer, but I'm still far from mastering all the different functions. I still have a lot to learn.",
+       "new": "“23rd - I'm finally getting used to working with the computer, but I'm still far from mastering all the different functions. I still have a lot to learn.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 61,
+       "talk_index_new": 61,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "14th - Kanade helped with the arrangement I was having trouble with. To be honest, I was really surprised. She might have a gift for this.",
+       "new": "“14th - Kanade helped with the arrangement I was having trouble with. To be honest, I was really surprised. She might have a gift for this.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 62,
+       "talk_index_new": 62,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "30th - I won the competition, but I'm finding it hard to celebrate.",
+       "new": "“30th - I won the competition, but I'm finding it hard to celebrate.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 64,
+       "talk_index_new": 64,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "The only part they really liked was the section Kanade made. That's her music, not mine.",
+       "new": "“The only part they really liked was the section Kanade made. That's her music, not mine.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 65,
+       "talk_index_new": 65,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "22nd - I've been getting more work since the commercial started airing, but the clients all want something similar to it. I keep telling them I can't, but they insist.",
+       "new": "“22nd - I've been getting more work since the commercial started airing, but the clients all want something similar to it. I keep telling them I can't, but they insist.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 68,
+       "talk_index_new": 68,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "They all laugh at how old-fashioned my music sounds, despite the commercial piece being so well polished. What am I missing?",
+       "new": "“They all laugh at how old-fashioned my music sounds, despite the commercial piece being so well polished. What am I missing?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 69,
+       "talk_index_new": 69,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "8th - Kanade gave me a song she made.",
+       "new": "“8th - Kanade gave me a song she made.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 71,
+       "talk_index_new": 71,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "I finally realized what my music is missing. Why everyone says it sounds so outdated.",
+       "new": "“I finally realized what my music is missing. Why everyone says it sounds so outdated.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 72,
+       "talk_index_new": 72,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "The music I'm making is all just a cheap imitation of songs I've heard in the past.",
+       "new": "“The music I'm making is all just a cheap imitation of songs I've heard in the past.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 73,
+       "talk_index_new": 73,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "But Kanade's is different. Her music has the ability to touch the hearts of the people of today.",
+       "new": "“But Kanade's is different. Her music has the ability to touch the hearts of the people of today.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 74,
+       "talk_index_new": 74,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "It's all feeling instead of logic. That isn't something I can imitate.",
+       "new": "“It's all feeling instead of logic. That isn't something I can imitate.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 75,
+       "talk_index_new": 75,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "And yet I have to keep writing music. I need to make a living so I can take care of Kanade.",
+       "new": "“And yet I have to keep writing music. I need to make a living so I can take care of Kanade.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 76,
+       "talk_index_new": 76,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "But is that really the kind of music I want to write? The kind that can make people happy?",
+       "new": "“But is that really the kind of music I want to write? The kind that can make people happy?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 77,
+       "talk_index_new": 77,
+       "kind": "text",
+       "speaker_old": "Father's Diary",
+       "speaker_new": "Father's Diary",
+       "old": "I wonder if Kanade could make music like that. I may not be able to, but she might...",
+       "new": "“I wonder if Kanade could make music like that. I may not be able to, but she might...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_12",
+     "episode_no": 13,
+     "title_en": "A Single Song",
+     "title_jp": "A Single Song",
+     "lines_old": 70,
+     "lines_new": 70,
+     "changes": [
+      {
+       "talk_index_old": 45,
+       "talk_index_new": 45,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "Even if it wasn't enough...it still reached her..",
+       "new": "Even if it wasn't enough...it still reached her.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 57,
+       "talk_index_new": 57,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "However, I am sure that if anything is able to help her ...it will be your music.",
+       "new": "However, I am sure that if anything is able to help her...it will be your music.",
+       "ratio": 0.993,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_13",
+     "episode_no": 14,
+     "title_en": "Who am \"I\"?",
+     "title_jp": "Who am \"I\"?",
+     "lines_old": 66,
+     "lines_new": 66,
+     "changes": [
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "linebreak",
+       "speaker_old": "Classmate B",
+       "speaker_new": "Classmate B",
+       "old": "A bunch of us from class are planning on going to that new arcade. You wanna come?",
+       "new": "A bunch of us from class are planning on going to that new arcade. You wanna come?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_14",
+     "episode_no": 15,
+     "title_en": "To Be So Lonely",
+     "title_jp": "To Be So Lonely",
+     "lines_old": 59,
+     "lines_new": 59,
+     "changes": [
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<I hope everything's all right. I knew her taking on everything like that would be too much. Without Yuki...>",
+       "new": "<I hope everything's okay. I knew her taking on everything like that would be too much. Without Yuki...>",
+       "ratio": 0.944,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 7,
+       "talk_index_new": 7,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<We don't need Yuki.>",
+       "new": "<..... We don't need Yuki.>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<Maybe she thought she had to always be a good girl, never inconveniencing others in order for them to like her.>",
+       "new": "<Maybe she thought she had to always be a “good girl”, never inconveniencing others in order for them to like her.>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 41,
+       "talk_index_new": 41,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<If Yuki really did end up like this from being in so much pain, and now feels likes she just wants to disappear...>",
+       "new": "<If Yuki really did end up like this from being in so much pain, and now feels like she just wants to disappear...>",
+       "ratio": 0.995,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 45,
+       "talk_index_new": 45,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<We can go back by playing that Untitled song, right? If that's true...>",
+       "new": "<We can go back by playing that “Untitled” song, right? If that's true...>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 46,
+       "talk_index_new": 46,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<That's what Miku said. But will talking to Yuki in her current state of mind achieve anything?",
+       "new": "<That's what Miku said. But will talking to Yuki in her current state of mind achieve anything?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_15",
+     "episode_no": 16,
+     "title_en": "Before I Disappear",
+     "title_jp": "Before I Disappear",
+     "lines_old": 66,
+     "lines_new": 66,
+     "changes": [
+      {
+       "talk_index_old": 15,
+       "talk_index_new": 15,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "<All right. I'll let you know before I go back.>",
+       "new": "<Alright. I'll let you know before I go back.>",
+       "ratio": 0.976,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<All right. I guess it's just the two of us, K.>",
+       "new": "<Alright. I guess it's just the two of us, K.>",
+       "ratio": 0.976,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 39,
+       "talk_index_new": 39,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "However, I am sure that if anything is able to help her ...it will be your music.",
+       "new": "However, I am sure that if anything is able to help her...it will be your music.",
+       "ratio": 0.993,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 63,
+       "talk_index_new": 63,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<Make sure you come back, all right?>",
+       "new": "<Make sure you come back, okay?>",
+       "ratio": 0.82,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 64,
+       "talk_index_new": 64,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "<Of course! All right, K! Let's go!>",
+       "new": "<Of course! Alright, K! Let's go!>",
+       "ratio": 0.964,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_16",
+     "episode_no": 17,
+     "title_en": "Dissolve Away",
+     "title_jp": "Dissolve Away",
+     "lines_old": 63,
+     "lines_new": 63,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Friend B",
+       "speaker_new": "Friend B",
+       "old": "Everything okay, Mafuyu? Are you feeling all right?",
+       "new": "Everything okay, Mafuyu? Are you feeling okay?",
+       "ratio": 0.879,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_17",
+     "episode_no": 18,
+     "title_en": "Their Curse",
+     "title_jp": "Their Curse",
+     "lines_old": 68,
+     "lines_new": 68,
+     "changes": [
+      {
+       "talk_index_old": 30,
+       "talk_index_new": 30,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "You said it yourself, Yuki. You accused us all of wanting to disappear",
+       "new": "You said it yourself, Yuki. You accused us all of wanting to disappear.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 63,
+       "talk_index_new": 63,
+       "kind": "linebreak",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "Maybe those shared feelings are why your song was the only thing able to get through.",
+       "new": "Maybe those shared feelings are why your song was the only thing able to get through.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 64,
+       "talk_index_new": 64,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "Even if it wasn't enough...it still reached her..",
+       "new": "Even if it wasn't enough...it still reached her.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "linebreak",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "That's why I want to save you with my music. As long as there is still a chance, I will save you.",
+       "new": "That's why I want to save you with my music. As long as there is still a chance, I will save you.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_18",
+     "episode_no": 19,
+     "title_en": "Desire To Save",
+     "title_jp": "Desire To Save",
+     "lines_old": 98,
+     "lines_new": 98,
+     "changes": [
+      {
+       "talk_index_old": 52,
+       "talk_index_new": 52,
+       "kind": "text",
+       "speaker_old": "???",
+       "speaker_new": "???",
+       "old": "I can't take this any more!",
+       "new": "I can't take this anymore!",
+       "ratio": 0.98,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 67,
+       "talk_index_new": 67,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "I can't bear the thought of another person disappearing right from in front of me.",
+       "new": "I can't bear the thought of another person disappearing right in front of me.",
+       "ratio": 0.968,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 97,
+       "talk_index_new": 97,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "It's all right, Yuki. I promise I'll save you someday.",
+       "new": "It's okay, Yuki. I promise I'll save you someday.",
+       "ratio": 0.882,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_19",
+     "episode_no": 20,
+     "title_en": "Composing the Future",
+     "title_jp": "Composing the Future",
+     "lines_old": 86,
+     "lines_new": 86,
+     "changes": [
+      {
+       "talk_index_old": 47,
+       "talk_index_new": 47,
+       "kind": "text",
+       "speaker_old": "Ena",
+       "speaker_new": "Ena",
+       "old": "<The name of that Untitled file changed?>",
+       "new": "<The name of that “Untitled” file changed?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 48,
+       "talk_index_new": 48,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "<Composing the Future?>",
+       "new": "<“Composing the Future”?>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 62,
+       "talk_index_new": 62,
+       "kind": "text",
+       "speaker_old": "Kanade",
+       "speaker_new": "Kanade",
+       "old": "<All right, see—>",
+       "new": "<Alright, see—>",
+       "ratio": 0.917,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "nightcode_01_20",
+     "episode_no": 21,
+     "title_en": "Nightcord at 25:00",
+     "title_jp": "Nightcord at 25:00",
+     "lines_old": 76,
+     "lines_new": 76,
+     "changes": [
+      {
+       "talk_index_old": 49,
+       "talk_index_new": 49,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "Oh, are you two all right with this level of energy?",
+       "new": "Oh, are you two okay with this level of energy?",
+       "ratio": 0.884,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 54,
+       "talk_index_new": 54,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "All right, let the first official offline meeting of N25 begin! Cheers!",
+       "new": "Alright, let the first official offline meeting of N25 begin! Cheers!",
+       "ratio": 0.985,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 84,
+   "text_changes": 74
+  }
+ ],
+ "bundles_only_in_new": []
+}

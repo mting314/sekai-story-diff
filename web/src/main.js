@@ -112,8 +112,14 @@ function card(e, q, href) {
   const eps = new Set(trs.flatMap((t) => t.episodes.map((ep) => ep.no))).size;
   const tag = href ? "a" : "span";
   const link = href ? ` href="${href}"` : "";
+  // Unit arcs have no banner — no chapter art exists on the mirror — so they get a
+  // unit-coloured panel carrying the unit logo instead of an empty slot.
   const art = e.banner
-    ? `<div class="art" style="background-image:url('${ASSETS}${e.banner}')"></div>` : "";
+    ? `<div class="art" style="background-image:url('${ASSETS}${e.banner}')"></div>`
+    : e.kind === "arc"
+      ? `<div class="art arcart">${e.unitLogo
+          ? `<img alt="" src="${ASSETS}${e.unitLogo}">` : ""}</div>`
+      : "";
   const logo = e.unitLogo ? `<img class="ulogo" alt="" src="${ASSETS}${e.unitLogo}">` : "";
   const stats = href
     ? badge(strongest(trs)) + `<span class="pill hot">${lines} changed lines</span>
@@ -246,7 +252,8 @@ function event(ev, openEp) {
 
   document.getElementById("app").innerHTML = `
     <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/${rangePrefix()}" title="All events">←</a>
-      ${ev.logo ? `<img class="elogo" alt="" src="${ASSETS}${ev.logo}">` : ""}
+      ${ev.logo ? `<img class="elogo" alt="" src="${ASSETS}${ev.logo}">`
+        : ev.unitLogo ? `<img class="ulogo big" alt="" src="${ASSETS}${ev.unitLogo}">` : ""}
       <h2>${esc(ev.name)}</h2>
       <span class="meta">${lines} changed lines ·
         ${trs.length} release${trs.length === 1 ? "" : "s"}</span>
@@ -309,10 +316,12 @@ function navRow(e, n) {
   // whether the drawer is opened or not.
   const art = e.banner
     ? `<img class="nav-art" loading="lazy" decoding="async" alt="" src="${ASSETS}${e.banner}">`
-    : "";
+    : `<span class="nav-art blank">${e.unitLogo
+        ? `<img loading="lazy" alt="" src="${ASSETS}${e.unitLogo}">` : ""}</span>`;
+  // an arc already sits under its unit's header, so drop the unit name from the label
   return `<a class="nav-ev" data-ev="${e.id}" href="#/${rangePrefix()}e${e.id}"`
        + ` style="--u:${e.colour || "#8f89b5"}">${art}`
-       + `<span class="nav-txt"><b>${esc(e.name)}</b>`
+       + `<span class="nav-txt"><b>${esc(e.shortName || e.name)}</b>`
        + `<small>${n} changed lines</small></span></a>`;
 }
 

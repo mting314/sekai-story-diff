@@ -355,6 +355,26 @@
     "new": "5.5.1.0",
     "old": "5.5.0.20"
    }
+  ],
+  "scenario/unitstory/school-refusal-story-chapter": [
+   {
+    "new": "4.1.51.0",
+    "old": "4.1.50.20"
+   },
+   {
+    "new": "4.1.51.15",
+    "old": "4.1.51.10"
+   },
+   {
+    "new": "5.0.0.1",
+    "old": "4.1.52.10"
+   }
+  ],
+  "scenario/unitstory/theme-park-story-chapter": [
+   {
+    "new": "5.1.0.1",
+    "old": "5.0.51.0"
+   }
   ]
  },
  "versions": [

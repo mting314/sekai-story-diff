@@ -131,9 +131,12 @@ def main() -> None:
             (s["eventId"], f"event_story/{s['assetbundleName']}/scenario") for s in stories
         ]
     else:
+        # Chapters key on "id"; there is no "seq" field, which this branch assumed until
+        # it was first actually run. One bundle holds a whole chapter's episodes, the
+        # same shape as an event's scenario bundle.
         chapters = json.loads((MASTER / "unitStories.json").read_text())
         bundles = [
-            (ch["seq"], f"scenario/unitstory/{ch['assetbundleName']}")
+            (ch["id"], f"scenario/unitstory/{ch['assetbundleName']}")
             for unit in chapters
             for ch in unit.get("chapters", [])
         ]

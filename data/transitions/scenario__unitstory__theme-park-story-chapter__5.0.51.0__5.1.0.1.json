@@ -1,0 +1,1176 @@
+{
+ "comparison": {
+  "old_asset_version": "5.0.51.0",
+  "new_asset_version": "5.1.0.1",
+  "old_released_at": "2026-02-09",
+  "new_released_at": "2026-02-19",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 18,
+  "changed_lines": 87,
+  "by_kind": {
+   "text": 87
+  },
+  "by_lang": {
+   "rewrite": 85,
+   "punctuation": 2
+  },
+  "rewrite_lines": 85
+ },
+ "events": [
+  {
+   "event_id": 9002,
+   "kind": "arc",
+   "name_en": "Wonderlands×Showtime Story - Chapter 1",
+   "name_jp": "",
+   "unit": "theme_park",
+   "arc_slug": "",
+   "bundle": "scenario/unitstory/theme-park-story-chapter",
+   "episodes": [
+    {
+     "scenario_id": "wonder_01_01",
+     "episode_no": 2,
+     "title_en": "Welcome to the Wonder Stage!",
+     "title_jp": "Welcome to the Wonder Stage!",
+     "lines_old": 73,
+     "lines_new": 73,
+     "changes": [
+      {
+       "talk_index_old": 22,
+       "talk_index_new": 22,
+       "kind": "text",
+       "speaker_old": "???",
+       "speaker_new": "???",
+       "old": "Did someone say incredible shows?",
+       "new": "Did someone say “incredible shows”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 45,
+       "talk_index_new": 45,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "(They've built quite a few new attractions over the last few years. Everywhere you look, it's brand spanking new. But, well, it is one of the best theme parks in the country!)",
+       "new": "(They've built quite a few new attractions over the last few years. Everywhere you look, it's brand spanking new. But, well, it IS one of the best theme parks in the country!)",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Wonder Stage?",
+       "new": "“Wonder Stage”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_02",
+     "episode_no": 3,
+     "title_en": "The Future Star and Wonderhoy!",
+     "title_jp": "The Future Star and Wonderhoy!",
+     "lines_old": 70,
+     "lines_new": 70,
+     "changes": [
+      {
+       "talk_index_old": 57,
+       "talk_index_new": 57,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "What's this? It says Untitled?",
+       "new": "What's this? It says “Untitled”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_03",
+     "episode_no": 4,
+     "title_en": "Wonderland SEKAI",
+     "title_jp": "Wonderland SEKAI",
+     "lines_old": 66,
+     "lines_new": 66,
+     "changes": [
+      {
+       "talk_index_old": 5,
+       "talk_index_new": 5,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Huh? Your SEKAI? I have no idea what that is.",
+       "new": "Huh? “Your SEKAI”? I have no idea what that is.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Oh, I get it. This is some kind elaborate special effect!",
+       "new": "Oh, I get it. This is some kind of elaborate special effect!",
+       "ratio": 0.973,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "How can you be so calm? This isn't normal, it's all right to panic, you know!",
+       "new": "How can you be so calm? This isn't normal, it's okay to panic, you know!",
+       "ratio": 0.92,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 36,
+       "talk_index_new": 36,
+       "kind": "text",
+       "speaker_old": "KAITO",
+       "speaker_new": "KAITO",
+       "old": "This SEKAI is connected to your world through a song. You must have played Untitled to come here.",
+       "new": "This SEKAI is connected to your world through a song. You must have played “Untitled” to come here.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_04",
+     "episode_no": 5,
+     "title_en": "Members Needed!",
+     "title_jp": "Members Needed!",
+     "lines_old": 67,
+     "lines_new": 67,
+     "changes": [
+      {
+       "talk_index_old": 3,
+       "talk_index_new": 3,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "Are you feeling all right?",
+       "new": "Are you feeling okay?",
+       "ratio": 0.756,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 8,
+       "talk_index_new": 8,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "I've had enough, I'm leaving! If that Untitled song got me here, stopping it should take me back, right?",
+       "new": "I've had enough, I'm leaving! If that “Untitled” song got me here, stopping it should take me back, right?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 18,
+       "talk_index_new": 18,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Good job, Emu! Now I just have to stop Untitled and I'll be out of here!",
+       "new": "Good job, Emu! Now I just have to stop “Untitled” and I'll be out of here!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_05",
+     "episode_no": 6,
+     "title_en": "Strange Producer",
+     "title_jp": "Strange Producer",
+     "lines_old": 65,
+     "lines_new": 65,
+     "changes": [
+      {
+       "talk_index_old": 63,
+       "talk_index_new": 63,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "It seems we share a penchant for theater. I wish you best of luck, Tsukasa. Let's meet again some other time!",
+       "new": "It seems we share a penchant for theater. I wish you the best of luck, Tsukasa. Let's meet again some other time!",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_07",
+     "episode_no": 8,
+     "title_en": "Robo-Nene on Stage?!",
+     "title_jp": "Robo-Nene on Stage?!",
+     "lines_old": 78,
+     "lines_new": 78,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "That's a big robot! She's comes up to my waist!",
+       "new": "That's a big robot! She comes up to my waist!",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_08",
+     "episode_no": 9,
+     "title_en": "The Team's All Here!",
+     "title_jp": "The Team's All Here!",
+     "lines_old": 65,
+     "lines_new": 65,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "I am Pegasus, prince of this land!",
+       "new": "“I am Pegasus, prince of this land!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 12,
+       "talk_index_new": 12,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "My journey to defeat the dastardly demon lord has only just begun. It will certainly be rife with peril, but at the end of it, surely, there is hope!",
+       "new": "“My journey to defeat the dastardly demon lord has only just begun. It will certainly be rife with peril, but at the end of it, surely, there is hope!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "The strength of my conviction banished all fear from my heart!",
+       "new": "“The strength of my conviction banished all fear from my heart!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 44,
+       "talk_index_new": 44,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Why do you have to have world in every name?",
+       "new": "Why do you have to have “world” in every name?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 51,
+       "talk_index_new": 51,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "Mhm... A Great Time in the Wonderland?",
+       "new": "Mhm... “A Great Time in the Wonderland”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 52,
+       "talk_index_new": 52,
+       "kind": "text",
+       "speaker_old": "Robo-Nene",
+       "speaker_new": "Robo-Nene",
+       "old": "Maybe... Instead of great time, it can be showtime? Then we can put it together as... Wonderland Showtime?",
+       "new": "Maybe... Instead of great time, it can be “showtime”? Then we can put it together as... Wonderland Showtime?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_09",
+     "episode_no": 10,
+     "title_en": "The Strange and the Talented",
+     "title_jp": "The Strange and the Talented",
+     "lines_old": 71,
+     "lines_new": 71,
+     "changes": [
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "But you said you'd perform any role I gave you to, quote, 12,000%, unquote!",
+       "new": "But you said you'd perform any role I gave you to, quote, “12,000%”, unquote!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 62,
+       "talk_index_new": 62,
+       "kind": "text",
+       "speaker_old": "Robo-Nene",
+       "speaker_new": "Robo-Nene",
+       "old": "What's the problem, future super-star? Was that the best you could do?",
+       "new": "What's the problem, “future super-star”? Was that the best you could do?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "Miku's SEKAI! I have this song on my phone, Untitled, that I can play to take us there instantly!",
+       "new": "Miku's SEKAI! I have this song on my phone, “Untitled,” that I can play to take us there instantly!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 68,
+       "talk_index_new": 68,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "You have Untitled on your phone too?! You're seriously suggesting we go to that crazy place again?!",
+       "new": "You have “Untitled” on your phone too?! You're seriously suggesting we go to that crazy place again?!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_10",
+     "episode_no": 11,
+     "title_en": "KAITO's Hint",
+     "title_jp": "KAITO's Hint",
+     "lines_old": 74,
+     "lines_new": 74,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Robo-Nene",
+       "speaker_new": "Robo-Nene",
+       "old": "That's Hatsune Miku... And KAITO? Wait, these are not projections?...",
+       "new": "That's Hatsune Miku... And KAITO? They don't look like holograms...",
+       "ratio": 0.615,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 40,
+       "talk_index_new": 40,
+       "kind": "text",
+       "speaker_old": "KAITO",
+       "speaker_new": "KAITO",
+       "old": "I take it upon myself to slay the demon lord! How about this kind of delivery?",
+       "new": "“I take it upon myself to slay the demon lord!” How about this kind of delivery?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_11",
+     "episode_no": 12,
+     "title_en": "Emu's Dream",
+     "title_jp": "Emu's Dream",
+     "lines_old": 74,
+     "lines_new": 74,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Excellent is my middle name! Ha ha ha ha!",
+       "new": "“Excellent” is my middle name! Ha ha ha ha!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Robo-Nene",
+       "speaker_new": "Robo-Nene",
+       "old": "I don't remember trying to keep up with you. ...It doesn't matter. I hope our audience enjoys the play.",
+       "new": "I don't remember trying to “keep up” with you. ...It doesn't matter. I hope our audience enjoys the play.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 39,
+       "talk_index_new": 39,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Please allow me to take care of this.",
+       "new": "“Please allow me to take care of this.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_12",
+     "episode_no": 13,
+     "title_en": "Public Performance!",
+     "title_jp": "Public Performance!",
+     "lines_old": 61,
+     "lines_new": 61,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "I must set off with my trusty sword to slay the dastardly demon lord♪",
+       "new": "“I must set off with my trusty sword to slay the dastardly demon lord♪”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Well, if it isn't Ne-Ne the Cyborgian! Perhaps she would join me on my treacherous journey?",
+       "new": "“Well, if it isn't Ne-Ne the Cyborgian! Perhaps she would join me on my treacherous journey?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 2,
+       "talk_index_new": 2,
+       "kind": "text",
+       "speaker_old": "Ne-Ne",
+       "speaker_new": "Ne-Ne",
+       "old": "Your Highness, you have restored peace to our village, which had long been troubled by monsters.",
+       "new": "“Your Highness, you have restored peace to our village, which had long been troubled by monsters.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 3,
+       "talk_index_new": 3,
+       "kind": "text",
+       "speaker_old": "Ne-Ne",
+       "speaker_new": "Ne-Ne",
+       "old": "I bring you a Hyper Drink, my tribe's famous revitalizing potion, as a token of our gratitude.",
+       "new": "“I bring you a Hyper Drink, my tribe's famous revitalizing potion, as a token of our gratitude.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "A gift for me, how splendid! Based on its slimy, disgusting appearance, it must be highly effective. I shall drink it at once! Glug, glug, glug...",
+       "new": "“A gift for me, how splendid! Based on its slimy, disgusting appearance, it must be highly effective. I shall drink it at once! Glug, glug, glug...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 5,
+       "talk_index_new": 5,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Blah! What is this?! Oh, how could I have not realized... The Cyborgians only drink oil!",
+       "new": "“Blah! What is this?! Oh, how could I have not realized... The Cyborgians only drink oil!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Something's there... I sense a dangerous presence!",
+       "new": "“Something's there... I sense a dangerous presence!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Emumu",
+       "speaker_new": "Emumu",
+       "old": "I'm Emumu, the demon lord's dragon keeper! My dragon will pancake you, foolish prince!",
+       "new": "“I'm Emumu, the demon lord's dragon keeper! My dragon will pancake you, foolish prince!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Curses! How am I supposed to fight a dragon this enormous?!",
+       "new": "“Curses! How am I supposed to fight a dragon this enormous?!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 17,
+       "talk_index_new": 17,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "(I've been terrified of performing on stage ever since... that happened.)",
+       "new": "(I've been terrified of performing on stage ever since... “that” happened.)",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 19,
+       "talk_index_new": 19,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Ah, I see! This dragon can be lulled to sleep with a song! I must think of some song to sing...",
+       "new": "“Ah, I see! This dragon can be lulled to sleep with a song! I must think of some song to sing...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 20,
+       "talk_index_new": 20,
+       "kind": "text",
+       "speaker_old": "Ne-Ne",
+       "speaker_new": "Ne-Ne",
+       "old": "Your Highness, please allow me to take care of this. I shall sing to the dragon.",
+       "new": "“Your Highness, please allow me to take care of this. I shall sing to the dragon.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 22,
+       "talk_index_new": 22,
+       "kind": "text",
+       "speaker_old": "Ne-Ne",
+       "speaker_new": "Ne-Ne",
+       "old": "————♪",
+       "new": "“————♪”",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Splendid! The dragon is falling into a deep slumber!",
+       "new": "“Splendid! The dragon is falling into a deep slumber!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Ne-Ne",
+       "speaker_new": "Ne-Ne",
+       "old": "————♪.........",
+       "new": "“————♪.........”",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 34,
+       "talk_index_new": 34,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Ne-Ne, what's the matter? It seems your song made you fall asleep before the dragon did!",
+       "new": "“Ne-Ne, what's the matter? It seems your song made you fall asleep before the dragon did!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 35,
+       "talk_index_new": 35,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "I need you to sing just a little longer! Perhaps Ne-Ne needs some encouragement from our wonderful audience! Can you please help us?",
+       "new": "“I need you to sing just a little longer! Perhaps Ne-Ne needs some encouragement from our wonderful audience! Can you please help us?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 54,
+       "talk_index_new": 54,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Prince Pegasus befriended the dragon and its keeper. His journey was to continue for a long, long time, before he would finally cross swords with the demon lord. The end.",
+       "new": "“Prince Pegasus befriended the dragon and its keeper. His journey was to continue for a long, long time, before he would finally cross swords with the demon lord. The end.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_13",
+     "episode_no": 14,
+     "title_en": "A Smile Lost",
+     "title_jp": "A Smile Lost",
+     "lines_old": 77,
+     "lines_new": 77,
+     "changes": [
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Next time? And what about today's audience?!",
+       "new": "“Next time”? And what about today's audience?!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 56,
+       "talk_index_new": 56,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "What now... No one is smiling anymore...",
+       "new": "What now? No one is smiling anymore...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 57,
+       "talk_index_new": 57,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Nene",
+       "new": "Nene...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 69,
+       "talk_index_new": 69,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "It was that song, Untitled. Why did it do that?",
+       "new": "It was that song, “Untitled.” Why did it do that?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_14",
+     "episode_no": 15,
+     "title_en": "The Feeling That Day",
+     "title_jp": "The Feeling That Day",
+     "lines_old": 77,
+     "lines_new": 77,
+     "changes": [
+      {
+       "talk_index_old": 13,
+       "talk_index_new": 13,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Close, but it's hoy, not boy! Reach up and wave with both hands like this!",
+       "new": "Close, but it's “hoy,” not “boy”! Reach up and wave with both hands like this!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Saki? Come to think of it, Saki used to have a bunny plushie, didn't she?",
+       "new": "“Saki”? Come to think of it, Saki used to have a bunny plushie, didn't she?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_15",
+     "episode_no": 16,
+     "title_en": "Grandpa's Stage",
+     "title_jp": "Grandpa's Stage",
+     "lines_old": 60,
+     "lines_new": 60,
+     "changes": [
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Your Highness, please allow me to take care of this. I shall sing to the dragon.",
+       "new": "“Your Highness, please allow me to take care of this. I shall sing to the dragon.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_16",
+     "episode_no": 17,
+     "title_en": "How Not to Fail",
+     "title_jp": "How Not to Fail",
+     "lines_old": 65,
+     "lines_new": 65,
+     "changes": [
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "You don't have say anything, but please listen to what I have to say. I'm really sorry about yesterday.",
+       "new": "You don't have to say anything, but please listen to what I have to say. I'm really sorry about yesterday.",
+       "ratio": 0.985,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 52,
+       "talk_index_new": 52,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Don't ever try anything new, and you'll never make a mistake.",
+       "new": "“Don't ever try anything new, and you'll never make a mistake.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_18",
+     "episode_no": 19,
+     "title_en": "The Path to the Greatest Show",
+     "title_jp": "The Path to the Greatest Show",
+     "lines_old": 77,
+     "lines_new": 77,
+     "changes": [
+      {
+       "talk_index_old": 21,
+       "talk_index_new": 21,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "What an incredible performance? If you joined us, our troupe would make a name for itself at last!",
+       "new": "“What an incredible performance! If you joined us, our troupe would make a name for itself at last!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 22,
+       "talk_index_new": 22,
+       "kind": "text",
+       "speaker_old": "Alchemist",
+       "speaker_new": "Alchemist",
+       "old": "Who are you?",
+       "new": "“Who are you?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 23,
+       "talk_index_new": 23,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "I am a showman, and I could use your help to put on wonderful shows!",
+       "new": "“I am a showman, and I could use your help to put on wonderful shows!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "I promise that our spectacles will be a joy to see and a joy to perform in!",
+       "new": "“I promise that our spectacles will be a joy to see and a joy to perform in!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Alchemist",
+       "speaker_new": "Alchemist",
+       "old": "You wish to make shows with me? I see. I suppose I could help you out a little.",
+       "new": "“You wish to make shows with me? I see. I suppose I could help you out a little.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Clown",
+       "speaker_new": "Clown",
+       "old": "Yaaay! Welcome to our troupe!",
+       "new": "“Yaaay! Welcome to our troupe!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Songstress",
+       "speaker_new": "Songstress",
+       "old": "But will I...find the courage to sing?",
+       "new": "“But will I...find the courage to sing?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 32,
+       "talk_index_new": 32,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "What a shameful fiasco! It's all your fault!",
+       "new": "“What a shameful fiasco! It's all your fault!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 37,
+       "talk_index_new": 37,
+       "kind": "text",
+       "speaker_old": "Fairy",
+       "speaker_new": "Fairy",
+       "old": "Why were you making shows? Wasn't it because you wanted to make people happy?",
+       "new": "“Why were you making shows? Wasn't it because you wanted to make people happy?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 39,
+       "talk_index_new": 39,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "How could I have forgotten...",
+       "new": "“How could I have forgotten...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 41,
+       "talk_index_new": 41,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "I've always wanted to become a star like the actors in the first show I saw. I wanted to be a star so that I too could make people as happy as I was then.",
+       "new": "“I've always wanted to become a star like the actors in the first show I saw. I wanted to be a star so that I too could make people as happy as I was then.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 42,
+       "talk_index_new": 42,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "It was very important to me, but I forgot it along the way. I shall never forget it again!",
+       "new": "“It was very important to me, but I forgot it along the way. I shall never forget it again!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 43,
+       "talk_index_new": 43,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "What I want is to make people smile. I want to perform with my troupe again!",
+       "new": "“What I want is to make people smile. I want to perform with my troupe again!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 50,
+       "talk_index_new": 50,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "It's true that it's my dream to become a star. A star who brings joy to everyone!",
+       "new": "“It's true that it's my dream to become a star. A star who brings joy to everyone!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 51,
+       "talk_index_new": 51,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "To me, a star is someone who delights the audience as much as his fellow performers with the most wonderful shows!",
+       "new": "“To me, a star is someone who delights the audience as much as his fellow performers with the most wonderful shows!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 52,
+       "talk_index_new": 52,
+       "kind": "text",
+       "speaker_old": "Troupe Leader",
+       "speaker_new": "Troupe Leader",
+       "old": "Please, believe me this time! With our next show we can spread joy to everyone around us!",
+       "new": "“Please, believe me this time! With our next show we can spread joy to everyone around us!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_19",
+     "episode_no": 20,
+     "title_en": "The World Hasn't Even Started Yet",
+     "title_jp": "The World Hasn't Even Started Yet",
+     "lines_old": 66,
+     "lines_new": 66,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "All right! Let's go back and try our show one more time!",
+       "new": "Alright! Let's go back and try our show one more time!",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Huh? Untitled is flashing again?",
+       "new": "Huh? “Untitled” is flashing again?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Would it be all right if we all sang it together?",
+       "new": "Would it be okay if we all sang it together?",
+       "ratio": 0.879,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 19,
+       "talk_index_new": 19,
+       "kind": "text",
+       "speaker_old": "KAITO",
+       "speaker_new": "KAITO",
+       "old": "Oh, look. Untitled is being overwritten with your song.",
+       "new": "Oh, look. “Untitled” is being overwritten with your song.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 22,
+       "talk_index_new": 22,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "The title is now... The World Hasn't Even Started Yet?",
+       "new": "The title is now... “The World Hasn't Even Started Yet”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 23,
+       "talk_index_new": 23,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "The World Hasn't Even Started Yet... Oh!",
+       "new": "“The World Hasn't Even Started Yet”... Oh!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 48,
+       "talk_index_new": 48,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "Ah, THAT thing♪ All right!",
+       "new": "Ah, THAT thing♪ Alright!",
+       "ratio": 0.955,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 52,
+       "talk_index_new": 52,
+       "kind": "text",
+       "speaker_old": "Emumu",
+       "speaker_new": "Emumu",
+       "old": "Nyeh heh heh! I'm Emumu, the demon lord's dragon keeper! My dragon will pancake you, foolish prince!",
+       "new": "“Nyeh heh heh! I'm Emumu, the demon lord's dragon keeper! My dragon will pancake you, foolish prince!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 54,
+       "talk_index_new": 54,
+       "kind": "text",
+       "speaker_old": "Ne-Ne",
+       "speaker_new": "Ne-Ne",
+       "old": "Your Highness, please allow me to take care of this. Lalalala♪",
+       "new": "“Your Highness, please allow me to take care of this. Lalalala♪”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 55,
+       "talk_index_new": 55,
+       "kind": "text",
+       "speaker_old": "Emumu",
+       "speaker_new": "Emumu",
+       "old": "Ooh, what a pretty song! But somehow it's...it's making me unbearably sleepy! Zzz...",
+       "new": "“Ooh, what a pretty song! But somehow it's...it's making me unbearably sleepy! Zzz...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 56,
+       "talk_index_new": 56,
+       "kind": "text",
+       "speaker_old": "Demon Lord",
+       "speaker_new": "Demon Lord",
+       "old": "So you made it this far, Prince...",
+       "new": "“So you made it this far, Prince...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 57,
+       "talk_index_new": 57,
+       "kind": "text",
+       "speaker_old": "Demon Lord",
+       "speaker_new": "Demon Lord",
+       "old": "But look at you, you're wounded and battered. You stand no chance against me, so why do you still raise your sword?",
+       "new": "“But look at you, you're wounded and battered. You stand no chance against me, so why do you still raise your sword?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 58,
+       "talk_index_new": 58,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "Why? Isn't it obvious?",
+       "new": "“Why? Isn't it obvious?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 59,
+       "talk_index_new": 59,
+       "kind": "text",
+       "speaker_old": "Pegasus",
+       "speaker_new": "Pegasus",
+       "old": "To restore happiness to the world!",
+       "new": "“To restore happiness to the world!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wonder_01_20",
+     "episode_no": 21,
+     "title_en": "Wonderlands×Showtime",
+     "title_jp": "Wonderlands×Showtime",
+     "lines_old": 59,
+     "lines_new": 59,
+     "changes": [
+      {
+       "talk_index_old": 12,
+       "talk_index_new": 12,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Wo?",
+       "new": "“Wo”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 50,
+       "talk_index_new": 50,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "I heard it too♪ It went like this, Ha ha ha!",
+       "new": "I heard it too♪ It went like this, “Ha ha ha!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 87,
+   "text_changes": 87
+  }
+ ],
+ "bundles_only_in_new": []
+}

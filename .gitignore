@@ -18,6 +18,9 @@
 !/data/master/eventStories_en.json
 !/data/master/events_en.json
 !/data/master/character2ds.json
+# the six unit arcs. unit_bundles() returns [] when this is absent, so an untracked copy
+# would make CI quietly sweep events only and drop the arcs from the payload
+!/data/master/unitStories.json
 __pycache__/
 *.pyc
 .venv/

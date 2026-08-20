@@ -33,11 +33,22 @@ def on_disk(bundle: str, version: str) -> bool:
     return (OFFICIAL / version / (bundle.replace("/", "__") + ".json")).exists()
 
 
+def kind_of(bundle: str) -> str:
+    """Which master list the fetcher must consult to recognise this bundle."""
+    return "unit" if bundle.startswith("scenario/unitstory/") else "event"
+
+
+def label(bundle: str) -> str:
+    """Short name for progress lines. Unit arcs put the chapter last, events second."""
+    parts = bundle.split("/")
+    return parts[-1] if kind_of(bundle) == "unit" else parts[1]
+
+
 def fetch(bundle: str, version: str) -> bool:
     """Pull one bundle at one version. Cheap now that --bundles exists."""
     result = subprocess.run(
         [str(RE_PYTHON), "scripts/fetch_official_bundles.py",
-         "--version", version, "--bundles", bundle],
+         "--kind", kind_of(bundle), "--version", version, "--bundles", bundle],
         capture_output=True, text=True,
     )
     if result.returncode != 0:
@@ -81,7 +92,7 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     confirmed = spurious = failed = 0
     for i, (bundle, old, new) in enumerate(jobs, 1):
-        name = bundle.split("/")[1]
+        name = label(bundle)
         for version in (old, new):
             if not on_disk(bundle, version) and not fetch(bundle, version):
                 print(f"  [{i}/{len(jobs)}] {name} {old}->{new}: FETCH FAILED")

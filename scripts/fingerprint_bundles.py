@@ -104,6 +104,22 @@ def event_bundles() -> list[str]:
     return out
 
 
+def unit_bundles() -> list[str]:
+    """The six main unit arcs — one bundle per chapter, holding all its episodes.
+
+    Only six probes per version, and they are the character-band stories rather than
+    seasonal events, so a considered retranslation is more likely to land here.
+    """
+    path = MASTER / "unitStories.json"
+    if not path.exists():
+        return []
+    return [
+        f"scenario/unitstory/{chapter['assetbundleName']}"
+        for unit in json.loads(path.read_text())
+        for chapter in unit.get("chapters", [])
+    ]
+
+
 def live_versions(base: str, versions: list[dict], workers: int) -> list[dict]:
     """Versions the CDN still serves, found by probing one long-lived bundle."""
     with ThreadPoolExecutor(max_workers=workers) as pool:
@@ -152,7 +168,7 @@ def main() -> None:
     if args.probe:
         return
 
-    bundles = event_bundles()
+    bundles = event_bundles() + unit_bundles()
     if args.limit_bundles:
         bundles = bundles[: args.limit_bundles]
     cache = json.loads(FINGERPRINTS.read_text()) if FINGERPRINTS.exists() else {}
@@ -194,7 +210,11 @@ def main() -> None:
     for bundle, trans in sorted(found.items(), key=lambda kv: -len(kv[1]))[:10]:
         pairs = ", ".join(f"{t['old']}->{t['new']}" for t in trans[:3])
         more = f" (+{len(trans) - 3})" if len(trans) > 3 else ""
-        print(f"    {len(trans):2d}  {bundle.split('/')[1]:28s} {pairs}{more}")
+        # events name the bundle in the middle, unit arcs at the end; taking [1] blindly
+        # labelled all six arcs "unitstory"
+        parts = bundle.split("/")
+        name = parts[-1] if bundle.startswith("scenario/unitstory/") else parts[1]
+        print(f"    {len(trans):2d}  {name:28s} {pairs}{more}")
 
 
 if __name__ == "__main__":

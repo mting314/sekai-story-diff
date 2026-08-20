@@ -23,6 +23,9 @@ from textutil import compare_key, language_shift, normalize  # noqa: E402
 
 MASTER = Path("data/master")
 OFFICIAL = Path("data/official")
+# Unit arcs are carried as pseudo-events so search, range filtering, the drawer and the
+# version browser need no second code path. Event ids run to 178; chapter ids to 6.
+ARC_ID_BASE = 9000
 # The story indexer supplies the JP name / unit / arc slug. This used to be read as a
 # bare "events_index.json" from the current working directory — a file that does not
 # exist in this repo, so the script only ran from a scratch cwd with a copy dropped in.
@@ -167,6 +170,22 @@ def main() -> None:
 
     stories = json.loads((MASTER / "eventStories.json").read_text())
     by_bundle = {f"event_story/{s['assetbundleName']}/scenario": s for s in stories}
+    # Unit arcs ride the same code path as events, keyed into an id range that cannot
+    # collide (event ids run to 178 today). They differ only in where their metadata
+    # lives: unitStories.json from the EN master repo already carries English chapter
+    # and episode titles, so no eventStories_en.json lookup and no indexer entry.
+    unit_path = MASTER / "unitStories.json"
+    if unit_path.exists():
+        for unit in json.loads(unit_path.read_text()):
+            for chapter in unit.get("chapters", []):
+                by_bundle[f"scenario/unitstory/{chapter['assetbundleName']}"] = {
+                    "arc": True,
+                    "eventId": ARC_ID_BASE + chapter["id"],
+                    "unit": unit["unit"],
+                    "name_en": chapter.get("title", ""),
+                    "chapter_no": chapter.get("chapterNo"),
+                    "eventStoryEpisodes": chapter.get("episodes", []),
+                }
     en_events = {e["id"]: e for e in json.loads((MASTER / "events_en.json").read_text())}
     en_titles = {
         s["eventId"]: {ep["episodeNo"]: ep.get("title", "") for ep in s.get("eventStoryEpisodes", [])}
@@ -227,7 +246,8 @@ def main() -> None:
                 {
                     "scenario_id": name,
                     "episode_no": episode_no,
-                    "title_en": en_titles.get(master["eventId"], {}).get(episode_no, ""),
+                    "title_en": ep.get("title", "") if master.get("arc")
+                                else en_titles.get(master["eventId"], {}).get(episode_no, ""),
                     "title_jp": ep.get("title", ""),
                     "lines_old": len(_talks(old_scenario)),
                     "lines_new": len(_talks(new_scenario)),
@@ -242,9 +262,12 @@ def main() -> None:
         events.append(
             {
                 "event_id": event_id,
-                "name_en": en_events.get(event_id, {}).get("name", ""),
+                "kind": "arc" if master.get("arc") else "event",
+                "chapter_no": master.get("chapter_no"),
+                "name_en": master.get("name_en") if master.get("arc")
+                           else en_events.get(event_id, {}).get("name", ""),
                 "name_jp": meta.get("name", ""),
-                "unit": meta.get("unit", ""),
+                "unit": master.get("unit") if master.get("arc") else meta.get("unit", ""),
                 "arc_slug": meta.get("arc_slug", ""),
                 "bundle": bundle,
                 "episodes": episodes,

@@ -1,0 +1,104 @@
+{
+ "comparison": {
+  "old_asset_version": "4.1.51.10",
+  "new_asset_version": "4.1.51.15",
+  "old_released_at": "2025-12-16",
+  "new_released_at": "2025-12-26",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 5,
+  "by_kind": {
+   "speaker": 5
+  },
+  "by_lang": {
+   "punctuation": 1,
+   "rewrite": 4
+  },
+  "rewrite_lines": 4
+ },
+ "events": [
+  {
+   "event_id": 9006,
+   "kind": "arc",
+   "name_en": "Nightcord at 25:00 Story - Chapter 1",
+   "name_jp": "",
+   "unit": "school_refusal",
+   "arc_slug": "",
+   "bundle": "scenario/unitstory/school-refusal-story-chapter",
+   "episodes": [
+    {
+     "scenario_id": "nightcode_01_05",
+     "episode_no": 6,
+     "title_en": "Vanishing Snow",
+     "title_jp": "Vanishing Snow",
+     "lines_old": 73,
+     "lines_new": 73,
+     "changes": [
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Dad",
+       "speaker_new": "Kanade's Father",
+       "old": ".....",
+       "new": ".....",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Dad",
+       "speaker_new": "Kanade's Father",
+       "old": "That's amazing, Kanade!",
+       "new": "That's amazing, Kanade!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Dad",
+       "speaker_new": "Kanade's Father",
+       "old": "I didn't realize you could write such gentle songs. I'm sure your mother would have loved it, too.",
+       "new": "I didn't realize you could write such gentle songs. I'm sure your mother would have loved it, too.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Dad",
+       "speaker_new": "Kanade's Father",
+       "old": "You have such a gift, Kanade. You've really been blessed by music.",
+       "new": "You have such a gift, Kanade. You've really been blessed by music.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "speaker",
+       "speaker_old": "Kanade's Dad",
+       "speaker_new": "Kanade's Father",
+       "old": "Kanade, make sure you keep creating your own music.",
+       "new": "Kanade, make sure you keep creating your own music.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 5,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}

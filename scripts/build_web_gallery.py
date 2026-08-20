@@ -90,6 +90,10 @@ UNITS = {
     "virtual_singer": ("piapro", "#00bcd4"),
     "mixed": ("", "#8f89b5"),
 }
+# unitStories.json keys its units by the asset family — the name UNITS maps *to*, not
+# the one it is keyed by. Without this an arc looks up "school_refusal", misses, and
+# silently takes the grey no-unit default instead of Nightcord's purple and logo.
+UNIT_BY_FAMILY = {family: name for name, (family, _) in UNITS.items() if family}
 
 
 def sprite_key(costume: str, motion: str, facial: str, ambient: str, depth: int) -> str:
@@ -498,14 +502,21 @@ def main() -> None:
                 )
 
         if episodes:
+            # Unit arcs ride the event path but carry their own metadata: the diff payload
+            # already knows their unit and English chapter title, and neither the indexer
+            # nor events_en.json has an entry for them. They also have no art of their own
+            # — no banner and no title logo exist on the mirror — so the card and header
+            # fall back to the unit logo, which is why UNITS is consulted either way.
+            is_arc = event.get("kind") == "arc"
             meta = metas.get(event["event_id"], {})
-            unit = meta.get("unit") or ""
+            unit = (UNIT_BY_FAMILY.get(event.get("unit"), event.get("unit"))
+                    if is_arc else meta.get("unit")) or ""
             logo, colour = UNITS.get(unit, ("", "#8f89b5"))
             bundle = meta.get("bundle") or bundle_name
-            banner = f"event/{bundle}.webp" if fetch_banner(
+            banner = "" if is_arc else (f"event/{bundle}.webp" if fetch_banner(
                 meta.get("banner", ""), out_root / "public/event" / f"{bundle}.webp",
                 BANNER_WIDTH, args.quality
-            ) else ""
+            ) else "")
             # An event can be rewritten at several releases, so it owns a list of
             # transitions rather than one pair. Appending a second entry with the same
             # id would make it unreachable — main.js finds events by id.
@@ -515,13 +526,19 @@ def main() -> None:
                     "banner": banner,
                     "colour": colour,
                     "id": event["event_id"],
-                    "logo": f"logo/{bundle}.webp" if fetch_logo(
+                    "kind": "arc" if is_arc else "event",
+                    "logo": "" if is_arc else (f"logo/{bundle}.webp" if fetch_logo(
                         bundle, meta.get("logo", ""),
                         out_root / "public/logo" / f"{bundle}.webp", args.quality
-                    ) else "",
+                    ) else ""),
                     "name": event["name_en"],
+                    # In the drawer an arc already sits under its unit's group header, so
+                    # "Nightcord at 25:00 Story - Chapter 1" repeats itself. Cards and the
+                    # page header are not grouped, so they keep the full official title.
+                    "shortName": f"Unit Story — Chapter {event.get('chapter_no') or 1}"
+                                 if is_arc else "",
                     "nameJp": meta.get("nameJp") or event["name_jp"],
-                    "slug": f"event{event['event_id']:03d}",
+                    "slug": f"{'arc' if is_arc else 'event'}{event['event_id']:03d}",
                     "transitions": [],
                     "unit": unit,
                     "unitLogo": f"unit/{logo}.png" if logo else "",
@@ -647,9 +664,20 @@ def main() -> None:
     if missing:
         print(f"  WARNING {len(missing)} poses produced no sprite: {missing[:5]}")
     if unresolved_motion_bases:
-        # no motion set on the mirror, so these render in the model's rest pose
-        print(f"  WARNING {len(unresolved_motion_bases)} costumes have no motion base and "
-              f"render as a T-pose: {sorted(unresolved_motion_bases)}")
+        # No motion set on the mirror, so these render in the model's rest pose. For
+        # sub_* that is fine and expected: they are prop and mascot models with no
+        # articulation, and their rest pose is an ordinary standing pose — spot-checked
+        # sub_kanadefather and sub_nenedayo. Only a main costume failing to resolve is
+        # the arms-out T-pose worth shouting about, and lumping the two together taught
+        # every run to be ignored, which would hide exactly that regression.
+        expected = sorted(c for c in unresolved_motion_bases if c.startswith("sub_"))
+        genuine = sorted(c for c in unresolved_motion_bases if not c.startswith("sub_"))
+        if genuine:
+            print(f"  WARNING {len(genuine)} costume(s) have no motion base and will "
+                  f"render as a T-pose: {genuine}")
+        if expected:
+            print(f"  {len(expected)} sub-character model(s) have no motion set and use "
+                  f"their rest pose, as expected: {expected}")
     if dropped:
         print(f"  dropped {len(dropped)} lines")
 
