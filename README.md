@@ -19,6 +19,24 @@ msgpack). Bundles are decrypted with [`sssekai`][sssekai] and read with UnityPy.
 [endiff]: https://github.com/Sekai-World/sekai-master-db-en-diff
 [sssekai]: https://github.com/mos9527/sssekai
 
+### How far back this can go
+
+Not to launch, and never will. The version index knows **194 EN releases back to
+2021-12-13**, but probing every one of them against the CDN finds only **42 still served**
+— from **2025-09-26 (4.0.0.1)** onward. The boundary is clean: the newest dead version is
+3.8.51.20, four days before the oldest live one. It is a rolling ~11-month retention
+window, not scattered gaps.
+
+The pre-2025-09 text is simply gone. `storage.sekai.best` mirrors only the current version
+of each asset, and `sekai-master-db-en-diff` has deep history but holds master-DB JSON —
+story dialogue lives in the scenario asset bundles, not the master DB.
+
+Two consequences. The floor **rises**: every release ages out after ~11 months, so a
+transition not diffed while it is live is lost for good — which is the real reason the
+daily job matters. And the window is currently **fully covered**: all 42 live versions are
+fingerprinted, and of the 41 adjacent pairs, 22 rendered a diff, 16 had no bundle re-hash
+at all, and 3 re-hashed without the English text moving (confirmed by fetching both sides).
+
 ## First result
 
 The EN release that rewrote **Event 1 · First Star After the Rain**:
