@@ -60,6 +60,17 @@ def main() -> None:
     missing_bg = sorted(b for b in backgrounds if not (assets / "bg" / f"{b}.webp").exists())
     problems += [f"background {b} is referenced but absent" for b in missing_bg[:10]]
 
+    # Event art was not checked here, which is how a whole asset class could be added to
+    # the payload and never uploaded: the site still returns 200, just with holes in it.
+    art = {
+        path
+        for event in payload.get("events", []) + payload.get("pending", [])
+        for key in ("banner", "logo", "unitLogo")
+        if (path := event.get(key))
+    }
+    missing_art = sorted(p for p in art if not (assets / p).exists())
+    problems += [f"event art {p} is referenced but absent" for p in missing_art[:10]]
+
     frames = sum(
         len(episode["frames"])
         for event in payload.get("events", [])
@@ -69,6 +80,7 @@ def main() -> None:
     print(f"{len(payload.get('events', []))} events, {frames} frames")
     print(f"  sprite keys referenced: {len(referenced)}  entries: {len(sprites)}")
     print(f"  backgrounds referenced: {len(backgrounds)}")
+    print(f"  event art referenced:   {len(art)}")
 
     if problems:
         print(f"\n{len(problems)} problem(s):", file=sys.stderr)
