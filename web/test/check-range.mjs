@@ -187,6 +187,35 @@ ok(payload.events.filter((e) => e.kind !== "arc").every((e) => e.logo),
    "every event carries a logo",
    `${payload.events.filter((e) => e.kind !== "arc" && !e.logo).length} missing`);
 
+console.log("\nATTRIBUTION");
+{
+  const b = boot("#/");
+  const foot = b.document.querySelector(".attrib");
+  ok(foot, "home carries an attribution footer");
+  const txt = foot.textContent.replace(/\s+/g, " ");
+  for (const who of ["SEGA", "Colorful Palette", "Crypton Future Media"]) {
+    ok(txt.includes(who), `names ${who} as a rights holder`);
+  }
+  ok(/unofficial fan project/i.test(txt) && /not affiliated/i.test(txt),
+     "says plainly that it is unofficial and unaffiliated");
+  // the pipeline depends on these; they should be credited, not silently consumed
+  for (const src of ["sekai-master-db-en-diff", "sekai.best", "sssekai",
+                     "sekai-viewer", "Cleista"]) {
+    ok(txt.includes(src), `credits ${src}`);
+  }
+  ok([...foot.querySelectorAll("a")].every((a) =>
+       a.getAttribute("rel") === "noopener noreferrer"),
+     "every outbound credit link is safe");
+
+  // an event page has no footer, so the drawer has to carry it
+  const e = boot("#/e1");
+  const nav = e.document.querySelector(".nav-attrib");
+  ok(nav, "the drawer carries a short attribution too");
+  ok(/SEGA/.test(nav.textContent) && nav.querySelector("a[href^='#/']"),
+     "with the rights holders and a link back to the full credits",
+     nav.textContent.replace(/\s+/g, " ").trim().slice(0, 60));
+}
+
 console.log("\nREAD-IN-CONTEXT LINKS");
 {
   // every episode needs the game's scenario id and every entry its bundle name, or the

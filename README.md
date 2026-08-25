@@ -170,3 +170,24 @@ data/      caches + outputs (gitignored; ~700 MB)
 
 * `sekai-viewer` fork, branch `feat/story-version-diff` — the same diff as a browsing
   experience, reusing the viewer's faithful Live2D story player.
+
+## Attribution
+
+An unofficial fan project. Not affiliated with, endorsed by, or connected to SEGA,
+Colorful Palette or Crypton Future Media.
+
+All story text, character models, backgrounds and event art belong to their owners —
+© SEGA · © Colorful Palette Inc. · © Crypton Future Media, INC. (piapro.net) — and are
+reproduced here only to document what changed between two official English releases.
+Nothing here is a translation of ours: both sides of every diff are the publisher's own
+text, taken from two pinned versions of their own CDN.
+
+Built on other people's work:
+
+| Project | What it gives us |
+| --- | --- |
+| [`Sekai-World/sekai-master-db-en-diff`](https://github.com/Sekai-World/sekai-master-db-en-diff) | the asset version index — every release's `assetVersion` and `assetHash`, recovered from its git history |
+| [`sekai.best`](https://sekai.best) | the asset mirror the backgrounds, banners and Japanese script come from |
+| [`Sekai-World/sekai-viewer`](https://github.com/Sekai-World/sekai-viewer) | the scene layout and Live2D transforms this reimplements |
+| [`sssekai`](https://github.com/mos9527/sssekai) | reads and decrypts the game's asset bundles |
+| [Cleista's SEKAI Reader](https://pjsk.cleista.cc) | where the "in context" links go, and the model for the dialogue styling |

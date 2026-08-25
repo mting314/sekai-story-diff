@@ -99,6 +99,40 @@ const figure = (ev, tr, ep, f) =>
   + (f.jp ? `<div class="jpline"><i>JP</i>${esc(f.jp)}</div>` : "")
   + `</figcaption></figure>`;
 
+/* ---------- attribution ---------- */
+// This site reproduces thousands of lines of someone else's script over their character
+// art. It should say whose, and say so where people actually land, rather than in a
+// buried About page — hence the home footer plus a short line in the drawer, which is
+// the only chrome an event page has.
+const CREDITS = [
+  ["https://github.com/Sekai-World/sekai-master-db-en-diff",
+   "Sekai-World/sekai-master-db-en-diff",
+   "the asset version index — every release's version and hash, recovered from its git history"],
+  ["https://sekai.best", "sekai.best",
+   "the asset mirror the backgrounds, banners and Japanese script are taken from"],
+  ["https://github.com/Sekai-World/sekai-viewer", "Sekai-World/sekai-viewer",
+   "the scene layout and Live2D transforms this reimplements"],
+  ["https://github.com/mos9527/sssekai", "sssekai",
+   "reads and decrypts the game's asset bundles"],
+  ["https://pjsk.cleista.cc", "Cleista's SEKAI Reader",
+   "where the “in context” links go, and the model for the dialogue styling"],
+];
+
+const attribution = () => `<footer class="attrib">
+  <p><b>An unofficial fan project.</b> Not affiliated with, endorsed by, or connected to
+     SEGA, Colorful Palette or Crypton Future Media.</p>
+  <p>All story text, character models, backgrounds and event art belong to their owners
+     — © SEGA · © Colorful Palette Inc. · © Crypton Future Media, INC.
+     <a href="https://piapro.net" target="_blank" rel="noopener noreferrer">piapro.net</a>
+     — and appear here only to document what changed between two official English
+     releases. Nothing here is a translation of ours: both sides of every diff are the
+     publisher's own text.</p>
+  <p class="attrib-h">Built on other people's work</p>
+  <ul>${CREDITS.map(([href, name, what]) =>
+    `<li><a href="${href}" target="_blank" rel="noopener noreferrer">${name}</a> — ${what}</li>`
+  ).join("")}</ul>
+</footer>`;
+
 /* ---------- home ---------- */
 function searchLines(q) {
   const out = [];
@@ -222,9 +256,9 @@ function home() {
       <div class="hero">
         <h1>Project Sekai EN — official retranslation</h1>
         <p>Every story line the English release quietly rewrote, shown before and after
-           over the scene the game actually draws for it. Backgrounds are served by
-           storage.sekai.best; the posed characters are rendered from the official
-           Live2D models.</p>
+           over the scene the game actually draws for it. Both sides come from the
+           game's own asset CDN at a pinned version; the posed characters are rendered
+           from the official Live2D models.</p>
         <div class="picker">
           <label>from <select id="from">${opts(view.from)}</select></label>
           <label>to <select id="to">${opts(view.to)}</select></label>
@@ -235,7 +269,8 @@ function home() {
       <input id="q" placeholder="Search events, episodes, characters or dialogue…"
              autocomplete="off">
       <div class="hint">Press <b>/</b> to search. Try “Shiho”, “bass”, “rain”, or 星.</div>
-      <div id="results"></div></div>`;
+      <div id="results"></div>
+      ${attribution()}</div>`;
     const sync = (which) => {
       const el = document.getElementById(which);
       el.onchange = () => {
@@ -414,7 +449,12 @@ function drawer(ev, trs) {
                + g.events.map(({ e, n }) => navRow(e, n)).join("")
                + `</details>`;
         }).join("")
-      + `</div><div id="nav-eps"></div>`;
+      + `</div><div id="nav-eps"></div>`
+      // an event page has no other chrome, so the drawer is the only place the
+      // attribution can reach someone who deep-linked straight into a story
+      + `<div class="nav-attrib">Unofficial fan project. Story text and art are
+           © SEGA · Colorful Palette · Crypton Future Media.
+           <a href="#/${rangePrefix()}">Full credits</a></div>`;
   }
   for (const a of d.querySelectorAll("#nav-events .nav-ev")) {
     a.classList.toggle("on", a.getAttribute("data-ev") === String(ev.id));
