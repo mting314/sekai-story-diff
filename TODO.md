@@ -22,55 +22,17 @@ nothing, so the list should probably show only those that did, with a count of t
 
 ---
 
-## 2. Attribution disclaimer on the site
-
-State plainly that all story text, character art and assets belong to Colorful Palette /
-SEGA / Crypton, that this is an unofficial fan project, and that source data comes from
-the game CDN and `sekai.best`.
-
-**Why:** it is other people's copyrighted work, presented at length. It should say so
-without needing to be asked.
-
-**Watch out for:** it needs to be visible, not buried — the home hero footer and the
-drawer are both reasonable. Also credit `Sekai-World/sekai-master-db-en-diff` for the
-version index and `sekai.best` for the asset mirror, since the pipeline depends on both.
-
----
-
-## 3. Style the dialogue like the game
-
-Replace the 94%-opaque white card with the game's look. The viewer's assets specify it
-exactly: `src/assets/live2d_player_ui/text_background.svg` is a **vertical black gradient at
-0.2–0.3 opacity** spanning the bottom of the stage, and `layer/Dialog.ts` draws text
-`#ffffff` with `stroke #4a496899` — white text with a soft dark outline.
-
-**Watch out for:** the diff highlight colours go with it. `#a52f2f` / `#126b48` were picked
-against white and will be unreadable on a dark panel; the mobile variants (`#ff9b9b` /
-`#8ce0b6`) are the starting point, and the two code paths can then merge. A screenshot would
-settle how much stage height the panel covers and where the name plate sits.
-
-## 4. Prune orphaned sprites from the bucket
-
-Every reclassification leaves sprites in `gs://sekai-story-diff-assets` that no payload
-references. The bucket holds 2,390 sprites against 1,161 the payload references.
-
-**Why it can wait:** they are immutable, content-addressed, and cost roughly $0.001/month.
-Nothing breaks.
-
-**Why it should not wait forever:** the set only grows, and there is currently no way to
-tell a live sprite from a dead one without rebuilding the payload. A script that diffs the
-bucket listing against `web/src/data.json` and deletes the difference is small — the pieces
-already exist in `scripts/verify_payload.py`, which walks exactly the same references in the
-opposite direction. Do it after the classifier fix lands, when the orphan set is at its largest and the
-saving is easiest to confirm.
-
-Banners are orphaned the same way and should go in the same sweep: 45 files under
-`event/` for the 38 events the payload still references.
-
----
-
 ## Done
 
+- Dialogue styled like the game: the opaque white card replaced by the two stacked
+  gradients and #fff text stroked in #4a4968, sized in `cqmin` against the stage.
+  `paint-order:stroke fill` is the load-bearing part. The highlight colours moved with
+  it and the separate mobile path collapsed into one rule
+- Orphaned media pruned. `scripts/prune_bucket.py` walks the same references
+  `verify_payload.py` checks, in the opposite direction. Removed 1,306 objects from the
+  bucket and 1,381 files (45.7 MB) from the local staging mirror — pruning only the
+  bucket would have been undone by the next upload from a dev machine
+- Attribution on the site: home footer, drawer line, README
 - Main unit stories ingested. Six arcs swept (252 probes); only Nightcord at 25:00 and
   Wonderlands×Showtime were ever retouched. Modelled as pseudo-events in id range
   9000+ so search, range filtering, the drawer and a future version browser need no
