@@ -23,10 +23,23 @@ _session.headers["User-Agent"] = "sekai-story-diff"
 
 
 def jp_lines(bundle: str, scenario_id: str) -> list[str]:
-    """JP ``Body`` per TalkData index (cached)."""
-    dest = JP_CACHE / bundle / f"{scenario_id}.json"
+    """JP ``Body`` per TalkData index (cached).
+
+    ``bundle`` is the full bundle path — ``event_story/<name>/scenario`` or
+    ``scenario/unitstory/<chapter>``. It used to be just the event's short name with
+    ``event_story/`` and ``/scenario`` spliced on here, which meant unit arcs could
+    never resolve: their path has a different shape entirely, the fetch 404'd, and the
+    empty list was indistinguishable from "this line has no JP counterpart". Every arc
+    frame shipped with a blank JP column and nothing said so.
+    """
+    # Cache key stays flat so the 43 already-cached event bundles are not re-downloaded.
+    dest = JP_CACHE / bundle.replace("/", "__") / f"{scenario_id}.json"
+    legacy = JP_CACHE / bundle.split("/")[1] / f"{scenario_id}.json" \
+        if bundle.startswith("event_story/") else None
+    if legacy and legacy.exists():
+        dest = legacy
     if not dest.exists():
-        url = f"{JP_CDN}/event_story/{bundle}/scenario/{scenario_id}.asset"
+        url = f"{JP_CDN}/{bundle}/{scenario_id}.asset"
         try:
             resp = _session.get(url, timeout=60)
             if resp.status_code != 200:

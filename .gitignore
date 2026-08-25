@@ -34,6 +34,8 @@ port/live2d-version-diff/
 # cache), so the build input has to be in the tree.
 node_modules/
 web/dist/
+# throwaway production build used for local preview on :8199
+web/dist-local/
 
 # project venv
 .venv/

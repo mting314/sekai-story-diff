@@ -12,7 +12,16 @@ const ASSETS = import.meta.env.VITE_ASSET_BASE || BASE;
 
 const esc = (s) => String(s).replace(/[&<>"]/g,
   (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const strip = (h) => h.replace(/<[^>]*>/g, "");
+// The payload stores each line as HTML — Python's html.escape() has already turned
+// & < > " ' into entities, and the diff runs are real <b> tags. Injecting that into
+// .txt is correct, but every *other* use wants plain text, so the entities have to come
+// back out. Leaving them in escaped the ampersand a second time and printed a literal
+// "it&#x27;s" in the search results, and — less visibly — made the search haystack
+// contain "can&#x27;t", so no query with an apostrophe could ever match.
+const ENTITY = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#x27;": "'" };
+// one left-to-right pass, so "&amp;lt;" decodes to "&lt;" and is not decoded twice
+const strip = (h) => h.replace(/<[^>]*>/g, "")
+                      .replace(/&(?:amp|lt|gt|quot|#x27);/g, (m) => ENTITY[m]);
 const hl = (s, q) => !q ? esc(s)
   : esc(s).replace(new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"),
                    "<mark>$1</mark>");
@@ -49,19 +58,44 @@ function panel(f, old, tr) {
   // the bracket belongs to the transition: one event can be rewritten at several
   // releases, and each frame must say which one it belongs to
   const ver = old ? "BEFORE " + tr.oldVersion : "AFTER " + tr.newVersion;
-  // the box is a sibling of the stage, not a child: the stage is a fixed 16:9 box with
-  // overflow hidden, so a narrow layout that stacks the text below the art cannot do it
-  // from inside. On wide screens .box is absolutely positioned back over the stage.
+  // The dialogue lives *inside* the stage now. It used to be a sibling so a narrow
+  // layout could stack it below the art, but that stopped being true when the mobile
+  // rules went back to overlaying — and being inside is what lets it size in cqmin
+  // against the stage's own box, the way the game scales every dialogue dimension.
   return `<div class="panel"><div class="stage${f.flashback ? " fb" : ""}" style="${bg}">`
-       + `${layers}</div>`
-       + `<div class="box"><span class="plate">${esc(name)}</span>`
+       + `${layers}`
+       + `<div class="dlg"><div class="spk-row"><span class="spk">${esc(name)}</span>`
+       + `<span class="spk-rule" aria-hidden="true"></span></div>`
        + `<span class="tag ${old ? "o" : "n"}">${ver}</span>`
-       + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div></div>`;
+       + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div>`
+       + `</div></div>`;
 }
+// Read this exact line in context, in a full story reader.
+//
+// Cleista's reader rather than sekai.best: sekai.best's /storyreader/ route reaches an
+// episode but has no line anchor, so it could only ever drop you at the top of a
+// twenty-minute scene. This one takes ?line=N.
+//
+// ?line is NOT our line number. It counts the reader's *steps*, and a full-screen telop
+// is a step you click through, so it runs ahead of TalkData by however many telops came
+// before. 94% of our frames drift, by up to seven lines. readerLine is computed in the
+// builder from the same rule their steps.js uses; f.talkIndex must not be substituted.
+//
+// Neither reader puts the language in the URL; both read it from a stored preference,
+// so a reader set to JP will land on the Japanese text of the right line.
+const READER = "https://pjsk.cleista.cc/#/read";
+const readerHref = (ev, ep, f) =>
+  `${READER}/${ev.kind === "arc" ? "unit" : "event"}`
+  + `/${ev.bundleName}/${ep.scenarioId}?line=${f.readerLine}`;
+
 const figure = (ev, tr, ep, f) =>
   `<figure id="f-${ev.id}-${tr.newVersion}-${ep.no}-${f.talkIndex}">`
   + panel(f, true, tr) + panel(f, false, tr)
-  + `<figcaption>#${f.talkIndex}`
+  + `<figcaption><span class="ln">#${f.talkIndex}</span>`
+  + (ev.bundleName && ep.scenarioId && f.readerLine
+      ? `<a class="ctx" target="_blank" rel="noopener noreferrer"
+           title="Read this line in context on Cleista's SEKAI Reader"
+           href="${readerHref(ev, ep, f)}">in context ↗</a>` : "")
   + (f.jp ? `<div class="jpline"><i>JP</i>${esc(f.jp)}</div>` : "")
   + `</figcaption></figure>`;
 
@@ -158,7 +192,7 @@ function results() {
   document.getElementById("results").innerHTML = `
     ${hits.length ? `<div class="sec">${hits.length > 300 ? "300+" : hits.length}
         matching lines</div>` + hits.slice(0, 40).map((h) => `
-      <a class="hit" href="#/${rangePrefix()}e${h.ev.id}/ep${String(h.ep.no).padStart(2, "0")}/${h.f.talkIndex}">
+      <a class="hit" href="${epHref(h.ev, h.tr, h.ep, h.f.talkIndex)}">
         <div class="who">${esc(h.ev.name)} · Ep ${h.ep.no} · #${h.f.talkIndex} ·
           <b>${esc(h.f.speaker)}</b></div>
         <div class="o">− ${hl(strip(h.f.old), q)}</div>
@@ -168,7 +202,7 @@ function results() {
       : ""}
     <div class="sec">Events${q ? ` matching “${esc(q)}”` : ""}</div>
     <div class="cards">
-      ${evs.map((e) => card(e, q, `#/${rangePrefix()}e${e.id}`)).join("")
+      ${evs.map((e) => card(e, q, evHref(e))).join("")
       || `<div class="empty">No event matches “${esc(q)}”.</div>`}
       ${q ? "" : (D.pending || []).map((e) => card(e, "", null)).join("")}
     </div>`;
@@ -241,6 +275,17 @@ function home() {
 
 /* ---------- event ---------- */
 const epId = (tr, ep) => `t${tr.newVersion.replace(/\./g, "_")}-ep${String(ep.no).padStart(2, "0")}`;
+
+// Every link goes through these two, so the URL shape is defined in exactly one place.
+// The version is only appended when the event has more than one release in range —
+// carrying it always would put a version string in 34 of 40 URLs that cannot be
+// ambiguous.
+const evHref = (ev) => `#/${rangePrefix()}${ev.slug}`;
+const epHref = (ev, tr, ep, line) => {
+  const multi = inRange(ev).length > 1;
+  return `${evHref(ev)}/${ep.slug}${line != null ? "/" + line : ""}`
+       + (multi ? `?v=${tr.newVersion}` : "");
+};
 
 function event(ev, openEp) {
   document.getElementById("burger").hidden = false;
@@ -319,7 +364,7 @@ function navRow(e, n) {
     : `<span class="nav-art blank">${e.unitLogo
         ? `<img loading="lazy" alt="" src="${ASSETS}${e.unitLogo}">` : ""}</span>`;
   // an arc already sits under its unit's header, so drop the unit name from the label
-  return `<a class="nav-ev" data-ev="${e.id}" href="#/${rangePrefix()}e${e.id}"`
+  return `<a class="nav-ev" data-ev="${e.id}" href="${evHref(e)}"`
        + ` style="--u:${e.colour || "#8f89b5"}">${art}`
        + `<span class="nav-txt"><b>${esc(e.shortName || e.name)}</b>`
        + `<small>${n} changed lines</small></span></a>`;
@@ -383,7 +428,7 @@ function drawer(ev, trs) {
     trs.map((tr) => `<details class="nav-grp" open>`
         + `<summary class="nav-h"><span class="nav-t">${tr.oldVersion} → ${tr.newVersion}</span></summary>`
         + tr.episodes.map((ep) => `<a class="nav-ep" data-ep="${epId(tr, ep)}"`
-            + ` href="#/${rangePrefix()}e${ev.id}/${epId(tr, ep)}">`
+            + ` href="${epHref(ev, tr, ep)}">`
             + `<i>${ep.no}.</i> ${esc(ep.title)} <i>${ep.frames.length}</i></a>`).join("")
         + `</details>`).join("")
     + `<div class="nav-h">All episodes</div>`
@@ -392,11 +437,20 @@ function drawer(ev, trs) {
 }
 
 /* ---------- routing ---------- */
-// #/                                   whole window
-// #/r/5.4.0.20..5.5.1.20/              explicit range
-// #/[r/<a>..<b>/]e1/t5_4_0_30-ep03/19  event, transition+episode, line
+// #/                                                          whole window
+// #/r/5.4.0.20..5.5.1.20/                                     explicit range
+// #/[r/<a>..<b>/]first-star-after-the-rain                    event
+// #/…/first-star-after-the-rain/ep03-a-narrow-escape          episode
+// #/…/first-star-after-the-rain/ep03-a-narrow-escape/19       one line
+//
+// ?v=<newVersion> disambiguates the six events rewritten at more than one release —
+// three of them repeat an episode number across transitions, so the slug alone is not
+// enough. Old ids (e1 / t5_4_0_30-ep03) still resolve: they are in the wild.
 function route() {
-  const parts = (location.hash || "#/").slice(2).split("/").filter(Boolean);
+  const raw = (location.hash || "#/").slice(2);
+  const [path, query] = raw.split("?");
+  const wantVersion = new URLSearchParams(query || "").get("v") || "";
+  const parts = path.split("/").filter(Boolean);
   [view.from, view.to] = spanAll();
   if (parts[0] === "r" && parts[1] && parts[1].includes("..")) {
     const [a, b] = parts.shift() && parts.shift().split("..");
@@ -404,17 +458,40 @@ function route() {
   }
   if (!parts.length) { view.name = "home"; return home(); }
 
-  const ev = D.events.find((e) => "e" + e.id === parts[0]);
+  const ev = D.events.find((e) => e.slug === parts[0])
+          || D.events.find((e) => "e" + e.id === parts[0]);
   if (!ev || !inRange(ev).length) { view.name = "home"; return home(); }
   view.name = "event";
-  event(ev, parts[1]);
+  // Resolve the episode segment to the DOM id the page actually renders. The slug is
+  // per-episode; when a version is given, or the event has only one release, that
+  // pins the transition.
+  const trs = inRange(ev);
+  let domId = "", hitTr = null, hitEp = null;
   if (parts[1]) {
-    const el = document.getElementById(parts[1]);
+    const byVer = wantVersion ? trs.filter((t) => t.newVersion === wantVersion) : trs;
+    for (const t of (byVer.length ? byVer : trs)) {
+      const ep = t.episodes.find((x) => x.slug === parts[1]);
+      if (ep) { domId = epId(t, ep); hitTr = t; hitEp = ep; break; }
+    }
+    if (!domId && /^t[\d_]+-ep\d+$/.test(parts[1])) {          // legacy episode id
+      domId = parts[1];
+      hitTr = trs.find((t) => domId.startsWith("t" + t.newVersion.replace(/\./g, "_")));
+      hitEp = hitTr && hitTr.episodes.find((x) => epId(hitTr, x) === domId);
+    }
+  }
+  // Rewrite a legacy or partial URL to the readable one. Old links keep working, but
+  // the address bar — and so anything copied out of it — ends up canonical. replaceState
+  // does not fire hashchange, so this cannot re-enter route().
+  const canonical = hitEp ? epHref(ev, hitTr, hitEp, parts[2]) : evHref(ev);
+  if (location.hash !== canonical) history.replaceState?.(null, "", canonical);
+  event(ev, domId);
+  if (domId) {
+    const el = document.getElementById(domId);
     if (el) {
       el.open = true;
-      const tr = inRange(ev).find((t) => parts[1].startsWith("t" + t.newVersion.replace(/\./g, "_")));
+      const tr = trs.find((t) => domId.startsWith("t" + t.newVersion.replace(/\./g, "_")));
       const target = parts[2] && tr
-        ? document.getElementById(`f-${ev.id}-${tr.newVersion}-${parseInt(parts[1].slice(-2))}-${parts[2]}`)
+        ? document.getElementById(`f-${ev.id}-${tr.newVersion}-${parseInt(domId.slice(-2))}-${parts[2]}`)
         : el;
       setTimeout(() => {
         // optional-call: never let a missing scrollIntoView abort the rest of the route

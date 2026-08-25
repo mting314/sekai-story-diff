@@ -32,6 +32,7 @@ import hashlib
 import html
 import io
 import json
+import re
 import sys
 from difflib import SequenceMatcher
 from itertools import groupby
@@ -317,6 +318,45 @@ def score_changes(changes: list[dict], total_lines: int) -> dict:
     return {"breadth": round(breadth, 4), "depth": round(depth, 4), "label": label}
 
 
+# Cleista's reader numbers its ?line= over *steps*, not over TalkData: a full-screen
+# telop is a step you click through, so it shifts every line after it. Reusing our
+# talkIndex put every link past the first telop on the wrong line — event_01_01 has 63
+# talks but 67 steps, so by the end of the episode the drift is four lines.
+#
+# Rule taken from their steps.js: a step is a Talk, or a SpecialEffect of type 8/18
+# whose StringVal is real text rather than a sound-cue identifier, or type 24.
+_CUE_IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
+
+
+def reader_lines(scenario: dict) -> dict[int, int]:
+    """TalkData index (0-based) -> the reader's ``?line=`` value (1-based)."""
+    talks = scenario.get("TalkData") or []
+    effects = scenario.get("SpecialEffectData") or []
+    out: dict[int, int] = {}
+    step = talk = 0
+    for snippet in scenario.get("Snippets") or []:
+        action = snippet.get("Action")
+        if action == 1:
+            if talk >= len(talks):
+                continue
+            step += 1
+            out[talk] = step
+            talk += 1
+        elif action == 6:
+            ref = snippet.get("ReferenceIndex", 0)
+            if ref >= len(effects):
+                continue
+            effect = effects[ref]
+            kind = effect.get("EffectType")
+            text = (effect.get("StringVal") or "").strip()
+            if kind in (8, 18):
+                if text and not _CUE_IDENTIFIER.match(text):
+                    step += 1
+            elif kind == 24:
+                step += 1
+    return out
+
+
 def spans_html(spans: list[tuple[str, bool]]) -> str:
     """Word runs as HTML, one ``<b>`` per *contiguous* run of changed words.
 
@@ -405,7 +445,12 @@ def main() -> None:
     # before/after for the site as a whole
     for cmp_info, event in [(d["comparison"], e) for d in payloads for e in d["events"]]:
         new_ver = cmp_info["new_asset_version"]
-        bundle_name = event["bundle"].split("/")[1]
+        # Events name the bundle in the middle of the path, unit arcs at the end:
+        #   event_story/event_stella_2020/scenario   ->  event_stella_2020
+        #   scenario/unitstory/school-refusal-story-chapter -> school-refusal-...
+        # Taking [1] blindly gave arcs the literal string "unitstory".
+        parts = event["bundle"].split("/")
+        bundle_name = parts[-1] if event["bundle"].startswith("scenario/unitstory/") else parts[1]
         scenarios = json.loads(
             Path("data/official", new_ver, event["bundle"].replace("/", "__") + ".json").read_text()
         )["scenarios"]
@@ -422,7 +467,8 @@ def main() -> None:
             scenes = scene_states(scenario)
             mode = "three_models" if scenario.get("FirstCharacterLayoutMode") == 1 else "normal"
             # report.py owns the JP fetch + cache; reuse it so there is one implementation
-            jp_lines = jp_source(bundle_name, ep["scenario_id"])
+            jp_lines = jp_source(event["bundle"], ep["scenario_id"])
+            reader_line = reader_lines(scenario)
             frames: list[dict] = []
 
             for change in ep["changes"]:
@@ -487,16 +533,34 @@ def main() -> None:
                         "old": spans_html(spans_old),
                         "speaker": change["speaker_new"] or change["speaker_old"] or "—",
                         "speakerOld": change["speaker_old"] or "",
-                        "talkIndex": idx,
+                        # what the outbound reader calls this line; absent if the walk
+                        # could not place it, which hides the link rather than guessing
+                        "readerLine": reader_line.get(idx, 0),
+                        # 1-based on the way out. `idx` is an array offset and stays
+                        # 0-based everywhere it indexes something (jp_lines above), but
+                        # the payload is where it stops being an offset and becomes a
+                        # line number people read and put in URLs — "#34" should be the
+                        # 34th line. Doing the conversion here keeps exactly one
+                        # convention on the site side rather than +1/-1 at each use.
+                        "talkIndex": idx + 1,
                     }
                 )
 
             if frames:
+                # The slug is the URL segment, so it leads with the episode number to
+                # keep the ordering obvious and appends the title to make the link
+                # readable. Untitled episodes keep the bare number rather than
+                # advertising "ep03-untitled".
+                title_slug = slug(ep["title_en"], 40) if ep["title_en"] else ""
                 episodes.append(
                     {
                         "frames": frames,
                         "no": ep["episode_no"],
-                        "slug": f"ep{ep['episode_no']:02d}",
+                        # the game's own id for this scenario; the outbound reader link
+                        # is keyed on it, and it is stable across releases
+                        "scenarioId": ep["scenario_id"],
+                        "slug": f"ep{ep['episode_no']:02d}"
+                                + (f"-{title_slug}" if title_slug else ""),
                         "title": ep["title_en"],
                     }
                 )
@@ -524,6 +588,8 @@ def main() -> None:
                 event["event_id"],
                 {
                     "banner": banner,
+                    # the game's asset bundle name, for the outbound reader link
+                    "bundleName": bundle_name,
                     "colour": colour,
                     "id": event["event_id"],
                     "kind": "arc" if is_arc else "event",
@@ -538,7 +604,9 @@ def main() -> None:
                     "shortName": f"Unit Story — Chapter {event.get('chapter_no') or 1}"
                                  if is_arc else "",
                     "nameJp": meta.get("nameJp") or event["name_jp"],
-                    "slug": f"{'arc' if is_arc else 'event'}{event['event_id']:03d}",
+                    # Readable URL segment. Deduped against every other entry below,
+                    # because a repeated slug would make one of them unreachable.
+                    "slug": slug(event["name_en"], 50) or f"event{event['event_id']:03d}",
                     "transitions": [],
                     "unit": unit,
                     "unitLogo": f"unit/{logo}.png" if logo else "",
@@ -566,6 +634,15 @@ def main() -> None:
     # order transitions chronologically by the release index, not by string compare:
     # "5.10.x" sorts under "5.2.x" lexicographically
     events = sorted(by_event.values(), key=lambda e: e["id"])
+    # Two entries sharing a slug would make the second unreachable by URL — the router
+    # resolves the first match. Suffix the id rather than silently losing one.
+    seen_slugs: dict[str, int] = {}
+    for entry in events:
+        base = entry["slug"]
+        if base in seen_slugs:
+            entry["slug"] = f"{base}-{entry['id']}"
+            print(f"  slug collision on {base!r}; using {entry['slug']!r}")
+        seen_slugs[base] = entry["id"]
     for e in events:
         e["transitions"].sort(key=lambda t: order.get(t["newVersion"], 0))
         e["changed"] = sum(t["changed"] for t in e["transitions"])

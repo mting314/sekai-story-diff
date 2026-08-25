@@ -18,20 +18,26 @@ const payload = JSON.parse(readFileSync(resolve(HERE, "../src/data.json"), "utf8
 function boot(hash = "#/") {
   const { window, document } = parseHTML(html);
   let hashL = null;
+  const replaced = [];
   const ctx = {
     document, window, console,
+    // records canonicalisation so a test can assert the address bar gets rewritten
+    history: { replaceState: (_s, _t, url) => { replaced.push(url); ctx.location.hash = url; } },
+    replaced,
     location: { hash },
     setTimeout: (f) => f(),
     addEventListener: (t, f) => { if (t === "hashchange") hashL = f; },
     MutationObserver: class { observe() {} disconnect() {} },
     fetch: () => Promise.resolve({}),
     RegExp, JSON, Math, Object, Array, String, Number, Boolean, Error, Set, Map,
+    URLSearchParams,
     Event: window.Event,
   };
   ctx.globalThis = ctx;
   vm.createContext(ctx);
   vm.runInContext(js, ctx);
-  return { ctx, document, window, nav: (h) => { ctx.location.hash = h; hashL && hashL(); } };
+  return { ctx, document, window, replaced,
+           nav: (h) => { ctx.location.hash = h; hashL && hashL(); } };
 }
 
 let fails = 0;
@@ -181,6 +187,187 @@ ok(payload.events.filter((e) => e.kind !== "arc").every((e) => e.logo),
    "every event carries a logo",
    `${payload.events.filter((e) => e.kind !== "arc" && !e.logo).length} missing`);
 
+console.log("\nREAD-IN-CONTEXT LINKS");
+{
+  // every episode needs the game's scenario id and every entry its bundle name, or the
+  // link cannot be built at all
+  ok(payload.events.every((e) => e.bundleName), "every entry carries its bundle name",
+     `${payload.events.filter((e) => !e.bundleName).length} missing`);
+  const eps = payload.events.flatMap((e) => e.transitions.flatMap((t) => t.episodes));
+  ok(eps.every((ep) => ep.scenarioId), "every episode carries its scenario id",
+     `${eps.filter((ep) => !ep.scenarioId).length} missing`);
+  // arcs must use the unit path and the chapter bundle, not "unitstory"
+  const arc = payload.events.find((e) => e.kind === "arc");
+  ok(arc && /-story-chapter$/.test(arc.bundleName),
+     "an arc's bundle name is its chapter, not the literal 'unitstory'", arc?.bundleName);
+
+  const b = boot("#/e1");
+  const link = b.document.querySelector("main figcaption a.ctx");
+  ok(link, "each frame offers a read-in-context link");
+  const href = link.getAttribute("href");
+  ok(href.startsWith("https://pjsk.cleista.cc/#/read/event/event_stella_2020/event_"),
+     "event links use the event path and bundle", href);
+  // ?line counts the reader's steps, not TalkData — telops are steps too — so it must
+  // come from readerLine and must NOT be our line number. Asserting equality is what
+  // shipped every link on the wrong line the first time.
+  ok(payload.events.every((e) => e.transitions.every((t) => t.episodes.every((ep) =>
+       ep.frames.every((f) => Number.isInteger(f.readerLine) && f.readerLine >= 1)))),
+     "every frame carries a reader line");
+  const drift = payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+    t.episodes.flatMap((ep) => ep.frames.map((f) => f.readerLine - f.talkIndex))));
+  ok(drift.every((d) => d >= 0), "a reader line is never behind our line number",
+     `min ${Math.min(...drift)}`);
+  ok(drift.some((d) => d > 0), "and runs ahead where telops precede the line",
+     `${drift.filter((d) => d > 0).length} of ${drift.length} frames drift`);
+  // spot-check the one line verified by hand against the live reader
+  const stella = payload.events.find((e) => e.id === 1);
+  const ep1 = stella.transitions.flatMap((t) => t.episodes).find((ep) => ep.no === 1);
+  const f25 = ep1.frames.find((f) => f.talkIndex === 25);
+  ok(f25 && f25.readerLine === 26,
+     "First Star ep1 #25 maps to ?line=26, as confirmed in the live reader",
+     `readerLine ${f25?.readerLine}`);
+  const fig = link.closest("figure");
+  const ours = Number(fig.getAttribute("id").split("-").pop());
+  const sent = Number(new URL(href.replace("#/", "")).searchParams.get("line"));
+  ok(sent >= ours, "the emitted link uses the reader's numbering", `#${ours} -> ?line=${sent}`);
+  ok(link.getAttribute("rel") === "noopener noreferrer" && link.getAttribute("target") === "_blank",
+     "outbound link opens safely in a new tab");
+
+  const ab = boot(`#/e${arc.id}`);
+  const ahref = ab.document.querySelector("main figcaption a.ctx").getAttribute("href");
+  ok(ahref.includes("/read/unit/"), "arc links use the unit path", ahref);
+}
+
+console.log("\nLINE NUMBERING");
+{
+  // 1-based: "#34" should be the 34th line, not the 35th. The payload is the boundary
+  // where an array offset becomes a line number, so nothing downstream adds or
+  // subtracts one — a regression here would silently shift every deep link by a line,
+  // landing on adjacent dialogue that looks plausible rather than obviously wrong.
+  const idx = payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+    t.episodes.flatMap((ep) => ep.frames.map((f) => f.talkIndex))));
+  ok(Math.min(...idx) === 1, "line numbers start at 1", `min ${Math.min(...idx)}`);
+  ok(idx.every((n) => Number.isInteger(n) && n >= 1), "and are all positive integers");
+  // every episode's own numbering must start at or above 1 too
+  const perEp = payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+    t.episodes.map((ep) => Math.min(...ep.frames.map((f) => f.talkIndex)))));
+  ok(perEp.every((n) => n >= 1), "no episode carries a zero line", `min ${Math.min(...perEp)}`);
+
+  const b = boot("#/e1");
+  const cap = b.document.querySelector("main figcaption").textContent.trim();
+  ok(/^#[1-9]/.test(cap), "the caption shows a 1-based number", cap.split("\n")[0]);
+}
+
+console.log("\nENTITY DECODING");
+{
+  // the payload is HTML: html.escape() turned ' into &#x27; and < into &lt;
+  const raw = payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+    t.episodes.flatMap((ep) => ep.frames.flatMap((f) => [f.old, f.new]))));
+  const withEntities = raw.filter((s) => /&(amp|lt|gt|quot|#x27);/.test(s));
+  ok(withEntities.length > 0, "the payload really does carry HTML entities",
+     `${withEntities.length} of ${raw.length} lines`);
+
+  const b = boot("#/");
+  const box = b.document.getElementById("q");
+  // a query that only matches through an apostrophe — this used to find nothing at all
+  box.value = "can't find it"; box.dispatchEvent(new b.window.Event("input"));
+  const hits = [...b.document.querySelectorAll(".hit")];
+  ok(hits.length > 0, "a query containing an apostrophe finds its line", `${hits.length} hit(s)`);
+  const shown = hits.map((h) => h.textContent).join(" ");
+  ok(!/&(amp|lt|gt|quot|#x27);/.test(shown),
+     "and no raw entity is printed in the result",
+     (shown.match(/&\w+;|&#x27;/) || ["clean"])[0]);
+  ok(shown.includes("can't"), "the apostrophe renders as an apostrophe");
+
+  // angle brackets are used for the game's whispered lines; they must not leak either
+  const b2 = boot("#/");
+  const q2 = b2.document.getElementById("q");
+  q2.value = "I didn't hate it"; q2.dispatchEvent(new b2.window.Event("input"));
+  const t2 = [...b2.document.querySelectorAll(".hit")].map((h) => h.textContent).join(" ");
+  ok(!/&(amp|lt|gt|quot|#x27);/.test(t2), "whispered <…> lines render their brackets",
+     (t2.match(/&\w+;|&#x27;/) || ["clean"])[0]);
+}
+
+console.log("\nREADABLE URLS");
+{
+  const first = payload.events.find((e) => e.name === "First Star After the Rain");
+  ok(first.slug === "first-star-after-the-rain", "event slug reads as the event name",
+     first.slug);
+  ok(payload.events.every((e) => /^[a-z0-9-]+$/.test(e.slug)), "all event slugs are clean");
+  ok(new Set(payload.events.map((e) => e.slug)).size === payload.events.length,
+     "and unique — a duplicate would make one entry unreachable");
+  const eps = payload.events.flatMap((e) => e.transitions.flatMap((t) => t.episodes));
+  ok(eps.every((ep) => /^ep\d\d(-[a-z0-9-]+)?$/.test(ep.slug)),
+     "episode slugs lead with the number and carry the title",
+     eps[0].slug);
+
+  // the readable URL resolves
+  let b = boot(`#/${first.slug}/${first.transitions[0].episodes[2].slug}/19`);
+  ok(b.document.querySelectorAll("main figure").length === 359, "slug URL opens the event");
+  ok([...b.document.querySelectorAll("main details[open]")].length === 1,
+     "and opens exactly the named episode",
+     [...b.document.querySelectorAll("main details[open]")].map((x) => x.id).join(","));
+
+  // old links are in the wild and must keep working
+  b = boot("#/e1/t5_4_0_30-ep03/19");
+  ok(b.document.querySelectorAll("main figure").length === 359, "legacy e<id> URL still resolves");
+  ok(b.document.getElementById("t5_4_0_30-ep03")?.hasAttribute("open"),
+     "legacy episode id still opens");
+  // ...but the address bar must end up canonical, so anything copied out of it is good
+  ok(b.replaced.length === 1 && b.replaced[0] === `#/${first.slug}/ep03-less-stars-more-bass/19`,
+     "a legacy URL is rewritten to the readable one", b.replaced.join(" "));
+  b = boot("#/e157");
+  ok(b.replaced[0] === "#/rise-and-strive", "a bare legacy event id is rewritten too",
+     b.replaced.join(" "));
+  // and a URL that is already canonical must not be rewritten at all
+  b = boot(`#/${first.slug}`);
+  ok(b.replaced.length === 0, "an already-readable URL is left alone", b.replaced.join(" "));
+
+  // an event rewritten twice needs ?v= to say which release
+  const multi = payload.events.find((e) => e.transitions.length > 1);
+  const mt = multi.transitions[1], mep = mt.episodes[0];
+  b = boot(`#/${multi.slug}/${mep.slug}?v=${mt.newVersion}`);
+  const open = [...b.document.querySelectorAll("main details[open]")].map((x) => x.id);
+  ok(open.length === 1 && open[0].startsWith("t" + mt.newVersion.replace(/\./g, "_")),
+     `?v= picks the right release for ${multi.name}`, open.join(","));
+
+  // links the page emits must round-trip through the router
+  b = boot("#/");
+  const box = b.document.getElementById("q");
+  box.value = "bass"; box.dispatchEvent(new b.window.Event("input"));
+  const hit = b.document.querySelector(".hit");
+  ok(hit, "search produces a hit to test");
+  const href = hit.getAttribute("href");
+  ok(/^#\/[a-z0-9-]+\/ep\d\d/.test(href), "search hits link to a readable URL", href);
+  // this used to emit #/e1/ep03/19 — an id no element has — so the episode never opened
+  const hb = boot(href);
+  ok([...hb.document.querySelectorAll("main details[open]")].length === 1,
+     "and that link actually opens its episode",
+     [...hb.document.querySelectorAll("main details[open]")].map((x) => x.id).join(","));
+}
+
+console.log("\nDIALOGUE OVERLAY");
+{
+  const b = boot("#/e1");
+  const fig = b.document.querySelector("main figure");
+  ok(!b.document.querySelector(".box"), "the opaque white dialogue box is gone");
+  const dlg = fig.querySelectorAll(".dlg");
+  ok(dlg.length === 2, "each frame has a before and an after overlay", `${dlg.length}`);
+  // it must be inside the stage: that is what makes cqmin resolve against the stage
+  // box rather than the card, and what puts it over the art instead of beside it
+  ok([...dlg].every((d) => d.closest(".stage")), "the overlay sits inside the stage");
+  ok([...fig.querySelectorAll(".stage")].every((s) => s.querySelector(".dlg")),
+     "and every stage carries one");
+  ok(fig.querySelector(".spk-row .spk") && fig.querySelector(".spk-row .spk-rule"),
+     "speaker row has a name and its underline rule");
+  ok(fig.querySelectorAll(".tag.o").length === 1 && fig.querySelectorAll(".tag.n").length === 1,
+     "before/after version tags survive the restyle");
+  // the diff highlight is the whole point of the frame; it must still be marked up
+  const marked = fig.querySelectorAll(".txt.old b, .txt.new b");
+  ok(marked.length > 0, "diff spans still render inside the overlay text",
+     `${marked.length} span(s)`);
+}
+
 console.log("\nUNIT ARCS");
 {
   const arcs = payload.events.filter((e) => e.kind === "arc");
@@ -222,9 +409,9 @@ console.log("\nEMPTY FILTER");
 }
 
 console.log("\nDEEP LINK WITH RANGE");
-({ document } = boot("#/r/5.4.0.20..5.4.0.30/e1/t5_4_0_30-ep03/19"));
+({ document } = boot("#/r/5.4.0.20..5.4.0.30/e1/t5_4_0_30-ep03/20"));
 ok(document.getElementById("t5_4_0_30-ep03")?.hasAttribute("open"), "target episode opened");
-ok(document.getElementById("f-1-5.4.0.30-3-19"), "target frame present");
+ok(document.getElementById("f-1-5.4.0.30-3-20"), "target frame present");
 // filenames must be content hashes, or immutable caching would serve stale art
 const srcs = [...document.querySelectorAll("main figure img")].map((i) => i.getAttribute("src"));
 ok(srcs.length > 0 && srcs.every((u) => /\/[0-9a-f]{16}\.webp$/.test(u)),

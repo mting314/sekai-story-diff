@@ -160,31 +160,69 @@
     be sized as a fraction of the stage the way the game does it (BaseLayer.em scales
     every dialogue dimension by stage size). With fixed px the box keeps its size as
     the card narrows and swallows the art. */
- .panel { position:relative; container-type:inline-size; }
+ .panel { position:relative; }
+ /* container-type:size (not inline-size) so 1cqmin tracks the smaller of the stage's
+    two axes. Width alone was wrong: a short wide stage got text sized for its width.
+    The stage has a determinate size in both axes from aspect-ratio, so size
+    containment is safe here in a way it would not be on .panel. */
  .stage { position:relative; aspect-ratio:16/9; overflow:hidden;
-          background:#000 50%/cover no-repeat; }
- .stage.fb::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,.3); }
+          container-type:size; background:#000 50%/cover no-repeat; }
+ .stage.fb::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,.3);
+                    z-index:1; }
  .stage img { position:absolute; }
+ /* Stage-wide darkening under the dialogue, the outer of the game's two gradients. */
+ .stage::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+                  background:linear-gradient(180deg,transparent 0,transparent 55%,
+                                             rgba(0,0,0,.40) 100%); }
  /* The game's body text is em(16) = 4% of stage height = 2.25% of stage width at
     16:9, and every other dimension scales with it. Matched here in cqw so the box
     stays the same fraction of the frame at any size — but clamped, because the game
     gets away with pure proportion by making the stage the whole landscape screen
     (~844px on a phone), while a card in our grid is ~366px and would land at 8px. */
- .box { position:absolute; left:5%; right:5%; bottom:5%; background:rgba(255,255,255,.94);
-        color:#222233; border-radius:clamp(9px,2.9cqw,20px);
-        padding:clamp(5px,1.6cqw,11px) clamp(9px,2.7cqw,19px) clamp(6px,1.9cqw,13px); }
- .plate { display:inline-block; background:#5d5882; color:#fff;
-          border-radius:clamp(7px,2cqw,14px); padding:1px clamp(7px,1.8cqw,13px);
-          font-size:clamp(9.5px,2.1cqw,15px); }
- .tag { display:inline-block; border-radius:clamp(7px,2cqw,14px);
-        padding:1px clamp(6px,1.5cqw,11px); font-size:clamp(9px,1.95cqw,14px);
-        margin-left:clamp(4px,1.1cqw,8px); color:#fff; }
- .tag.o { background:#b04444; } .tag.n { background:#2e8060; }
- .txt { margin:clamp(3px,.8cqw,6px) 0 0; font-size:clamp(10.5px,2.4cqw,17px);
-        line-height:1.38; }
- .old b { background:rgba(196,60,60,.18); color:#a52f2f; border-radius:4px; padding:0 3px; }
- .new b { background:rgba(28,132,92,.18); color:#126b48; border-radius:4px; padding:0 3px; }
+ /* The dialogue is an overlay, not a panel. The old near-opaque white slab covered the
+    Live2D art it sat on; the game draws a soft gradient and strokes the text instead.
+    Values match the game: an inner gradient to rgba(0,0,0,.33), #fff text with a
+    0.25em #4a4968 stroke at ~0.67 alpha. Confirmed twice over — the viewer's
+    layer/Dialog.ts and pjsk.cleista.cc arrive at the same colour independently.
+    --dlg is the em unit: the game scales every dialogue dimension off the stage, but
+    a 366px card would land at 8px text, so it is clamped at the small end. */
+ /* font-size on the overlay itself, not just on the children that happen to set it:
+    every em inside — the speaker rule, its offsets, the tag padding — has to resolve
+    against the dialogue scale. Without it they resolved against the inherited 15px
+    body text and stayed a fixed size while the stage grew and shrank around them. */
+ .dlg { position:absolute; left:0; right:0; bottom:0; z-index:2;
+        --dlg:clamp(10.5px,4.6cqmin,17px); font-size:var(--dlg);
+        padding:14% 6% 4.5%; pointer-events:none;
+        background:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.33) 38%,
+                                             rgba(0,0,0,.33) 100%); }
+ /* paint-order is the load-bearing bit: without it the stroke paints over the glyph
+    and the letterforms go fat and muddy instead of outlined. */
+ .dlg .spk, .dlg .txt { color:#fff; -webkit-text-stroke:.25em rgba(74,73,104,.667);
+                        paint-order:stroke fill;
+                        pointer-events:auto; user-select:text; }
+ .spk-row { position:relative; display:inline-block; padding-bottom:.35em; }
+ .spk { font-size:1em; font-weight:900; letter-spacing:.02em;
+        position:relative; z-index:1; }
+ /* our stage is a card, not a full landscape screen, so the rule is proportionally
+    thicker and more opaque than the game's or it disappears into a bright background */
+ .spk-rule { position:absolute; left:-.3em; right:-6em; bottom:0; height:.2em;
+             border-radius:.1em; z-index:0;
+             background:linear-gradient(90deg,rgba(255,255,255,.85) 0,
+                        rgba(255,255,255,.55) 35%,rgba(255,255,255,0) 100%); }
+ .tag { display:inline-block; border-radius:1em; vertical-align:.1em;
+        padding:.05em .6em; font-size:.78em; margin-left:.6em;
+        color:#fff; background:rgba(0,0,0,.42); }
+ .tag.o { background:rgba(176,68,68,.85); } .tag.n { background:rgba(46,128,96,.85); }
+ .txt { margin:.25em 0 0; font-size:1em; line-height:1.5; font-weight:600; }
+ /* Picked against the old white slab, #a52f2f and #126b48 are unreadable on the
+    gradient. These are the tints the mobile path already used on dark. */
+ .old b { background:rgba(255,80,80,.30); color:#ff9b9b; border-radius:4px; padding:0 3px; }
+ .new b { background:rgba(50,220,150,.24); color:#8ce0b6; border-radius:4px; padding:0 3px; }
  figcaption { padding:9px 14px 13px; font-size:12.5px; color:var(--dim); }
+ .ctx { margin-left:10px; padding:1px 8px; border-radius:9px; font-size:11.5px;
+        color:#bdb5e8; background:#221d3d; border:1px solid var(--line);
+        white-space:nowrap; }
+ .ctx:hover { background:#2c2550; color:#fff; }
  .jpline { color:#cfc9ee; font-size:13.5px; margin-top:3px; }
  .jpline i { color:#7d77a5; font-size:11px; margin-right:6px; font-style:normal; }
  .empty { padding:40px 24px; color:var(--dim); }
@@ -194,7 +232,7 @@
       the wider the stage, the larger the clamped text is allowed to be */
    details { margin:0; } .grid { padding:6px 0 20px; gap:14px; }
    figure { border-radius:0; }
-   .box { left:3.5%; right:3.5%; bottom:4%; }
+   .dlg { padding:14% 4.5% 4%; }
    /* one thin row: the counts and version pair are already on the home card and in
       the drawer, so on a phone they only cost height */
    #burger { width:34px; height:34px; top:9px; left:9px; font-size:15px; border-radius:9px; }
