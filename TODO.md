@@ -71,28 +71,14 @@ Six events have more than one transition, so the scan is small and bounded.
 
 ---
 
-## 3. Migrate the web app to TypeScript
-
-`web/src/main.js` is ~600 lines of untyped string-templated DOM against a payload whose
-shape is defined in Python, on the other side of a JSON file. Nothing checks the two
-agree.
-
-**Why:** most of the bugs this session were shape bugs that a type would have caught at
-build time — `talkIndex` silently changing base, `readerLine` being confused with it,
-`scenarioId` and `bundleName` being read before they were emitted, and `strip()` handling
-a field that turned out to be HTML rather than text. The harness caught these only
-because someone thought to assert them.
-
-**Watch out for:** the payload type is the valuable part, and it wants generating from
-`build_web_gallery.py` rather than hand-writing a `data.d.ts` that drifts. Something that
-emits a `.d.ts` next to `data.json` keeps one source of truth. Vite handles `.ts` with no
-config change, and `check-range.mjs` runs against the *built bundle*, so the harness
-needs no port — but the linkedom globals it injects are the one place that will complain.
-
----
-
 ## Done
 
+- Web app on TypeScript. `tsc --noEmit` in CI *before* the build, which is the whole
+  point — Vite strips types with esbuild and never checks them, so without that step the
+  migration would have been decorative. Payload shape hand-written in `src/payload.d.ts`
+  and kept honest by a drift check that parses the declarations and walks the real
+  payload against them; branded `Html` / `LineNo` / `ReaderNo` catch the right-type
+  wrong-meaning confusions that plain interfaces cannot
 - Version browser at `#/releases` — every release in the live window, what each changed,
   and the 18 that changed nothing kept in place. Derived in the browser from 46
   transitions, not the 1,107 frames under them, so no payload or pipeline change

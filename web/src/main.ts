@@ -1,5 +1,26 @@
 import "./style.css";
-import payload from "./data.json";
+import payloadJson from "./data.json";
+import type {
+  EventEntry, Episode, Frame, Html, Magnitude, Payload, PendingEvent, ReaderNo,
+  Transition,
+} from "./payload";
+
+// resolveJsonModule infers the payload's type from the file, which is unsound here:
+// `dropped` and `pending` are empty in every build so far and infer as never[], and
+// `cover` is "" on all 1,107 frames though the code branches on "white". payload.d.ts
+// is the declared shape; test/check-range.mjs asserts the real file matches it.
+const payload = payloadJson as unknown as Payload;
+
+/** `document.getElementById` that fails loudly rather than returning null.
+ *
+ *  Every id this file asks for is one it just rendered, so a miss is a bug in the
+ *  template, not a case to handle. Sprinkling `!` would say the same thing and lose the
+ *  error message. */
+const el = <T extends HTMLElement = HTMLElement>(id: string): T => {
+  const found = document.getElementById(id);
+  if (!found) throw new Error(`no #${id} in the document`);
+  return found as T;
+};
 
 // Sprite URLs are built at runtime, so Vite cannot rewrite them the way it does the
 // ones in index.html and the CSS. Resolve them against the configured base instead of
@@ -10,31 +31,40 @@ const BASE = import.meta.env.BASE_URL;
 // Falls back to the site's own base so `bun run dev` and a local dist still work.
 const ASSETS = import.meta.env.VITE_ASSET_BASE || BASE;
 
-const esc = (s) => String(s).replace(/[&<>"]/g,
-  (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ESCAPE: Record<string, string> =
+  { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
+/** Plain text -> markup-safe. Returns Html because the result is now escaped. */
+const esc = (s: string | number): Html =>
+  String(s).replace(/[&<>"]/g, (c) => ESCAPE[c]) as Html;
 // The payload stores each line as HTML — Python's html.escape() has already turned
 // & < > " ' into entities, and the diff runs are real <b> tags. Injecting that into
 // .txt is correct, but every *other* use wants plain text, so the entities have to come
 // back out. Leaving them in escaped the ampersand a second time and printed a literal
 // "it&#x27;s" in the search results, and — less visibly — made the search haystack
 // contain "can&#x27;t", so no query with an apostrophe could ever match.
-const ENTITY = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#x27;": "'" };
+const ENTITY: Record<string, string> =
+  { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#x27;": "'" };
 // one left-to-right pass, so "&amp;lt;" decodes to "&lt;" and is not decoded twice
-const strip = (h) => h.replace(/<[^>]*>/g, "")
+/** Html -> plain text. Only accepts Html: handing it an already-plain string is the
+ *  mistake that left `&#x27;` in the search haystack. */
+const strip = (h: Html): string => h.replace(/<[^>]*>/g, "")
                       .replace(/&(?:amp|lt|gt|quot|#x27);/g, (m) => ENTITY[m]);
-const hl = (s, q) => !q ? esc(s)
+const hl = (s: string, q: string): Html => !q ? esc(s)
   : esc(s).replace(new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"),
-                   "<mark>$1</mark>");
+                   "<mark>$1</mark>") as Html;
 
-let D = null, view = { ev: null, from: "", name: "home", q: "", to: "" };
+interface View { from: string; name: string; q: string; to: string }
+let D: Payload;
+const view: View = { from: "", name: "home", q: "", to: "" };
 // index of every live release, oldest first — comparisons are by position, never by
 // string: "5.10.x" sorts under "5.2.x" lexicographically
-let ORDER = new Map();
-const pos = (v) => (ORDER.has(v) ? ORDER.get(v) : -1);
-const spanAll = () => [D.versions[0].version, D.versions[D.versions.length - 1].version];
+let ORDER = new Map<string, number>();
+const pos = (v: string): number => (ORDER.has(v) ? ORDER.get(v)! : -1);
+const spanAll = (): [string, string] =>
+  [D.versions[0].version, D.versions[D.versions.length - 1].version];
 
 /** Transitions of `e` whose change landed inside the selected window (from, to]. */
-function inRange(e) {
+function inRange(e: EventEntry): Transition[] {
   const lo = pos(view.from), hi = pos(view.to);
   return e.transitions.filter((t) => pos(t.newVersion) > lo && pos(t.newVersion) <= hi);
 }
@@ -44,7 +74,7 @@ const rangePrefix = () => {
 };
 
 /* ---------- frame rendering ---------- */
-function panel(f, old, tr) {
+function panel(f: Frame, old: boolean, tr: Transition): Html {
   const layers = f.layers.map((l) => {
     const s = D.sprites[l.key];
     // the filename is a hash of the sprite's own bytes, so it can be cached forever
@@ -75,7 +105,7 @@ function panel(f, old, tr) {
        + `<span class="spk-rule" aria-hidden="true"></span></div>`
        + `<span class="tag ${old ? "o" : "n"}">${ver}</span>`
        + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div>`
-       + `</div></div>`;
+       + `</div></div>` as Html;
 }
 // Read this exact line in context, in a full story reader.
 //
@@ -91,20 +121,24 @@ function panel(f, old, tr) {
 // Neither reader puts the language in the URL; both read it from a stored preference,
 // so a reader set to JP will land on the Japanese text of the right line.
 const READER = "https://pjsk.cleista.cc/#/read";
-const readerHref = (ev, ep, f) =>
+// The line is a parameter rather than read off the frame inside the template: a brand
+// does not survive template interpolation, so `?line=${f.readerLine}` and
+// `?line=${f.talkIndex}` are both just `string` there and the compiler cannot tell them
+// apart. Taking a ReaderNo argument is what makes substituting talkIndex an error.
+const readerHref = (ev: EventEntry, ep: Episode, line: ReaderNo): string =>
   `${READER}/${ev.kind === "arc" ? "unit" : "event"}`
-  + `/${ev.bundleName}/${ep.scenarioId}?line=${f.readerLine}`;
+  + `/${ev.bundleName}/${ep.scenarioId}?line=${line}`;
 
-const figure = (ev, tr, ep, f) =>
+const figure = (ev: EventEntry, tr: Transition, ep: Episode, f: Frame): Html =>
   `<figure id="f-${ev.id}-${tr.newVersion}-${ep.no}-${f.talkIndex}">`
   + panel(f, true, tr) + panel(f, false, tr)
   + `<figcaption><span class="ln">#${f.talkIndex}</span>`
   + (ev.bundleName && ep.scenarioId && f.readerLine
       ? `<a class="ctx" target="_blank" rel="noopener noreferrer"
            title="Read this line in context on Cleista's SEKAI Reader"
-           href="${readerHref(ev, ep, f)}">in context ↗</a>` : "")
+           href="${readerHref(ev, ep, f.readerLine)}">in context ↗</a>` : "")
   + (f.jp ? `<div class="jpline"><i>JP</i>${esc(f.jp)}</div>` : "")
-  + `</figcaption></figure>`;
+  + `</figcaption></figure>` as Html;
 
 // Banner art with the arc fallback, shared by the drawer and the release list — three
 // copies of this was where drift would start.
@@ -115,10 +149,10 @@ const figure = (ev, tr, ep, f) =>
 // loading="lazy">, never card()'s CSS background-image, because backgrounds fetch as soon
 // as the element renders — that would pull every banner on a page whether or not the
 // drawer is open or the row is scrolled to.
-const thumb = (e, cls) => e.banner
+const thumb = (e: EventEntry, cls: string): Html => (e.banner
   ? `<img class="${cls}" loading="lazy" decoding="async" alt="" src="${ASSETS}${e.banner}">`
   : `<span class="${cls} blank">${e.unitLogo
-      ? `<img loading="lazy" alt="" src="${ASSETS}${e.unitLogo}">` : ""}</span>`;
+      ? `<img loading="lazy" alt="" src="${ASSETS}${e.unitLogo}">` : ""}</span>`) as Html;
 
 /* ---------- releases ---------- */
 // The site answers "what changed in this event". This answers "what did this release
@@ -127,18 +161,27 @@ const thumb = (e, cls) => e.banner
 // Derived here rather than in the payload: a row needs counts, and those are already
 // aggregated on each transition, so the pivot is 46 transitions rather than the 1,107
 // frames underneath them. Nothing here needs the pipeline to emit anything new.
-function releases() {
-  const byPair = new Map();
+/** One adjacent version pair and the events whose text moved at it. */
+interface Release {
+  changed: number;
+  date: string;
+  from: string;
+  hits: { ev: EventEntry; tr: Transition }[];
+  to: string;
+}
+
+function releases(): Release[] {
+  const byPair = new Map<string, { ev: EventEntry; tr: Transition }[]>();
   for (const ev of D.events) {
     for (const tr of ev.transitions) {
       const key = `${tr.oldVersion}..${tr.newVersion}`;
       if (!byPair.has(key)) byPair.set(key, []);
-      byPair.get(key).push({ ev, tr });
+      byPair.get(key)!.push({ ev, tr });
     }
   }
   // Walk every adjacent pair in the live window, not just the ones that changed: a
   // release that moved nothing is a result the sweep produced, not missing data.
-  const out = [];
+  const out: Release[] = [];
   for (let i = 1; i < D.versions.length; i++) {
     const from = D.versions[i - 1], to = D.versions[i];
     const hits = byPair.get(`${from.version}..${to.version}`) || [];
@@ -158,11 +201,11 @@ function releases() {
 
 function releasesPage() {
   // no current event, so nothing for the drawer to scope to — same as home
-  document.getElementById("burger").hidden = true;
+  el("burger").hidden = true;
   const rows = releases();
   const live = rows.filter((r) => r.hits.length);
   const lines = live.reduce((n, r) => n + r.changed, 0);
-  document.getElementById("app").innerHTML = `<div class="home">
+  el("app").innerHTML = `<div class="home">
     <div class="hero">
       <h1>Releases</h1>
       <p>Every English asset release in the window the game's CDN still serves, and what
@@ -177,11 +220,11 @@ function releasesPage() {
     ${attribution()}</div>`;
 }
 
-const relRow = (r) => {
+const relRow = (r: Release): Html => {
   if (!r.hits.length) {
     return `<div class="rel quiet"><span class="rel-d">${r.date}</span>`
          + `<span class="rel-v">${r.from} → ${r.to}</span>`
-         + `<span class="rel-n">no text changed</span></div>`;
+         + `<span class="rel-n">no text changed</span></div>` as Html;
   }
   // per-event magnitude, not the release's strongest: a release can touch eight events
   // and rewrite only one of them, and the row above already carries the summary
@@ -196,7 +239,7 @@ const relRow = (r) => {
       <span class="rel-v">${r.from} → ${r.to}</span>
       <span class="rel-n">${r.hits.length} event${r.hits.length === 1 ? "" : "s"} ·
         ${r.changed.toLocaleString()} line${r.changed === 1 ? "" : "s"}</span>
-    </a><div class="rel-evs">${chips}</div>`;
+    </a><div class="rel-evs">${chips}</div>` as Html;
 };
 
 /* ---------- attribution ---------- */
@@ -234,8 +277,9 @@ const attribution = () => `<footer class="attrib">
 </footer>`;
 
 /* ---------- home ---------- */
-function searchLines(q) {
-  const out = [];
+interface Hit { ep: Episode; ev: EventEntry; f: Frame; tr: Transition }
+function searchLines(q: string): Hit[] {
+  const out: Hit[] = [];
   if (q.length < 2) return out;
   const needle = q.toLowerCase();
   for (const ev of D.events) for (const tr of inRange(ev)) for (const ep of tr.episodes)
@@ -249,7 +293,7 @@ function searchLines(q) {
 // The payload keys are slugs. Spelling them out matters now that they head the drawer
 // groups: the casing in "MORE MORE JUMP!" and "Vivid BAD SQUAD" is the official EN
 // styling, not shouting, and de-slugging alone would print "leo need".
-const UNIT_NAMES = {
+const UNIT_NAMES: Record<string, string> = {
   leo_need: "Leo/need",
   more_more_jump: "MORE MORE JUMP!",
   vivid_bad_squad: "Vivid BAD SQUAD",
@@ -257,25 +301,27 @@ const UNIT_NAMES = {
   nightcord: "Nightcord at 25:00",
   mixed: "Mixed units",
 };
-const unitName = (u) => UNIT_NAMES[u] || (u || "").replace(/_/g, " ");
+const unitName = (u: string): string => UNIT_NAMES[u] || (u || "").replace(/_/g, " ");
 
 // How much the text actually moved. Ranked, because an event can hold several
 // transitions and the card shows whichever is strongest in range — averaging would let
 // two typo passes cancel out a real rewrite.
-const LABELS = {
+const LABELS: Record<Magnitude, { rank: number; text: string }> = {
   retranslation: { rank: 3, text: "substantial rewrite" },
   revised:       { rank: 2, text: "revised wording" },
   punctuation:   { rank: 1, text: "punctuation only" },
 };
-const strongest = (transitions) =>
-  transitions.reduce((best, t) =>
+const strongest = (transitions: Transition[]): Magnitude | null =>
+  transitions.reduce<Magnitude | null>((best, t) =>
     !best || (LABELS[t.label]?.rank ?? 0) > (LABELS[best]?.rank ?? 0) ? t.label : best,
   null);
-const badge = (label) =>
-  label ? `<span class="pill mag ${label}">${LABELS[label]?.text ?? label}</span>` : "";
+const badge = (label: Magnitude | null): Html =>
+  (label ? `<span class="pill mag ${label}">${LABELS[label]?.text ?? label}</span>` : "") as Html;
 
-function card(e, q, href) {
-  const trs = href ? inRange(e) : [];
+function card(e: EventEntry | PendingEvent, q: string, href: string | null): Html {
+  // a pending event has no transitions and no kind — it is only ever rendered as a
+  // dead card, and href is null in exactly that case
+  const trs = href && "transitions" in e ? inRange(e) : [];
   const lines = trs.reduce((n, t) => n + t.changed, 0);
   const eps = new Set(trs.flatMap((t) => t.episodes.map((ep) => ep.no))).size;
   const tag = href ? "a" : "span";
@@ -284,7 +330,7 @@ function card(e, q, href) {
   // unit-coloured panel carrying the unit logo instead of an empty slot.
   const art = e.banner
     ? `<div class="art" style="background-image:url('${ASSETS}${e.banner}')"></div>`
-    : e.kind === "arc"
+    : "kind" in e && e.kind === "arc"
       ? `<div class="art arcart">${e.unitLogo
           ? `<img alt="" src="${ASSETS}${e.unitLogo}">` : ""}</div>`
       : "";
@@ -304,7 +350,7 @@ function card(e, q, href) {
           : `${trs[0].oldVersion} → ${trs[trs.length - 1].newVersion}`}</div>` : ""}
       <div class="row">${logo}${stats}
         ${e.unit ? `<span class="pill unit">${esc(unitName(e.unit))}</span>` : ""}</div>
-    </div></${tag}>`;
+    </div></${tag}>` as Html;
 }
 
 function results() {
@@ -323,7 +369,7 @@ function results() {
     tally.textContent = `${evs.length} event${evs.length === 1 ? "" : "s"} · `
       + `${shown.toLocaleString()} changed lines · ${trs} release${trs === 1 ? "" : "s"}`;
   }
-  document.getElementById("results").innerHTML = `
+  el("results").innerHTML = `
     ${hits.length ? `<div class="sec">${hits.length > 300 ? "300+" : hits.length}
         matching lines</div>` + hits.slice(0, 40).map((h) => `
       <a class="hit" href="${epHref(h.ev, h.tr, h.ep, h.f.talkIndex)}">
@@ -343,16 +389,16 @@ function results() {
 }
 
 function home() {
-  document.getElementById("burger").hidden = true;
+  el("burger").hidden = true;
   // Render the shell once and only ever replace #results afterwards. Re-rendering the
   // whole page per keystroke would destroy and recreate the input, which loses the
   // caret and — the reason it matters here — aborts IME composition, making the
   // Japanese search unusable.
   if (!document.getElementById("q")) {
-    const opts = (sel) => D.versions.map((v) =>
+    const opts = (sel: string) => D.versions.map((v) =>
       `<option value="${v.version}"${v.version === sel ? " selected" : ""}>${v.version} · ${v.date}</option>`
     ).join("");
-    document.getElementById("app").innerHTML = `<div class="home">
+    el("app").innerHTML = `<div class="home">
       <div class="hero">
         <h1>Project Sekai EN — official retranslation</h1>
         <p>Every story line the English release quietly rewrote, shown before and after
@@ -372,30 +418,30 @@ function home() {
       <div class="hint">Press <b>/</b> to search. Try “Shiho”, “bass”, “rain”, or 星.</div>
       <div id="results"></div>
       ${attribution()}</div>`;
-    const sync = (which) => {
-      const el = document.getElementById(which);
-      el.onchange = () => {
-        view[which] = el.value;
+    const sync = (which: "from" | "to") => {
+      const sel = el<HTMLSelectElement>(which);
+      sel.onchange = () => {
+        view[which] = sel.value;
         // a backwards range selects nothing; nudge the other end rather than show zero
         if (pos(view.from) > pos(view.to)) {
           const other = which === "from" ? "to" : "from";
-          view[other] = el.value;
-          document.getElementById(other).value = el.value;
+          view[other] = sel.value;
+          el<HTMLSelectElement>(other).value = sel.value;
         }
         location.hash = "#/" + rangePrefix();
         results();
       };
     };
     sync("from"); sync("to");
-    document.getElementById("allv").onclick = () => {
+    el("allv").onclick = () => {
       [view.from, view.to] = spanAll();
-      document.getElementById("from").value = view.from;
-      document.getElementById("to").value = view.to;
+      el<HTMLSelectElement>("from").value = view.from;
+      el<HTMLSelectElement>("to").value = view.to;
       location.hash = "#/";
       results();
     };
 
-    const box = document.getElementById("q");
+    const box = el<HTMLInputElement>("q");
     box.value = view.q;
     let composing = false;
     box.addEventListener("compositionstart", () => { composing = true; });
@@ -410,28 +456,28 @@ function home() {
 }
 
 /* ---------- event ---------- */
-const epId = (tr, ep) => `t${tr.newVersion.replace(/\./g, "_")}-ep${String(ep.no).padStart(2, "0")}`;
+const epId = (tr: Transition, ep: Episode): string => `t${tr.newVersion.replace(/\./g, "_")}-ep${String(ep.no).padStart(2, "0")}`;
 
 // Every link goes through these two, so the URL shape is defined in exactly one place.
 // The version is only appended when the event has more than one release in range —
 // carrying it always would put a version string in 34 of 40 URLs that cannot be
 // ambiguous.
-const evHref = (ev) => `#/${rangePrefix()}${ev.slug}`;
-const epHref = (ev, tr, ep, line) => {
+const evHref = (ev: EventEntry): string => `#/${rangePrefix()}${ev.slug}`;
+const epHref = (ev: EventEntry, tr: Transition, ep: Episode, line?: number): string => {
   const multi = inRange(ev).length > 1;
   return `${evHref(ev)}/${ep.slug}${line != null ? "/" + line : ""}`
        + (multi ? `?v=${tr.newVersion}` : "");
 };
 
-function event(ev, openEp) {
-  document.getElementById("burger").hidden = false;
+function event(ev: EventEntry, openEp: string): void {
+  el("burger").hidden = false;
   const trs = inRange(ev);
   const lines = trs.reduce((n, t) => n + t.changed, 0);
   // One event can be rewritten at several releases. Each gets its own section so a
   // line edited twice is shown twice, against the release that actually changed it.
   const multi = trs.length > 1;
 
-  document.getElementById("app").innerHTML = `
+  el("app").innerHTML = `
     <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/${rangePrefix()}" title="All events">←</a>
       ${ev.logo ? `<img class="elogo" alt="" src="${ASSETS}${ev.logo}">`
         : ev.unitLogo ? `<img class="ulogo big" alt="" src="${ASSETS}${ev.unitLogo}">` : ""}
@@ -454,24 +500,24 @@ function event(ev, openEp) {
       </details>`).join("")).join("")}`;
 
   drawer(ev, trs);
-  const filt = document.getElementById("filter");
+  const filt = el<HTMLInputElement>("filter");
   filt.oninput = () => {
     const q = filt.value.toLowerCase();
     let total = 0;
     for (const tr of trs) for (const ep of tr.episodes) {
-      const el = document.getElementById(epId(tr, ep));
+      const section = el<HTMLDetailsElement>(epId(tr, ep));
       let shown = 0;
       ep.frames.forEach((f) => {
-        const fig = document.getElementById(`f-${ev.id}-${tr.newVersion}-${ep.no}-${f.talkIndex}`);
+        const fig = el(`f-${ev.id}-${tr.newVersion}-${ep.no}-${f.talkIndex}`);
         const hay = (strip(f.old) + strip(f.new) + f.speaker + f.jp).toLowerCase();
         const on = !q || hay.includes(q);
         fig.style.display = on ? "" : "none";
         if (on) shown++;
       });
-      el.style.display = shown ? "" : "none";
-      el.querySelector("em").textContent = q ? `${shown} of ${ep.frames.length} lines`
+      section.style.display = shown ? "" : "none";
+      section.querySelector("em")!.textContent = q ? `${shown} of ${ep.frames.length} lines`
                                              : `${ep.frames.length} changed lines`;
-      if (q) el.open = true;
+      if (q) section.open = true;
       total += shown;
     }
     // hiding every episode used to leave a silently blank page with no explanation
@@ -480,32 +526,36 @@ function event(ev, openEp) {
       none = document.createElement("div");
       none.id = "nomatch";
       none.className = "empty";
-      document.getElementById("app").append(none);
+      el("app").append(none);
     }
     none.textContent = q && !total ? `No line in this event matches “${filt.value}”.` : "";
     none.style.display = q && !total ? "" : "none";
   };
 }
 
-function navRow(e, n) {
+function navRow(e: EventEntry, n: number): Html {
   // an arc already sits under its unit's header, so drop the unit name from the label
   return `<a class="nav-ev" data-ev="${e.id}" href="${evHref(e)}"`
        + ` style="--u:${e.colour || "#8f89b5"}">${thumb(e, "nav-art")}`
        + `<span class="nav-txt"><b>${esc(e.shortName || e.name)}</b>`
-       + `<small>${n} changed lines</small></span></a>`;
+       + `<small>${n} changed lines</small></span></a>` as Html;
 }
 
 // Events grouped by unit, heaviest first at both levels: units by their total changed
 // lines, events within a unit by their own. Grouping is over the *in-range* events, so a
 // narrow window drops whole units rather than showing empty headers.
-function navGroups() {
-  const by = new Map();
+interface NavGroup {
+  unit: string; total: number; logo: string; events: { e: EventEntry; n: number }[];
+}
+
+function navGroups(): NavGroup[] {
+  const by = new Map<string, NavGroup>();
   for (const e of D.events) {
     const trs = inRange(e);
     if (!trs.length) continue;
     const u = e.unit || "mixed";
     if (!by.has(u)) by.set(u, { unit: u, total: 0, logo: "", events: [] });
-    const g = by.get(u);
+    const g = by.get(u)!;
     const n = trs.reduce((m, t) => m + t.changed, 0);
     g.total += n;
     g.logo ||= e.unitLogo || "";
@@ -515,10 +565,10 @@ function navGroups() {
   return [...by.values()].sort((a, b) => b.total - a.total);
 }
 
-let navRange = null;
+let navRange: string | null = null;
 
-function drawer(ev, trs) {
-  const d = document.getElementById("drawer");
+function drawer(ev: EventEntry, trs: Transition[]): void {
+  const d = el("drawer");
   const key = `${view.from}..${view.to}`;
   // The event list depends only on the range, but drawer() runs on every route change
   // including each episode deep-link. Rebuilding it there would discard and recreate 38
@@ -555,7 +605,7 @@ function drawer(ev, trs) {
   for (const g of d.querySelectorAll("#nav-events .nav-grp")) {
     if (g.querySelector(`.nav-ev[data-ev="${ev.id}"]`)) g.setAttribute("open", "");
   }
-  document.getElementById("nav-eps").innerHTML =
+  el("nav-eps").innerHTML =
     trs.map((tr) => `<details class="nav-grp" open>`
         + `<summary class="nav-h"><span class="nav-t">${tr.oldVersion} → ${tr.newVersion}</span></summary>`
         + tr.episodes.map((ep) => `<a class="nav-ep" data-ep="${epId(tr, ep)}"`
@@ -584,7 +634,8 @@ function route() {
   const parts = path.split("/").filter(Boolean);
   [view.from, view.to] = spanAll();
   if (parts[0] === "r" && parts[1] && parts[1].includes("..")) {
-    const [a, b] = parts.shift() && parts.shift().split("..");
+    parts.shift();
+    const [a, b] = parts.shift()!.split("..");
     if (ORDER.has(a) && ORDER.has(b) && pos(a) <= pos(b)) { view.from = a; view.to = b; }
   }
   if (!parts.length) { view.name = "home"; return home(); }
@@ -599,7 +650,9 @@ function route() {
   // per-episode; when a version is given, or the event has only one release, that
   // pins the transition.
   const trs = inRange(ev);
-  let domId = "", hitTr = null, hitEp = null;
+  let domId = "";
+  let hitTr: Transition | undefined;
+  let hitEp: Episode | undefined;
   if (parts[1]) {
     const byVer = wantVersion ? trs.filter((t) => t.newVersion === wantVersion) : trs;
     for (const t of (byVer.length ? byVer : trs)) {
@@ -609,27 +662,28 @@ function route() {
     if (!domId && /^t[\d_]+-ep\d+$/.test(parts[1])) {          // legacy episode id
       domId = parts[1];
       hitTr = trs.find((t) => domId.startsWith("t" + t.newVersion.replace(/\./g, "_")));
-      hitEp = hitTr && hitTr.episodes.find((x) => epId(hitTr, x) === domId);
+      hitEp = hitTr?.episodes.find((x) => epId(hitTr!, x) === domId);
     }
   }
   // Rewrite a legacy or partial URL to the readable one. Old links keep working, but
   // the address bar — and so anything copied out of it — ends up canonical. replaceState
   // does not fire hashchange, so this cannot re-enter route().
-  const canonical = hitEp ? epHref(ev, hitTr, hitEp, parts[2]) : evHref(ev);
+  const canonical = hitEp && hitTr
+    ? epHref(ev, hitTr, hitEp, parts[2] ? Number(parts[2]) : undefined) : evHref(ev);
   if (location.hash !== canonical) history.replaceState?.(null, "", canonical);
   event(ev, domId);
   if (domId) {
-    const el = document.getElementById(domId);
-    if (el) {
-      el.open = true;
+    const section = document.getElementById(domId) as HTMLDetailsElement | null;
+    if (section) {
+      section.open = true;
       const tr = trs.find((t) => domId.startsWith("t" + t.newVersion.replace(/\./g, "_")));
       const target = parts[2] && tr
         ? document.getElementById(`f-${ev.id}-${tr.newVersion}-${parseInt(domId.slice(-2))}-${parts[2]}`)
-        : el;
+        : section;
       setTimeout(() => {
         // optional-call: never let a missing scrollIntoView abort the rest of the route
-        (target || el).scrollIntoView?.({ behavior: "smooth", block: parts[2] ? "center" : "start" });
-        if (target && target !== el) {
+        (target || section).scrollIntoView?.({ behavior: "smooth", block: parts[2] ? "center" : "start" });
+        if (target && target !== section) {
           target.classList.add("flash");
           setTimeout(() => target.classList.remove("flash"), 2200);
         }
@@ -638,26 +692,31 @@ function route() {
   }
 }
 
-const dr = document.getElementById("drawer"), scrim = document.getElementById("scrim");
-const toggle = (on) => { dr.classList.toggle("open", on); scrim.classList.toggle("open", on); };
-document.getElementById("burger").onclick = () => toggle(!dr.classList.contains("open"));
+const dr = el("drawer"), scrim = el("scrim");
+const toggle = (on: boolean) => {
+  dr.classList.toggle("open", on); scrim.classList.toggle("open", on);
+};
+el("burger").onclick = () => toggle(!dr.classList.contains("open"));
 scrim.onclick = () => toggle(false);
 addEventListener("keydown", (e) => {
   if (e.key === "Escape") toggle(false);
-  if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
+  if (e.key === "/" && document.activeElement?.tagName !== "INPUT") {
     const b = document.getElementById("q") || document.getElementById("filter");
     if (b) { e.preventDefault(); b.focus(); }
   }
 });
 dr.addEventListener("click", (e) => {
-  if (e.target.closest("[data-ep]")) { toggle(false); return; }
-  if (e.target.id === "expand" || e.target.id === "collapse") {
+  const t = e.target as HTMLElement | null;
+  if (!t) return;
+  if (t.closest("[data-ep]")) { toggle(false); return; }
+  if (t.id === "expand" || t.id === "collapse") {
     e.preventDefault();
-    const open = e.target.id === "expand";
-    document.querySelectorAll("main details").forEach((x) => { x.open = open; });
+    const open = t.id === "expand";
+    document.querySelectorAll<HTMLDetailsElement>("main details")
+      .forEach((x) => { x.open = open; });
     return;
   }
-  if (e.target.closest("a")) toggle(false);
+  if (t.closest("a")) toggle(false);
 });
 addEventListener("hashchange", route);
 // Bundled at build time rather than fetched, so the built site also works when opened

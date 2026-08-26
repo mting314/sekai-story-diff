@@ -585,5 +585,79 @@ for (const e of payload.events) for (const t of e.transitions) for (const ep of 
 ok(jpFrames === 0, "no Japanese-side lines shown as retranslation", `${jpFrames} found`);
 ok(punctOnly === 0, "no punctuation-only lines shown as retranslation", `${punctOnly} found`);
 
+console.log("\nPAYLOAD MATCHES ITS DECLARED TYPE");
+{
+  // payload.d.ts is hand-written, so nothing structurally stops it drifting from what
+  // build_web_gallery.py emits. This reads the declarations themselves rather than
+  // restating them here — a third copy of the shape would drift from both — and checks
+  // the real payload against them. tsc validates main.ts against the .d.ts; this
+  // validates the .d.ts against reality, and together they close the loop.
+  const dts = readFileSync(resolve(HERE, "../src/payload.d.ts"), "utf8");
+  const ifaces = new Map();
+  for (const m of dts.matchAll(/export interface (\w+) \{([^}]*)\}/g)) {
+    const fields = [...m[2].matchAll(/^\s*(\w+)(\??):\s*([^;]+);/gm)]
+      .map((f) => ({ name: f[1], optional: f[2] === "?", type: f[3].trim() }));
+    ifaces.set(m[1], fields);
+  }
+  ok(ifaces.size >= 10, `parsed ${ifaces.size} interfaces from payload.d.ts`);
+
+  const ev = payload.events[0];
+  const tr = ev.transitions[0];
+  const epi = tr.episodes[0];
+  const frame = tr.episodes.flatMap((x) => x.frames).find((f) => f.layers.length);
+  const samples = [
+    ["Payload", [payload]],
+    ["Comparison", [payload.comparison]],
+    ["EventEntry", payload.events],
+    ["Transition", payload.events.flatMap((e) => e.transitions)],
+    ["Episode", [epi]],
+    ["Frame", [frame, tr.episodes[0].frames[0]]],
+    ["Layer", frame.layers],
+    ["Sprite", Object.values(payload.sprites).slice(0, 50)],
+    ["Version", payload.versions],
+    ["PendingEvent", payload.pending],
+    ["Dropped", payload.dropped],
+  ];
+  for (const [name, objs] of samples) {
+    const declared = ifaces.get(name);
+    if (!declared) { ok(false, `payload.d.ts declares ${name}`); continue; }
+    if (!objs.length) {
+      // empty in this build, so there is nothing to compare against — say so rather
+      // than let a vacuous pass look like coverage
+      console.log(`  ----  ${name}: none in this payload, shape unverified`);
+      continue;
+    }
+    const want = new Set(declared.filter((f) => !f.optional).map((f) => f.name));
+    const allowed = new Set(declared.map((f) => f.name));
+    const missing = new Set(), extra = new Set();
+    for (const o of objs) {
+      for (const k of want) if (!(k in o)) missing.add(k);
+      for (const k of Object.keys(o)) if (!allowed.has(k)) extra.add(k);
+    }
+    ok(missing.size === 0 && extra.size === 0,
+       `${name} matches (${objs.length} sampled)`,
+       [...(missing.size ? [`missing ${[...missing]}`] : []),
+        ...(extra.size ? [`undeclared ${[...extra]}`] : [])].join(" "));
+  }
+
+  // the union members have to be exhaustive, or a new one arrives typed as impossible
+  const unions = {
+    "events[].kind": [payload.events.map((e) => e.kind), /"event" \| "arc"/],
+    "transitions[].label": [payload.events.flatMap((e) => e.transitions.map((t) => t.label)),
+                            /Magnitude =([^;]+);/],
+    "frames[].cover": [payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+                         t.episodes.flatMap((x) => x.frames.map((f) => f.cover)))),
+                       /Cover =([^;]+);/],
+  };
+  for (const [what, [values, pattern]] of Object.entries(unions)) {
+    const src = pattern.source.includes("=") ? (dts.match(pattern) || [, ""])[1] : pattern.source;
+    const declared = new Set([...src.matchAll(/"([^"]*)"/g)].map((m) => m[1]));
+    const seen = new Set(values);
+    const rogue = [...seen].filter((v) => !declared.has(v));
+    ok(rogue.length === 0, `${what} only holds declared values`,
+       rogue.length ? `undeclared: ${rogue}` : `${[...seen].map((v) => `"${v}"`).join(", ")}`);
+  }
+}
+
 console.log(`\n${fails === 0 ? "ALL RANGE CHECKS PASSED" : fails + " FAILED"}`);
 process.exit(fails ? 1 : 0);

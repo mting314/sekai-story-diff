@@ -1,0 +1,27 @@
+{
+  // Type-checking only. Vite compiles with esbuild, which strips types without ever
+  // checking them — `bun run build` will happily emit a bundle from a file full of type
+  // errors. `bun run typecheck` is the gate, and it runs in CI before the build.
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    // data.json is imported as a module; resolveJsonModule would infer its type from the
+    // file, which is exactly what we do not want — `dropped` and `pending` are empty in
+    // every build so far and would infer as never[]. main.ts casts the import to Payload
+    // from payload.d.ts instead.
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "types": ["vite/client"]
+  },
+  "include": ["src"]
+}
