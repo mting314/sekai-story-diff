@@ -55,6 +55,11 @@ function panel(f, old, tr) {
   const bg = f.cover ? `background:${f.cover === "white" ? "#fff" : "#000"}`
                      : `background-image:url('${ASSETS}bg/${f.bg}.webp')`;
   const name = old && f.speakerOld ? f.speakerOld : f.speaker;
+  // 23 frames change only the name plate — "Kanade's Father" to "Kanade's Dad",
+  // "Tsukasa ＆Emu" to "Tsukasa, Emu". The body text is identical, so with the name left
+  // unmarked the pair reads as two copies of the same frame and the edit is invisible.
+  // Mark it with the same red/green the body diff uses.
+  const renamed = f.speakerOld && f.speakerOld !== f.speaker;
   // the bracket belongs to the transition: one event can be rewritten at several
   // releases, and each frame must say which one it belongs to
   const ver = old ? "BEFORE " + tr.oldVersion : "AFTER " + tr.newVersion;
@@ -64,7 +69,9 @@ function panel(f, old, tr) {
   // against the stage's own box, the way the game scales every dialogue dimension.
   return `<div class="panel"><div class="stage${f.flashback ? " fb" : ""}" style="${bg}">`
        + `${layers}`
-       + `<div class="dlg"><div class="spk-row"><span class="spk">${esc(name)}</span>`
+       + `<div class="dlg"><div class="spk-row">`
+       + `<span class="spk${renamed ? (old ? " old" : " new") : ""}">`
+       + `${renamed ? `<b>${esc(name)}</b>` : esc(name)}</span>`
        + `<span class="spk-rule" aria-hidden="true"></span></div>`
        + `<span class="tag ${old ? "o" : "n"}">${ver}</span>`
        + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div>`
@@ -98,6 +105,99 @@ const figure = (ev, tr, ep, f) =>
            href="${readerHref(ev, ep, f)}">in context ↗</a>` : "")
   + (f.jp ? `<div class="jpline"><i>JP</i>${esc(f.jp)}</div>` : "")
   + `</figcaption></figure>`;
+
+// Banner art with the arc fallback, shared by the drawer and the release list — three
+// copies of this was where drift would start.
+//
+// The full-size banner, not a thumbnail variant: home is the default entry point, so the
+// cards have already fetched these and reuse costs nothing, whereas a separate small set
+// would share no cache and make the common path download both. Always an <img
+// loading="lazy">, never card()'s CSS background-image, because backgrounds fetch as soon
+// as the element renders — that would pull every banner on a page whether or not the
+// drawer is open or the row is scrolled to.
+const thumb = (e, cls) => e.banner
+  ? `<img class="${cls}" loading="lazy" decoding="async" alt="" src="${ASSETS}${e.banner}">`
+  : `<span class="${cls} blank">${e.unitLogo
+      ? `<img loading="lazy" alt="" src="${ASSETS}${e.unitLogo}">` : ""}</span>`;
+
+/* ---------- releases ---------- */
+// The site answers "what changed in this event". This answers "what did this release
+// change" — which the range view already renders, so this is only the index over it.
+//
+// Derived here rather than in the payload: a row needs counts, and those are already
+// aggregated on each transition, so the pivot is 46 transitions rather than the 1,107
+// frames underneath them. Nothing here needs the pipeline to emit anything new.
+function releases() {
+  const byPair = new Map();
+  for (const ev of D.events) {
+    for (const tr of ev.transitions) {
+      const key = `${tr.oldVersion}..${tr.newVersion}`;
+      if (!byPair.has(key)) byPair.set(key, []);
+      byPair.get(key).push({ ev, tr });
+    }
+  }
+  // Walk every adjacent pair in the live window, not just the ones that changed: a
+  // release that moved nothing is a result the sweep produced, not missing data.
+  const out = [];
+  for (let i = 1; i < D.versions.length; i++) {
+    const from = D.versions[i - 1], to = D.versions[i];
+    const hits = byPair.get(`${from.version}..${to.version}`) || [];
+    out.push({
+      changed: hits.reduce((n, h) => n + h.tr.changed, 0),
+      date: to.date,
+      from: from.version,
+      // no release-level magnitude: it is the strongest of its events, which on a
+      // release touching eight of them says nothing about any particular one. Each
+      // event tile carries its own.
+      hits: hits.sort((a, b) => b.tr.changed - a.tr.changed),
+      to: to.version,
+    });
+  }
+  return out.reverse();
+}
+
+function releasesPage() {
+  // no current event, so nothing for the drawer to scope to — same as home
+  document.getElementById("burger").hidden = true;
+  const rows = releases();
+  const live = rows.filter((r) => r.hits.length);
+  const lines = live.reduce((n, r) => n + r.changed, 0);
+  document.getElementById("app").innerHTML = `<div class="home">
+    <div class="hero">
+      <h1>Releases</h1>
+      <p>Every English asset release in the window the game's CDN still serves, and what
+         each one did to the story text. ${live.length} of ${rows.length} changed
+         something; the rest are listed too, because "nothing moved here" is a result of
+         the sweep rather than a gap in it.</p>
+      <div class="picker"><a class="relback" href="#/${rangePrefix()}">← All events</a>
+        <span class="tally">${rows.length} releases ·
+          ${lines.toLocaleString()} changed lines</span></div>
+    </div>
+    <div class="rels">${rows.map(relRow).join("")}</div>
+    ${attribution()}</div>`;
+}
+
+const relRow = (r) => {
+  if (!r.hits.length) {
+    return `<div class="rel quiet"><span class="rel-d">${r.date}</span>`
+         + `<span class="rel-v">${r.from} → ${r.to}</span>`
+         + `<span class="rel-n">no text changed</span></div>`;
+  }
+  // per-event magnitude, not the release's strongest: a release can touch eight events
+  // and rewrite only one of them, and the row above already carries the summary
+  const chips = r.hits.map(({ ev, tr }) =>
+    `<a class="rel-ev" style="--u:${ev.colour || "#8f89b5"}"
+        href="#/r/${r.from}..${r.to}/${ev.slug}">${thumb(ev, "rel-art")}
+        <span class="rel-ev-t"><b>${esc(ev.shortName || ev.name)}</b>
+          <small>${tr.changed} line${tr.changed === 1 ? "" : "s"}
+            ${badge(tr.label)}</small></span></a>`).join("");
+  return `<a class="rel" href="#/r/${r.from}..${r.to}/">
+      <span class="rel-d">${r.date}</span>
+      <span class="rel-v">${r.from} → ${r.to}</span>
+      <span class="rel-n">${r.hits.length} event${r.hits.length === 1 ? "" : "s"} ·
+        ${r.changed.toLocaleString()} line${r.changed === 1 ? "" : "s"}</span>
+    </a><div class="rel-evs">${chips}</div>`;
+};
 
 /* ---------- attribution ---------- */
 // This site reproduces thousands of lines of someone else's script over their character
@@ -263,6 +363,7 @@ function home() {
           <label>from <select id="from">${opts(view.from)}</select></label>
           <label>to <select id="to">${opts(view.to)}</select></label>
           <button id="allv" type="button">whole window</button>
+          <a class="relback" href="#/releases">Browse by release →</a>
           <span id="tally" class="tally"></span>
         </div>
       </div>
@@ -387,20 +488,9 @@ function event(ev, openEp) {
 }
 
 function navRow(e, n) {
-  // The full-size banner, not a thumbnail variant. Home is the default entry point, so
-  // the cards have already fetched these and the drawer costs nothing; a separate small
-  // set would share no cache and make the common path download both.
-  //
-  // An <img loading="lazy"> rather than card()'s CSS background-image: backgrounds fetch
-  // as soon as the element renders, which would pull every banner on every event page
-  // whether the drawer is opened or not.
-  const art = e.banner
-    ? `<img class="nav-art" loading="lazy" decoding="async" alt="" src="${ASSETS}${e.banner}">`
-    : `<span class="nav-art blank">${e.unitLogo
-        ? `<img loading="lazy" alt="" src="${ASSETS}${e.unitLogo}">` : ""}</span>`;
   // an arc already sits under its unit's header, so drop the unit name from the label
   return `<a class="nav-ev" data-ev="${e.id}" href="${evHref(e)}"`
-       + ` style="--u:${e.colour || "#8f89b5"}">${art}`
+       + ` style="--u:${e.colour || "#8f89b5"}">${thumb(e, "nav-art")}`
        + `<span class="nav-txt"><b>${esc(e.shortName || e.name)}</b>`
        + `<small>${n} changed lines</small></span></a>`;
 }
@@ -438,6 +528,7 @@ function drawer(ev, trs) {
     d.innerHTML =
       `<div class="nav-h">Browse</div>`
       + `<a class="nav-ev flat" href="#/${rangePrefix()}">← All events</a>`
+      + `<a class="nav-ev flat" href="#/releases">Browse by release →</a>`
       + `<div id="nav-events">`
       + navGroups().map((g) => {
           const logo = g.logo
@@ -497,6 +588,8 @@ function route() {
     if (ORDER.has(a) && ORDER.has(b) && pos(a) <= pos(b)) { view.from = a; view.to = b; }
   }
   if (!parts.length) { view.name = "home"; return home(); }
+  // reserved segment: checked before the event lookup, and no event slugs to "releases"
+  if (parts[0] === "releases") { view.name = "releases"; return releasesPage(); }
 
   const ev = D.events.find((e) => e.slug === parts[0])
           || D.events.find((e) => "e" + e.id === parts[0]);

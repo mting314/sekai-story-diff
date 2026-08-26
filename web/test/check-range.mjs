@@ -187,6 +187,102 @@ ok(payload.events.filter((e) => e.kind !== "arc").every((e) => e.logo),
    "every event carries a logo",
    `${payload.events.filter((e) => e.kind !== "arc" && !e.logo).length} missing`);
 
+console.log("\nSPEAKER-ONLY CHANGES");
+{
+  // some frames change only the name plate; with the name unmarked the before/after
+  // pair reads as two identical frames and the edit is invisible
+  const strip2 = (h) => h.replace(/<[^>]*>/g, "");
+  const renamed = payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+    t.episodes.flatMap((ep) => ep.frames
+      .filter((f) => f.speakerOld && f.speakerOld !== f.speaker)
+      .map((f) => ({ e, t, ep, f })))));
+  ok(renamed.length > 0, `${renamed.length} frame(s) change the speaker name`);
+  const silent = renamed.filter(({ f }) => strip2(f.old) === strip2(f.new));
+  ok(silent.length > 0,
+     `${silent.length} of them change nothing else, so the name is the only signal`);
+
+  const { e, f } = silent[0];
+  const b = boot(`#/${e.slug}`);
+  const fig = [...b.document.querySelectorAll("main figure")]
+    .find((x) => x.getAttribute("id").endsWith(`-${f.talkIndex}`));
+  ok(fig, "the frame renders");
+  ok(fig.querySelector(".spk.old b") && fig.querySelector(".spk.new b"),
+     "a renamed speaker is marked on both sides",
+     fig.querySelector(".spk.old b")?.textContent + " -> "
+     + fig.querySelector(".spk.new b")?.textContent);
+  // and an unchanged speaker must NOT be marked, or the highlight means nothing
+  const plain = payload.events[0].transitions[0].episodes[0].frames
+    .find((x) => !x.speakerOld || x.speakerOld === x.speaker);
+  const pf = [...b.document.querySelectorAll("main figure .spk")]
+    .filter((s) => !s.classList.contains("old") && !s.classList.contains("new"));
+  ok(plain && pf.length > 0, "unchanged speakers are left unmarked", `${pf.length} plain`);
+}
+
+console.log("\nRELEASE BROWSER");
+{
+  const b = boot("#/releases");
+  const rows = [...b.document.querySelectorAll(".rel")];
+  const pairs = payload.versions.length - 1;
+  ok(rows.length === pairs, "one row per adjacent release pair", `${rows.length}/${pairs}`);
+
+  // reconcile against the payload rather than against a hardcoded number
+  const byPair = new Map();
+  for (const e of payload.events) for (const t of e.transitions) {
+    const k = `${t.oldVersion}..${t.newVersion}`;
+    byPair.set(k, (byPair.get(k) || 0) + t.changed);
+  }
+  const live = rows.filter((r) => !r.classList.contains("quiet"));
+  ok(live.length === byPair.size, "every release that changed something gets a full row",
+     `${live.length}/${byPair.size}`);
+  ok(rows.length - live.length === pairs - byPair.size,
+     "and the rest are marked as having changed nothing",
+     `${rows.length - live.length} quiet`);
+
+  // line counts must equal the payload's, not be recomputed loosely
+  const shown = live.reduce((n, r) =>
+    n + Number((r.querySelector(".rel-n").textContent.match(/([\d,]+) line/) || [0, 0])[1]
+      .toString().replace(/,/g, "")), 0);
+  const want = [...byPair.values()].reduce((a, x) => a + x, 0);
+  ok(shown === want, "release line counts reconcile with the payload", `${shown} vs ${want}`);
+
+  // the busiest release should be First Star's, and its row must name it
+  const top = live[live.findIndex((r) => /5\.4\.0\.20 → 5\.4\.0\.30/.test(r.textContent))];
+  ok(top, "the First Star release is listed");
+  ok(/359/.test(top.textContent), "with its line count", top.textContent.replace(/\s+/g, " ").trim());
+  const chips = top.nextElementSibling;
+  ok(chips && chips.classList.contains("rel-evs")
+     && /First Star After the Rain/.test(chips.textContent),
+     "and the events it touched", chips?.textContent.replace(/\s+/g, " ").trim().slice(0, 50));
+  // the magnitude belongs on the event tile, not the release header: a release touching
+  // eight events has no single magnitude, and showing both said it twice
+  ok(!top.querySelector(".pill.mag"), "the release header carries no magnitude chip");
+  ok(chips.querySelector(".rel-ev .pill.mag"), "each event tile carries its own",
+     chips.querySelector(".rel-ev .pill.mag")?.textContent);
+  ok(chips.querySelector(".rel-ev img.rel-art, .rel-ev .rel-art.blank"),
+     "and its banner art");
+
+  // every row links into the range view, which is what actually renders the detail
+  const href = top.getAttribute("href");
+  ok(href === "#/r/5.4.0.20..5.4.0.30/", "a release links to its range", href);
+  const rb = boot(href);
+  ok(rb.document.querySelectorAll(".card:not(.soon)").length === 1,
+     "and that range renders exactly the events it claims",
+     `${rb.document.querySelectorAll(".card:not(.soon)").length}`);
+  // an event chip deep-links straight into that event, scoped to the release
+  const chip = chips.querySelector("a.rel-ev").getAttribute("href");
+  ok(chip === "#/r/5.4.0.20..5.4.0.30/first-star-after-the-rain",
+     "an event chip links into the event within that release", chip);
+  ok(boot(chip).document.querySelectorAll("main figure").length === 359,
+     "and that link opens the event");
+
+  ok(b.document.getElementById("burger").hasAttribute("hidden"),
+     "the drawer button is hidden — there is no event to scope it to");
+  // reachable from both other views
+  ok(boot("#/").document.querySelector("a[href='#/releases']"), "home links to releases");
+  ok(boot("#/e1").document.querySelector("#drawer a[href='#/releases']"),
+     "the drawer links to releases");
+}
+
 console.log("\nATTRIBUTION");
 {
   const b = boot("#/");
@@ -452,9 +548,14 @@ if (expectBase) {
   ok(srcs.every((u) => u.startsWith(expectBase)),
      `sprites point at ${expectBase}`, srcs[0]);
 }
-ok([...document.querySelectorAll("a[href^='#/']")].every((a) =>
-     a.getAttribute("href").startsWith("#/r/5.4.0.20..5.4.0.30")),
+// #/releases is deliberately exempt: it is the view you use to *pick* a range, so
+// carrying the current one into it would be backwards. Everything else must keep it.
+ok([...document.querySelectorAll("a[href^='#/']")]
+     .filter((a) => a.getAttribute("href") !== "#/releases")
+     .every((a) => a.getAttribute("href").startsWith("#/r/5.4.0.20..5.4.0.30")),
    "links inside a range keep the range");
+ok(document.querySelector("a[href='#/releases']"),
+   "except the release browser, which is how you leave a range");
 
 console.log("\nSEARCH RESPECTS RANGE");
 let b = boot("#/r/5.4.0.20..5.4.0.30/");

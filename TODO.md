@@ -6,24 +6,96 @@ knowing before picking one up.
 
 ---
 
-## 1. Version browser
+## 1. Bilingual mode
 
-A view over releases rather than events: for each asset version, which stories changed
-and how many lines in each.
+Show the Japanese alongside the English on the stage, the way Cleista's reader does
+(`#/read/event/event_stella_2020/event_01_01?line=3`). Its dialogue overlay becomes a
+two-column grid when a second language is on — `.reader.has-secondary .dialogue-overlay
+{ grid-template-columns: 1fr 1fr }` — collapsing to one column when narrow, with the
+script list below repeating the pairing row by row.
 
-**Why:** the site answers "what changed in this event". The other natural question is
-"what did this release change", and the data already supports it — `transitions.json`
-plus the per-transition payloads are keyed exactly that way.
+**Why:** the JP line is the thing both English versions are translating, so it is the
+only way to judge which one is *better* rather than merely different. We already carry
+it on every frame (`f.jp`, 100% coverage since the unit-arc fix), but it sits in the
+figcaption under the pair, detached from the art and easy to miss.
 
-**Watch out for:** the payload is currently nested event → transition → episode → frame.
-A release-first view needs the inverse index. Build it in `build_web_gallery.py` rather
-than pivoting 2,629 frames in the browser on every render. Note 18 of 41 releases changed
-nothing, so the list should probably show only those that did, with a count of the rest.
+**Watch out for:** our frame is a before/after pair and the JP is the same for both, so
+their layout does not port directly — duplicating it in each overlay is wrong and putting
+it in only one is lopsided. A third full-width row under the pair, styled like the
+overlay rather than like a caption, is probably the honest shape.
+
+Also: the overlay is already carrying a speaker row, a BEFORE/AFTER tag and the line at
+`clamp(10.5px, 4.6cqmin, 17px)`. Their stage runs to 940px; a card in our grid is ~540px
+and ~366px on a phone, so a second column may simply not fit and this may have to be
+stack-only. Worth a mock at card width before committing to it.
+
+It should be a toggle, not always-on — they treat it as a mode (`reader/languages.js`,
+`translate-mode.js`). That means persistence, and `check-range.mjs` has no localStorage
+stub yet. No pipeline work either way: the data is already in the payload.
+
+**Not in scope:** furigana. Their reader renders it (`.furigana-always rt`) but that
+needs per-token readings we do not have and would not get from the scenario data.
+
+---
+
+## 2. Flag lines that were edited twice
+
+A line can be changed at one release and changed again at a later one. The event page
+shows both, one section per release, but never composes them: a line that went A→B then
+B→C is shown as A→B and B→C, never as A→C.
+
+**Why it is worth surfacing:** every instance in the corpus is a *revert*. All five of
+them net to no change at all.
+
+    An Ode for the Pure of Heart · ep7 #1
+      4.1.50.20 → 4.1.51.0   "everything dad asked me to do"  →  "Dad"
+      5.3.50.0  → 5.3.51.0   "Dad"  →  "dad"
+
+    Nightcord at 25:00, Chapter 1 · ep6 #25–28   (speaker only, body identical)
+      4.1.50.20  → 4.1.51.0    Kanade's Father  →  Kanade's Dad
+      4.1.51.10  → 4.1.51.15   Kanade's Dad     →  Kanade's Father
+
+Someone capitalised *Dad* and reverted it fifteen releases later; someone renamed a
+speaker and reverted it two releases later. That is a real editorial signal and the site
+currently makes you find it by hand.
+
+**Watch out for the framing.** The obvious feature is "net diff across a version range",
+but a net-diff view over this corpus would render five empty results — the composition
+is a no-op in every case. The value is the *observation*, not the diff. Build it as a
+flag on the frame ("edited again at 5.3.51.0, back to its original wording") linking to
+the other occurrence, not as a new view.
+
+**Cheap:** no pipeline work. Group frames by (event, episode no, talkIndex) across
+transitions in `main.js` — 1,107 frames, and only 5 land in a group larger than one.
+Six events have more than one transition, so the scan is small and bounded.
+
+---
+
+## 3. Migrate the web app to TypeScript
+
+`web/src/main.js` is ~600 lines of untyped string-templated DOM against a payload whose
+shape is defined in Python, on the other side of a JSON file. Nothing checks the two
+agree.
+
+**Why:** most of the bugs this session were shape bugs that a type would have caught at
+build time — `talkIndex` silently changing base, `readerLine` being confused with it,
+`scenarioId` and `bundleName` being read before they were emitted, and `strip()` handling
+a field that turned out to be HTML rather than text. The harness caught these only
+because someone thought to assert them.
+
+**Watch out for:** the payload type is the valuable part, and it wants generating from
+`build_web_gallery.py` rather than hand-writing a `data.d.ts` that drifts. Something that
+emits a `.d.ts` next to `data.json` keeps one source of truth. Vite handles `.ts` with no
+config change, and `check-range.mjs` runs against the *built bundle*, so the harness
+needs no port — but the linkedom globals it injects are the one place that will complain.
 
 ---
 
 ## Done
 
+- Version browser at `#/releases` — every release in the live window, what each changed,
+  and the 18 that changed nothing kept in place. Derived in the browser from 46
+  transitions, not the 1,107 frames under them, so no payload or pipeline change
 - Dialogue styled like the game: the opaque white card replaced by the two stacked
   gradients and #fff text stroked in #4a4968, sized in `cqmin` against the stage.
   `paint-order:stroke fill` is the load-bearing part. The highlight colours moved with
