@@ -187,6 +187,64 @@ ok(payload.events.filter((e) => e.kind !== "arc").every((e) => e.logo),
    "every event carries a logo",
    `${payload.events.filter((e) => e.kind !== "arc" && !e.logo).length} missing`);
 
+console.log("\nLINES EDITED TWICE");
+{
+  // find them in the payload independently of the app, so the test is not just asserting
+  // that the implementation agrees with itself
+  const plain = (h) => h.replace(/<[^>]*>/g, "")
+    .replace(/&(?:amp|lt|gt|quot|#x27);/g,
+             (m) => ({ "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#x27;": "'" }[m]));
+  const order = new Map(payload.versions.map((v, i) => [v.version, i]));
+  const chains = [];
+  for (const e of payload.events) {
+    const by = new Map();
+    for (const t of e.transitions) for (const ep of t.episodes) for (const f of ep.frames) {
+      const k = `${ep.no}|${f.talkIndex}`;
+      by.set(k, [...(by.get(k) || []), { t, ep, f }]);
+    }
+    for (const [k, hits] of by) {
+      if (hits.length < 2) continue;
+      hits.sort((a, b) => order.get(a.t.newVersion) - order.get(b.t.newVersion));
+      chains.push({ e, k, hits });
+    }
+  }
+  ok(chains.length > 0, `${chains.length} line(s) were edited at more than one release`);
+  // the finding this exists to surface: every one of them nets to nothing
+  const reverts = chains.filter(({ hits }) =>
+    plain(hits[0].f.old) === plain(hits[hits.length - 1].f.new)
+    && hits[0].f.speakerOld === hits[hits.length - 1].f.speaker);
+  ok(reverts.length === chains.length, "and all of them are reverts that end unchanged",
+     `${reverts.length}/${chains.length}`);
+
+  const { e, hits } = chains[0];
+  const b = boot(`#/${e.slug}`);
+  const notes = [...b.document.querySelectorAll("main .again")];
+  // one note per occurrence, on every frame in the chain, in this event
+  const inThisEvent = chains.filter((c) => c.e.id === e.id)
+    .reduce((n, c) => n + c.hits.length, 0);
+  ok(notes.length === inThisEvent, "each occurrence is flagged",
+     `${notes.length}/${inThisEvent}`);
+  ok(notes[0].textContent.includes("also edited at"), "the note says so",
+     notes[0].textContent.replace(/\s+/g, " ").trim());
+  ok(/ends unchanged/.test(notes[0].textContent), "and that the chain nets to nothing");
+
+  // the note must point at the *other* occurrence, not itself, and that link must work
+  const href = notes[0].querySelector("a").getAttribute("href");
+  const otherVersions = hits.map((h) => h.t.newVersion);
+  ok(otherVersions.some((v) => href.includes(v)), "linking to a release in the chain", href);
+  const nb = boot(href);
+  ok(nb.document.querySelectorAll("main figure").length > 0,
+     "and that link opens the event", href);
+  // an explicit range, so it resolves even when the other edit is outside the current one
+  ok(href.startsWith("#/r/"), "with a range that makes it resolve from anywhere", href);
+
+  // a line edited once must not be flagged, or the marker means nothing
+  const single = boot("#/e1");
+  ok(single.document.querySelectorAll("main .again").length === 0,
+     "an event with one release flags nothing",
+     `${single.document.querySelectorAll("main .again").length}`);
+}
+
 console.log("\nSPEAKER-ONLY CHANGES");
 {
   // some frames change only the name plate; with the name unmarked the before/after

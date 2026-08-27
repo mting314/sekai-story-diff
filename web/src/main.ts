@@ -129,7 +129,63 @@ const readerHref = (ev: EventEntry, ep: Episode, line: ReaderNo): string =>
   `${READER}/${ev.kind === "arc" ? "unit" : "event"}`
   + `/${ev.bundleName}/${ep.scenarioId}?line=${line}`;
 
-const figure = (ev: EventEntry, tr: Transition, ep: Episode, f: Frame): Html =>
+/* ---------- lines edited more than once ---------- */
+// A line can move at one release and move again at a later one. The page shows both, one
+// section per release, but nothing connects them, so you have to notice by hand.
+//
+// Worth connecting because in this corpus the answer is always the same: all five such
+// lines are *reverts* that end exactly where they started. Someone capitalised "dad" and
+// undid it fifteen releases later; someone renamed Kanade's father and undid it two
+// releases later. That is an editorial signal, and it is invisible one frame at a time.
+//
+// Deliberately not a "net diff across releases" view, which is the obvious shape and the
+// wrong one: composing these five pairs produces five empty diffs. The finding is that
+// the composition is empty, so it belongs on the frame as a note.
+interface Occurrence { tr: Transition; ep: Episode; f: Frame }
+
+/** Every (episode, line) in `ev` that more than one release touched, oldest first.
+ *
+ *  Built over *all* the event's transitions rather than the in-range ones: a line edited
+ *  outside the current window is still worth knowing about, and the note links with an
+ *  explicit range so it resolves regardless. */
+function editedTwice(ev: EventEntry): Map<string, Occurrence[]> {
+  const by = new Map<string, Occurrence[]>();
+  for (const tr of ev.transitions) {
+    for (const ep of tr.episodes) {
+      for (const f of ep.frames) {
+        const key = `${ep.no}|${f.talkIndex}`;
+        if (!by.has(key)) by.set(key, []);
+        by.get(key)!.push({ tr, ep, f });
+      }
+    }
+  }
+  for (const [key, hits] of by) {
+    if (hits.length < 2) by.delete(key);
+    else hits.sort((a, b) => pos(a.tr.newVersion) - pos(b.tr.newVersion));
+  }
+  return by;
+}
+
+/** Did the whole chain end where it started — text and speaker both? */
+const isRevert = (hits: Occurrence[]): boolean => {
+  const first = hits[0].f, last = hits[hits.length - 1].f;
+  return strip(first.old) === strip(last.new) && first.speakerOld === last.speaker;
+};
+
+const againNote = (ev: EventEntry, hits: Occurrence[], self: Frame): Html => {
+  const others = hits.filter((h) => h.f !== self);
+  if (!others.length) return "" as Html;
+  const links = others.map((h) =>
+    `<a href="#/r/${h.tr.oldVersion}..${h.tr.newVersion}/${ev.slug}/${h.ep.slug}`
+    + `/${h.f.talkIndex}?v=${h.tr.newVersion}">${h.tr.newVersion}</a>`).join(", ");
+  return `<span class="again" title="This line was changed at more than one release">`
+       + `↻ also edited at ${links}`
+       + (isRevert(hits) ? ` — <b>ends unchanged</b>` : "")
+       + `</span>` as Html;
+};
+
+const figure = (ev: EventEntry, tr: Transition, ep: Episode, f: Frame,
+                again: Map<string, Occurrence[]>): Html =>
   `<figure id="f-${ev.id}-${tr.newVersion}-${ep.no}-${f.talkIndex}">`
   + panel(f, true, tr) + panel(f, false, tr)
   + `<figcaption><span class="ln">#${f.talkIndex}</span>`
@@ -137,6 +193,7 @@ const figure = (ev: EventEntry, tr: Transition, ep: Episode, f: Frame): Html =>
       ? `<a class="ctx" target="_blank" rel="noopener noreferrer"
            title="Read this line in context on Cleista's SEKAI Reader"
            href="${readerHref(ev, ep, f.readerLine)}">in context ↗</a>` : "")
+  + againNote(ev, again.get(`${ep.no}|${f.talkIndex}`) ?? [], f)
   + (f.jp ? `<div class="jpline"><i>JP</i>${esc(f.jp)}</div>` : "")
   + `</figcaption></figure>` as Html;
 
@@ -476,6 +533,9 @@ function event(ev: EventEntry, openEp: string): void {
   // One event can be rewritten at several releases. Each gets its own section so a
   // line edited twice is shown twice, against the release that actually changed it.
   const multi = trs.length > 1;
+  // computed once per event, not per frame: 359 frames would otherwise each
+  // rebuild the same index
+  const again = editedTwice(ev);
 
   el("app").innerHTML = `
     <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/${rangePrefix()}" title="All events">←</a>
@@ -496,7 +556,7 @@ function event(ev: EventEntry, openEp: string): void {
                    : (ti === 0 && i === 0 ? "open" : "")}>
         <summary>Episode ${ep.no} — ${esc(ep.title)}
           <em>${ep.frames.length} changed lines</em></summary>
-        <div class="grid">${ep.frames.map((f) => figure(ev, tr, ep, f)).join("")}</div>
+        <div class="grid">${ep.frames.map((f) => figure(ev, tr, ep, f, again)).join("")}</div>
       </details>`).join("")).join("")}`;
 
   drawer(ev, trs);

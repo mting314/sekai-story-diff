@@ -223,6 +223,12 @@
         color:#bdb5e8; background:#221d3d; border:1px solid var(--line);
         white-space:nowrap; }
  .ctx:hover { background:#2c2550; color:#fff; }
+ /* five frames in the whole corpus, so it has to earn its place by being noticeable
+    when it does appear rather than by being loud everywhere */
+ .again { margin-left:10px; padding:1px 8px; border-radius:9px; font-size:11.5px;
+          background:#3a2a17; color:#e8c48a; border:1px solid #5a4324; }
+ .again a { color:#ffd9a0; text-decoration:underline; text-underline-offset:2px; }
+ .again b { font-weight:600; color:#ffd9a0; }
  .jpline { color:#cfc9ee; font-size:13.5px; margin-top:3px; }
  .jpline i { color:#7d77a5; font-size:11px; margin-right:6px; font-style:normal; }
  .empty { padding:40px 24px; color:var(--dim); }

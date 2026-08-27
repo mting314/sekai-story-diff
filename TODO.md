@@ -38,41 +38,13 @@ needs per-token readings we do not have and would not get from the scenario data
 
 ---
 
-## 2. Flag lines that were edited twice
-
-A line can be changed at one release and changed again at a later one. The event page
-shows both, one section per release, but never composes them: a line that went A→B then
-B→C is shown as A→B and B→C, never as A→C.
-
-**Why it is worth surfacing:** every instance in the corpus is a *revert*. All five of
-them net to no change at all.
-
-    An Ode for the Pure of Heart · ep7 #1
-      4.1.50.20 → 4.1.51.0   "everything dad asked me to do"  →  "Dad"
-      5.3.50.0  → 5.3.51.0   "Dad"  →  "dad"
-
-    Nightcord at 25:00, Chapter 1 · ep6 #25–28   (speaker only, body identical)
-      4.1.50.20  → 4.1.51.0    Kanade's Father  →  Kanade's Dad
-      4.1.51.10  → 4.1.51.15   Kanade's Dad     →  Kanade's Father
-
-Someone capitalised *Dad* and reverted it fifteen releases later; someone renamed a
-speaker and reverted it two releases later. That is a real editorial signal and the site
-currently makes you find it by hand.
-
-**Watch out for the framing.** The obvious feature is "net diff across a version range",
-but a net-diff view over this corpus would render five empty results — the composition
-is a no-op in every case. The value is the *observation*, not the diff. Build it as a
-flag on the frame ("edited again at 5.3.51.0, back to its original wording") linking to
-the other occurrence, not as a new view.
-
-**Cheap:** no pipeline work. Group frames by (event, episode no, talkIndex) across
-transitions in `main.js` — 1,107 frames, and only 5 land in a group larger than one.
-Six events have more than one transition, so the scan is small and bounded.
-
----
-
 ## Done
 
+- Lines edited at more than one release are flagged on the frame, linking to the other
+  occurrence with an explicit range so it resolves from anywhere. All five in the corpus
+  are reverts that end exactly where they started, and the note says so. Built as a flag
+  rather than the obvious "net diff across releases" view, which would have rendered five
+  empty results
 - Web app on TypeScript. `tsc --noEmit` in CI *before* the build, which is the whole
   point — Vite strips types with esbuild and never checks them, so without that step the
   migration would have been decorative. Payload shape hand-written in `src/payload.d.ts`
