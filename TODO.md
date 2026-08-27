@@ -1,42 +1,30 @@
 # Backlog
 
-Ordered roughly by how much they unblock or how visible they are. Each entry says what
-it is, why it matters, and what makes it non-trivial — the last part is the bit worth
-knowing before picking one up.
+Nothing open.
 
----
+New entries say what the thing is, why it matters, and what makes it non-trivial — the
+last part being the bit worth knowing before picking one up.
 
-## 1. Bilingual mode
+## Not doing
 
-Show the Japanese alongside the English on the stage, the way Cleista's reader does
-(`#/read/event/event_stella_2020/event_01_01?line=3`). Its dialogue overlay becomes a
-two-column grid when a second language is on — `.reader.has-secondary .dialogue-overlay
-{ grid-template-columns: 1fr 1fr }` — collapsing to one column when narrow, with the
-script list below repeating the pairing row by row.
+### Bilingual mode — Japanese alongside the English on the stage
 
-**Why:** the JP line is the thing both English versions are translating, so it is the
-only way to judge which one is *better* rather than merely different. We already carry
-it on every frame (`f.jp`, 100% coverage since the unit-arc fix), but it sits in the
-figcaption under the pair, detached from the art and easy to miss.
+Both plausible layouts were built and rejected on sight, so this is closed rather than
+pending. Reopen only with a third shape, not with either of these.
 
-**Watch out for:** our frame is a before/after pair and the JP is the same for both, so
-their layout does not port directly — duplicating it in each overlay is wrong and putting
-it in only one is lopsided. A third full-width row under the pair, styled like the
-overlay rather than like a caption, is probably the honest shape.
+*A row spanning the pair* was implemented and reverted. *A column inside each panel* —
+Cleista's shape (`.reader.has-secondary .dialogue-overlay { grid-template-columns: 1fr
+1fr }`) — was mocked at real widths with real frames and rejected too.
 
-Also: the overlay is already carrying a speaker row, a BEFORE/AFTER tag and the line at
-`clamp(10.5px, 4.6cqmin, 17px)`. Their stage runs to 940px; a card in our grid is ~540px
-and ~366px on a phone, so a second column may simply not fit and this may have to be
-stack-only. Worth a mock at card width before committing to it.
+The width was the concrete problem. Their stage runs to 940px; a card in our grid is
+~540px and ~366px on a phone, so a second column leaves the English at roughly 230px and
+150px. The dialogue is `clamp(10.5px, 4.6cqmin, 17px)` and does not shrink to compensate,
+so it wraps instead and pushes the overlay further up over the art it is sitting on. The
+duplication is the other half: the Japanese is the same for both panels, so a column in
+each shows it twice per frame.
 
-It should be a toggle, not always-on — they treat it as a mode (`reader/languages.js`,
-`translate-mode.js`). That means persistence, and `check-range.mjs` has no localStorage
-stub yet. No pipeline work either way: the data is already in the payload.
-
-**Not in scope:** furigana. Their reader renders it (`.furigana-always rt`) but that
-needs per-token readings we do not have and would not get from the scenario data.
-
----
+The Japanese is still on every frame (`f.jp`, 100% coverage) in the figcaption, which is
+where it stays.
 
 ## Done
 
