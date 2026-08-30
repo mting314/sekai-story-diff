@@ -73,6 +73,25 @@ def version_at(sha: str) -> tuple[str, str] | None:
     return (version, digest) if version and digest else None
 
 
+def order_key(row: dict) -> tuple:
+    """Release order: by date, then by the version number itself.
+
+    Sorting on the date alone is ambiguous whenever two releases share one — 5.5.1.30
+    and 5.5.1.50 both land on 2026-08-24 — and the tie then breaks on whatever order the
+    walk happened to produce, which is newest-first. That is not cosmetic: everything
+    downstream reads this list as the release sequence, so fingerprint_bundles.py pairs
+    each version with its predecessor by position and would report the 5.5.1.50 ->
+    5.5.1.30 transition backwards, diffing the new text as if it were the old.
+
+    Asset versions are dotted integers, and they increase monotonically everywhere the
+    CDN still serves, so they are a sound tie-break. (The index does hold one older
+    inversion, 2.6.1.0 on 2024-08-08 before 2.5.1.10 on 2024-08-09; date stays the
+    primary key so that stays where upstream put it, and it is a year outside the
+    retention window either way.)
+    """
+    return (row["date"], tuple(int(part) for part in row["version"].split(".")))
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="data/versions_en.json")
@@ -94,7 +113,7 @@ def main() -> None:
             print(f"{version} already indexed")
             return
         rows.append({"date": date, "hash": digest, "version": version})
-        rows.sort(key=lambda r: r["date"])
+        rows.sort(key=order_key)
         out.write_text(json.dumps(rows, indent=1), encoding="utf-8")
         print(f"appended {version} ({date}); {len(rows)} versions indexed")
         return
@@ -110,7 +129,7 @@ def main() -> None:
             continue
         seen.add(pair)
         rows.append({"date": date[:10], "hash": pair[1], "version": pair[0]})
-    rows.sort(key=lambda r: r["date"])
+    rows.sort(key=order_key)
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
