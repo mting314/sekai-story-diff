@@ -177,8 +177,15 @@ jobs:
 
       # Refuse to publish a payload whose sprites are missing: with "hide until
       # rendered" a partial deploy looks identical to a healthy site.
-      - name: Every referenced sprite must exist
-        run: uv run python scripts/verify_payload.py
+      #
+      # --pending-upload-ok because this runs *before* the rsync below: everything the
+      # render step just drew is local-only by definition, and demanding it already be
+      # in the bucket would fail the job precisely when it did some work. Off CI the
+      # default applies and an unpublished asset is an error, which is the case that
+      # actually bites — a laptop build leaves new media on disk, gitignored, and
+      # commits a payload pointing at objects the bucket has never held.
+      - name: Every referenced asset must exist
+        run: uv run python scripts/verify_payload.py --pending-upload-ok
 
       # Upload before committing: the payload must never reference a sprite that is
       # not yet fetchable. Immutable caching is only safe because the filenames are
