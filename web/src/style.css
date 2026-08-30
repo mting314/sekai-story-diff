@@ -213,6 +213,9 @@
         padding:.05em .6em; font-size:.78em; margin-left:.6em;
         color:#fff; background:rgba(0,0,0,.42); }
  .tag.o { background:rgba(176,68,68,.85); } .tag.n { background:rgba(46,128,96,.85); }
+ /* Insertions read as a third state, not a greener edit: there is no red panel above
+    them to make the green mean "this side of the pair". */
+ .tag.i { background:rgba(58,104,180,.85); }
  .txt { margin:.25em 0 0; font-size:1em; line-height:1.5; font-weight:600; }
  /* Picked against the old white slab, #a52f2f and #126b48 are unreadable on the
     gradient. These are the tints the mobile path already used on dark. */

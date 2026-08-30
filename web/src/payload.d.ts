@@ -65,12 +65,18 @@ export interface Layer {
   speaking: boolean;
 }
 
-/** One changed line, rendered before and after. */
+/** One changed line, rendered before and after — or alone, when `inserted`. */
 export interface Frame {
   /** background asset id; meaningless when `cover` is set */
   bg: string;
   cover: Cover;
   flashback: boolean;
+  /**
+   * The release inserted this line; there is no before-state, so it renders as a single
+   * panel. `old` is `""` on these, and reading it as the previous wording is wrong —
+   * the line did not exist. Rare: 16 frames across two events.
+   */
+  inserted: boolean;
   /** the Japanese source line — plain text, never markup */
   jp: string;
   layers: Layer[];

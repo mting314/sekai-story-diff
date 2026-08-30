@@ -591,6 +591,38 @@ console.log("\nEMPTY FILTER");
      msg ? msg.textContent : "(no element)");
 }
 
+console.log("\nINSERTED LINES");
+// A line the release added has no before-state. Both panels of an ordinary frame take
+// their staging from the *new* scenario, which is sound when only the text moved, so a
+// before panel here would invent a scene, caption it with the speaker's name and show
+// them saying nothing. These render as a single panel instead.
+{
+  const inserted = payload.events.flatMap((e) => e.transitions.flatMap((t) =>
+    t.episodes.flatMap((ep) => ep.frames.filter((f) => f.inserted))));
+  ok(inserted.length > 0, "the payload still carries inserted lines", `${inserted.length}`);
+  ok(inserted.every((f) => f.old === ""), "every inserted frame has an empty before-text");
+
+  // event 145 is entirely insertions; event 150 mixes them with an ordinary edit, which
+  // is what proves the two renderings coexist inside one event
+  for (const [slug, want] of [["whither-this-path-of-thorns", 6], ["with-our-wounded-hands", 10]]) {
+    const doc = boot(`#/${slug}`).document;
+    const figs = [...doc.querySelectorAll("main figure")];
+    const single = figs.filter((f) => f.querySelectorAll(".panel").length === 1);
+    ok(single.length === want, `${slug}: ${want} insertions render as one panel`,
+       `${single.length}/${want}`);
+    ok(doc.querySelectorAll(".tag.i").length === want,
+       `${slug}: each is tagged as an insertion, not as an edit`,
+       `${doc.querySelectorAll(".tag.i").length}`);
+    // the specific regression this replaces: a BEFORE panel with nothing in it
+    ok(single.every((f) => !f.querySelector(".txt.old")),
+       `${slug}: no empty before-text is rendered`);
+  }
+  const mixed = boot("#/with-our-wounded-hands").document;
+  ok([...mixed.querySelectorAll("main figure")].filter((f) =>
+       f.querySelectorAll(".panel").length === 2).length === 1,
+     "an ordinary edit in the same event still renders as a pair");
+}
+
 console.log("\nDEEP LINK WITH RANGE");
 ({ document } = boot("#/r/5.4.0.20..5.4.0.30/e1/t5_4_0_30-ep03/20"));
 ok(document.getElementById("t5_4_0_30-ep03")?.hasAttribute("open"), "target episode opened");

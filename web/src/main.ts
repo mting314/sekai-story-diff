@@ -92,7 +92,10 @@ function panel(f: Frame, old: boolean, tr: Transition): Html {
   const renamed = f.speakerOld && f.speakerOld !== f.speaker;
   // the bracket belongs to the transition: one event can be rewritten at several
   // releases, and each frame must say which one it belongs to
-  const ver = old ? "BEFORE " + tr.oldVersion : "AFTER " + tr.newVersion;
+  // An inserted line has no "after" because it has no "before" — it is simply the line
+  // this release added, so say that rather than implying a rewrite.
+  const ver = old ? "BEFORE " + tr.oldVersion
+                  : (f.inserted ? "INSERTED AT " : "AFTER ") + tr.newVersion;
   // The dialogue lives *inside* the stage now. It used to be a sibling so a narrow
   // layout could stack it below the art, but that stopped being true when the mobile
   // rules went back to overlaying — and being inside is what lets it size in cqmin
@@ -103,7 +106,7 @@ function panel(f: Frame, old: boolean, tr: Transition): Html {
        + `<span class="spk${renamed ? (old ? " old" : " new") : ""}">`
        + `${renamed ? `<b>${esc(name)}</b>` : esc(name)}</span>`
        + `<span class="spk-rule" aria-hidden="true"></span></div>`
-       + `<span class="tag ${old ? "o" : "n"}">${ver}</span>`
+       + `<span class="tag ${old ? "o" : f.inserted ? "i" : "n"}">${ver}</span>`
        + `<p class="txt ${old ? "old" : "new"}">${old ? f.old : f.new}</p></div>`
        + `</div></div>` as Html;
 }
@@ -169,6 +172,9 @@ function editedTwice(ev: EventEntry): Map<string, Occurrence[]> {
 /** Did the whole chain end where it started — text and speaker both? */
 const isRevert = (hits: Occurrence[]): boolean => {
   const first = hits[0].f, last = hits[hits.length - 1].f;
+  // A chain that opens with an insertion has no state to return to, and `old` is "" on
+  // those, so the comparison below would call any later deletion-to-empty a revert.
+  if (first.inserted) return false;
   return strip(first.old) === strip(last.new) && first.speakerOld === last.speaker;
 };
 
@@ -187,7 +193,7 @@ const againNote = (ev: EventEntry, hits: Occurrence[], self: Frame): Html => {
 const figure = (ev: EventEntry, tr: Transition, ep: Episode, f: Frame,
                 again: Map<string, Occurrence[]>): Html =>
   `<figure id="f-${ev.id}-${tr.newVersion}-${ep.no}-${f.talkIndex}">`
-  + panel(f, true, tr) + panel(f, false, tr)
+  + (f.inserted ? "" : panel(f, true, tr)) + panel(f, false, tr)
   + `<figcaption><span class="ln">#${f.talkIndex}</span>`
   + (ev.bundleName && ep.scenarioId && f.readerLine
       ? `<a class="ctx" target="_blank" rel="noopener noreferrer"
@@ -432,7 +438,7 @@ function results() {
       <a class="hit" href="${epHref(h.ev, h.tr, h.ep, h.f.talkIndex)}">
         <div class="who">${esc(h.ev.name)} · Ep ${h.ep.no} · #${h.f.talkIndex} ·
           <b>${esc(h.f.speaker)}</b></div>
-        <div class="o">− ${hl(strip(h.f.old), q)}</div>
+        ${h.f.inserted ? "" : `<div class="o">− ${hl(strip(h.f.old), q)}</div>`}
         <div class="n">+ ${hl(strip(h.f.new), q)}</div>
       </a>`).join("") + (hits.length > 40
         ? `<div class="hint">…and ${hits.length - 40} more. Refine the search.</div>` : "")

@@ -388,7 +388,15 @@ def main() -> None:
         default="web",
         help="Vite app root; sprites go to <out>/public/sprites, payload to <out>/src/data.json",
     )
-    ap.add_argument("--kinds", default="text,speaker")
+    ap.add_argument(
+        "--kinds",
+        default="text,speaker,added",
+        help="which change kinds to show. 'added' is a line the release inserted, which "
+             "has no before-state and so renders as a single frame rather than a pair; "
+             "'linebreak' is excluded by default because the words are identical and "
+             "only the on-screen wrap moved. 'removed' is accepted but never appears: a "
+             "cut line has no talk_index_new, so it lands in `dropped` instead",
+    )
     ap.add_argument(
         "--langs",
         default="rewrite",
@@ -532,6 +540,14 @@ def main() -> None:
                         "cover": state["cover"],
                         "flashback": state["flashback"],
                         "jp": jp_lines[idx] if idx < len(jp_lines) else "",
+                        # A line the release inserted. The site draws one frame rather
+                        # than a pair for these: both panels take their staging from the
+                        # *new* scenario, which is sound when only the text moved, but an
+                        # inserted line has no counterpart at all — event 145's episode 8
+                        # ran to 49 lines before and 55 after, so a "before" panel at
+                        # index 49 would invent a scene, put the speaker's name on it and
+                        # show them saying nothing.
+                        "inserted": change["kind"] == "added",
                         "layers": layers,
                         "new": spans_html(spans_new),
                         "old": spans_html(spans_old),
