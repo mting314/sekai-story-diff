@@ -21,6 +21,11 @@
 # the six unit arcs. unit_bundles() returns [] when this is absent, so an untracked copy
 # would make CI quietly sweep events only and drop the arcs from the payload
 !/data/master/unitStories.json
+# JP name, unit, arc slug and banner art per event. Trimmed to the six fields the
+# pipeline reads from sekai-story-indexer's events_index.json, which lives in another
+# repo on one laptop: diff_versions.py hard-exits without it and build_web_gallery.py
+# silently drops every banner, so CI needs its own copy.
+!/data/master/events_index.json
 __pycache__/
 *.pyc
 .venv/

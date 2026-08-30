@@ -29,7 +29,10 @@ ARC_ID_BASE = 9000
 # The story indexer supplies the JP name / unit / arc slug. This used to be read as a
 # bare "events_index.json" from the current working directory — a file that does not
 # exist in this repo, so the script only ran from a scratch cwd with a copy dropped in.
-INDEXER = Path.home() / "github/sekai-story-indexer/events_index.json"
+# The tracked snapshot under data/master is the one CI reads; the working copy in the
+# indexer repo wins when it is present, so a laptop still sees new events first.
+INDEXER = MASTER / "events_index.json"
+INDEXER_SOURCE = Path.home() / "github/sekai-story-indexer/events_index.json"
 
 
 @dataclass
@@ -149,7 +152,12 @@ def main() -> None:
         default="",
         help="output path; defaults to data/official_changes_<old>_<new>.json",
     )
-    ap.add_argument("--indexer", default=str(INDEXER), help="sekai-story-indexer events_index.json")
+    ap.add_argument(
+        "--indexer",
+        default="",
+        help="events_index.json; defaults to the indexer repo when present, else the "
+             "tracked snapshot in data/master",
+    )
     ap.add_argument(
         "--bundles",
         nargs="*",
@@ -191,11 +199,14 @@ def main() -> None:
         s["eventId"]: {ep["episodeNo"]: ep.get("title", "") for ep in s.get("eventStoryEpisodes", [])}
         for s in json.loads((MASTER / "eventStories_en.json").read_text())
     }
-    index_path = Path(args.indexer)
+    if args.indexer:
+        index_path = Path(args.indexer)
+    else:
+        index_path = INDEXER_SOURCE if INDEXER_SOURCE.exists() else INDEXER
     if not index_path.exists():
         raise SystemExit(
             f"{index_path} not found — it supplies each event's JP name, unit and arc slug. "
-            "Pass --indexer, or clone sekai-story-indexer next to this repo."
+            "Pass --indexer, or restore the tracked snapshot at data/master/events_index.json."
         )
     index = {e["event_id"]: e for e in json.loads(index_path.read_text())}
 

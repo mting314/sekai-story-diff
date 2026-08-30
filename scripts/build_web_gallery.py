@@ -76,7 +76,11 @@ LOGO_HEIGHT = 72
 # localised title art, which is what belongs above English story text. Verified present
 # for all 38 events in the payload, with the JP URL kept as a fallback.
 EN_LOGO = "https://storage.sekai.best/sekai-en-assets/event/{bundle}/logo/logo.webp"
-INDEXER = Path.home() / "github/sekai-story-indexer/events_index.json"
+# The indexer repo when it is checked out, else the tracked snapshot. Without a
+# fallback CI has neither, and event_meta() degrades silently — every banner, logo,
+# JP name and unit drops out of the payload while the build still reports success.
+_INDEXER_SOURCE = Path.home() / "github/sekai-story-indexer/events_index.json"
+INDEXER = _INDEXER_SOURCE if _INDEXER_SOURCE.exists() else Path("data/master/events_index.json")
 # Events the mirror shows as re-uploaded on their own dates, awaiting a diff.
 PENDING_EVENTS = [24, 31, 74, 75, 111, 155]
 # Unit identity. The indexer names units after the group (leo_need); the game's own
