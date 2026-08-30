@@ -29,9 +29,9 @@ try:
     from sssekai.unity.AssetBundle import load_assetbundle
 except ImportError as exc:  # pragma: no cover - dependency guard
     raise SystemExit(
-        "needs sssekai + UnityPy — run with an interpreter that has them, e.g.\n"
-        "  ~/github/sekai-reverse-engineering/.venv/bin/python "
-        "scripts/data/fetch_official_bundles.py ..."
+        "needs sssekai + UnityPy — both are project dependencies, so run this under "
+        "the project environment:\n"
+        "  uv sync && uv run python scripts/fetch_official_bundles.py ..."
     ) from exc
 
 warnings.filterwarnings("ignore")

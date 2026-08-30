@@ -26,7 +26,6 @@ from pathlib import Path
 TRANSITIONS = Path("data/transitions.json")
 OFFICIAL = Path("data/official")
 OUT_DIR = Path("data/transitions")
-RE_PYTHON = Path.home() / "github/sekai-reverse-engineering/.venv/bin/python"
 
 
 def on_disk(bundle: str, version: str) -> bool:
@@ -45,9 +44,16 @@ def label(bundle: str) -> str:
 
 
 def fetch(bundle: str, version: str) -> bool:
-    """Pull one bundle at one version. Cheap now that --bundles exists."""
+    """Pull one bundle at one version. Cheap now that --bundles exists.
+
+    Runs under our own interpreter: sssekai and UnityPy are project dependencies, so
+    the fetcher no longer needs the separate reverse-engineering venv it was written
+    against. That venv only ever existed on one laptop, so shelling out to it made
+    this step fail on any machine without it — CI included, where nothing is cached
+    and so every candidate needs a fetch.
+    """
     result = subprocess.run(
-        [str(RE_PYTHON), "scripts/fetch_official_bundles.py",
+        [sys.executable, "scripts/fetch_official_bundles.py",
          "--kind", kind_of(bundle), "--version", version, "--bundles", bundle],
         capture_output=True, text=True,
     )
