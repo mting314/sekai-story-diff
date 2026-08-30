@@ -136,6 +136,14 @@ def main() -> None:
     print("next: scripts/build_web_gallery.py --changes 'data/transitions/*.json' "
           "'data/official_changes*.json'")
 
+    # A failed candidate is a transition we know moved and cannot account for. Exiting 0
+    # here made that invisible: CI counts payload files to decide whether to render, so a
+    # run where every diff failed looks exactly like a run where nothing changed, and the
+    # site keeps under-reporting with a green tick. The retention window is ~11 months,
+    # so a transition not diffed while it is live is lost for good — fail loudly instead.
+    if failed:
+        raise SystemExit(f"{failed} candidate transition(s) could not be confirmed")
+
 
 if __name__ == "__main__":
     main()
