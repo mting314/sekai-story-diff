@@ -76,8 +76,17 @@ jobs:
         run: |
           git config user.name "sekai-story-diff bot"
           git config user.email "actions@github.com"
-          git add data/versions_en.json data/fingerprints.json data/transitions.json \
-                  data/transitions data/versions_etag.json 2>/dev/null || true
+          # Stage the whole directory rather than a list of paths. `git add a b c` is
+          # atomic: one pathspec matching nothing aborts the command and stages *none*
+          # of the rest. data/versions_etag.json was exactly that — check_new_version.py
+          # only writes the etag when the version is NOT new, so on every run that
+          # reaches this step the file is absent, and it is untracked, so it never came
+          # into existence to fix itself. git add exited 128, `|| true` hid it, and
+          # `git diff --cached --quiet` then passed because nothing was staged: the
+          # index, the fingerprints and every new payload were dropped on the floor
+          # under a green tick. .gitignore already whitelists precisely what belongs
+          # here, so -A on the directory stages the right set and cannot go stale.
+          git add -A data
           git diff --cached --quiet || git commit -m "Index asset version ${{ steps.check.outputs.version }}"
           git push
 
