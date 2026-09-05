@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 150,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "With Our Wounded Hands",
    "name_jp": "傷だらけの手で、私達は",
    "unit": "nightcord",

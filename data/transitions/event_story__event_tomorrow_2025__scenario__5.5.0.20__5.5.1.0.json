@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 177,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Tying Tomorrow's Ribbon",
    "name_jp": "ほどけぬ明日に手を伸ばして",
    "unit": "nightcord",

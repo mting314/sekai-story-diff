@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 125,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "The First Concerto",
    "name_jp": "The first concerto",
    "unit": "vivid_bad_squad",

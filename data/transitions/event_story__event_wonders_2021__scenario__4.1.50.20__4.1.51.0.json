@@ -24,6 +24,8 @@
  "events": [
   {
    "event_id": 25,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Wonder Magical Showtime!",
    "name_jp": "ワンダーマジカルショウタイム！",
    "unit": "wonderlands_showtime",

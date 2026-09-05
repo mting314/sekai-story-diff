@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 24,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "An Ode for the Pure of Heart",
    "name_jp": "純白の貴方へ、誓いの歌を！",
    "unit": "mixed",

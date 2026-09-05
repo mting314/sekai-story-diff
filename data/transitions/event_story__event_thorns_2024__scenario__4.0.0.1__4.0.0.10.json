@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 145,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Whither This Path of Thorns",
    "name_jp": "荊棘の道は何処へ",
    "unit": "nightcord",

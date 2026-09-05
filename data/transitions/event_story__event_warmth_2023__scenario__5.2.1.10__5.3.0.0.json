@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 111,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "The Warmth of a Guiding Hand",
    "name_jp": "その手導くぬくもりは",
    "unit": "more_more_jump",

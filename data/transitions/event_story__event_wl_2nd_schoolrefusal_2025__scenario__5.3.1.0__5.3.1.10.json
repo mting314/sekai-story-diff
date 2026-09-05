@@ -24,6 +24,8 @@
  "events": [
   {
    "event_id": 170,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "In an Ephemeral Embrace",
    "name_jp": "泡沫に抱かれて",
    "unit": "nightcord",

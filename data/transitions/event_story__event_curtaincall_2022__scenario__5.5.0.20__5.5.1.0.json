@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 74,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "A Sad Farewell at the Curtain Call",
    "name_jp": "カーテンコールに惜別を",
    "unit": "wonderlands_showtime",

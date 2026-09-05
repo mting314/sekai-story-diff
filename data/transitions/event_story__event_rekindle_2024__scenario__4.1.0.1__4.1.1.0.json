@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 146,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Rekindle the Flame",
    "name_jp": "Rekindle the flame",
    "unit": "vivid_bad_squad",

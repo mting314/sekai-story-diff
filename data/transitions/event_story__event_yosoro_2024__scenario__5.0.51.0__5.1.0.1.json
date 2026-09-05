@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 124,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "With Your Sights on Stardom, Set Sail!",
    "name_jp": "星を目指して、ヨーソロー！",
    "unit": "wonderlands_showtime",

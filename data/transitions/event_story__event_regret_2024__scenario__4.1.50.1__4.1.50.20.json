@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 149,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "The Power of Regret",
    "name_jp": "The Power Of Regret",
    "unit": "wonderlands_showtime",

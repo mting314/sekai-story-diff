@@ -26,6 +26,8 @@
  "events": [
   {
    "event_id": 169,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Aim Higher and Higher!",
    "name_jp": "Aim higher and higher！",
    "unit": "vivid_bad_squad",

@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 43,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "MORE MORE Making Christmas",
    "name_jp": "MOREMOREMakingXmas",
    "unit": "more_more_jump",

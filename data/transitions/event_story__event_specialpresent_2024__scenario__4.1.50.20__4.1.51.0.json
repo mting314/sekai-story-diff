@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 152,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Special Present for You!",
    "name_jp": "Special present for YOU！",
    "unit": "mixed",

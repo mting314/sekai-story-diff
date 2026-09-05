@@ -24,6 +24,8 @@
  "events": [
   {
    "event_id": 2,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Imprisoned Marionette",
    "name_jp": "囚われのマリオネット",
    "unit": "nightcord",

@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 135,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Over Rad Squad!!",
    "name_jp": "OVER RAD SQUAD!!",
    "unit": "vivid_bad_squad",

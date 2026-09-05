@@ -24,6 +24,8 @@
  "events": [
   {
    "event_id": 154,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Time to Take Off!",
    "name_jp": "Time to take off！",
    "unit": "vivid_bad_squad",

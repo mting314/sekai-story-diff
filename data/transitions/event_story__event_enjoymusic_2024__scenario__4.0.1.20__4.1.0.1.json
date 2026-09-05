@@ -26,6 +26,8 @@
  "events": [
   {
    "event_id": 147,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Happy Enjoy Music!",
    "name_jp": "Happy Enjoy Music！",
    "unit": "leo_need",

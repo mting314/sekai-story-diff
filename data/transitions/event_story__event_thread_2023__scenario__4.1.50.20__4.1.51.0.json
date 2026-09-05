@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 85,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "At The End of The Unraveled Thread",
    "name_jp": "ほどかれた糸のその先に",
    "unit": "more_more_jump",

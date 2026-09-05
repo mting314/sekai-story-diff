@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 151,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Grow Glorious Glow",
    "name_jp": "Grow glorious glow",
    "unit": "more_more_jump",

@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 153,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Unfading Wishing",
    "name_jp": "Unfading wishing",
    "unit": "mixed",

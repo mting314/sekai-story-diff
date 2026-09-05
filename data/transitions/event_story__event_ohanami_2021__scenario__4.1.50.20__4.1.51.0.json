@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 18,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Singing Among the Cherry Blossoms",
    "name_jp": "君と歌う、桜舞う世界で",
    "unit": "leo_need",

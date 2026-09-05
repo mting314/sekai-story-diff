@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 136,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Halt! Tenma's on the Case",
    "name_jp": "お縄を頂戴！？天馬捕物帳",
    "unit": "wonderlands_showtime",

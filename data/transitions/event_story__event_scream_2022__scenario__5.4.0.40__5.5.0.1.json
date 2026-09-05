@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 75,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Screaming?! Welcome to the Forest of Wolves!",
    "name_jp": "絶叫！？ オオカミの森へようこそ！",
    "unit": "mixed",

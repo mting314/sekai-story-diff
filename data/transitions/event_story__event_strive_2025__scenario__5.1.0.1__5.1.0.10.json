@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 157,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Rise and Strive",
    "name_jp": "Rise and Strive",
    "unit": "more_more_jump",

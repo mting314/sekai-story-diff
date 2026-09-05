@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 130,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "To One Day Reach that Flowery Stage",
    "name_jp": "いつか花咲くステージへ",
    "unit": "more_more_jump",

@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 119,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Backlight, Lens Flare",
    "name_jp": "逆光のレンズフレア",
    "unit": "wonderlands_showtime",

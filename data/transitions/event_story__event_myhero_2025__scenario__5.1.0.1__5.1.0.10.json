@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 160,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "You Are My Hero!",
    "name_jp": "You are my HERO!!",
    "unit": "mixed",

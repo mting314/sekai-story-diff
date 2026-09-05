@@ -25,6 +25,8 @@
  "events": [
   {
    "event_id": 168,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Cheer With My Heart!",
    "name_jp": "Cheer with my Heart!",
    "unit": "more_more_jump",

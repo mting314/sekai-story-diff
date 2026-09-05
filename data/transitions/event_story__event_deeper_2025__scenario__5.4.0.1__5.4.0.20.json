@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 172,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Deeper and Deeper",
    "name_jp": "Deeper and deeper",
    "unit": "wonderlands_showtime",

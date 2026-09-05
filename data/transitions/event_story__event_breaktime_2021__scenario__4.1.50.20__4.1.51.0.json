@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 23,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "You deserve it! Break Time!",
    "name_jp": "頑張るあなたにBreak Time！",
    "unit": "more_more_jump",

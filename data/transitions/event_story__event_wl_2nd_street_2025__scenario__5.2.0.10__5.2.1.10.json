@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 163,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Turning Pain Into Drive",
    "name_jp": "Turning Pain into Drive",
    "unit": "vivid_bad_squad",

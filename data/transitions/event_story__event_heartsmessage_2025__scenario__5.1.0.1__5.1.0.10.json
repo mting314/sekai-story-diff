@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 159,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Connect Hearts Message",
    "name_jp": "Connect hearts message",
    "unit": "mixed",

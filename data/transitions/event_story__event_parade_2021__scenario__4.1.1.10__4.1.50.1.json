@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 13,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Musical Twilight Parade",
    "name_jp": "響くトワイライトパレード",
    "unit": "leo_need",

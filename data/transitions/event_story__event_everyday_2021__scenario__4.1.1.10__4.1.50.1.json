@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 31,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Happy Lovely Everyday!",
    "name_jp": "ハッピー・ラブリー・エブリデイ！",
    "unit": "more_more_jump",

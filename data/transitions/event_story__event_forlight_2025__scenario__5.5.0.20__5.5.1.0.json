@@ -23,6 +23,8 @@
  "events": [
   {
    "event_id": 178,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Deep Dark for Light",
    "name_jp": "Deep Dark For Light",
    "unit": "wonderlands_showtime",

@@ -24,6 +24,8 @@
  "events": [
   {
    "event_id": 1,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "First Star After the Rain",
    "name_jp": "雨上がりの一番星",
    "unit": "leo_need",

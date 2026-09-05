@@ -22,6 +22,8 @@
  "events": [
   {
    "event_id": 161,
+   "kind": "event",
+   "chapter_no": null,
    "name_en": "Unreliable Notes",
    "name_jp": "Unreliable Notes",
    "unit": "nightcord",
