@@ -1,0 +1,187 @@
+{
+ "comparison": {
+  "old_asset_version": "5.6.0.1",
+  "new_asset_version": "5.6.1.10",
+  "old_released_at": "2026-09-05",
+  "new_released_at": "2026-09-10",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 6,
+  "changed_lines": 8,
+  "by_kind": {
+   "text": 8
+  },
+  "by_lang": {
+   "rewrite": 8
+  },
+  "rewrite_lines": 8
+ },
+ "events": [
+  {
+   "event_id": 179,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "",
+   "name_jp": "Link the Beats！",
+   "unit": "mixed",
+   "arc_slug": "0179-link-the-beats",
+   "bundle": "event_story/event_wl_2nd_piapro_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "wl_piapro_02_02",
+     "episode_no": 2,
+     "title_en": "",
+     "title_jp": "星に見守られて",
+     "lines_old": 105,
+     "lines_new": 105,
+     "changes": [
+      {
+       "talk_index_old": 53,
+       "talk_index_new": 53,
+       "kind": "text",
+       "speaker_old": "Len",
+       "speaker_new": "Len",
+       "old": "(Beng sent over to another SEKAI has to be pretty scary...)",
+       "new": "(Being sent over to another SEKAI has to be pretty scary...)",
+       "ratio": 0.991,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 85,
+       "talk_index_new": 85,
+       "kind": "text",
+       "speaker_old": "Luka",
+       "speaker_new": "Luka",
+       "old": "Here's a picture of them having a sleepover. And this one's from when they when to PXL.",
+       "new": "Here's a picture of them having a sleepover. And this one's from when they went to PXL.",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_piapro_02_04",
+     "episode_no": 4,
+     "title_en": "",
+     "title_jp": "どこまでも灰色な",
+     "lines_old": 134,
+     "lines_new": 134,
+     "changes": [
+      {
+       "talk_index_old": 105,
+       "talk_index_new": 105,
+       "kind": "text",
+       "speaker_old": "Miku",
+       "speaker_new": "Miku",
+       "old": "They're all dealing with lot, and they aren't always able to solve their problems...",
+       "new": "They're all dealing with a lot, and they aren't always able to solve their problems...",
+       "ratio": 0.987,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_piapro_02_07",
+     "episode_no": 7,
+     "title_en": "",
+     "title_jp": "世界中へ！",
+     "lines_old": 121,
+     "lines_new": 121,
+     "changes": [
+      {
+       "talk_index_old": 103,
+       "talk_index_new": 103,
+       "kind": "text",
+       "speaker_old": "Fan's Voice",
+       "speaker_new": "Fan's Voice",
+       "old": "Maybe I should keep at it for little longer. Alright, I'll come up with a practice regimen for my next match...!",
+       "new": "Maybe I should keep at it for a little longer. Alright, I'll come up with a practice regimen for my next match...!",
+       "ratio": 0.991,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_piapro_02_09",
+     "episode_no": 9,
+     "title_en": "",
+     "title_jp": "新しい景色を",
+     "lines_old": 148,
+     "lines_new": 148,
+     "changes": [
+      {
+       "talk_index_old": 66,
+       "talk_index_new": 66,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "I guess you could climb on top it as long as you avoided that part.",
+       "new": "I guess you could climb on top of it as long as you avoided that part.",
+       "ratio": 0.978,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 76,
+       "talk_index_new": 76,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "I mean, there's way we can climb it...",
+       "new": "I mean, there's no way we can climb it...",
+       "ratio": 0.957,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_piapro_02_10",
+     "episode_no": 10,
+     "title_en": "",
+     "title_jp": "不思議がたくさん！？",
+     "lines_old": 152,
+     "lines_new": 152,
+     "changes": [
+      {
+       "talk_index_old": 80,
+       "talk_index_new": 80,
+       "kind": "text",
+       "speaker_old": "KAITO",
+       "speaker_new": "KAITO",
+       "old": "Ob, but... Rin's still...",
+       "new": "Oh, but... Rin's still...",
+       "ratio": 0.941,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "wl_piapro_02_13",
+     "episode_no": 13,
+     "title_en": "",
+     "title_jp": "みんながひとつに",
+     "lines_old": 141,
+     "lines_new": 141,
+     "changes": [
+      {
+       "talk_index_old": 35,
+       "talk_index_new": 35,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "We don't it often... But we should be able to. We do a lot of improv during practices.",
+       "new": "We don't do it often... But we should be able to. We do a lot of improv during practices.",
+       "ratio": 0.982,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 8,
+   "text_changes": 8
+  }
+ ],
+ "bundles_only_in_new": []
+}
