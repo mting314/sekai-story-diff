@@ -9,6 +9,17 @@ on:
   schedule:
     - cron: "10 8 * * *"
   workflow_dispatch:
+    inputs:
+      # `detect` only reports a change for a version it has not indexed, so once a
+      # release is recorded there is no way back into the render job: the index says
+      # the work is done and the payload says otherwise. That gap is only visible when
+      # the render fails on its own, which is precisely when it needs re-running.
+      # Rerunning the failed run is not the answer — it replays the original commit and
+      # the workflow file that came with it, so it cannot pick up the fix.
+      force_render:
+        description: "Render and publish even when no new version was detected"
+        type: boolean
+        default: false
 
 concurrency:
   group: update
@@ -108,7 +119,7 @@ jobs:
   render:
     name: Render and publish
     needs: detect
-    if: needs.detect.outputs.changed == 'true'
+    if: needs.detect.outputs.changed == 'true' || inputs.force_render
     # Windows, not Linux: live2d-py ships no Linux wheel and its CMakeLists has no
     # Linux branch, so the Cubism binding cannot be built there. A GitHub-hosted
     # Windows runner is free for public repos, which is why this needs no VM.
@@ -219,7 +230,9 @@ jobs:
           git config user.email "actions@github.com"
           git add web/src/data.json
           if (git diff --cached --quiet) { echo "nothing new to publish" } else {
-            git commit -m "Render ${{ needs.detect.outputs.version }}"
+            # a forced render has no detected version to name: it is re-rendering a
+            # payload some earlier run already indexed
+            git commit -m "Render ${{ needs.detect.outputs.version || 'the pending payload' }}"
             git push
           }
 
