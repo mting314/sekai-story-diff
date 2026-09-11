@@ -127,6 +127,7 @@ jobs:
     permissions:
       contents: write
       id-token: write   # for Workload Identity Federation; no key is stored anywhere
+      actions: write    # to dispatch the Pages deploy this job's own push cannot trigger
     env:
       # Every script reads and writes text at the platform default, which is UTF-8 on
       # the Linux and macOS this was written on and cp1252 here. The scenarios are
@@ -225,6 +226,7 @@ jobs:
           gcloud storage objects update "gs://sekai-story-diff-assets/**" --cache-control="public, max-age=31536000, immutable" --quiet
 
       - name: Commit and publish
+        id: publish
         run: |
           git config user.name "sekai-story-diff bot"
           git config user.email "actions@github.com"
@@ -234,7 +236,20 @@ jobs:
             # payload some earlier run already indexed
             git commit -m "Render ${{ needs.detect.outputs.version || 'the pending payload' }}"
             git push
+            "pushed=true" >> $env:GITHUB_OUTPUT
           }
+
+      # The commit above lands on main and the site goes on serving the build before it.
+      # A push authenticated with GITHUB_TOKEN deliberately does not start another
+      # workflow — that is GitHub's guard against a run triggering itself for ever — so
+      # deploy.yml, which listens for pushes, never hears this one. Every data.json
+      # until now arrived by a human push, so nothing noticed. workflow_dispatch is the
+      # documented exception to that guard, and deploy.yml already accepts it.
+      - name: Deploy the site
+        if: steps.publish.outputs.pushed == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   report-failure:
     name: Report failure
