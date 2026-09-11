@@ -125,7 +125,17 @@ jobs:
       # inherited by the fetcher subprocess ensure_scenarios spawns.
       PYTHONUTF8: "1"
     steps:
+      # main's tip, not the run's SHA. The payload this job exists to render is written
+      # by `detect` and pushed *during* this run, so the commit that triggered us does
+      # not contain it. Checking out that commit gives a tree with no new transition:
+      # the build finds nothing to draw, "nothing new to publish" passes, and the
+      # release is quietly skipped — or the render does commit and the push is rejected
+      # as non-fast-forward, because origin has moved on and this checkout has not.
+      # Rerunning a failed job replays the original SHA too, so without this a rerun
+      # can never see a fix pushed after the failure.
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
