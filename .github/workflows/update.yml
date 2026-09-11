@@ -116,6 +116,14 @@ jobs:
     permissions:
       contents: write
       id-token: write   # for Workload Identity Federation; no key is stored anywhere
+    env:
+      # Every script reads and writes text at the platform default, which is UTF-8 on
+      # the Linux and macOS this was written on and cp1252 here. The scenarios are
+      # Japanese, so on Windows the first read_text() of a transition payload dies on
+      # byte 0x81 — and past it lie sixty more call sites and data.json, written back
+      # out. UTF-8 mode fixes the default itself rather than sixty signatures, and is
+      # inherited by the fetcher subprocess ensure_scenarios spawns.
+      PYTHONUTF8: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
