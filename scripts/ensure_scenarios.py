@@ -60,16 +60,24 @@ def main() -> None:
             print(f"  missing {version} {bundle}")
         return
 
-    # group by version so each one costs a single handshake
-    by_version: dict[str, list[str]] = {}
+    # Group by version so each one costs a single handshake — and by kind, because the
+    # fetcher builds its candidate list from one master table at a time and filters
+    # --bundles against that. Under the default (event) it lists eventStories.json,
+    # which holds only event_story/... names, so a scenario/unitstory/... bundle matches
+    # nothing and is dropped from the batch without comment. Whether that surfaced as an
+    # error depended on the company it kept: alone at its version the fetcher exited
+    # "no bundles matched", but alongside an event bundle the run looked clean and the
+    # chapter simply never arrived. Three of them were still missing at the end.
+    by_batch: dict[tuple[str, str], list[str]] = {}
     for version, bundle in missing:
-        by_version.setdefault(version, []).append(bundle)
+        kind = "unit" if bundle.startswith("scenario/unitstory/") else "event"
+        by_batch.setdefault((version, kind), []).append(bundle)
 
-    for version, bundles in sorted(by_version.items()):
-        print(f"  fetching {len(bundles)} bundle(s) at {version}")
+    for (version, kind), bundles in sorted(by_batch.items()):
+        print(f"  fetching {len(bundles)} {kind} bundle(s) at {version}")
         result = subprocess.run(
             [sys.executable, "scripts/fetch_official_bundles.py",
-             "--version", version, "--bundles", *bundles],
+             "--version", version, "--kind", kind, "--bundles", *bundles],
             capture_output=True, text=True,
         )
         if result.returncode != 0:
