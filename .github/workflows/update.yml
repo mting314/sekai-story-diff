@@ -231,11 +231,23 @@ jobs:
           git config user.name "sekai-story-diff bot"
           git config user.email "actions@github.com"
           git add web/src/data.json
-          if (git diff --cached --quiet) { echo "nothing new to publish" } else {
+          # `git diff --quiet` says what it found through its exit status and prints
+          # nothing at all. PowerShell's `if` tests the *output* of a native command,
+          # not its status, so `if (git diff --cached --quiet)` read an empty stdout as
+          # false every single time: the "nothing new" branch was unreachable and every
+          # render fell through to commit and push whether or not anything had changed.
+          # That stayed invisible while the last command was a push that answered
+          # "Everything up-to-date" and exited 0.
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            echo "nothing new to publish"
+          } else {
             # a forced render has no detected version to name: it is re-rendering a
             # payload some earlier run already indexed
             git commit -m "Render ${{ needs.detect.outputs.version || 'the pending payload' }}"
+            if ($LASTEXITCODE -ne 0) { throw "commit failed" }
             git push
+            if ($LASTEXITCODE -ne 0) { throw "push failed" }
             "pushed=true" >> $env:GITHUB_OUTPUT
           }
 
