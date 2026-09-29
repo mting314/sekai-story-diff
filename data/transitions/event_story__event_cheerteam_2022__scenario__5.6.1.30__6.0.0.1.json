@@ -1,0 +1,177 @@
+{
+ "comparison": {
+  "old_asset_version": "5.6.1.30",
+  "new_asset_version": "6.0.0.1",
+  "old_released_at": "2026-09-25",
+  "new_released_at": "2026-09-29",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 5,
+  "changed_lines": 8,
+  "by_kind": {
+   "text": 8
+  },
+  "by_lang": {
+   "rewrite": 8
+  },
+  "rewrite_lines": 8
+ },
+ "events": [
+  {
+   "event_id": 58,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "The Climax! Kamiyama Cheer Squad!",
+   "name_jp": "白熱！神高応援団！",
+   "unit": "mixed",
+   "arc_slug": "0058-hakunetsu-kandaka-ouendan",
+   "bundle": "event_story/event_cheerteam_2022/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_58_02",
+     "episode_no": 2,
+     "title_en": "For the Sports Festival",
+     "title_jp": "体育祭にかける想い",
+     "lines_old": 101,
+     "lines_new": 101,
+     "changes": [
+      {
+       "talk_index_old": 45,
+       "talk_index_new": 45,
+       "kind": "text",
+       "speaker_old": "Blue Squad Captain",
+       "speaker_new": "Blue Squad Captain",
+       "old": "The cheering competition itself will proceed as I just mentioned. Now, I'd like it if you could all take a look at the ideas I've come up for it. Don't be afraid to give me your honest opinion.",
+       "new": "The cheering competition itself will proceed as I just mentioned. Now, I'd like it if you could all take a look at the ideas I've come up with for it. Don't be afraid to give me your honest opinion.",
+       "ratio": 0.987,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_58_03",
+     "episode_no": 3,
+     "title_en": "For the Cheering Competition",
+     "title_jp": "応援合戦に向けて",
+     "lines_old": 95,
+     "lines_new": 95,
+     "changes": [
+      {
+       "talk_index_old": 29,
+       "talk_index_new": 29,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "Simply put, it's about these three kingdoms that are vying for power with the leader of each fiercely battling against one another...",
+       "new": "Simply put, it's about these three kingdoms that are vying for power with the leaders of each fiercely battling against one another...",
+       "ratio": 0.996,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_58_04",
+     "episode_no": 4,
+     "title_en": "A Twist",
+     "title_jp": "引っかかり",
+     "lines_old": 100,
+     "lines_new": 100,
+     "changes": [
+      {
+       "talk_index_old": 7,
+       "talk_index_new": 7,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Only victory can shine the path to stardom! Let us both fight fair and square on the day of!!",
+       "new": "Only victory can shine on the path to stardom! Let us both fight fair and square on the day of!!",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_58_07",
+     "episode_no": 7,
+     "title_en": "Intermediate Results",
+     "title_jp": "中間発表",
+     "lines_old": 101,
+     "lines_new": 101,
+     "changes": [
+      {
+       "talk_index_old": 4,
+       "talk_index_new": 4,
+       "kind": "text",
+       "speaker_old": "Toya",
+       "speaker_new": "Toya",
+       "old": "Second place... If only I did a little better during the ball toss.",
+       "new": "Second place... If only I had done a little better during the ball toss.",
+       "ratio": 0.947,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Mizuki",
+       "speaker_new": "Mizuki",
+       "old": "Still, I threw down the gauntlet just now, so we're going to have to put on an incredible performance.",
+       "new": "Still, you threw down the gauntlet just now, so we're going to have to put on an incredible performance.",
+       "ratio": 0.98,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 87,
+       "talk_index_new": 87,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "Yeah... Tsukasa's booming voice and singing were really amazing too. Inspiring and empowering at the same time, you know?",
+       "new": "Yeah... Tenma's booming voice and singing were really amazing too. Inspiring and empowering at the same time, you know?",
+       "ratio": 0.965,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_58_08",
+     "episode_no": 8,
+     "title_en": "Believing in Everyone",
+     "title_jp": "みんなを信じて",
+     "lines_old": 126,
+     "lines_new": 126,
+     "changes": [
+      {
+       "talk_index_old": 8,
+       "talk_index_new": 8,
+       "kind": "text",
+       "speaker_old": "Akito",
+       "speaker_new": "Akito",
+       "old": "There don't seem to be many of them standing by either.",
+       "new": "There doesn't seem to be many of them standing by either.",
+       "ratio": 0.981,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 118,
+       "talk_index_new": 118,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "Yeah, I'm in too! Just thinking about it's making my stomach rumble!",
+       "new": "Yeah, I'm in too! Just thinking about it is making my stomach rumble!",
+       "ratio": 0.984,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 8,
+   "text_changes": 8
+  }
+ ],
+ "bundles_only_in_new": []
+}

@@ -1,0 +1,115 @@
+{
+ "comparison": {
+  "old_asset_version": "5.6.1.30",
+  "new_asset_version": "6.0.0.1",
+  "old_released_at": "2026-09-25",
+  "new_released_at": "2026-09-29",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 6,
+  "by_kind": {
+   "speaker": 6
+  },
+  "by_lang": {
+   "rewrite": 6
+  },
+  "rewrite_lines": 6
+ },
+ "events": [
+  {
+   "event_id": 24,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "An Ode for the Pure of Heart",
+   "name_jp": "純白の貴方へ、誓いの歌を！",
+   "unit": "mixed",
+   "arc_slug": "0024-junpaku-no-anata-he-chikai-no-utawo",
+   "bundle": "event_story/event_bridal_2021/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_24_07",
+     "episode_no": 7,
+     "title_en": "Extra Wedding Show!",
+     "title_jp": "エクストラウェディングショー！",
+     "lines_old": 103,
+     "lines_new": 103,
+     "changes": [
+      {
+       "talk_index_old": 86,
+       "talk_index_new": 86,
+       "kind": "speaker",
+       "speaker_old": "passersby",
+       "speaker_new": "Passersby",
+       "old": "What's going on there? Looks like they're having an outdoor wedding.",
+       "new": "What's going on there? Looks like they're having an outdoor wedding.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 87,
+       "talk_index_new": 87,
+       "kind": "speaker",
+       "speaker_old": "passersby",
+       "speaker_new": "Passersby",
+       "old": "The bouquet toss maybe? I think this is supposed to be some kind of show, so it might be pretty fun!",
+       "new": "The bouquet toss maybe? I think this is supposed to be some kind of show, so it might be pretty fun!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 94,
+       "talk_index_new": 94,
+       "kind": "speaker",
+       "speaker_old": "passersby",
+       "speaker_new": "Passersby",
+       "old": "Whoa, they're all dancing! They're a part of this too...?!",
+       "new": "Whoa, they're all dancing! They're a part of this too...?!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 96,
+       "talk_index_new": 96,
+       "kind": "speaker",
+       "speaker_old": "passersby",
+       "speaker_new": "Passersby",
+       "old": "Us? What's going on? Are you sure about this?",
+       "new": "Us? What's going on? Are you sure about this?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 97,
+       "talk_index_new": 97,
+       "kind": "speaker",
+       "speaker_old": "passersby",
+       "speaker_new": "Passersby",
+       "old": "No idea, but it looks fun! There's no harm in clapping, right?",
+       "new": "No idea, but it looks fun! There's no harm in clapping, right?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 100,
+       "talk_index_new": 100,
+       "kind": "speaker",
+       "speaker_old": "passersby",
+       "speaker_new": "Passersby",
+       "old": "It's so pretty...!!",
+       "new": "It's so pretty...!!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 6,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}
