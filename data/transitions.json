@@ -374,6 +374,12 @@
     "old": "5.6.0.1"
    }
   ],
+  "event_story/event_colorcross_2025/scenario": [
+   {
+    "new": "6.0.1.0",
+    "old": "6.0.0.10"
+   }
+  ],
   "scenario/unitstory/school-refusal-story-chapter": [
    {
     "new": "4.1.51.0",
@@ -643,6 +649,11 @@
    "date": "2026-10-01",
    "hash": "35b6361f-ab5e-4054-bfde-2cc884f8edd9",
    "version": "6.0.0.10"
+  },
+  {
+   "date": "2026-10-09",
+   "hash": "91068c0a-154c-4820-8624-1fb6f93f2582",
+   "version": "6.0.1.0"
   }
  ]
 }
