@@ -1,0 +1,114 @@
+{
+ "comparison": {
+  "old_asset_version": "6.0.1.0",
+  "new_asset_version": "6.0.1.10",
+  "old_released_at": "2026-10-09",
+  "new_released_at": "2026-10-13",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 3,
+  "changed_lines": 4,
+  "by_kind": {
+   "text": 4
+  },
+  "by_lang": {
+   "rewrite": 3,
+   "punctuation": 1
+  },
+  "rewrite_lines": 3
+ },
+ "events": [
+  {
+   "event_id": 183,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "",
+   "name_jp": "交わる色はあの日のままに",
+   "unit": "more_more_jump",
+   "arc_slug": "0183-majiwa-ru-iro-haano-nichi-nomamani",
+   "bundle": "event_story/event_colorcross_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_183_01",
+     "episode_no": 1,
+     "title_en": "",
+     "title_jp": "次なるお題は",
+     "lines_old": 112,
+     "lines_new": 112,
+     "changes": [
+      {
+       "talk_index_old": 79,
+       "talk_index_new": 79,
+       "kind": "text",
+       "speaker_old": "MC",
+       "speaker_new": "MC",
+       "old": "Yes, that's right! As I mentioned earlier, this one is going to be extra hard!!",
+       "new": "Yes, that's right! As I mentioned earlier, this one is going to be extra hard!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_183_04",
+     "episode_no": 4,
+     "title_en": "",
+     "title_jp": "難しさの意味",
+     "lines_old": 99,
+     "lines_new": 99,
+     "changes": [
+      {
+       "talk_index_old": 60,
+       "talk_index_new": 60,
+       "kind": "text",
+       "speaker_old": "Arisa",
+       "speaker_new": "Arisa",
+       "old": "Failed. sir?",
+       "new": "Failed, sir?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_183_08",
+     "episode_no": 8,
+     "title_en": "",
+     "title_jp": "一緒に、最高のステージを",
+     "lines_old": 132,
+     "lines_new": 132,
+     "changes": [
+      {
+       "talk_index_old": 78,
+       "talk_index_new": 78,
+       "kind": "text",
+       "speaker_old": "Arisa",
+       "speaker_new": "Arisa",
+       "old": "♪——! ♪————~~!!",
+       "new": "♪——! ♪————~~!!!",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 79,
+       "talk_index_new": 79,
+       "kind": "text",
+       "speaker_old": "Comments",
+       "speaker_new": "Comments",
+       "old": "<Arisaaaa!> <I can't see! Her aura's blinding! <I'll follow you for life!>",
+       "new": "<Arisaaaa!> <I can't see! Her aura's blinding!> <I'll follow you for life!>",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 4,
+   "text_changes": 4
+  }
+ ],
+ "bundles_only_in_new": []
+}

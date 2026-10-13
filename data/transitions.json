@@ -378,6 +378,10 @@
    {
     "new": "6.0.1.0",
     "old": "6.0.0.10"
+   },
+   {
+    "new": "6.0.1.10",
+    "old": "6.0.1.0"
    }
   ],
   "scenario/unitstory/school-refusal-story-chapter": [
@@ -654,6 +658,11 @@
    "date": "2026-10-09",
    "hash": "91068c0a-154c-4820-8624-1fb6f93f2582",
    "version": "6.0.1.0"
+  },
+  {
+   "date": "2026-10-13",
+   "hash": "17622e96-d91a-44bb-acd8-0eb7a68990d8",
+   "version": "6.0.1.10"
   }
  ]
 }
