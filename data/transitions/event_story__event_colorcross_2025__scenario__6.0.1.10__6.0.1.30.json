@@ -1,0 +1,136 @@
+{
+ "comparison": {
+  "old_asset_version": "6.0.1.10",
+  "new_asset_version": "6.0.1.30",
+  "old_released_at": "2026-10-13",
+  "new_released_at": "2026-10-23",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 4,
+  "changed_lines": 5,
+  "by_kind": {
+   "text": 4,
+   "linebreak": 1
+  },
+  "by_lang": {
+   "rewrite": 4,
+   "punctuation": 1
+  },
+  "rewrite_lines": 4
+ },
+ "events": [
+  {
+   "event_id": 183,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "",
+   "name_jp": "交わる色はあの日のままに",
+   "unit": "more_more_jump",
+   "arc_slug": "0183-majiwa-ru-iro-haano-nichi-nomamani",
+   "bundle": "event_story/event_colorcross_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_183_01",
+     "episode_no": 1,
+     "title_en": "",
+     "title_jp": "次なるお題は",
+     "lines_old": 112,
+     "lines_new": 112,
+     "changes": [
+      {
+       "talk_index_old": 6,
+       "talk_index_new": 6,
+       "kind": "text",
+       "speaker_old": "Minori",
+       "speaker_new": "Minori",
+       "old": "I'm also ready! My hair's all shiny now after Airi used that oi!",
+       "new": "I'm also ready! My hair's all shiny now after Airi used that oil!",
+       "ratio": 0.992,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_183_02",
+     "episode_no": 2,
+     "title_en": "",
+     "title_jp": "やるべきことを",
+     "lines_old": 74,
+     "lines_new": 74,
+     "changes": [
+      {
+       "talk_index_old": 41,
+       "talk_index_new": 41,
+       "kind": "linebreak",
+       "speaker_old": "Arisa",
+       "speaker_new": "Arisa",
+       "old": "So for now, let's forget about everything else and focus on the task at hand.",
+       "new": "So for now, let's forget about everything else and focus on the task at hand.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_183_03",
+     "episode_no": 3,
+     "title_en": "",
+     "title_jp": "噂話",
+     "lines_old": 121,
+     "lines_new": 121,
+     "changes": [
+      {
+       "talk_index_old": 100,
+       "talk_index_new": 100,
+       "kind": "text",
+       "speaker_old": "Member B",
+       "speaker_new": "Member B",
+       "old": "We are dealing with a pretty hard schedule. This reminds me our of nationwide tour.",
+       "new": "We are dealing with a pretty hard schedule. This reminds me of our nationwide tour.",
+       "ratio": 0.963,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_183_08",
+     "episode_no": 8,
+     "title_en": "",
+     "title_jp": "一緒に、最高のステージを",
+     "lines_old": 132,
+     "lines_new": 132,
+     "changes": [
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Comments",
+       "speaker_new": "Comments",
+       "old": "<I watched you all practice!> <They way you girls worked together was so inspiring.> <I can't wait to see the arrangements!>",
+       "new": "<I watched you all practice!> <The way you girls worked together was so inspiring.> <I can't wait to see the arrangements!>",
+       "ratio": 0.996,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Shizuku",
+       "speaker_new": "Shizuku",
+       "old": "♪————~~~~!!",
+       "new": "♪————~~~~!!!",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      }
+     ]
+    }
+   ],
+   "total_changes": 5,
+   "text_changes": 4
+  }
+ ],
+ "bundles_only_in_new": []
+}
