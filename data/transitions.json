@@ -12,6 +12,12 @@
     "old": "4.0.0.1"
    }
   ],
+  "event_story/event_nijiiro_2020/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
+   }
+  ],
   "event_story/event_parade_2021/scenario": [
    {
     "new": "4.1.50.1",
@@ -88,6 +94,12 @@
     "old": "5.1.0.1"
    }
   ],
+  "event_story/event_canvas_2022/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
+   }
+  ],
   "event_story/event_cheerteam_2022/scenario": [
    {
     "new": "4.1.50.20",
@@ -96,6 +108,18 @@
    {
     "new": "6.0.0.1",
     "old": "5.6.1.30"
+   }
+  ],
+  "event_story/event_ribbon_2022/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
+   }
+  ],
+  "event_story/event_rainbow_2022/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
    }
   ],
   "event_story/event_curtaincall_2022/scenario": [
@@ -112,6 +136,12 @@
    {
     "new": "5.5.0.1",
     "old": "5.4.0.40"
+   }
+  ],
+  "event_story/event_wish_2022/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
    }
   ],
   "event_story/event_thread_2023/scenario": [
@@ -146,6 +176,12 @@
    {
     "new": "4.1.0.1",
     "old": "4.0.1.20"
+   }
+  ],
+  "event_story/event_unseen_2024/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
    }
   ],
   "event_story/event_blooming_2024/scenario": [
@@ -278,6 +314,10 @@
    {
     "new": "5.0.50.20",
     "old": "5.0.0.1"
+   },
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
    }
   ],
   "event_story/event_yourshine_2025/scenario": [
@@ -374,6 +414,12 @@
     "old": "5.6.0.1"
    }
   ],
+  "event_story/event_golden_2025/scenario": [
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
+   }
+  ],
   "event_story/event_colorcross_2025/scenario": [
    {
     "new": "6.0.1.0",
@@ -414,6 +460,10 @@
    {
     "new": "5.1.0.1",
     "old": "5.0.51.0"
+   },
+   {
+    "new": "6.1.0.1",
+    "old": "6.0.1.30"
    }
   ]
  },
@@ -672,6 +722,11 @@
    "date": "2026-10-23",
    "hash": "f9555daf-d74c-4815-b245-ac0f39f536e3",
    "version": "6.0.1.30"
+  },
+  {
+   "date": "2026-10-28",
+   "hash": "8bf40659-f6f4-442b-9f54-a73313febdc2",
+   "version": "6.1.0.1"
   }
  ]
 }

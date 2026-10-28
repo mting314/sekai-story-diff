@@ -1,0 +1,683 @@
+{
+ "comparison": {
+  "old_asset_version": "6.0.1.30",
+  "new_asset_version": "6.1.0.1",
+  "old_released_at": "2026-10-23",
+  "new_released_at": "2026-10-28",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 6,
+  "changed_lines": 53,
+  "by_kind": {
+   "text": 53
+  },
+  "by_lang": {
+   "rewrite": 49,
+   "punctuation": 4
+  },
+  "rewrite_lines": 49
+ },
+ "events": [
+  {
+   "event_id": 8,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "On This Holy Night, I Sing",
+   "name_jp": "聖なる夜に、この歌声を",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0008-hijiri-naru-yoru-ni-kono-utagoe-wo",
+   "bundle": "event_story/event_nijiiro_2020/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_08_01",
+     "episode_no": 1,
+     "title_en": "A Merry Christmas",
+     "title_jp": "『スマイリング・クリスマス』",
+     "lines_old": 73,
+     "lines_new": 73,
+     "changes": [
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "What's it going to be? I'd like a razzle-dazzle show that makes everyone go WOW!",
+       "new": "What's it going to be? I'd like a razzle-dazzle show that makes everyone go “WOW”!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Our last show earned us some notoriety, but that's still a huge gap to close if we're going to aim for the top.",
+       "new": "Our last show generated some buzz, but that's still a huge gap to close if we're going to aim for the top.",
+       "ratio": 0.89,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 15,
+       "talk_index_new": 15,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Precisely. Which is why jabbering about razzle-dazzle or the wow factor won't do us much good!",
+       "new": "Precisely. Which is why jabbering about “razzle-dazzle” or the “wow” factor won't do us much good!",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "Presents? Of course...! We can attach little notes that even say, Please vote for us.",
+       "new": "Presents? Of course...! We can attach little notes that even say, “Please vote for us.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 33,
+       "talk_index_new": 33,
+       "kind": "text",
+       "speaker_old": "Rui",
+       "speaker_new": "Rui",
+       "old": "And how does everyone feel about A Merry Christmas for the title?",
+       "new": "And how does everyone feel about “A Merry Christmas” for the title?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 42,
+       "talk_index_new": 42,
+       "kind": "text",
+       "speaker_old": "Emu",
+       "speaker_new": "Emu",
+       "old": "Oooh! It has a razzle-dazzle factor and makes you go WOW♪",
+       "new": "Oooh! It has a razzle-dazzle factor and makes you go “WOW”♪",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_08_02",
+     "episode_no": 2,
+     "title_en": "Phoenix Stage Investigation",
+     "title_jp": "偵察！フェニックスステージ",
+     "lines_old": 92,
+     "lines_new": 92,
+     "changes": [
+      {
+       "talk_index_old": 86,
+       "talk_index_new": 86,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Tsukasa may be an idiot, but you have no right calling our shows pretend or anything...",
+       "new": "Tsukasa may be an idiot, but you have no right calling our shows “pretend” or anything...",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_08_03",
+     "episode_no": 3,
+     "title_en": "I Can't Rival Her",
+     "title_jp": "あんな風には",
+     "lines_old": 68,
+     "lines_new": 68,
+     "changes": [
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Was that supposed to be, for sure?",
+       "new": "Was that supposed to be, “for sure”?",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 63,
+       "talk_index_new": 63,
+       "kind": "text",
+       "speaker_old": "Troupe Member",
+       "speaker_new": "Troupe Member",
+       "old": "I mean, she never really talks to anyone else, so what did she expect?",
+       "new": "Everyone's giving her the silent treatment. Obviously.",
+       "ratio": 0.322,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_08_05",
+     "episode_no": 5,
+     "title_en": "The Show Back Then",
+     "title_jp": "あの日見たショー",
+     "lines_old": 71,
+     "lines_new": 71,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "Tsukasa",
+       "speaker_new": "Tsukasa",
+       "old": "There's one house left on my list. Let's go!",
+       "new": "“There's one house left on my list. Let's go!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Nene",
+       "speaker_new": "Nene",
+       "old": "Okay, but... Hey, wait for me!",
+       "new": "“Okay, but... Hey, wait for me!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_08_06",
+     "episode_no": 6,
+     "title_en": "Enchantment",
+     "title_jp": "魔法をかけて",
+     "lines_old": 47,
+     "lines_new": 47,
+     "changes": [
+      {
+       "talk_index_old": 8,
+       "talk_index_new": 8,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "Would you like to fly into the sky with me?",
+       "new": "“Would you like to fly into the sky with me?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "Don't be afraid. Believe in yourself!",
+       "new": "“Don't be afraid. Believe in yourself!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "I'm going to cast a special spell on you.",
+       "new": "“I'm going to cast a special spell on you.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 11,
+       "talk_index_new": 11,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "♪～～～～",
+       "new": "“♪～～～～”",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "♪♪♪",
+       "new": "“♪♪♪”",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 15,
+       "talk_index_new": 15,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "Don't look down. Look up at the sky. See? There's a beautiful rainbow!",
+       "new": "“Don't look down. Look up at the sky. See? There's a beautiful rainbow!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "text",
+       "speaker_old": "Little Nene",
+       "speaker_new": "Little Nene",
+       "old": "Doesn't it make you want to sing?",
+       "new": "“Doesn't it make you want to sing?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 23,
+       "talk_index_new": 23,
+       "kind": "text",
+       "speaker_old": "Little Nene's Voice",
+       "speaker_new": "Little Nene's Voice",
+       "old": "Would you like to fly into the sky with me?",
+       "new": "“Would you like to fly into the sky with me?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Little Nene's Voice",
+       "speaker_new": "Little Nene's Voice",
+       "old": "Don't be afraid. Believe in yourself!",
+       "new": "“Don't be afraid. Believe in yourself!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 39,
+       "talk_index_new": 39,
+       "kind": "text",
+       "speaker_old": "Little Nene's Voice",
+       "speaker_new": "Little Nene's Voice",
+       "old": "I'm going to cast a special spell on you.",
+       "new": "“I'm going to cast a special spell on you.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 40,
+       "talk_index_new": 40,
+       "kind": "text",
+       "speaker_old": "Little Nene's Voice",
+       "speaker_new": "Little Nene's Voice",
+       "old": "♪♪♪",
+       "new": "“♪♪♪”",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_08_08",
+     "episode_no": 8,
+     "title_en": "Merry Christmas!",
+     "title_jp": "メリー・クリスマス！",
+     "lines_old": 88,
+     "lines_new": 88,
+     "changes": [
+      {
+       "talk_index_old": 0,
+       "talk_index_new": 0,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Gasp! Someone's outside! Is it a burglar?",
+       "new": "“Gasp! Someone's outside! Is it a burglar?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 1,
+       "talk_index_new": 1,
+       "kind": "text",
+       "speaker_old": "Boy's Voice\n(Tsukasa)",
+       "speaker_new": "Boy's Voice\n(Tsukasa)",
+       "old": "No, I'm no burglar...! I'm Santa Claus! I'm about to fall. Can you please help me up?!",
+       "new": "“No, I'm no burglar...! I'm Santa Claus! I'm about to fall. Can you please help me up?!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 2,
+       "talk_index_new": 2,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "S-Santa Claus? Don't lie. Santa doesn't exist...",
+       "new": "“S-Santa Claus? Don't lie. Santa doesn't exist...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 3,
+       "talk_index_new": 3,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "I never had Santa visit me... Not even once...",
+       "new": "“I never had Santa visit me... Not even once...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 7,
+       "talk_index_new": 7,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "There. All done! With this disguise, no one will suspect I'm actually Santa!",
+       "new": "“There. All done! With this disguise, no one will suspect I'm actually Santa!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 8,
+       "talk_index_new": 8,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Isn't it 'Santa's apprentice'? And won't that disguise get you into more trouble? You could be mistaken for a burglar.",
+       "new": "“Isn't it 'Santa's apprentice'? And won't that disguise get you into more trouble? You could be mistaken for a burglar.”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 9,
+       "talk_index_new": 9,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "Everything will work out, just you wait and see! Huh? Oh nooo!",
+       "new": "“Everything will work out, just you wait and see! Huh? Oh nooo!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 10,
+       "talk_index_new": 10,
+       "kind": "text",
+       "speaker_old": "Guard\n(Rui)",
+       "speaker_new": "Guard\n(Rui)",
+       "old": "A thief is trying to break into the manor! Catch him at once!",
+       "new": "“A thief is trying to break into the manor! Catch him at once!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 11,
+       "talk_index_new": 11,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "H-How did this happen?!",
+       "new": "“H-How did this happen?!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 14,
+       "talk_index_new": 14,
+       "kind": "text",
+       "speaker_old": "Little Girl\n(Emu)",
+       "speaker_new": "Little Girl\n(Emu)",
+       "old": "Oh! Are you Santa? I thought you were an old man, but you're really a girl!",
+       "new": "“Oh! Are you Santa? I thought you were an old man, but you're really a girl!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 15,
+       "talk_index_new": 15,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Er... I'm sorry, you have the wrong idea...",
+       "new": "“Er... I'm sorry, you have the wrong idea...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "text",
+       "speaker_old": "Little Girl\n(Emu)",
+       "speaker_new": "Little Girl\n(Emu)",
+       "old": "Huh? You're not Santa?",
+       "new": "“Huh? You're not Santa?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 17,
+       "talk_index_new": 17,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Well, I guess I am...! Here, I brought you a present!",
+       "new": "“Well, I guess I am...! Here, I brought you a present!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 18,
+       "talk_index_new": 18,
+       "kind": "text",
+       "speaker_old": "Little Girl\n(Emu)",
+       "speaker_new": "Little Girl\n(Emu)",
+       "old": "Yay! It's a teddy bear! Thank you, Santa!",
+       "new": "“Yay! It's a teddy bear! Thank you, Santa!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 19,
+       "talk_index_new": 19,
+       "kind": "text",
+       "speaker_old": "Little Girl\n(Emu)",
+       "speaker_new": "Little Girl\n(Emu)",
+       "old": "I'm happy about the present, but I'm even happier that I finally got to see you!",
+       "new": "“I'm happy about the present, but I'm even happier that I finally got to see you!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 20,
+       "talk_index_new": 20,
+       "kind": "text",
+       "speaker_old": "Little Girl\n(Emu)",
+       "speaker_new": "Little Girl\n(Emu)",
+       "old": "Thank you so much, Santa!",
+       "new": "“Thank you so much, Santa!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 21,
+       "talk_index_new": 21,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Hehe. You're welcome...!",
+       "new": "“Hehe. You're welcome...!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 24,
+       "talk_index_new": 24,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "Phew, all presents are delivered! I couldn't have done it without your help!",
+       "new": "“Phew, all presents are delivered! I couldn't have done it without your help!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 25,
+       "talk_index_new": 25,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Heh. You're welcome!",
+       "new": "“Heh. You're welcome!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 26,
+       "talk_index_new": 26,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "Oh, the sun is starting to rise... I'd better get back. Bye!",
+       "new": "“Oh, the sun is starting to rise... I'd better get back. Bye!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Wait... You could have stayed a little longer with me...",
+       "new": "“Wait... You could have stayed a little longer with me...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 28,
+       "talk_index_new": 28,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Everyone got their gifts... Except me. Hmph...!",
+       "new": "“Everyone got their gifts... Except me. Hmph...!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 29,
+       "talk_index_new": 29,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "But... Being thanked...",
+       "new": "“But... Being thanked...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 30,
+       "talk_index_new": 30,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "That might've been the best moment...",
+       "new": "“That might've been the best moment...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 31,
+       "talk_index_new": 31,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "♪♪♪",
+       "new": "“♪♪♪”",
+       "ratio": 1.0,
+       "lang": "punctuation"
+      },
+      {
+       "talk_index_old": 46,
+       "talk_index_new": 46,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "Heeey!",
+       "new": "“Heeey!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 47,
+       "talk_index_new": 47,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "It's you again? I thought you'd left...",
+       "new": "“It's you again? I thought you'd left...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 48,
+       "talk_index_new": 48,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "Well, I had to make sure you got your gift too. This is just for you! Do you like it?",
+       "new": "“Well, I had to make sure you got your gift too. This is just for you! Do you like it?”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 49,
+       "talk_index_new": 49,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Well, it'll do nicely...",
+       "new": "“Well, it'll do nicely...”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 50,
+       "talk_index_new": 50,
+       "kind": "text",
+       "speaker_old": "Santa's Apprentice\n(Tsukasa)",
+       "speaker_new": "Santa's Apprentice\n(Tsukasa)",
+       "old": "I'll see you again next year! Merry Christmas!",
+       "new": "“I'll see you again next year! Merry Christmas!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 51,
+       "talk_index_new": 51,
+       "kind": "text",
+       "speaker_old": "Girl\n(Nene)",
+       "speaker_new": "Girl\n(Nene)",
+       "old": "Merry Christmas to you too!",
+       "new": "“Merry Christmas to you too!”",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 53,
+   "text_changes": 53
+  }
+ ],
+ "bundles_only_in_new": []
+}

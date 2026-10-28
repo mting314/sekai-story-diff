@@ -1,0 +1,93 @@
+{
+ "comparison": {
+  "old_asset_version": "6.0.1.30",
+  "new_asset_version": "6.1.0.1",
+  "old_released_at": "2026-10-23",
+  "new_released_at": "2026-10-28",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 4,
+  "by_kind": {
+   "text": 4
+  },
+  "by_lang": {
+   "rewrite": 4
+  },
+  "rewrite_lines": 4
+ },
+ "events": [
+  {
+   "event_id": 181,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "",
+   "name_jp": "Our Golden Days",
+   "unit": "mixed",
+   "arc_slug": "0181-our-golden-days",
+   "bundle": "event_story/event_golden_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_181_03",
+     "episode_no": 3,
+     "title_en": "",
+     "title_jp": "巡るスタンプラリー",
+     "lines_old": 71,
+     "lines_new": 71,
+     "changes": [
+      {
+       "talk_index_old": 27,
+       "talk_index_new": 27,
+       "kind": "text",
+       "speaker_old": "Haruka",
+       "speaker_new": "Haruka",
+       "old": "Wow, they have meerkats, toucans, sloths... Oh, it even looks like they have capibaras here.",
+       "new": "Wow, they have meerkats, toucans, sloths... Oh, it even looks like they have capybaras here.",
+       "ratio": 0.988,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 28,
+       "talk_index_new": 28,
+       "kind": "text",
+       "speaker_old": "An & Saki",
+       "speaker_new": "An & Saki",
+       "old": "Capibaras?!",
+       "new": "Capybaras?!",
+       "ratio": 0.889,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 30,
+       "talk_index_new": 30,
+       "kind": "text",
+       "speaker_old": "An",
+       "speaker_new": "An",
+       "old": "Lately, I've been watching tons of videos of capibaras bathing in hot springs!",
+       "new": "Lately, I've been watching tons of videos of capybaras bathing in hot springs!",
+       "ratio": 0.987,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": 32,
+       "talk_index_new": 32,
+       "kind": "text",
+       "speaker_old": "Saki",
+       "speaker_new": "Saki",
+       "old": "Yeah, same! I'm so excited about getting to play with some real capibaras!",
+       "new": "Yeah, same! I'm so excited about getting to play with some real capybaras!",
+       "ratio": 0.986,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 4,
+   "text_changes": 4
+  }
+ ],
+ "bundles_only_in_new": []
+}

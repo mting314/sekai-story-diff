@@ -1,0 +1,81 @@
+{
+ "comparison": {
+  "old_asset_version": "6.0.1.30",
+  "new_asset_version": "6.1.0.1",
+  "old_released_at": "2026-10-23",
+  "new_released_at": "2026-10-28",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 2,
+  "changed_lines": 2,
+  "by_kind": {
+   "speaker": 2
+  },
+  "by_lang": {
+   "rewrite": 2
+  },
+  "rewrite_lines": 2
+ },
+ "events": [
+  {
+   "event_id": 127,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "Knowing the Unseen",
+   "name_jp": "Knowing the Unseen",
+   "unit": "nightcord",
+   "arc_slug": "0127-knowing-the-unseen",
+   "bundle": "event_story/event_unseen_2024/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_127_04",
+     "episode_no": 4,
+     "title_en": "A Melancholy Morning",
+     "title_jp": "憂鬱な朝",
+     "lines_old": 80,
+     "lines_new": 80,
+     "changes": [
+      {
+       "talk_index_old": 38,
+       "talk_index_new": 38,
+       "kind": "speaker",
+       "speaker_old": "Yukihira",
+       "speaker_new": "Yukihira's Voice",
+       "old": "Hello, Mr. Shinonome.",
+       "new": "Hello, Mr. Shinonome.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    },
+    {
+     "scenario_id": "event_127_06",
+     "episode_no": 6,
+     "title_en": "The Surrounding Night",
+     "title_jp": "夜更けの景色",
+     "lines_old": 65,
+     "lines_new": 65,
+     "changes": [
+      {
+       "talk_index_old": 16,
+       "talk_index_new": 16,
+       "kind": "speaker",
+       "speaker_old": "Yukihira",
+       "speaker_new": "Yukihira's Voice",
+       "old": "Shinonome.",
+       "new": "Shinonome.",
+       "ratio": 1.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 2,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}

@@ -1,0 +1,60 @@
+{
+ "comparison": {
+  "old_asset_version": "6.0.1.30",
+  "new_asset_version": "6.1.0.1",
+  "old_released_at": "2026-10-23",
+  "new_released_at": "2026-10-28",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 1,
+  "by_kind": {
+   "text": 1
+  },
+  "by_lang": {
+   "rewrite": 1
+  },
+  "rewrite_lines": 1
+ },
+ "events": [
+  {
+   "event_id": 53,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "On This Blank Canvas, I Paint",
+   "name_jp": "空白のキャンバスに描く私は",
+   "unit": "nightcord",
+   "arc_slug": "0053-kuuhaku-no-kyanbasu-ni-egaku-watashi-ha",
+   "bundle": "event_story/event_canvas_2022/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_53_02",
+     "episode_no": 2,
+     "title_en": "What I Wasn't Seeing",
+     "title_jp": "見えていなかったのは",
+     "lines_old": 117,
+     "lines_new": 117,
+     "changes": [
+      {
+       "talk_index_old": 94,
+       "talk_index_new": 94,
+       "kind": "text",
+       "speaker_old": "Yukihira",
+       "speaker_new": "Yukihira",
+       "old": "Shinonome, as it stands, your current mindset will only hinder you from growing further as an artist.",
+       "new": "Shinonome, as it stands, your current mindset will only prevent you from growing further as an artist.",
+       "ratio": 0.944,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 1,
+   "text_changes": 1
+  }
+ ],
+ "bundles_only_in_new": []
+}
