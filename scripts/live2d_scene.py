@@ -165,6 +165,33 @@ def make_legacy_context() -> None:
 # --- asset fetching ----------------------------------------------------------
 
 
+def _model_versions() -> list[tuple[str, str]]:
+    """(assetVersion, assetHash) pairs to probe for live2d models, newest first."""
+    index = Path("data/versions_en.json")
+    if index.exists():
+        try:
+            rows = json.loads(index.read_text(encoding="utf-8"))
+            seen: set[tuple[str, str]] = set()
+            pairs: list[tuple[str, str]] = []
+            for row in reversed(rows):
+                v, h = row.get("version"), row.get("hash")
+                if v and h and (v, h) not in seen:
+                    seen.add((v, h))
+                    pairs.append((v, h))
+            if pairs:
+                fallback = ("5.5.1.20", "5ea006ba-5840-4fe4-aed8-d1beeacd39ab")
+                top = pairs[:10]
+                if fallback not in top and fallback in seen:
+                    top.append(fallback)
+                return top
+        except Exception:
+            pass
+    return [
+        ("6.1.0.1", "8bf40659-f6f4-442b-9f54-a73313febdc2"),
+        ("5.5.1.20", "5ea006ba-5840-4fe4-aed8-d1beeacd39ab"),
+    ]
+
+
 def model_dir(costume: str) -> Path | None:
     """Download + decrypt ``live2d/model/<costume>`` and return its extract dir."""
     dest = CACHE / "models" / costume
@@ -174,15 +201,23 @@ def model_dir(costume: str) -> Path | None:
     if (dest / ".missing").exists():
         return None
     dest.mkdir(parents=True, exist_ok=True)
-    url = (
-        "https://n-production-846c90c1-assetbundle.sekai-en.com/"
-        "5.5.1.20/5ea006ba-5840-4fe4-aed8-d1beeacd39ab/android/"
-        f"live2d/model/{costume}"
-    )
-    resp = _get(url, timeout=120)
-    if resp.status_code != 200:
+
+    resp = None
+    for version, digest in _model_versions():
+        url = (
+            "https://n-production-846c90c1-assetbundle.sekai-en.com/"
+            f"{version}/{digest}/android/"
+            f"live2d/model/{costume}"
+        )
+        r = _get(url, timeout=120)
+        if r.status_code == 200:
+            resp = r
+            break
+
+    if resp is None:
         (dest / ".missing").touch()
         return None
+
     blob = CACHE / "bundles" / f"{costume}.bin"
     blob.parent.mkdir(parents=True, exist_ok=True)
     blob.write_bytes(resp.content)
