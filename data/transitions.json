@@ -434,6 +434,18 @@
     "old": "6.0.1.10"
    }
   ],
+  "event_story/event_lookup_2025/scenario": [
+   {
+    "new": "6.1.1.0",
+    "old": "6.1.0.1"
+   }
+  ],
+  "event_story/event_trueroute_2025/scenario": [
+   {
+    "new": "6.1.1.0",
+    "old": "6.1.0.1"
+   }
+  ],
   "scenario/unitstory/school-refusal-story-chapter": [
    {
     "new": "4.1.51.0",
@@ -727,6 +739,11 @@
    "date": "2026-10-28",
    "hash": "8bf40659-f6f4-442b-9f54-a73313febdc2",
    "version": "6.1.0.1"
+  },
+  {
+   "date": "2026-11-09",
+   "hash": "e501fadd-94b5-41bd-a4bd-504fc5561894",
+   "version": "6.1.1.0"
   }
  ]
 }
