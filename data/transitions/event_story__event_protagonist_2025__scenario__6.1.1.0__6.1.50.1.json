@@ -1,0 +1,93 @@
+{
+ "comparison": {
+  "old_asset_version": "6.1.1.0",
+  "new_asset_version": "6.1.50.1",
+  "old_released_at": "2026-11-09",
+  "new_released_at": "2026-11-20",
+  "region": "en",
+  "source": "official game CDN (n-production-*-assetbundle.sekai-en.com)"
+ },
+ "totals": {
+  "events_changed": 1,
+  "episodes_changed": 1,
+  "changed_lines": 4,
+  "by_kind": {
+   "added": 4
+  },
+  "by_lang": {
+   "rewrite": 4
+  },
+  "rewrite_lines": 4
+ },
+ "events": [
+  {
+   "event_id": 185,
+   "kind": "event",
+   "chapter_no": null,
+   "name_en": "",
+   "name_jp": "超克のプロタゴニスタ",
+   "unit": "wonderlands_showtime",
+   "arc_slug": "0185-choukoku-no-purotagonisuta",
+   "bundle": "event_story/event_protagonist_2025/scenario",
+   "episodes": [
+    {
+     "scenario_id": "event_185_08",
+     "episode_no": 8,
+     "title_en": "",
+     "title_jp": "信じてくれて",
+     "lines_old": 137,
+     "lines_new": 141,
+     "changes": [
+      {
+       "talk_index_old": null,
+       "talk_index_new": 26,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Harte",
+       "old": "",
+       "new": "“Please...someone!”",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 27,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Harte",
+       "old": "",
+       "new": "“Anyone! Gods, spirits, anyone!”",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 28,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Harte",
+       "old": "",
+       "new": "“Is anyone watching?! Please! Help us!”",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      },
+      {
+       "talk_index_old": null,
+       "talk_index_new": 29,
+       "kind": "added",
+       "speaker_old": "",
+       "speaker_new": "Harte",
+       "old": "",
+       "new": "“Let us hear your voice!”",
+       "ratio": 0.0,
+       "lang": "rewrite"
+      }
+     ]
+    }
+   ],
+   "total_changes": 4,
+   "text_changes": 0
+  }
+ ],
+ "bundles_only_in_new": []
+}

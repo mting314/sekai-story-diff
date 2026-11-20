@@ -434,6 +434,12 @@
     "old": "6.0.1.10"
    }
   ],
+  "event_story/event_protagonist_2025/scenario": [
+   {
+    "new": "6.1.50.1",
+    "old": "6.1.1.0"
+   }
+  ],
   "event_story/event_lookup_2025/scenario": [
    {
     "new": "6.1.1.0",
@@ -744,6 +750,11 @@
    "date": "2026-11-09",
    "hash": "e501fadd-94b5-41bd-a4bd-504fc5561894",
    "version": "6.1.1.0"
+  },
+  {
+   "date": "2026-11-20",
+   "hash": "4dc77e5c-0d47-4579-875b-33d7df8fa0d0",
+   "version": "6.1.50.1"
   }
  ]
 }
