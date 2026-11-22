@@ -231,6 +231,16 @@ def event_meta() -> dict[int, dict]:
             entry = out.setdefault(row["id"], {"banner": "", "logo": "", "nameJp": "", "unit": ""})
             entry["name"] = row.get("name", "")
             entry["bundle"] = row.get("assetbundleName", "")
+    en_stories_path = Path("data/master/eventStories_en.json")
+    if en_stories_path.exists():
+        for row in json.loads(en_stories_path.read_text()):
+            entry = out.setdefault(
+                row["eventId"], {"banner": "", "logo": "", "nameJp": "", "unit": ""}
+            )
+            entry["episodes"] = {
+                ep["episodeNo"]: ep.get("title", "")
+                for ep in row.get("eventStoryEpisodes", [])
+            }
     return out
 
 
@@ -571,7 +581,13 @@ def main() -> None:
                 # keep the ordering obvious and appends the title to make the link
                 # readable. Untitled episodes keep the bare number rather than
                 # advertising "ep03-untitled".
-                title_slug = slug(ep["title_en"], 40) if ep["title_en"] else ""
+                ep_title = (
+                    ep["title_en"]
+                    or metas.get(event["event_id"], {})
+                    .get("episodes", {})
+                    .get(ep["episode_no"], "")
+                )
+                title_slug = slug(ep_title, 40) if ep_title else ""
                 episodes.append(
                     {
                         "frames": frames,
@@ -581,7 +597,7 @@ def main() -> None:
                         "scenarioId": ep["scenario_id"],
                         "slug": f"ep{ep['episode_no']:02d}"
                                 + (f"-{title_slug}" if title_slug else ""),
-                        "title": ep["title_en"],
+                        "title": ep_title,
                     }
                 )
 
@@ -593,6 +609,7 @@ def main() -> None:
             # fall back to the unit logo, which is why UNITS is consulted either way.
             is_arc = event.get("kind") == "arc"
             meta = metas.get(event["event_id"], {})
+            name = event["name_en"] or meta.get("name", "")
             unit = (UNIT_BY_FAMILY.get(event.get("unit"), event.get("unit"))
                     if is_arc else meta.get("unit")) or ""
             logo, colour = UNITS.get(unit, ("", "#8f89b5"))
@@ -617,7 +634,7 @@ def main() -> None:
                         bundle, meta.get("logo", ""),
                         out_root / "public/logo" / f"{bundle}.webp", args.quality
                     ) else ""),
-                    "name": event["name_en"],
+                    "name": name,
                     # In the drawer an arc already sits under its unit's group header, so
                     # "Nightcord at 25:00 Story - Chapter 1" repeats itself. Cards and the
                     # page header are not grouped, so they keep the full official title.
@@ -626,7 +643,7 @@ def main() -> None:
                     "nameJp": meta.get("nameJp") or event["name_jp"],
                     # Readable URL segment. Deduped against every other entry below,
                     # because a repeated slug would make one of them unreachable.
-                    "slug": slug(event["name_en"], 50) or f"event{event['event_id']:03d}",
+                    "slug": (slug(name, 50) if name else "") or f"event{event['event_id']:03d}",
                     "transitions": [],
                     "unit": unit,
                     "unitLogo": f"unit/{logo}.png" if logo else "",
