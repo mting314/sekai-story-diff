@@ -62,6 +62,10 @@ jobs:
             "${{ steps.check.outputs.version }}" "${{ steps.check.outputs.hash }}" \
             "$(date -u +%F)"
 
+      - name: Refresh EN master titles
+        if: steps.check.outputs.new == 'true'
+        run: uv run python scripts/refresh_master.py
+
       # 211 one-byte probes for a new release, and every cell is immutable so nothing
       # already known is re-fetched
       - name: Fingerprint the new release

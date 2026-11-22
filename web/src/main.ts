@@ -294,7 +294,7 @@ const relRow = (r: Release): Html => {
   const chips = r.hits.map(({ ev, tr }) =>
     `<a class="rel-ev" style="--u:${ev.colour || "#8f89b5"}"
         href="#/r/${r.from}..${r.to}/${ev.slug}">${thumb(ev, "rel-art")}
-        <span class="rel-ev-t"><b>${esc(ev.shortName || ev.name)}</b>
+        <span class="rel-ev-t"><b>${esc(ev.shortName || ev.name || ev.nameJp)}</b>
           <small>${tr.changed} line${tr.changed === 1 ? "" : "s"}
             ${badge(tr.label)}</small></span></a>`).join("");
   return `<a class="rel" href="#/r/${r.from}..${r.to}/">
@@ -403,11 +403,12 @@ function card(e: EventEntry | PendingEvent, q: string, href: string | null): Htm
        <span class="pill">${eps} episode${eps === 1 ? "" : "s"}</span>`
       + (trs.length > 1 ? `<span class="pill">${trs.length} releases</span>` : "")
     : `<span class="pill wait">not yet diffed</span>`;
+  const title = e.name || e.nameJp;
   return `<${tag} class="card${href ? "" : " soon"}" style="--u:${e.colour || "#8f89b5"}"${link}>
     ${art}
     <div class="cbody">
-      <h3>${q ? hl(e.name, q) : esc(e.name)}</h3>
-      <div class="jp">${esc(e.nameJp || "")}</div>
+      <h3>${q ? hl(title, q) : esc(title)}</h3>
+      <div class="jp">${e.name ? esc(e.nameJp || "") : ""}</div>
       ${trs.length ? `<div class="vpair">${trs.length === 1
           ? `${trs[0].oldVersion} → ${trs[0].newVersion}`
           : `${trs[0].oldVersion} → ${trs[trs.length - 1].newVersion}`}</div>` : ""}
@@ -436,7 +437,7 @@ function results() {
     ${hits.length ? `<div class="sec">${hits.length > 300 ? "300+" : hits.length}
         matching lines</div>` + hits.slice(0, 40).map((h) => `
       <a class="hit" href="${epHref(h.ev, h.tr, h.ep, h.f.talkIndex)}">
-        <div class="who">${esc(h.ev.name)} · Ep ${h.ep.no} · #${h.f.talkIndex} ·
+        <div class="who">${esc(h.ev.name || h.ev.nameJp)} · Ep ${h.ep.no} · #${h.f.talkIndex} ·
           <b>${esc(h.f.speaker)}</b></div>
         ${h.f.inserted ? "" : `<div class="o">− ${hl(strip(h.f.old), q)}</div>`}
         <div class="n">+ ${hl(strip(h.f.new), q)}</div>
@@ -547,7 +548,7 @@ function event(ev: EventEntry, openEp: string): void {
     <div class="topbar" style="--u:${ev.colour || "#8f89b5"}"><a href="#/${rangePrefix()}" title="All events">←</a>
       ${ev.logo ? `<img class="elogo" alt="" src="${ASSETS}${ev.logo}">`
         : ev.unitLogo ? `<img class="ulogo big" alt="" src="${ASSETS}${ev.unitLogo}">` : ""}
-      <h2>${esc(ev.name)}</h2>
+      <h2>${esc(ev.name || ev.nameJp)}</h2>
       <span class="meta">${lines} changed lines ·
         ${trs.length} release${trs.length === 1 ? "" : "s"}</span>
       <input id="filter" placeholder="Filter lines in this event…" autocomplete="off">
@@ -603,7 +604,7 @@ function navRow(e: EventEntry, n: number): Html {
   // an arc already sits under its unit's header, so drop the unit name from the label
   return `<a class="nav-ev" data-ev="${e.id}" href="${evHref(e)}"`
        + ` style="--u:${e.colour || "#8f89b5"}">${thumb(e, "nav-art")}`
-       + `<span class="nav-txt"><b>${esc(e.shortName || e.name)}</b>`
+       + `<span class="nav-txt"><b>${esc(e.shortName || e.name || e.nameJp)}</b>`
        + `<small>${n} changed lines</small></span></a>` as Html;
 }
 

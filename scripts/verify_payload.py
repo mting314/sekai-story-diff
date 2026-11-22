@@ -150,7 +150,11 @@ def refetch(payload: dict, assets: Path, gaps: set[str], quality: int) -> set[st
         banner, logo = event.get("banner"), event.get("logo")
         if banner in gaps:
             print(f"  fetching banner for {event.get('name')}…")
-            if fetch_banner(info.get("banner", ""), assets / banner, BANNER_WIDTH, quality):
+            fetched = fetch_banner(
+                event.get("bundleName", ""), info.get("banner", ""),
+                assets / "event", BANNER_WIDTH, quality,
+            )
+            if fetched == banner or (assets / banner).exists():
                 recovered.add(banner)
         if logo in gaps:
             print(f"  fetching logo for {event.get('name')}…")

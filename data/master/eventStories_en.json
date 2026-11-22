@@ -5752,7 +5752,7 @@
         "id": 1000366,
         "eventStoryId": 45,
         "episodeNo": 9,
-        "title": "Please Let It Comes True",
+        "title": "Please Let It Come True",
         "assetbundleName": "event_prayer_2022_09",
         "scenarioId": "event_45_09",
         "releaseConditionId": 104408,
@@ -23405,6 +23405,1193 @@
           {
             "storyType": "event_story",
             "resourceBoxId": 130
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "eventId": 179,
+    "outline": "VIRTUAL SINGERS in each SEKAI are caring for their respective trees when they are vanished away by a mysterious light. Witnessing this, their counterparts in the space between worlds enter SEKAI to search for them.",
+    "bannerGameCharacterUnitId": 21,
+    "assetbundleName": "event_wl_2nd_piapro_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001458,
+        "eventStoryId": 179,
+        "episodeNo": 1,
+        "title": "What Happened to SEKAI?!",
+        "assetbundleName": "event_wl_2nd_piapro_2025_01",
+        "scenarioId": "wl_piapro_02_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001459,
+        "eventStoryId": 179,
+        "gameCharacterId": 23,
+        "episodeNo": 2,
+        "title": "Watched Over by the Stars",
+        "assetbundleName": "event_wl_2nd_piapro_2025_02",
+        "scenarioId": "wl_piapro_02_02",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001460,
+        "eventStoryId": 179,
+        "gameCharacterId": 23,
+        "episodeNo": 3,
+        "title": "Even When We're Apart",
+        "assetbundleName": "event_wl_2nd_piapro_2025_03",
+        "scenarioId": "wl_piapro_02_03",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001461,
+        "eventStoryId": 179,
+        "gameCharacterId": 21,
+        "episodeNo": 4,
+        "title": "A Gray Expanse",
+        "assetbundleName": "event_wl_2nd_piapro_2025_04",
+        "scenarioId": "wl_piapro_02_04",
+        "releaseConditionId": 117802,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001462,
+        "eventStoryId": 179,
+        "gameCharacterId": 21,
+        "episodeNo": 5,
+        "title": "To Bring Hope",
+        "assetbundleName": "event_wl_2nd_piapro_2025_05",
+        "scenarioId": "wl_piapro_02_05",
+        "releaseConditionId": 117802,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001463,
+        "eventStoryId": 179,
+        "gameCharacterId": 24,
+        "episodeNo": 6,
+        "title": "A Stage in a Flower Field",
+        "assetbundleName": "event_wl_2nd_piapro_2025_06",
+        "scenarioId": "wl_piapro_02_06",
+        "releaseConditionId": 117803,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001464,
+        "eventStoryId": 179,
+        "gameCharacterId": 24,
+        "episodeNo": 7,
+        "title": "Reach the Whole World!",
+        "assetbundleName": "event_wl_2nd_piapro_2025_07",
+        "scenarioId": "wl_piapro_02_07",
+        "releaseConditionId": 117803,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001465,
+        "eventStoryId": 179,
+        "gameCharacterId": 25,
+        "episodeNo": 8,
+        "title": "Bon Appetit♪",
+        "assetbundleName": "event_wl_2nd_piapro_2025_08",
+        "scenarioId": "wl_piapro_02_08",
+        "releaseConditionId": 117804,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001466,
+        "eventStoryId": 179,
+        "gameCharacterId": 25,
+        "episodeNo": 9,
+        "title": "New Sights",
+        "assetbundleName": "event_wl_2nd_piapro_2025_09",
+        "scenarioId": "wl_piapro_02_09",
+        "releaseConditionId": 117804,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001467,
+        "eventStoryId": 179,
+        "gameCharacterId": 26,
+        "episodeNo": 10,
+        "title": "So Much Mystery!",
+        "assetbundleName": "event_wl_2nd_piapro_2025_10",
+        "scenarioId": "wl_piapro_02_10",
+        "releaseConditionId": 117805,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001468,
+        "eventStoryId": 179,
+        "gameCharacterId": 26,
+        "episodeNo": 11,
+        "title": "Bonded by Music",
+        "assetbundleName": "event_wl_2nd_piapro_2025_11",
+        "scenarioId": "wl_piapro_02_11",
+        "releaseConditionId": 117805,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001469,
+        "eventStoryId": 179,
+        "gameCharacterId": 22,
+        "episodeNo": 12,
+        "title": "So Much Fun!",
+        "assetbundleName": "event_wl_2nd_piapro_2025_12",
+        "scenarioId": "wl_piapro_02_12",
+        "releaseConditionId": 117806,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001470,
+        "eventStoryId": 179,
+        "gameCharacterId": 22,
+        "episodeNo": 13,
+        "title": "Coming Together",
+        "assetbundleName": "event_wl_2nd_piapro_2025_13",
+        "scenarioId": "wl_piapro_02_13",
+        "releaseConditionId": 117806,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001471,
+        "eventStoryId": 179,
+        "episodeNo": 14,
+        "title": "Fond Farewells",
+        "assetbundleName": "event_wl_2nd_piapro_2025_14",
+        "scenarioId": "wl_piapro_02_14",
+        "releaseConditionId": 117807,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001472,
+        "eventStoryId": 179,
+        "episodeNo": 15,
+        "title": "Now and Forever More",
+        "assetbundleName": "event_wl_2nd_piapro_2025_15",
+        "scenarioId": "wl_piapro_02_15",
+        "releaseConditionId": 117807,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 131
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "eventId": 180,
+    "outline": "In the space between worlds, Miku and the other VIRTUAL SINGERS watch the young people of Shibuya strive towards their goals. Suddenly, a mysterious light brings a change to SEKAI.",
+    "assetbundleName": "event_wl_2nd_finale_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001473,
+        "eventStoryId": 180,
+        "episodeNo": 1,
+        "title": "Growth, and...",
+        "assetbundleName": "event_wl_2nd_finale_2025_01",
+        "scenarioId": "wl_finale_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001474,
+        "eventStoryId": 180,
+        "episodeNo": 2,
+        "title": "Wishes in Bloom",
+        "assetbundleName": "event_wl_2nd_finale_2025_02",
+        "scenarioId": "wl_finale_02",
+        "releaseConditionId": 117901,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 132
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "eventId": 181,
+    "outline": "An has finally caught up on the schoolwork she missed during her time in the US, when she and other high-schooler artists in the area are invited to perform at a music festival on a remote island.",
+    "bannerGameCharacterUnitId": 10,
+    "assetbundleName": "event_golden_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001475,
+        "eventStoryId": 181,
+        "episodeNo": 1,
+        "title": "Invitation to the Festival",
+        "assetbundleName": "event_golden_2025_01",
+        "scenarioId": "event_181_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001476,
+        "eventStoryId": 181,
+        "episodeNo": 2,
+        "title": "After Rehearsal",
+        "assetbundleName": "event_golden_2025_02",
+        "scenarioId": "event_181_02",
+        "releaseConditionId": 118001,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001477,
+        "eventStoryId": 181,
+        "episodeNo": 3,
+        "title": "A Stamp Rally Adventure",
+        "assetbundleName": "event_golden_2025_03",
+        "scenarioId": "event_181_03",
+        "releaseConditionId": 118002,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001478,
+        "eventStoryId": 181,
+        "episodeNo": 4,
+        "title": "A Chapter of Our Youth",
+        "assetbundleName": "event_golden_2025_04",
+        "scenarioId": "event_181_04",
+        "releaseConditionId": 118003,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001479,
+        "eventStoryId": 181,
+        "episodeNo": 5,
+        "title": "My Happiest Days",
+        "assetbundleName": "event_golden_2025_05",
+        "scenarioId": "event_181_05",
+        "releaseConditionId": 118004,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001480,
+        "eventStoryId": 181,
+        "episodeNo": 6,
+        "title": "What Does Last",
+        "assetbundleName": "event_golden_2025_06",
+        "scenarioId": "event_181_06",
+        "releaseConditionId": 118005,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001481,
+        "eventStoryId": 181,
+        "episodeNo": 7,
+        "title": "Ultimate Excitement",
+        "assetbundleName": "event_golden_2025_07",
+        "scenarioId": "event_181_07",
+        "releaseConditionId": 118006,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001482,
+        "eventStoryId": 181,
+        "episodeNo": 8,
+        "title": "Sprinting Toward the Future",
+        "assetbundleName": "event_golden_2025_08",
+        "scenarioId": "event_181_08",
+        "releaseConditionId": 118007,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 133
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "eventId": 182,
+    "outline": "The members of Leo\/need have completed the song they will reveal at their solo show and are steadily making preparations for the concert. When Ichika sees an ad for the VIRTUAL SINGER Fan Festival, she feels the itch to compose a Miku song.",
+    "bannerGameCharacterUnitId": 1,
+    "assetbundleName": "event_heartbeat_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001483,
+        "eventStoryId": 182,
+        "episodeNo": 1,
+        "title": "Unveiling the New Song!",
+        "assetbundleName": "event_heartbeat_2025_01",
+        "scenarioId": "event_182_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001484,
+        "eventStoryId": 182,
+        "episodeNo": 2,
+        "title": "An Urge Takes Root",
+        "assetbundleName": "event_heartbeat_2025_02",
+        "scenarioId": "event_182_02",
+        "releaseConditionId": 118101,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001485,
+        "eventStoryId": 182,
+        "episodeNo": 3,
+        "title": "A Flood of Ideas",
+        "assetbundleName": "event_heartbeat_2025_03",
+        "scenarioId": "event_182_03",
+        "releaseConditionId": 118102,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001486,
+        "eventStoryId": 182,
+        "episodeNo": 4,
+        "title": "Music Filled With Emotion",
+        "assetbundleName": "event_heartbeat_2025_04",
+        "scenarioId": "event_182_04",
+        "releaseConditionId": 118103,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001487,
+        "eventStoryId": 182,
+        "episodeNo": 5,
+        "title": "Shocking Notifications",
+        "assetbundleName": "event_heartbeat_2025_05",
+        "scenarioId": "event_182_05",
+        "releaseConditionId": 118104,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001488,
+        "eventStoryId": 182,
+        "episodeNo": 6,
+        "title": "Moving Hearts, Connecting Minds",
+        "assetbundleName": "event_heartbeat_2025_06",
+        "scenarioId": "event_182_06",
+        "releaseConditionId": 118105,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001489,
+        "eventStoryId": 182,
+        "episodeNo": 7,
+        "title": "A Chain Reaction",
+        "assetbundleName": "event_heartbeat_2025_07",
+        "scenarioId": "event_182_07",
+        "releaseConditionId": 118106,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001490,
+        "eventStoryId": 182,
+        "episodeNo": 8,
+        "title": "Part of Something Bigger",
+        "assetbundleName": "event_heartbeat_2025_08",
+        "scenarioId": "event_182_08",
+        "releaseConditionId": 118107,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 135
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 183,
+    "eventId": 183,
+    "outline": "For their latest Lumina Grand Prix task, MORE MORE JUMP! must put on a joint show with another group. Shizuku is determined to give it her all, but when their partner group is decided, she realizes that that will be easier said than done...",
+    "bannerGameCharacterUnitId": 8,
+    "assetbundleName": "event_colorcross_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001491,
+        "eventStoryId": 183,
+        "episodeNo": 1,
+        "title": "The Next Task",
+        "assetbundleName": "event_colorcross_2025_01",
+        "scenarioId": "event_183_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001492,
+        "eventStoryId": 183,
+        "episodeNo": 2,
+        "title": "Doing What We Need To",
+        "assetbundleName": "event_colorcross_2025_02",
+        "scenarioId": "event_183_02",
+        "releaseConditionId": 118201,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001493,
+        "eventStoryId": 183,
+        "episodeNo": 3,
+        "title": "Gossip",
+        "assetbundleName": "event_colorcross_2025_03",
+        "scenarioId": "event_183_03",
+        "releaseConditionId": 118202,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001494,
+        "eventStoryId": 183,
+        "episodeNo": 4,
+        "title": "Layers of Difficulty",
+        "assetbundleName": "event_colorcross_2025_04",
+        "scenarioId": "event_183_04",
+        "releaseConditionId": 118203,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001495,
+        "eventStoryId": 183,
+        "episodeNo": 5,
+        "title": "Different Brands",
+        "assetbundleName": "event_colorcross_2025_05",
+        "scenarioId": "event_183_05",
+        "releaseConditionId": 118204,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001496,
+        "eventStoryId": 183,
+        "episodeNo": 6,
+        "title": "A Persistent Feeling",
+        "assetbundleName": "event_colorcross_2025_06",
+        "scenarioId": "event_183_06",
+        "releaseConditionId": 118205,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001497,
+        "eventStoryId": 183,
+        "episodeNo": 7,
+        "title": "Just Like Before",
+        "assetbundleName": "event_colorcross_2025_07",
+        "scenarioId": "event_183_07",
+        "releaseConditionId": 118206,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001498,
+        "eventStoryId": 183,
+        "episodeNo": 8,
+        "title": "Giving Our Best Together",
+        "assetbundleName": "event_colorcross_2025_08",
+        "scenarioId": "event_183_08",
+        "releaseConditionId": 118207,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 136
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "eventId": 184,
+    "outline": "Ena has begun attending her technical mastery course to prepare for art school entrance exams. Though surrounded by overwhelmingly talented artists, her determination to devote herself to her studies is undimmed. A fresh struggle begins when her teacher announces a contest for course attendees.",
+    "bannerGameCharacterUnitId": 19,
+    "assetbundleName": "event_colors_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001499,
+        "eventStoryId": 184,
+        "episodeNo": 1,
+        "title": "The Contest",
+        "assetbundleName": "event_colors_2025_01",
+        "scenarioId": "event_184_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001500,
+        "eventStoryId": 184,
+        "episodeNo": 2,
+        "title": "A Failed Work",
+        "assetbundleName": "event_colors_2025_02",
+        "scenarioId": "event_184_02",
+        "releaseConditionId": 118301,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001501,
+        "eventStoryId": 184,
+        "episodeNo": 3,
+        "title": "At a Loss",
+        "assetbundleName": "event_colors_2025_03",
+        "scenarioId": "event_184_03",
+        "releaseConditionId": 118302,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001502,
+        "eventStoryId": 184,
+        "episodeNo": 4,
+        "title": "An Offhand Clue",
+        "assetbundleName": "event_colors_2025_04",
+        "scenarioId": "event_184_04",
+        "releaseConditionId": 118303,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001503,
+        "eventStoryId": 184,
+        "episodeNo": 5,
+        "title": "What I Hate the Most",
+        "assetbundleName": "event_colors_2025_05",
+        "scenarioId": "event_184_05",
+        "releaseConditionId": 118304,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001504,
+        "eventStoryId": 184,
+        "episodeNo": 6,
+        "title": "My Weapon",
+        "assetbundleName": "event_colors_2025_06",
+        "scenarioId": "event_184_06",
+        "releaseConditionId": 118305,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001505,
+        "eventStoryId": 184,
+        "episodeNo": 7,
+        "title": "What His Hands Meant to Me",
+        "assetbundleName": "event_colors_2025_07",
+        "scenarioId": "event_184_07",
+        "releaseConditionId": 118306,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001506,
+        "eventStoryId": 184,
+        "episodeNo": 8,
+        "title": "Commitment",
+        "assetbundleName": "event_colors_2025_08",
+        "scenarioId": "event_184_08",
+        "releaseConditionId": 118307,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 137
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "eventId": 185,
+    "outline": "Wonderlands×Showtime is set to perform at ArcLand. Despite feeling the pressure as the show's leading lady, Nene confidently throws herself into the part. However, that changes when she runs into an old face...",
+    "bannerGameCharacterUnitId": 15,
+    "assetbundleName": "event_protagonist_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001507,
+        "eventStoryId": 185,
+        "episodeNo": 1,
+        "title": "The Good Kind of Nervous",
+        "assetbundleName": "event_protagonist_2025_01",
+        "scenarioId": "event_185_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001508,
+        "eventStoryId": 185,
+        "episodeNo": 2,
+        "title": "Growing Motivation",
+        "assetbundleName": "event_protagonist_2025_02",
+        "scenarioId": "event_185_02",
+        "releaseConditionId": 118401,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001509,
+        "eventStoryId": 185,
+        "episodeNo": 3,
+        "title": "A Familiar Face",
+        "assetbundleName": "event_protagonist_2025_03",
+        "scenarioId": "event_185_03",
+        "releaseConditionId": 118402,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001510,
+        "eventStoryId": 185,
+        "episodeNo": 4,
+        "title": "That Nightmare of a Day",
+        "assetbundleName": "event_protagonist_2025_04",
+        "scenarioId": "event_185_04",
+        "releaseConditionId": 118403,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001511,
+        "eventStoryId": 185,
+        "episodeNo": 5,
+        "title": "Fumbling for an Answer",
+        "assetbundleName": "event_protagonist_2025_05",
+        "scenarioId": "event_185_05",
+        "releaseConditionId": 118404,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001512,
+        "eventStoryId": 185,
+        "episodeNo": 6,
+        "title": "The Director and the Lead",
+        "assetbundleName": "event_protagonist_2025_06",
+        "scenarioId": "event_185_06",
+        "releaseConditionId": 118405,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001513,
+        "eventStoryId": 185,
+        "episodeNo": 7,
+        "title": "My Duty",
+        "assetbundleName": "event_protagonist_2025_07",
+        "scenarioId": "event_185_07",
+        "releaseConditionId": 118406,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001514,
+        "eventStoryId": 185,
+        "episodeNo": 8,
+        "title": "For Believing in Me",
+        "assetbundleName": "event_protagonist_2025_08",
+        "scenarioId": "event_185_08",
+        "releaseConditionId": 118407,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 138
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 187,
+    "eventId": 187,
+    "outline": "Vivid BAD SQUAD has decided to compete in RUSH BEATS, seeing it as their ticket to take on the world. The team's search for ways to fund their globetrotting leads to Akito going back to the US on his own.",
+    "bannerGameCharacterUnitId": 11,
+    "assetbundleName": "event_overcome_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001515,
+        "eventStoryId": 187,
+        "episodeNo": 1,
+        "title": "Reality Check",
+        "assetbundleName": "event_overcome_2025_01",
+        "scenarioId": "event_187_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001516,
+        "eventStoryId": 187,
+        "episodeNo": 2,
+        "title": "No. 9 Records",
+        "assetbundleName": "event_overcome_2025_02",
+        "scenarioId": "event_187_02",
+        "releaseConditionId": 118601,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001517,
+        "eventStoryId": 187,
+        "episodeNo": 3,
+        "title": "The Interview",
+        "assetbundleName": "event_overcome_2025_03",
+        "scenarioId": "event_187_03",
+        "releaseConditionId": 118602,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001518,
+        "eventStoryId": 187,
+        "episodeNo": 4,
+        "title": "I'll Prove It",
+        "assetbundleName": "event_overcome_2025_04",
+        "scenarioId": "event_187_04",
+        "releaseConditionId": 118603,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001519,
+        "eventStoryId": 187,
+        "episodeNo": 5,
+        "title": "A Message",
+        "assetbundleName": "event_overcome_2025_05",
+        "scenarioId": "event_187_05",
+        "releaseConditionId": 118604,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001520,
+        "eventStoryId": 187,
+        "episodeNo": 6,
+        "title": "The Destination",
+        "assetbundleName": "event_overcome_2025_06",
+        "scenarioId": "event_187_06",
+        "releaseConditionId": 118605,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001521,
+        "eventStoryId": 187,
+        "episodeNo": 7,
+        "title": "My Approach",
+        "assetbundleName": "event_overcome_2025_07",
+        "scenarioId": "event_187_07",
+        "releaseConditionId": 118606,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001522,
+        "eventStoryId": 187,
+        "episodeNo": 8,
+        "title": "The Starting Line",
+        "assetbundleName": "event_overcome_2025_08",
+        "scenarioId": "event_187_08",
+        "releaseConditionId": 118607,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 139
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "eventId": 188,
+    "outline": "Leo\/need's members are brimming with motivation ahead of their first professional solo show, but some troubling social media comments plant a seed of doubt in Saki...",
+    "bannerGameCharacterUnitId": 2,
+    "assetbundleName": "event_lookup_2025",
+    "eventStoryEpisodes": [
+      {
+        "id": 1001523,
+        "eventStoryId": 188,
+        "episodeNo": 1,
+        "title": "Solo Show Kickoff Party!",
+        "assetbundleName": "event_lookup_2025_01",
+        "scenarioId": "event_188_01",
+        "releaseConditionId": 1,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001524,
+        "eventStoryId": 188,
+        "episodeNo": 2,
+        "title": "United in Music",
+        "assetbundleName": "event_lookup_2025_02",
+        "scenarioId": "event_188_02",
+        "releaseConditionId": 118701,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001525,
+        "eventStoryId": 188,
+        "episodeNo": 3,
+        "title": "A Flicker of Doubt",
+        "assetbundleName": "event_lookup_2025_03",
+        "scenarioId": "event_188_03",
+        "releaseConditionId": 118702,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001526,
+        "eventStoryId": 188,
+        "episodeNo": 4,
+        "title": "Remembering Those Days",
+        "assetbundleName": "event_lookup_2025_04",
+        "scenarioId": "event_188_04",
+        "releaseConditionId": 118703,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001527,
+        "eventStoryId": 188,
+        "episodeNo": 5,
+        "title": "Showtime",
+        "assetbundleName": "event_lookup_2025_05",
+        "scenarioId": "event_188_05",
+        "releaseConditionId": 118704,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001528,
+        "eventStoryId": 188,
+        "episodeNo": 6,
+        "title": "Leo\/need's Music",
+        "assetbundleName": "event_lookup_2025_06",
+        "scenarioId": "event_188_06",
+        "releaseConditionId": 118705,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001529,
+        "eventStoryId": 188,
+        "episodeNo": 7,
+        "title": "After the Cheers",
+        "assetbundleName": "event_lookup_2025_07",
+        "scenarioId": "event_188_07",
+        "releaseConditionId": 118706,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 2
+          }
+        ]
+      },
+      {
+        "id": 1001530,
+        "eventStoryId": 188,
+        "episodeNo": 8,
+        "title": "This Feeling I've Noticed",
+        "assetbundleName": "event_lookup_2025_08",
+        "scenarioId": "event_188_08",
+        "releaseConditionId": 118707,
+        "episodeRewards": [
+          {
+            "storyType": "event_story",
+            "resourceBoxId": 140
           }
         ]
       }
