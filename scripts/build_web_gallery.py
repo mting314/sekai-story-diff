@@ -72,9 +72,11 @@ BANNER_WIDTH = 640
 # Event title logo, shown in the event header. Sized by height because logos are wide
 # and vary in aspect; 72px is 2x the ~36px the header gives them.
 LOGO_HEIGHT = 72
-# The indexer's logo_url points at the JP mirror. Take the EN one instead — it is the
-# localised title art, which is what belongs above English story text. Verified present
-# for all 38 events in the payload, with the JP URL kept as a fallback.
+# The indexer's banner_url and logo_url point at the JP mirror. Prefer the EN mirror
+# first — localised title art belongs above English story text — and fall back to the
+# JP URL when an event has not shipped localised art yet. EN banners use a distinct
+# `_en.webp` filename so they never collide with 1-year-immutable cached JP banners.
+EN_BANNER = "https://storage.sekai.best/sekai-en-assets/home/banner/{bundle}/{bundle}.webp"
 EN_LOGO = "https://storage.sekai.best/sekai-en-assets/event/{bundle}/logo/logo.webp"
 # The indexer repo when it is checked out, else the tracked snapshot. Without a
 # fallback CI has neither, and event_meta() degrades silently — every banner, logo,
@@ -244,24 +246,42 @@ def event_meta() -> dict[int, dict]:
     return out
 
 
-def fetch_banner(url: str, dest: Path, width: int, quality: int) -> bool:
-    """Self-host the banner. The mirror 403s a cross-site Referer, same as backgrounds."""
-    if not url or dest.exists():
-        return dest.exists()
-    try:
-        resp = _banner_session.get(url, timeout=60)
-    except Exception:  # noqa: BLE001
-        return False
-    if resp.status_code != 200:
-        return False
+def fetch_banner(
+    bundle: str, fallback_url: str, event_dir: Path, width: int, quality: int
+) -> str:
+    """Self-host the event banner, preferring the EN mirror over the JP fallback.
+
+    Returns the relative asset path (``event/<bundle>_en.webp`` or ``event/<bundle>.webp``),
+    or ``""`` if neither mirror serves it. The mirror 403s a cross-site Referer, same as
+    backgrounds.
+    """
+    if not bundle:
+        return ""
     import io
 
-    image = Image.open(io.BytesIO(resp.content)).convert("RGB")
-    if image.width > width:
-        image = image.resize((width, round(image.height * width / image.width)), Image.LANCZOS)
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    image.save(dest, "WEBP", quality=quality, method=6)
-    return True
+    candidates = [
+        (EN_BANNER.format(bundle=bundle), f"{bundle}_en.webp"),
+        (fallback_url, f"{bundle}.webp"),
+    ]
+    for url, filename in candidates:
+        dest = event_dir / filename
+        if dest.exists():
+            return f"event/{filename}"
+        if not url:
+            continue
+        try:
+            resp = _banner_session.get(url, timeout=60)
+        except Exception:  # noqa: BLE001
+            continue
+        if resp.status_code != 200:
+            continue
+        image = Image.open(io.BytesIO(resp.content)).convert("RGB")
+        if image.width > width:
+            image = image.resize((width, round(image.height * width / image.width)), Image.LANCZOS)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        image.save(dest, "WEBP", quality=quality, method=6)
+        return f"event/{filename}"
+    return ""
 
 
 def fetch_logo(bundle: str, fallback_url: str, dest: Path, quality: int) -> bool:
@@ -614,10 +634,10 @@ def main() -> None:
                     if is_arc else meta.get("unit")) or ""
             logo, colour = UNITS.get(unit, ("", "#8f89b5"))
             bundle = meta.get("bundle") or bundle_name
-            banner = "" if is_arc else (f"event/{bundle}.webp" if fetch_banner(
-                meta.get("banner", ""), out_root / "public/event" / f"{bundle}.webp",
+            banner = "" if is_arc else fetch_banner(
+                bundle, meta.get("banner", ""), out_root / "public/event",
                 BANNER_WIDTH, args.quality
-            ) else "")
+            )
             # An event can be rewritten at several releases, so it owns a list of
             # transitions rather than one pair. Appending a second entry with the same
             # id would make it unreachable — main.js finds events by id.
@@ -724,10 +744,10 @@ def main() -> None:
         unit = meta.get("unit") or ""
         logo, colour = UNITS.get(unit, ("", "#8f89b5"))
         bundle = meta.get("bundle") or ""
-        banner = f"event/{bundle}.webp" if bundle and fetch_banner(
-            meta.get("banner", ""), out_root / "public/event" / f"{bundle}.webp",
+        banner = fetch_banner(
+            bundle, meta.get("banner", ""), out_root / "public/event",
             BANNER_WIDTH, args.quality
-        ) else ""
+        ) if bundle else ""
         pending.append(
             {
                 "banner": banner,
