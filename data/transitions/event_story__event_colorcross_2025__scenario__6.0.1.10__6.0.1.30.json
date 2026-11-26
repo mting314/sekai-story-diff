@@ -26,7 +26,7 @@
    "event_id": 183,
    "kind": "event",
    "chapter_no": null,
-   "name_en": "",
+   "name_en": "Blending Together, Just Like Before",
    "name_jp": "交わる色はあの日のままに",
    "unit": "more_more_jump",
    "arc_slug": "0183-majiwa-ru-iro-haano-nichi-nomamani",
@@ -35,7 +35,7 @@
     {
      "scenario_id": "event_183_01",
      "episode_no": 1,
-     "title_en": "",
+     "title_en": "The Next Task",
      "title_jp": "次なるお題は",
      "lines_old": 112,
      "lines_new": 112,
@@ -56,7 +56,7 @@
     {
      "scenario_id": "event_183_02",
      "episode_no": 2,
-     "title_en": "",
+     "title_en": "Doing What We Need To",
      "title_jp": "やるべきことを",
      "lines_old": 74,
      "lines_new": 74,
@@ -77,7 +77,7 @@
     {
      "scenario_id": "event_183_03",
      "episode_no": 3,
-     "title_en": "",
+     "title_en": "Gossip",
      "title_jp": "噂話",
      "lines_old": 121,
      "lines_new": 121,
@@ -98,7 +98,7 @@
     {
      "scenario_id": "event_183_08",
      "episode_no": 8,
-     "title_en": "",
+     "title_en": "Giving Our Best Together",
      "title_jp": "一緒に、最高のステージを",
      "lines_old": 132,
      "lines_new": 132,

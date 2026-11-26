@@ -24,7 +24,7 @@
    "event_id": 185,
    "kind": "event",
    "chapter_no": null,
-   "name_en": "",
+   "name_en": "Triumphant Protagonista",
    "name_jp": "超克のプロタゴニスタ",
    "unit": "wonderlands_showtime",
    "arc_slug": "0185-choukoku-no-purotagonisuta",
@@ -33,7 +33,7 @@
     {
      "scenario_id": "event_185_08",
      "episode_no": 8,
-     "title_en": "",
+     "title_en": "For Believing in Me",
      "title_jp": "信じてくれて",
      "lines_old": 137,
      "lines_new": 141,

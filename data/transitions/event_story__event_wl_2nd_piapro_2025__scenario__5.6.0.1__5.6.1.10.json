@@ -24,7 +24,7 @@
    "event_id": 179,
    "kind": "event",
    "chapter_no": null,
-   "name_en": "",
+   "name_en": "Link the Beats!",
    "name_jp": "Link the Beats！",
    "unit": "mixed",
    "arc_slug": "0179-link-the-beats",
@@ -33,7 +33,7 @@
     {
      "scenario_id": "wl_piapro_02_02",
      "episode_no": 2,
-     "title_en": "",
+     "title_en": "Watched Over by the Stars",
      "title_jp": "星に見守られて",
      "lines_old": 105,
      "lines_new": 105,
@@ -65,7 +65,7 @@
     {
      "scenario_id": "wl_piapro_02_04",
      "episode_no": 4,
-     "title_en": "",
+     "title_en": "A Gray Expanse",
      "title_jp": "どこまでも灰色な",
      "lines_old": 134,
      "lines_new": 134,
@@ -86,7 +86,7 @@
     {
      "scenario_id": "wl_piapro_02_07",
      "episode_no": 7,
-     "title_en": "",
+     "title_en": "Reach the Whole World!",
      "title_jp": "世界中へ！",
      "lines_old": 121,
      "lines_new": 121,
@@ -107,7 +107,7 @@
     {
      "scenario_id": "wl_piapro_02_09",
      "episode_no": 9,
-     "title_en": "",
+     "title_en": "New Sights",
      "title_jp": "新しい景色を",
      "lines_old": 148,
      "lines_new": 148,
@@ -139,7 +139,7 @@
     {
      "scenario_id": "wl_piapro_02_10",
      "episode_no": 10,
-     "title_en": "",
+     "title_en": "So Much Mystery!",
      "title_jp": "不思議がたくさん！？",
      "lines_old": 152,
      "lines_new": 152,
@@ -160,7 +160,7 @@
     {
      "scenario_id": "wl_piapro_02_13",
      "episode_no": 13,
-     "title_en": "",
+     "title_en": "Coming Together",
      "title_jp": "みんながひとつに",
      "lines_old": 141,
      "lines_new": 141,

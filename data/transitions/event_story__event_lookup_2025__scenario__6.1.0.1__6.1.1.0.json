@@ -27,7 +27,7 @@
    "event_id": 188,
    "kind": "event",
    "chapter_no": null,
-   "name_en": "",
+   "name_en": "The Sky That Night Was Empty",
    "name_jp": "仰ぐ夜空に、星は紛れて",
    "unit": "leo_need",
    "arc_slug": "0188-aogu-yozora-ni-hoshi-ha-magire-te",
@@ -36,7 +36,7 @@
     {
      "scenario_id": "event_188_01",
      "episode_no": 1,
-     "title_en": "",
+     "title_en": "Solo Show Kickoff Party!",
      "title_jp": "ワンマン決起会！",
      "lines_old": 54,
      "lines_new": 54,
@@ -640,7 +640,7 @@
     {
      "scenario_id": "event_188_02",
      "episode_no": 2,
-     "title_en": "",
+     "title_en": "United in Music",
      "title_jp": "心繋がる音",
      "lines_old": 68,
      "lines_new": 68,
@@ -1398,7 +1398,7 @@
     {
      "scenario_id": "event_188_03",
      "episode_no": 3,
-     "title_en": "",
+     "title_en": "A Flicker of Doubt",
      "title_jp": "微かな違和感",
      "lines_old": 80,
      "lines_new": 80,
@@ -2288,7 +2288,7 @@
     {
      "scenario_id": "event_188_04",
      "episode_no": 4,
-     "title_en": "",
+     "title_en": "Remembering Those Days",
      "title_jp": "あの頃の記憶",
      "lines_old": 73,
      "lines_new": 73,
@@ -3101,7 +3101,7 @@
     {
      "scenario_id": "event_188_05",
      "episode_no": 5,
-     "title_en": "",
+     "title_en": "Showtime",
      "title_jp": "ワンマン当日",
      "lines_old": 82,
      "lines_new": 82,
@@ -4013,7 +4013,7 @@
     {
      "scenario_id": "event_188_06",
      "episode_no": 6,
-     "title_en": "",
+     "title_en": "Leo/need's Music",
      "title_jp": "Leo/needの音楽を",
      "lines_old": 50,
      "lines_new": 50,
@@ -4573,7 +4573,7 @@
     {
      "scenario_id": "event_188_07",
      "episode_no": 7,
-     "title_en": "",
+     "title_en": "After the Cheers",
      "title_jp": "熱狂、そして",
      "lines_old": 97,
      "lines_new": 97,
@@ -5650,7 +5650,7 @@
     {
      "scenario_id": "event_188_08",
      "episode_no": 8,
-     "title_en": "",
+     "title_en": "This Feeling I've Noticed",
      "title_jp": "気づいた想いは",
      "lines_old": 98,
      "lines_new": 98,
